@@ -172,25 +172,6 @@ module.exports = function(grunt){
         },
 
         /*
-         * Compile JadeLang to HTML (new npm name: PUG)
-         * A clean, whitespace-sensitive template language for writing HTML
-         */
-        jade: {
-            compile: {
-                options: {
-                    pretty: true,
-                },
-                files: [{
-                    cwd: "client/views",
-                    src: "*.jade",
-                    dest: "build",
-                    expand: true,
-                    ext: ".html"
-                }],
-            }
-        },
-
-        /*
          * Compile SASS/SCSS to CSS
          */
         sass : {
@@ -311,7 +292,7 @@ module.exports = function(grunt){
             },            
             css: {
                 files: ['client/sass/**/*.scss'],
-                tasks: ['buildcss']
+                tasks: ['css']
             },
             copy: {
                 files: ['client/**/*'],
@@ -325,13 +306,9 @@ module.exports = function(grunt){
                 files: ['client/assets/sprites/*.png'],
                 tasks: ['sprite'],
             },
-            jade: {
-                files: ['client/views/*.jade', 'client/views/**/*.jade'],
-                tasks: ['jade']
-            },
             js: {
                 files : ['client/js/*.js', 'client/js/**/*.js'],
-                tasks: ['buildjs']
+                tasks: ['js']
             },
             ts: {
                 files : ['client/app/**/*.ts'],
@@ -342,13 +319,19 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', []);
 
-    grunt.registerTask('buildassets', ['copy:main', 'sprite', 'webfont']);
-    grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
-    grunt.registerTask('buildhtml', ['jade']);
-    grunt.registerTask('buildjs', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
+    grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
+    grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('build', ['clean', 'assets', 'css', 'typescript', 'js']);
 
-    grunt.registerTask('prepross', ['clean', 'buildassets', 'buildcss', 'typescript', 'buildjs']);
-
-    grunt.registerTask('build', ['prepross', 'express:dev', 'watch']);
-    grunt.registerTask('dev', ['prepross', 'watch']);
+    grunt.registerTask(
+        'front',
+        'Install npm modules, built and display logs for front updates',
+        ['build', 'express:dev', 'watch']
+    );
+    grunt.registerTask(
+        'deploy',
+        'Install npm modules, built and display logs for server updates',
+        ['build', 'express:dev']
+    );
 };
