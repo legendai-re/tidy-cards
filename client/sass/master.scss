@@ -1,0 +1,48 @@
+/*
+ * author: Alexandre Jolly (based on Adrien Becker work)
+ * version: v0.1.0
+ */
+
+@charset "UTF-8";
+
+// Vendors (eg: Twitter Bootstrap, PureCss)
+// @import "vendor/grid";
+
+// Utils
+
+// 
+
+// Assets
+// @import "assets/icons";
+// @import "assets/fonts";
+@import "assets/sprites";
+
+
+/*
+* Inspiration sources:
+* - http://www.nicoespeon.com/fr/2013/05/tombez-pour-smacss/
+* - https://smacss.com/
+*/
+
+// Base
+@import "base/functions";
+@import "base/mixins";
+@import "base/variables";
+@import "base/base";
+@import "base/helpers"; // clearfix, float-left, float-right
+@import "base/animations";
+
+// Layouts
+@import "layouts/grid";
+
+// Modules
+@import "modules/btn";
+
+// States
+@import "states/states";
+
+// Themes
+@import "themes/default";
+
+// Hacks
+@import "hacks/shame";
