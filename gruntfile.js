@@ -12,7 +12,7 @@ module.exports = function(grunt){
         /*
          * Clean files and folders
          */        
-        clean:["build"],
+        //clean:["build"],
 
         /*
          * Concatenate files
