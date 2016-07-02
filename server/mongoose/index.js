@@ -1,2 +1,2 @@
-var mongoose   = require('mongoose');
-mongoose.connect(process.env.MONGO_URL);
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI);
