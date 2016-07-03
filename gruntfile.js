@@ -12,7 +12,7 @@ module.exports = function(grunt){
         /*
          * Clean files and folders
          */        
-        //clean:["build"],
+        clean:["build"],
 
         /*
          * Concatenate files
@@ -322,7 +322,7 @@ module.exports = function(grunt){
     grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
     grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
     grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
-    grunt.registerTask('build', ['assets', 'css', 'typescript', 'js']);
+    grunt.registerTask('build', ['clean', 'assets', 'css', 'typescript', 'js']);
 
     grunt.registerTask(
         'front',
@@ -333,11 +333,6 @@ module.exports = function(grunt){
         'deploy',
         'Install npm modules, built and display logs for server updates',
         ['build', 'express:dev']
-    );
-    grunt.registerTask(
-        'heroku',
-        'Install npm modules, built and display logs for server updates',
-        ['build']
     );
     ///
 };

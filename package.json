@@ -5,9 +5,8 @@
   "version": "0.1.0",
   "license": "ISC",
   "private": true,
-  "scripts": {
-    "postinstall": "grunt build",
-    "start": "node server/server.js"
+  "scripts": {    
+    "start": "grunt deploy"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
