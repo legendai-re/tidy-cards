@@ -6,7 +6,7 @@
   "license": "ISC",
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "bundle install && grunt build",
+    "postinstall": "bundle install && grunt install",
     "start": "node server/server.js"
   },
   "dependencies": {
