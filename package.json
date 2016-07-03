@@ -7,7 +7,7 @@
   "private": true,
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "bundle install && grunt build",
+    "postinstall": "bundle install && grunt deploy",
     "start": ""
   },
   "dependencies": {
