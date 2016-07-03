@@ -15,6 +15,7 @@ app.set('port', (process.env.PORT || 2016));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     name: process.env.SESSION_NAME,
