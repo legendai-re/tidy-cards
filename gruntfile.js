@@ -100,7 +100,7 @@ module.exports = function(grunt){
          */
         express: {
             options: {
-                port: 2016,
+                port: 80,
                 hostname: "*",
                 bases: ["build"],
                 livereload: true
@@ -358,7 +358,7 @@ module.exports = function(grunt){
     grunt.registerTask(
         'deploy',
         'Install npm modules, built and display logs for server updates',
-        ['build']
+        ['build',  'express:dev']
     );
     ///
 };
