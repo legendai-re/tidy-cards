@@ -5,7 +5,8 @@ module.exports = function(grunt){
      * for each dependency, which would quickly add up as we find and install other plugins.
      */
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
-    
+    var npm = require('npm');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -319,6 +320,27 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', []);
 
+    grunt.registerTask('npm', 'Install npm modules.', function () {
+        var modules = Array.prototype.slice.call(arguments);
+        var done = this.async();
+
+        function errorHandler(err) {
+            if (err) {
+                grunt.log.error(err);
+            }
+            done();
+        }
+
+        npm.load(function (err, npm) {
+            if (err) {
+                grunt.log.error(err);
+                return;
+            }
+
+            npm.commands.install(modules, errorHandler);
+        });
+    });
+
     grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
     grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
     grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
@@ -332,7 +354,7 @@ module.exports = function(grunt){
     grunt.registerTask(
         'deploy',
         'Install npm modules, built and display logs for server updates',
-        ['build', 'express:dev']
+        ['npm', 'build']
     );
     ///
 };

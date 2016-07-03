@@ -5,8 +5,9 @@
   "version": "0.1.0",
   "license": "ISC",
   "private": true,
-  "scripts": {    
-    "start": "grunt deploy"
+  "scripts": {
+    "postinstall": "grunt deploy",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
@@ -66,7 +67,8 @@
     "matchdep": "^1.0.1",
     "pug": "^2.0.0-beta3",
     "typescript": "^1.8.10",
-    "typings": "^1.0.4"
+    "typings": "^1.0.4",
+    "npm": "^3.10.3"
   },
   "homepage": "readme.md",
   "engines": {
