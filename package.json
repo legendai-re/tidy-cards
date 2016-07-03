@@ -7,8 +7,8 @@
   "private": true,
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "bundle install && grunt build",
-    "start": "node server/server.js"
+    "postinstall": "bundle install && grunt build && node server/server.js",
+    "start": ""
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
