@@ -7,7 +7,7 @@
   "private": true,
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "./node_modules/grunt-cli/bin/grunt && grunt build",
+    "postinstall": "bungle install && grunt build",
     "start": "node server/server.js"
   },
   "dependencies": {
