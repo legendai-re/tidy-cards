@@ -49,7 +49,7 @@ module.exports = function(grunt){
                     {expand: true, flatten: true, src: ['client/assets/videos/*'], dest: 'build/medias/videos/'},
                     {expand: true, flatten: true, src: ['client/assets/fonts/*'], dest: 'build/fonts/'},
                     {expand: true, flatten: true, src: ['client/**/*.html'], dest: 'build/'},
-                    {expand: true, flatten: true, src: ['systemjs.config.js'], dest: 'build/node_modules/'}
+                    {expand: true, flatten: true, src: ['client/config/systemjs.config.js'], dest: 'build/config/'}
                 ]
             },
             node_modules:{
@@ -356,8 +356,8 @@ module.exports = function(grunt){
         ['build', 'express:dev', 'watch']
     );
     grunt.registerTask(
-        'deploy',
+        'dev',
         'Install npm modules, built and display logs for server updates',
-        ['build',  'express:dev']
+        ['build',  'watch']
     );
 };

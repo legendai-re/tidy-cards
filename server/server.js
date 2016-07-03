@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != "production"){
+	require('dotenv').config();
+}
+
 var express 		= require('express');
 var cookieParser 	= require('cookie-parser');
 var bodyParser 		= require('body-parser');
@@ -12,8 +16,8 @@ app.set('port', (process.env.PORT || 2016));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-    secret: "qfsfsdf5q4sfqsd4sdfqsf46q5s6d4f5q546FS864DAD",
-    name: "invow",
+    secret: process.env.SESSION_SECRET,
+    name: process.env.SESSION_NAME,
     resave: true,
     saveUninitialized: true
 }));

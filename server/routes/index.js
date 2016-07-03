@@ -9,6 +9,7 @@ module.exports = function(app) {
 	app.use('/assets', express.static(path.resolve(__dirname, '../../build/assets')));
 	app.use('/css', express.static(path.resolve(__dirname, '../../build/css')));
 	app.use('/styles', express.static(path.resolve(__dirname, '../../build/styles')));
+	app.use('/config', express.static(path.resolve(__dirname, '../../build/config')));
 	app.use('/node_modules', express.static(path.resolve(__dirname, '../../build/node_modules')));
 
 	app.use('/auth', authRouter);
