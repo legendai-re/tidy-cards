@@ -341,6 +341,9 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', []);
 
+    grunt.registerTask('heroku:development', 'clean less mincss');
+
+    
     grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
     grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
     grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
