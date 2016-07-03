@@ -1,2 +1,2 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:2000/test");
+mongoose.connect(process.env.MONGODB_URI);
