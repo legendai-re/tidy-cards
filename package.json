@@ -7,7 +7,7 @@
   "private": true,
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt && grunt build",
+    "postinstall": "./node_modules/grunt-cli/bin/grunt && grunt build",
     "start": "node server/server.js"
   },
   "dependencies": {
