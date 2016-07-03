@@ -49,7 +49,11 @@ module.exports = function(grunt){
                     {expand: true, flatten: true, src: ['client/assets/videos/*'], dest: 'build/medias/videos/'},
                     {expand: true, flatten: true, src: ['client/assets/fonts/*'], dest: 'build/fonts/'},
                     {expand: true, flatten: true, src: ['client/**/*.html'], dest: 'build/'},
-                    
+                    {expand: true, flatten: true, src: ['systemjs.config.js'], dest: 'build/node_modules/'}
+                ]
+            },
+            node_modules:{
+                files:[
                     {expand: true, cwd: 'node_modules/angular2',  src: '**/*', dest: 'build/node_modules/angular2'},
                     {expand: true, cwd: 'node_modules/@angular',  src: '**/*', dest: 'build/node_modules/@angular'},
                     {expand: true, cwd: 'node_modules/angular2',  src: '**/*', dest: 'build/node_modules/angular2'},
@@ -59,9 +63,7 @@ module.exports = function(grunt){
                     {expand: true, cwd: 'node_modules/zone.js',  src: '**/*', dest: 'build/node_modules/zone.js'},
                     {expand: true, cwd: 'node_modules/core-js',  src: '**/*', dest: 'build/node_modules/core-js'},
                     {expand: true, cwd: 'node_modules/systemjs',  src: '**/*', dest: 'build/node_modules/systemjs'},
-                    {expand: true, cwd: 'node_modules/rxjs',  src: '**/*', dest: 'build/node_modules/rxjs'},
-
-                    {expand: true, flatten: true, src: ['systemjs.config.js'], dest: 'build/node_modules/'}
+                    {expand: true, cwd: 'node_modules/rxjs',  src: '**/*', dest: 'build/node_modules/rxjs'}                                        
                 ],
             },
         },    

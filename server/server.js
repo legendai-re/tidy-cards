@@ -6,8 +6,8 @@ var path 			= require('path');
 var db 				= require('./mongoose');
 var models			= require('./models');
 
-var port = process.env.PORT || 2016;
 var app = express();
+app.set('port', (process.env.PORT || 2016));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,8 +21,6 @@ app.use(session({
 require('./passport')(app);
 require('./routes')(app);
 
-var server = app.listen(port, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('This express app is listening on port:' + port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
