@@ -75,8 +75,5 @@
     "react-tools": "^0.12.1",
     "grunt-contrib-requirejs": "^0.4.4"
   },
-  "homepage": "readme.md",
-  "engines": {
-    "node": "5.0.0"
-  }
+  "homepage": "readme.md"
 }
