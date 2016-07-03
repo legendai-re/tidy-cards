@@ -360,5 +360,4 @@ module.exports = function(grunt){
         'Install npm modules, built and display logs for server updates',
         ['build',  'express:dev']
     );
-    ///
 };
