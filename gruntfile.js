@@ -4,7 +4,7 @@ module.exports = function(grunt){
      * Without matchdep, we would have to write grunt.loadNpmTasks("grunt-task-name"); 
      * for each dependency, which would quickly add up as we find and install other plugins.
      */
-    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);    
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -316,6 +316,28 @@ module.exports = function(grunt){
             }
         }
     });
+
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-rename');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-cssc');
+    grunt.loadNpmTasks('grunt-express');
+    grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-htmlhint');
+    grunt.loadNpmTasks('grunt-md');
+    grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks('grunt-parallel');
+    grunt.loadNpmTasks('grunt-spritesmith');
+    grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-typings');
+    grunt.loadNpmTasks('grunt-webfont');
 
     grunt.registerTask('default', []);
 

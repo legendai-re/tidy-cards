@@ -5,9 +5,11 @@
   "version": "0.1.0",
   "license": "ISC",
   "private": true,
-  "scripts": {    
-    "start": "grunt build && node server/server.js"
-  },
+  "main": "server/server.js",
+  "scripts": {
+    "postinstall": "grunt build",
+    "start": "node server/server.js"
+  },  
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
