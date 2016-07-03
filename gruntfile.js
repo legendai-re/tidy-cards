@@ -12,7 +12,19 @@ module.exports = function(grunt){
         /*
          * Clean files and folders
          */        
-        clean:["build"],
+        // clean:["build/**/*", '!build/node_modules/**/*'],
+
+        clean: {
+            keep: {
+                src: ['build/**/*', '!build/node_modules/**/*'],
+                options: {
+                    'no-write': true
+                }
+            },
+            delete: {
+                src: ['build']
+            }
+        },
 
         /*
          * Concatenate files
@@ -50,7 +62,7 @@ module.exports = function(grunt){
                     {expand: true, flatten: true, src: ['client/assets/fonts/*'], dest: 'build/fonts/'},
                     {expand: true, flatten: true, src: ['client/**/*.html'], dest: 'build/'},
                     {expand: true, flatten: true, src: ['client/config/systemjs.config.js'], dest: 'build/config/'}
-                ]
+                ],
             },
             node_modules:{
                 files:[
@@ -79,7 +91,7 @@ module.exports = function(grunt){
                     consolidateMediaQueries:    true
                 },
                 files: {
-                    'build/css/master.css': 'build/css/master.css'
+                    'build/styles/main.css': 'build/styles/main.css'
                 }
             }
         },
@@ -90,8 +102,8 @@ module.exports = function(grunt){
          */
         cssmin: {
             build: {
-                src: 'build/css/master.css',
-                dest: 'build/css/master.css'
+                src: 'build/styles/main.css',
+                dest: 'build/styles/main.css'
             }
         },
 
@@ -177,23 +189,13 @@ module.exports = function(grunt){
          * Compile SASS/SCSS to CSS
          */
         sass : {
-            dev: {
+            build: {
                 options: {
                     bundleExec: true,
                     style: 'expanded'
                 },
                 files: {
                     'build/styles/main.css': 'client/sass/master.scss'
-                }
-            },
-            build: {
-                options: {
-                    bundleExec: true,
-                    style: 'compressed',
-                    sourcemap: 'none'
-                },
-                files: {
-                    'build/styles/main.min.css': 'client/sass/master.scss'
                 }
             }
         },
@@ -300,7 +302,7 @@ module.exports = function(grunt){
             },
             copy: {
                 files: ['client/**/*'],
-                tasks: ['copy'],
+                tasks: ['copy:main'],
             },
             webfont: {
                 files: ['client/assets/icons/*.svg'],
@@ -345,19 +347,12 @@ module.exports = function(grunt){
 
     grunt.registerTask('default', []);
 
-    grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
+    grunt.registerTask('assets', ['copy:main', 'sprite', 'webfont']);
     grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
     grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
-    grunt.registerTask('build', ['clean', 'assets', 'css', 'typescript', 'js']);
+    grunt.registerTask('build', ['clean:keep', 'assets', 'css', 'typescript', 'js']);
 
-    grunt.registerTask(
-        'front',
-        'Install npm modules, built and display logs for front updates',
-        ['build', 'express:dev', 'watch']
-    );
-    grunt.registerTask(
-        'dev',
-        'Install npm modules, built and display logs for server updates',
-        ['build',  'watch']
-    );
+    grunt.registerTask('install', ['clean:delete', 'assets', 'copy:node_modules', 'css', 'typescript', 'js']);
+    grunt.registerTask('front', ['build', 'express:dev', 'watch']);
+    grunt.registerTask('dev', ['build',  'watch']);
 };
