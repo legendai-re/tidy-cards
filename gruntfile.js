@@ -322,7 +322,7 @@ module.exports = function(grunt){
     grunt.registerTask('assets', ['copy', 'sprite', 'webfont']);
     grunt.registerTask('css',  ['sass', 'cssc', 'cssmin']);
     grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
-    grunt.registerTask('build', ['clean', 'assets', 'css', 'typescript', 'js']);
+    grunt.registerTask('build', ['assets', 'css', 'typescript', 'js']);
 
     grunt.registerTask(
         'front',
