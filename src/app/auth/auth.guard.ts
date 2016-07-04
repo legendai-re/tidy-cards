@@ -6,15 +6,34 @@ import { CanActivate,
 import { AuthService }            from './auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class GrantedAnonymous implements CanActivate {
 	constructor(private authService: AuthService, private router: Router) {}
 
-	canActivate(
-		next:  ActivatedRouteSnapshot,
-		state: RouterStateSnapshot
-	) {
-	if (this.authService.isLoggedIn) { return true; }
+	canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+		if (!this.authService.isLoggedIn) { return true; }
+		this.router.navigate(['/']);
+		return false;
+	}
+}
+
+@Injectable()
+export class GrantedUser implements CanActivate {
+	constructor(private authService: AuthService, private router: Router) {}
+
+	canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+		if (this.authService.isLoggedIn) { return true; }
 		this.router.navigate(['/login']);
+		return false;
+	}
+}
+
+@Injectable()
+export class GrantedAdmin implements CanActivate {
+	constructor(private authService: AuthService, private router: Router) {}
+
+	canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+		if (this.authService.isLoggedIn && this.authService.currentUser.isGranted('ROLE_ADMIN')) { return true; }
+		this.router.navigate(['/']);
 		return false;
 	}
 }

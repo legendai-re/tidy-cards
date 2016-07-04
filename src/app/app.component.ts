@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { CollectionService }   from './collection/collection.service';
-import { AuthService } from './auth/auth.service';
+import { Component } 			from '@angular/core';
+import { ROUTER_DIRECTIVES } 	from '@angular/router';
+import { CollectionService }   	from './collection/collection.service';
+import { AuthService } 			from './auth/auth.service';
 
 @Component({
 	selector: 'my-app',
@@ -9,7 +9,8 @@ import { AuthService } from './auth/auth.service';
 	directives: [ROUTER_DIRECTIVES],
 	providers: [CollectionService]
 })
-export class AppComponent { 
-	constructor(public authService: AuthService) {        
+export class AppComponent {
+	constructor(public authService: AuthService) {
+		authService.initCurrentUser();      
     }
 }

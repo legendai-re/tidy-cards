@@ -5,11 +5,11 @@ module.exports = function postSignup(req, res) {
     var User        = mongoose.model('User');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
-        res.json({'success': false, 'alert': 'Bad parameters'});
+        res.sendStatus(400);
         res.end();
     }else{
         User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}] }, function(err, user){
-            if (err) {res.send({success: false, error: err}); return;}
+            if (err) {res.sendStatus(500); return;}
             if(!user){
                 var user =  new User();
                 user.email = req.body.email;
@@ -18,15 +18,15 @@ module.exports = function postSignup(req, res) {
                 user.password = createHash(req.body.password);
                 user.roles = (process.env.ADMIN_EMAILS.indexOf(req.body.email) > -1 ) ? ['ROLE_USER', 'ROLE_ADMIN'] : ['ROLE_USER'];
                 user.save(function(err){
-                    if (err) {res.send({success: false, error: err}); return;}
+                    if (err) {res.sendStatus(422); return;}
                     req.login(user, function(err) {
-                        if (err) {res.json({success: false, alert:'Registration error'}); return;}
+                        if (err) {res.sendStatus(500); return;}
                         req.user.password = "";
-                        res.json({'success': true, 'user': req.user, 'alert':'Registration success'});
+                        res.json({'data': req.user});
                     });                    
                 });
             }else{
-                res.json({'success': false, 'alert':'Registration error, user already exist'});
+                res.sendStatus(422);
             }
         });
     }

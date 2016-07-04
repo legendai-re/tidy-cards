@@ -1,0 +1,11 @@
+<h2>LOGIN</h2>
+<p>{{message}}</p>
+<div>
+	<form (ngSubmit)="onSignupSubmit()">
+		<input [(ngModel)]="signupData.username" type="text" placeholder="username" required />
+		<input [(ngModel)]="signupData.email" type="email" placeholder="email" required />
+		<input [(ngModel)]="signupData.password" type="password" placeholder="password" required />
+		<input [(ngModel)]="signupData.passwordRepeat" type="password" placeholder="repeat password" required />		
+		<button type="submit">Signup</button>
+	</form>	
+</div>
