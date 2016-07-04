@@ -1,4 +1,4 @@
 
-User = require('../models/user.js');
+User = require('../models/user');
 
 exports.userModel = User.userModel;

@@ -8,7 +8,7 @@ variables:
 ```
 NODE_ENV=development
 MONGODB_URI=mongodb://localhost:2000/test
-PORT=3000
+PORT=8080
 SESSION_SECRET=addsecrethere
 SESSION_NAME=localinvow
 ```
