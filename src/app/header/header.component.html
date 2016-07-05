@@ -1,0 +1,26 @@
+<header>    
+    <h1><a [routerLink]="['/']">Invow</a></h1>
+    <nav>
+        <li [class.current]="router.url == '/c/last'">
+            <a [routerLink]="['/c/last']">Collections</a>
+        </li>
+        <li *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')" [class.current]="router.url == '/admin'">
+            <a [routerLink]="['/admin']">Admin</a>
+        </li>
+        <li *ngIf="authService.isLoggedIn" [class.current]="router.url == '/dashboard'">
+            <a [routerLink]="['/dashboard']">Dashboard</a>
+        </li>
+        <li [class.current]="router.url == '/discover'">
+            <a [routerLink]="['/discover']">Discover</a>
+        </li>
+        <li *ngIf="!authService.isLoggedIn" [class.current]="router.url == '/login'">
+            <a [routerLink]="['/login']">Login</a>
+        </li>
+        <li *ngIf="!authService.isLoggedIn" [class.current]="router.url == '/signup'">
+            <a [routerLink]="['/signup']">Signup</a>
+        </li>
+        <li *ngIf="authService.isLoggedIn" [class.current]="router.url == '/logout'">
+            <a [routerLink]="['/logout']">Logout</a>
+        </li>
+    </nav>
+</header>

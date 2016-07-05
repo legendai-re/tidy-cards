@@ -1,16 +1,10 @@
-<div>
-	<p>isLoggedIn: {{ authService.isLoggedIn }}</p>
-	<pre>{{ authService.currentUser | json }}</pre>
-</div>
-<h1>Invow</h1>
-<h2 *ngIf="authService.isLoggedIn">Hi {{authService.currentUser?.name}}</h2>
-<h2 *ngIf="!authService.isLoggedIn">Hi anonyme</h2>
-<nav>
-	<a [routerLink]="['/']">Home</a>
-	<a [routerLink]="['/c']">Collections</a>
-	<a [routerLink]="['/admin']">Admin</a>
-	<a [routerLink]="['/login']">Login</a>
-	<a [routerLink]="['/signup']">Signup</a>
-	<a [routerLink]="['/logout']">Logout</a>
-</nav>
-<router-outlet></router-outlet>
+<main>    
+    <div *ngIf="authService.authInitialized">
+        <div class="hide">
+            <p>isLoggedIn: {{ authService.isLoggedIn }}</p>
+            <pre>{{ authService.currentUser | json }}</pre>
+        </div>
+        <my-header></my-header>
+        <router-outlet></router-outlet>
+    </div>    
+<main>

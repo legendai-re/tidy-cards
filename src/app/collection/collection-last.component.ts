@@ -13,7 +13,8 @@ import { Collection, CollectionService }   from './collection.service';
 	    </ul>
 	`
 })
-export class CollectionListComponent implements OnInit { 
+
+export class CollectionLastComponent implements OnInit { 
 	collections: Collection[];
 	constructor(
 		private router: Router,

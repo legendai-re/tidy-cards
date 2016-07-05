@@ -1,5 +1,7 @@
 module.exports = function getCollectionSchema(Schema) {
 
+	//TO DO: visibility : PRIVATE / PUBLIC / UNINDEXED
+	
 	return new Schema({
 		createdAt: { type: Date },
 		updatedAt: { type: Date },

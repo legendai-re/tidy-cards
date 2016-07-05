@@ -1,8 +1,11 @@
 // styles in src/style directory are applied to the whole page
-body {
-    background: #0147A7;
-    color: #fff;
+body {    
+    font-family: sans-serif;
 }
-a {
-    color: #03A9F4;
+a {   
+    text-decoration: none;
+}
+
+.hide{
+    display: none;
 }

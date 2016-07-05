@@ -37,3 +37,16 @@ export class GrantedAdmin implements CanActivate {
 		return false;
 	}
 }
+
+@Injectable()
+export class HomeGuard implements CanActivate {
+	constructor(private authService: AuthService, private router: Router) {}
+
+	canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+		if (this.authService.isLoggedIn)
+			this.router.navigate(['/dashboard']);			
+		if (!this.authService.isLoggedIn)
+			this.router.navigate(['/discover']);	
+		return false; 	
+	}
+}

@@ -11,25 +11,18 @@ export class LoginComponent {
     username: string;
     password: string;
 
-    constructor(public authService: AuthService, public router: Router) {
-        this.setMessage();
-    }
-
-    setMessage() {
-        this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-    }
+    constructor(public authService: AuthService, public router: Router) {    
+    }    
 
     onLoginSubmit() {
         this.message = 'Trying to log in ...';        
-        this.authService.login(this.username, this.password).then(success => {
-            this.setMessage();
+        this.authService.login(this.username, this.password).then(success => {            
             if(success)
                 this.router.navigate(['/']);            
         });
     }
 
     logout() {
-        this.authService.logout();
-        this.setMessage();
+        this.authService.logout();        
     }
 }
