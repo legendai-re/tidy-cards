@@ -2,7 +2,16 @@ var mongoose    = require('mongoose');
 var roles       = require('../../security/roles.json');
 var Schema      = mongoose.Schema;
 
-var UserSchema = require('./schema')(Schema);
+var UserSchema  = require('./schema')(Schema);
+
+UserSchema.pre('save', function(next) {    
+    this.createdAt = new Date();
+    next();
+});
+
+UserSchema.pre('update', function(next) {    
+    this.updatedAt = Date();
+});
 
 UserSchema.methods.isGranted = function isGranted(role){        
     if(this.haveRole(role)) return true;    
@@ -47,6 +56,23 @@ UserSchema.methods.removeRole = function removeRole(role, callback) {
         callback({success: false, alert: "Role didn't exist or you tryed to remove ROLE_USER"});
     }
 }
+
+UserSchema.methods.addCollection = function addCollection(collection, callback) {
+    user = this;
+    collection._author = this._id;
+    collection.save(function(err){
+        if (err) {callback(err, collection); return;}       
+        user.collections.push(collection);
+        user.save(function(err){
+            if (err) {callback(err, collection); return;}
+            callback(false, collection)
+        });   
+    });    
+}
+
+UserSchema.virtual('webpath').get(function () {
+  return this.email + ' ' + this.name;
+});
 
 User = mongoose.model('User', UserSchema);
 

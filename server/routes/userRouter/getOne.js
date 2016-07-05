@@ -1,4 +1,4 @@
-module.exports = function postLogin (req, res) {
+module.exports = function getOne (req, res) {
 
 	var mongoose	= require('mongoose');
 	var User 		= mongoose.model('User');

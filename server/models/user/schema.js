@@ -1,6 +1,8 @@
 module.exports = function getUserSchema(Schema) {
 
 	return new Schema({
+		createdAt: { type: Date },
+		updatedAt: { type: Date },
 	    username: {
 	        type: String,
 	        required: true,
@@ -48,7 +50,8 @@ module.exports = function getUserSchema(Schema) {
 	            },
 	            message: 'Bio is to long'
 	        } 
-	    }
-	});
+	    },
+	    collections: [{ type: Schema.Types.ObjectId, ref: 'Collection' }]
+	});	
     
 }

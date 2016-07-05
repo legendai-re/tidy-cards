@@ -23,6 +23,8 @@ export class LoginComponent {
         this.message = 'Trying to log in ...';        
         this.authService.login(this.username, this.password).then(success => {
             this.setMessage();
+            if(success)
+                this.router.navigate(['/']);            
         });
     }
 
