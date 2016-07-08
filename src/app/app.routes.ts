@@ -15,7 +15,8 @@ export const routes: RouterConfig = [
 	...CollectionRoutes,
 	...AdminRoutes,
 	...LoginRoutes,
-	{ path: '', component: AppComponent, canActivate: [HomeGuard] }
+	{ path: '', component: AppComponent, canActivate: [HomeGuard] },
+    { path: '**', component: AppComponent, canActivate: [HomeGuard] }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

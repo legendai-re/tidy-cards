@@ -51,7 +51,10 @@ module.exports = function getUserSchema(Schema) {
 	            message: 'Bio is to long'
 	        } 
 	    },
-	    collections: [{ type: Schema.Types.ObjectId, ref: 'Collection' }]
+	    staredCollections: {
+	    	select: false,
+	    	type: Array //Relation to Collection
+	    }
 	});	
     
 }

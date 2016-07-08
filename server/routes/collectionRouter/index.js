@@ -13,7 +13,7 @@ router.route('/')
 
 router.route('/:collection_id')
     .get(function(req, res){
-       //require('./getOne')(req, res);
+       require('./getOne')(req, res);
     })
     .put(isGranted('ROLE_USER'), function(req, res) {        
         require('./put')(req, res);

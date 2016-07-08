@@ -4,7 +4,7 @@ import { Http, Response,
          Headers, 
          RequestOptions }   from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
-import { User }             from '../user/user.service';
+import { User }             from '../user/user.class';
 import { ApiUrl }           from '../shared/api-url';
 
 import 'rxjs/add/observable/throw';

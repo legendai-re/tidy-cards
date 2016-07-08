@@ -61,18 +61,10 @@ UserSchema.methods.addCollection = function addCollection(collection, callback) 
     user = this;
     collection._author = this._id;
     collection.save(function(err){
-        if (err) {callback(err, collection); return;}       
-        user.collections.push(collection);
-        user.save(function(err){
-            if (err) {callback(err, collection); return;}
-            callback(false, collection)
-        });   
+        if (err) {callback(err, collection); return;}                      
+        callback(false, collection);
     });    
 }
-
-UserSchema.virtual('webpath').get(function () {
-  return this.email + ' ' + this.name;
-});
 
 User = mongoose.model('User', UserSchema);
 

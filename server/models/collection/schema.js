@@ -1,6 +1,6 @@
 module.exports = function getCollectionSchema(Schema) {
 
-	//TO DO: visibility : PRIVATE / PUBLIC / UNINDEXED
+	var visibility = require('./visibility.json');
 	
 	return new Schema({
 		createdAt: { type: Date },
@@ -25,7 +25,12 @@ module.exports = function getCollectionSchema(Schema) {
 	            message: '{VALUE} is not a valid color'
 	        }      
 	    },
-	    _author : { type: String, ref: 'User' },	   
+	    visibility: {
+	    	type: Number,
+	    	default: visibility.PRIVATE
+	    },
+	    _author : { type: String, ref: 'User' },
+	    _thumbnail : { type: String, ref: 'Image' },
 	});
     
 }

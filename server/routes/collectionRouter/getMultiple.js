@@ -1,14 +1,16 @@
 module.exports = function getMultiple (req, res) {
 
 	var mongoose	= require('mongoose');
+	var visibility  = require('../../models/collection/visibility.json');
 	var Collection 	= mongoose.model('Collection');
 
 	var rq = req.query;
 
 	var q = Collection.find(getQueryFiler(rq)).sort({'createdAt': 1}).limit(20);	
 
-	if(rq.populate)
-		q.populate('_author');		
+	if(rq.populate){
+		q.populate(rq.populate);
+	}
 
 	if(rq.skip)
 		q.limit(parseInt(rq.skip));

@@ -1,7 +1,7 @@
 import { Component }   from '@angular/core';
 import { Router }      from '@angular/router';
 import { AuthService } from './auth.service';
-import { User }        from '../user/user.service';
+import { User }        from '../user/user.class';
 
 @Component({
   templateUrl: './signup.component.html'
@@ -21,6 +21,8 @@ export class SignupComponent {
 
     onSignupSubmit() {
         var user = new User(
+            undefined,
+            undefined,
             undefined,
             this.signupData.username,
             this.signupData.username,

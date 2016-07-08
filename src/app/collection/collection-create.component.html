@@ -1,0 +1,16 @@
+<main>
+    <h2>New collection</h2>
+    <div>
+        <form (ngSubmit)="onCreatCollectionSubmit()">
+            <input [(ngModel)]="collection.title" type="text" placeholder="title" required />
+            <input [(ngModel)]="collection.color" type="text" placeholder="color" required />
+            <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />  
+            <button type="submit">Create collection</button>
+        </form>
+        <div *ngIf="collectionCreated" >
+            <p>{{collection.title}}</p>
+            <p>{{collection.color}}</p>
+            <img [src]="collection._thumbnail?.getPath('original')" />
+        </div>
+    </div>
+</main>

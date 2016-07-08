@@ -1,0 +1,21 @@
+<h2>Collection detail</h2>
+<div *ngIf="collection">
+    <h3>{{collection.title}}</h3>
+    <img [src]="collection._thumbnail?.getPath('original')" />
+    <div>
+        <p>title: {{collection.title}}</p>
+        <p>color: #{{collection.color}}</p>
+    </div>
+    <div>
+        <p>
+            created by <b>{{collection._author?.name}}</b>
+            <small>@{{collection._author?.username}}</small>
+        </p>
+        <small>
+            created the {{collection.createdAt | date }}
+        </small>
+    </div>
+    <p>
+        <button (click)="goToCollections()">Back</button>
+    </p>
+</div>

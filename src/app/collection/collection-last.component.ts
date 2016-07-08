@@ -1,29 +1,33 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router }              from '@angular/router';
-import { Collection, CollectionService }   from './collection.service';
+import { URLSearchParams  }   from '@angular/http';
+import { CollectionService }   from './collection.service';
+import { CollectionCreateComponent }   from './collection-create.component';
+import { Collection }   from './collection.class';
 
 @Component({
-	template: `
-		<h2>Collections</h2>
-		<ul class="items">
-			<li *ngFor="let collection of collections"
-				(click)="onSelect(collection)">
-				<span class="badge">{{collection.id}}</span> {{collection.name}}
-			</li>
-	    </ul>
-	`
+    templateUrl: './collection-last.component.html',
+    directives: [CollectionCreateComponent]
 })
 
 export class CollectionLastComponent implements OnInit { 
-	collections: Collection[];
-	constructor(
-		private router: Router,
-		private service: CollectionService) { }
 
-	ngOnInit() {
-		this.service.getCollections().then(collections => this.collections = collections);		
-	}
-	onSelect(collection: Collection) {
-		this.router.navigate(['/c', collection.id]);
-	}	
+    public collections: Collection[];
+
+    constructor( private router: Router, private service: CollectionService) { 
+    }
+
+    ngOnInit() {
+        let params = new URLSearchParams();
+        params.set('populate', '_author+_thumbnail');
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '1');
+        this.service.getCollections(params).subscribe(collections => {
+            this.collections = collections;
+        },()=>{});
+    }
+
+    onSelect(collection: Collection) {
+        this.router.navigate(['/c', collection._id]);
+    }   
 }

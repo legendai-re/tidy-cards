@@ -1,18 +1,30 @@
 module.exports = function post (req, res) {
 
 	var mongoose		= require('mongoose');
-	var Collection 		= mongoose.model('Collection');
-	
-	if(!req.body.title || !req.body.color){
+    var visibility      = require('../../models/collection/visibility.json');
+	var Collection 		= mongoose.model('Collection');	
+
+	if(!req.body.title || !req.body.color || !req.body._thumbnail || !req.body._thumbnail._id || !req.body.visibility || !visibilityOk(req.body.visibility)){
         res.sendStatus(400);
         res.end();
-    }else{       
+    }else{        
         var collection =  new Collection();
         collection.title = req.body.title;
-        collection.color = req.body.color;        
+        collection.color = req.body.color;
+        collection.visibility = req.body.visibility;
+        collection._thumbnail = req.body._thumbnail._id;
         req.user.addCollection(collection, function(err, collection){
-            if (err) {console.log(err); res.sendStatus(422); return;}            
+            if (err) {console.log(err); res.sendStatus(422); return;}
             res.json({'data': collection});            
         });
-    }         
+    }
+
+
+    function visibilityOk(visibilityId){
+        for(var key in visibility){
+            if(visibility[key]==visibilityId)
+                return true;
+        }
+        return false;
+    }
 }
