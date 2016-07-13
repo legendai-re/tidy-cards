@@ -25,7 +25,6 @@ export class CollectionCreateComponent implements OnInit {
 
     ngOnInit() {
         this.collection = new Collection();
-        this.collection.visibility = 1;
         this.collectionCreated = false;
     }
 

@@ -1,5 +1,6 @@
 var mongoose    = require('mongoose');
 var roles       = require('../../security/roles.json');
+var visibility  = require('../collection/visibility.json')
 var Schema      = mongoose.Schema;
 
 var UserSchema  = require('./schema')(Schema);
@@ -58,12 +59,36 @@ UserSchema.methods.removeRole = function removeRole(role, callback) {
 }
 
 UserSchema.methods.addCollection = function addCollection(collection, callback) {
-    user = this;
     collection._author = this._id;
     collection.save(function(err){
         if (err) {callback(err, collection); return;}                      
         callback(false, collection);
     });    
+}
+
+UserSchema.methods.addStarredCollection = function addStarredCollection(User, collection, callback) {
+
+    if(this._id == collection._author || collection.visibility == visibility.PRIVATE){        
+        callback('Cannot star you own collection or collection is private');
+        return;
+    }
+    User.findById(this._id).select('+_starredCollections').exec(function(err, user){
+        if(err){
+            callback(err);
+            return;
+        }        
+        for(var key in user._starredCollections){
+            if(user._starredCollections[key] == collection._id){
+                callback('Collection already starred.');
+                return;
+            }
+        }                
+        user._starredCollections.push(String(collection._id));
+        user.save(function(err){
+            if(err)callback(err);
+            else callback(false);
+        });
+    })
 }
 
 User = mongoose.model('User', UserSchema);

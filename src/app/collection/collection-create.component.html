@@ -2,15 +2,22 @@
     <h2>New collection</h2>
     <div>
         <form (ngSubmit)="onCreatCollectionSubmit()">
-            <input [(ngModel)]="collection.title" type="text" placeholder="title" required />
-            <input [(ngModel)]="collection.color" type="text" placeholder="color" required />
-            <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />  
+            <div>
+                <input [(ngModel)]="collection.title" type="text" placeholder="title" required />
+                <input [(ngModel)]="collection.color" type="text" placeholder="color" required />
+            </div>
+            <div>
+                <input (click)="collection.visibility=1" type="radio" name="collection_visibility" value="1" checked />PRIVATE
+                <input (click)="collection.visibility=2" type="radio" name="collection_visibility" value="2" />PUBLIC
+                <input (click)="collection.visibility=3" type="radio" name="collection_visibility" value="3" />UNINDEXED
+            </div>
+            <div>
+                <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+            <div *ngIf="collection._thumbnail">
+                <img [src]="collection._thumbnail?.getPath('original')" />
+            </div>
             <button type="submit">Create collection</button>
-        </form>
-        <div *ngIf="collectionCreated" >
-            <p>{{collection.title}}</p>
-            <p>{{collection.color}}</p>
-            <img [src]="collection._thumbnail?.getPath('original')" />
-        </div>
+        </form>      
     </div>
 </main>

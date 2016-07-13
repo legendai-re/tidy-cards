@@ -13,6 +13,9 @@
         <li [class.current]="router.url == '/discover'">
             <a [routerLink]="['/discover']">Discover</a>
         </li>
+        <li *ngIf="authService.isLoggedIn" [class.current]="router.url == '/u/'+authService.currentUser._id">
+            <a [routerLink]="['/u', authService.currentUser._id]">{{authService.currentUser.name}}</a>
+        </li>
         <li *ngIf="!authService.isLoggedIn" [class.current]="router.url == '/login'">
             <a [routerLink]="['/login']">Login</a>
         </li>

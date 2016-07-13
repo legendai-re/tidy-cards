@@ -1,7 +1,7 @@
 <h2>Collections</h2>
 <ul class="items">
     <li *ngFor="let collection of collections" (click)="onSelect(collection)">
-        <a href="javascript:void(0);">
+        <a [routerLink]="['/c', collection._id]" >
             <b>{{collection.title}}</b>
             <p>created by {{collection._author?.name}}</p>
         </a>

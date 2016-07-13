@@ -1,5 +1,5 @@
 import { Component, OnInit }   from '@angular/core';
-import { Router }              from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
 import { CollectionService }   from './collection.service';
 import { CollectionCreateComponent }   from './collection-create.component';
@@ -7,7 +7,7 @@ import { Collection }   from './collection.class';
 
 @Component({
     templateUrl: './collection-last.component.html',
-    directives: [CollectionCreateComponent]
+    directives: [ROUTER_DIRECTIVES, CollectionCreateComponent]
 })
 
 export class CollectionLastComponent implements OnInit { 

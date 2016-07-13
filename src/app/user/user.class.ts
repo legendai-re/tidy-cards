@@ -8,6 +8,7 @@ export class User {
     public email: string;
     public password: string;
     public roles: string[];
+    public bio: string;
 
     constructor(
         _id?: string,
@@ -17,7 +18,8 @@ export class User {
         name?: string,
         email?: string,
         password?: string,
-        roles?: string[]) { 
+        roles?: string[],
+        bio?: string) { 
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -26,6 +28,7 @@ export class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.bio = bio;
     }
 
     public static createFormJson(obj){
@@ -37,7 +40,8 @@ export class User {
             obj.name,
             obj.email,
             obj.password,
-            obj.roles
+            obj.roles,
+            obj.bio
         );
     }
 

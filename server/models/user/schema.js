@@ -51,9 +51,9 @@ module.exports = function getUserSchema(Schema) {
 	            message: 'Bio is to long'
 	        } 
 	    },
-	    staredCollections: {
+	    _starredCollections: {
 	    	select: false,
-	    	type: Array //Relation to Collection
+	    	type: Array //Relation to Collection	    	
 	    }
 	});	
     
