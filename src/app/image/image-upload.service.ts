@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
-import { Image }      from './image.class';
-import { ApiUrl }     from '../shared/api-url';
+import { Injectable }             from '@angular/core';
+import { Observable }             from 'rxjs/Observable';
+import { FILE_UPLOAD_DIRECTIVES,
+         FileUploader }           from 'ng2-file-upload';
+import { Image }                  from './image.class';
+import { ApiUrl }                 from '../shared/api-url';
 
 
 @Injectable()

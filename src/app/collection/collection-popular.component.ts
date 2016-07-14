@@ -13,10 +13,10 @@ import { Collection }   from './collection.class';
 
 export class CollectionPopularComponent implements OnInit {
 
-  public collections: Collection[];
+    public collections: Collection[];
 
-  constructor( private router: Router, private service: CollectionService) {
-  }
+    constructor( private router: Router, private service: CollectionService) {
+    }
 
   ngOnInit() {
     let params = new URLSearchParams();
@@ -27,4 +27,5 @@ export class CollectionPopularComponent implements OnInit {
       this.collections = collections;
     }, () => {});
   }
+
 }

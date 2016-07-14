@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { URLSearchParams  }   from '@angular/http';
-import { AuthService }          from '../auth/auth.service';
-import { UserService }          from './user.service';
-import { User }          from './user.class';
+import { Router, ActivatedRoute }       from '@angular/router';
+import { URLSearchParams  }             from '@angular/http';
+import { AuthService }                  from '../auth/auth.service';
+import { UserService }                  from './user.service';
+import { User }                         from './user.class';
 
 @Component({
     selector: 'public-profile',
