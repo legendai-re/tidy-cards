@@ -1,8 +1,6 @@
 import { Injectable }       from '@angular/core';
 import { Router }           from '@angular/router';
-import { Http, Response,
-         Headers,
-         RequestOptions }   from '@angular/http';
+import { Http, Response, Headers, RequestOptions }   from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
 import { User }             from '../user/user.class';
 import { ApiUrl }           from '../shared/api-url';

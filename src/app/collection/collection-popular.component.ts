@@ -7,8 +7,8 @@ import { CollectionCardComponent }   from './collection-card.component';
 import { Collection }   from './collection.class';
 
 @Component({
-  templateUrl: './collection-popular.component.html',
-  directives: [ROUTER_DIRECTIVES, CollectionCardComponent]
+    templateUrl: './collection-popular.component.html',
+    directives: [ROUTER_DIRECTIVES, CollectionCardComponent]
 })
 
 export class CollectionPopularComponent implements OnInit {
@@ -18,14 +18,14 @@ export class CollectionPopularComponent implements OnInit {
     constructor( private router: Router, private service: CollectionService) {
     }
 
-  ngOnInit() {
-    let params = new URLSearchParams();
-    params.set('populate', '_author+_thumbnail');
-    params.set('sort_field', 'createdAt');
-    params.set('sort_dir', '-1');
-    this.service.getCollections(params).subscribe(collections => {
-      this.collections = collections;
-    }, () => {});
-  }
+    ngOnInit() {
+        let params = new URLSearchParams();
+        params.set('populate', '_author+_thumbnail');
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '-1');
+        this.service.getCollections(params).subscribe(collections => {
+            this.collections = collections;
+        }, () => {});
+    }
 
 }

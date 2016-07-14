@@ -15,7 +15,17 @@
             created the {{collection.createdAt | date }}
         </small>
     </div>
-    <p>
-        <button (click)="goToCollections()">Back</button>
-    </p>
+    <div>
+        <input type="text" name="link" [(ngModel)]="link" />
+        <input type="submit" value="check" (click)="checkLink()" />
+        <div *ngIf="isYoutube">
+            <iframe width="560" height="315" [src]="youtubeId" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div *ngIf="isImage">
+            <img [src]="imageUrl" />
+        </div>
+        <div *ngIf="isRandom">
+            <a target="_blank" [href]="randomUrl">{{link}}</a>
+        </div>
+    </div>
 </div>

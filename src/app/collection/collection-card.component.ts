@@ -9,7 +9,7 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 })
 
 export class CollectionCardComponent {
-    
+
     constructor() {
     }
 

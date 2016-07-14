@@ -10,14 +10,14 @@ import { AuthRoutes, AUTH_PROVIDERS }  from './auth/auth.routes';
 import { UserRoutes }                  from './user/user.routes';
 
 export const routes: RouterConfig = [
-...DiscoverRoutes,
-...DashboardRoutes,
-...CollectionRoutes,
-...AdminRoutes,
-...AuthRoutes,
-...UserRoutes,
-{ path: '', component: AppComponent, canActivate: [HomeGuard] },
-{ path: '**', component: AppComponent, canActivate: [HomeGuard] }
+    ...DiscoverRoutes,
+    ...DashboardRoutes,
+    ...CollectionRoutes,
+    ...AdminRoutes,
+    ...AuthRoutes,
+    ...UserRoutes,
+    { path: '', component: AppComponent, canActivate: [HomeGuard] },
+    { path: '**', component: AppComponent, canActivate: [HomeGuard] }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

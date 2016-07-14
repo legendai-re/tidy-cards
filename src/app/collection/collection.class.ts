@@ -23,19 +23,19 @@ export class Collection {
         this.visibility = visibility;
     }
 
-  public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json'); ; }
+    public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json'); ; }
 
-  public static createFormJson(obj) {
-    return new Collection(
-      obj._id,
-      obj.createdAt,
-      obj.updatedAt,
-      obj.title,
-      obj.color,
-      User.createFormJson(obj._author),
-      Image.createFormJson(obj._thumbnail),
-      obj.visibility
-      );
-  }
+    public static createFormJson(obj) {
+        return new Collection(
+            obj._id,
+            obj.createdAt,
+            obj.updatedAt,
+            obj.title,
+            obj.color,
+            User.createFormJson(obj._author),
+            Image.createFormJson(obj._thumbnail),
+            obj.visibility
+            );
+    }
 
 }

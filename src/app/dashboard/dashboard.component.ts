@@ -8,44 +8,46 @@ import { CollectionCardComponent }   from '../collection/collection-card.compone
 import { Collection }   from '../collection/collection.class';
 
 @Component({
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  directives: [ROUTER_DIRECTIVES, CollectionCreateComponent, CollectionCardComponent]
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    directives: [ROUTER_DIRECTIVES, CollectionCreateComponent, CollectionCardComponent]
 })
 
 export class DashboardComponent implements OnInit {
 
-  public myCollections: Collection[];
-  public myFavoriteCollections: Collection[];
+    public myCollections: Collection[];
+    public myFavoriteCollections: Collection[];
 
-  constructor(public authService: AuthService, private router: Router, private service: CollectionService) {
-  }
+    constructor(public authService: AuthService, private router: Router, private service: CollectionService) {
+    }
 
-  ngOnInit() {
-    this.initMyCollections();
-    this.initMyFavoriteCollections();
-  }
+    ngOnInit() {
+        this.initMyCollections();
+        this.initMyFavoriteCollections();
+    }
 
-  initMyCollections(){
-    let params = new URLSearchParams();
-    params.set('populate', '_author+_thumbnail');
-    params.set('sort_field', 'createdAt');
-    params.set('_author', this.authService.currentUser._id);
-    params.set('sort_dir', '-1');
-    this.service.getCollections(params).subscribe(collections => {
-      this.myCollections = collections;
-    }, () => {});
-  }
+    initMyCollections(){
+        let params = new URLSearchParams();
+        params.set('populate', '_author+_thumbnail');
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '-1');
+        params.set('limit', '7');
+        params.set('_author', this.authService.currentUser._id);
+        this.service.getCollections(params).subscribe(collections => {
+            this.myCollections = collections;
+        }, () => {});
+    }
 
-  initMyFavoriteCollections(){
-    let params = new URLSearchParams();
-    params.set('populate', '_author+_thumbnail');
-    params.set('sort_field', 'createdAt');
-    params.set('_starredBy', this.authService.currentUser._id);
-    params.set('sort_dir', '-1');
-    this.service.getCollections(params).subscribe(collections => {
-      this.myFavoriteCollections = collections;
-    }, () => {});
-  }
+    initMyFavoriteCollections(){
+        let params = new URLSearchParams();
+        params.set('populate', '_author+_thumbnail');
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '-1');
+        params.set('limit', '8');
+        params.set('_starredBy', this.authService.currentUser._id);
+        this.service.getCollections(params).subscribe(collections => {
+            this.myFavoriteCollections = collections;
+        }, () => {});
+    }
 
 }
