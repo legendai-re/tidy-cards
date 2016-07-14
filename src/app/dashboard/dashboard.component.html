@@ -1,6 +1,21 @@
 <section class="section">
   <div class="container">
     <h2>My collections</h2>
-    <p>Dashboard page...</p>
+    <div>
+        <li *ngFor="let collection of myCollections">
+            <myCollectionCard [collection]=collection></myCollectionCard>
+        </li>
+        <li>
+            <myCreateCollection></myCreateCollection>
+        </li>
+    </div>
+    <hr />
+
+    <h2>My favorite collections</h2>
+    <div>
+        <li *ngFor="let collection of myFavoriteCollections">
+            <myCollectionCard [collection]=collection></myCollectionCard>
+        </li>
+    </div>
   </div>
 </section>

@@ -3,11 +3,12 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
 import { CollectionService }   from './collection.service';
 import { CollectionCreateComponent }   from './collection-create.component';
+import { CollectionCardComponent }   from './collection-card.component';
 import { Collection }   from './collection.class';
 
 @Component({
   templateUrl: './collection-popular.component.html',
-  directives: [ROUTER_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, CollectionCardComponent]
 })
 
 export class CollectionPopularComponent implements OnInit {
@@ -26,9 +27,4 @@ export class CollectionPopularComponent implements OnInit {
       this.collections = collections;
     }, () => {});
   }
-
-  onSelect(collection: Collection) {
-    this.router.navigate(['/c', collection._id]);
-  }
-
 }

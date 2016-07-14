@@ -9,7 +9,7 @@ import { Image }            from '../image/image.class';
 import { ImgUploadService } from '../image/image-upload.service';
 
 @Component({
-  selector: 'create-collection',
+  selector: 'myCreateCollection',
   templateUrl: './collection-create.component.html',
   directives: [FILE_UPLOAD_DIRECTIVES]
 })
@@ -25,6 +25,7 @@ export class CollectionCreateComponent implements OnInit {
 
   ngOnInit() {
     this.collection = new Collection();
+    this.collection.visibility = Collection.VISIBILITY.PRIVATE;    
     this.collectionCreated = false;
   }
 

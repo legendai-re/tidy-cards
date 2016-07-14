@@ -1,7 +1,7 @@
 <main>
-    <h2>New collection</h2>
     <div>
         <form (ngSubmit)="onCreatCollectionSubmit()">
+            <legend>New Collection</legend>
             <div>
                 <input [(ngModel)]="collection.title" type="text" placeholder="title" required />
                 <input [(ngModel)]="collection.color" type="text" placeholder="color" required />

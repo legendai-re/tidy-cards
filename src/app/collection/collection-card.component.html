@@ -1,0 +1,6 @@
+<div *ngIf="collection">
+    <a [routerLink]="['/c', collection._id]" >
+        <b>{{collection.title}}</b>
+        <p>created by {{collection._author?.name}}</p>
+    </a>
+</div>

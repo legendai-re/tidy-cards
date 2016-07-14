@@ -23,6 +23,8 @@ export class Collection {
     this.visibility = visibility;
   }
 
+  public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json'); ; }
+
   public static createFormJson(obj) {
     return new Collection(
       obj._id,

@@ -14,9 +14,10 @@ module.exports = function getOne (req, res) {
 
 	q.exec(function(err, collection){
         if(err) {console.log(err); res.sendStatus(500); return;}
+        var _authorId = collection._author._id ? collection._author._id : collection._author;
         if(!collection){
         	res.sendStatus(404);
-        }else if(collection.visibility == visibility.PRIVATE && (!req.user || req.user._id!=collection._author)){
+        }else if(collection.visibility == visibility.PRIVATE && (!req.user || String(req.user._id)!=_authorId)){
         	res.sendStatus(401);
         }else{
         	res.json({data: collection});

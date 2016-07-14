@@ -2,12 +2,12 @@ import { Component, OnInit }   from '@angular/core';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
 import { CollectionService }   from './collection.service';
-import { CollectionCreateComponent }   from './collection-create.component';
+import { CollectionCardComponent }   from './collection-card.component';
 import { Collection }   from './collection.class';
 
 @Component({
   templateUrl: './collection-last.component.html',
-  directives: [ROUTER_DIRECTIVES, CollectionCreateComponent]
+  directives: [ROUTER_DIRECTIVES, CollectionCardComponent]
 })
 
 export class CollectionLastComponent implements OnInit {
@@ -25,9 +25,5 @@ export class CollectionLastComponent implements OnInit {
     this.service.getCollections(params).subscribe(collections => {
       this.collections = collections;
     }, () => {});
-  }
-
-  onSelect(collection: Collection) {
-    this.router.navigate(['/c', collection._id]);
   }
 }
