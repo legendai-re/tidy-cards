@@ -10,6 +10,5 @@ import { AuthService }          from '../auth/auth.service';
     directives: [ROUTER_DIRECTIVES]
 })
 export class HeaderComponent {
-    constructor(public authService: AuthService, public router: Router) {        
-    }
+    constructor(public authService: AuthService, public router: Router) {}
 }

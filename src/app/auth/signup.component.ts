@@ -8,30 +8,29 @@ import { User }        from '../user/user.class';
 })
 
 export class SignupComponent {
-    
-    signupData = new class SignupData{
-        username: string;
-        email: string;
-        password: string;
-        passwordRepeat: string;
-    }
 
-    constructor(public authService: AuthService, public router: Router) {        
-    }    
+  signupData = new class SignupData{
+    username: string;
+    email: string;
+    password: string;
+    passwordRepeat: string;
+  };
 
-    onSignupSubmit() {
-        var user = new User(
-            undefined,
-            undefined,
-            undefined,
-            this.signupData.username,
-            this.signupData.username,
-            this.signupData.email,
-            this.signupData.password
-        );
-        this.authService.signup(user).then(success => {
-            console.log(success);
-        });
-    }
-    
+  constructor(public authService: AuthService, public router: Router) {}
+
+  onSignupSubmit() {
+    let user = new User(
+      undefined,
+      undefined,
+      undefined,
+      this.signupData.username,
+      this.signupData.username,
+      this.signupData.email,
+      this.signupData.password
+      );
+    this.authService.signup(user).then(success => {
+      console.log(success);
+    });
+  }
+
 }

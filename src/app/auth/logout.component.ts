@@ -3,13 +3,13 @@ import { Router }      from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Component({
-    template: ""
+  template: ''
 })
 
-export class LogoutComponent {    
+export class LogoutComponent {
 
-    constructor(public authService: AuthService, public router: Router) {
-        this.authService.logout();        
-    }
-    
+  constructor(public authService: AuthService, public router: Router) {
+    this.authService.logout();
+  }
+
 }

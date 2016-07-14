@@ -10,7 +10,7 @@ if (process.env.ENV === 'build') {
 }
 
 bootstrap(AppComponent, [
-    HTTP_PROVIDERS,
-    APP_ROUTER_PROVIDERS
-])
+  HTTP_PROVIDERS,
+  APP_ROUTER_PROVIDERS
+  ])
 .catch(err => console.error(err));

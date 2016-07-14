@@ -8,9 +8,9 @@ import { SignupComponent }  from './signup.component';
 import { LogoutComponent }  from './logout.component';
 
 export const LoginRoutes = [
-  	{ path: 'login', component: LoginComponent, canActivate: [GrantedAnonymous] },
-  	{ path: 'logout', component: LogoutComponent, canActivate: [GrantedUser] },
-  	{ path: 'signup', component: SignupComponent, canActivate: [GrantedAnonymous] }  	
+{ path: 'login', component: LoginComponent, canActivate: [GrantedAnonymous] },
+{ path: 'logout', component: LogoutComponent, canActivate: [GrantedUser] },
+{ path: 'signup', component: SignupComponent, canActivate: [GrantedAnonymous] }
 ];
 
 export const AUTH_PROVIDERS = [GrantedUser, GrantedAdmin, GrantedAnonymous, AuthService, HomeGuard];

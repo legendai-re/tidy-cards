@@ -21,10 +21,10 @@ export class UserPublicComponent implements OnInit, OnDestroy  {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             let userId = params['user_id'];
-            let getParams = new URLSearchParams();            
+            let getParams = new URLSearchParams();
             this.userService.getUser(userId, getParams).subscribe((user) => {
                 this.user = user;
-            }, ()=>{})
+            }, () => {});
         });
     }
 
