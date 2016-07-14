@@ -1,6 +1,6 @@
 <section class="section">
   <div class="container">
-    <h2>Last public collections</h2>
+    <h2>Popular collections</h2>
     <ul class="items">
       <li *ngFor="let collection of collections" (click)="onSelect(collection)">
         <a [routerLink]="['/c', collection._id]" >
@@ -9,8 +9,5 @@
         </a>
       </li>
     </ul>
-    <div>
-      <create-collection></create-collection>
-    </div>
   </div>
 </section>

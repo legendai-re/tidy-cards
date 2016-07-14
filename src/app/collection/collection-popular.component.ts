@@ -6,11 +6,11 @@ import { CollectionCreateComponent }   from './collection-create.component';
 import { Collection }   from './collection.class';
 
 @Component({
-  templateUrl: './collection-last.component.html',
-  directives: [ROUTER_DIRECTIVES, CollectionCreateComponent]
+  templateUrl: './collection-popular.component.html',
+  directives: [ROUTER_DIRECTIVES]
 })
 
-export class CollectionLastComponent implements OnInit {
+export class CollectionPopularComponent implements OnInit {
 
   public collections: Collection[];
 
@@ -30,4 +30,5 @@ export class CollectionLastComponent implements OnInit {
   onSelect(collection: Collection) {
     this.router.navigate(['/c', collection._id]);
   }
+
 }

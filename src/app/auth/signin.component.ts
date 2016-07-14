@@ -3,10 +3,10 @@ import { Router }      from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Component({
-  templateUrl: './login.component.html'
+  templateUrl: './signin.component.html'
 })
 
-export class LoginComponent {
+export class SigninComponent {
   message: string;
   username: string;
   password: string;

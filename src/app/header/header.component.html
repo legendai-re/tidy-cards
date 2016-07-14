@@ -1,54 +1,54 @@
 <header class="header clearfix">
-  <div class="container">
-    <h1 class="logo">
-      <a [routerLink]="['/']">Invow</a>
-    </h1>
-    <nav class="nav nav-pills pull-xs-right">
-        <li class="nav-item" *ngIf="!authService.isLoggedIn">
-            <a class="nav-link disabled">
-              Popular
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="!authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/c/last'" [routerLink]="['/c/last']">
-              Last
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')">
-            <a class="nav-link" [class.active]="router.url == '/admin'" [routerLink]="['/admin']">
-              Admin
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/dashboard'" [routerLink]="['/dashboard']">
-              Dashboard
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/discover'" [routerLink]="['/discover']">
-              Discover
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/u/'+authService.currentUser._id" [routerLink]="['/u', authService.currentUser._id]">
-              {{authService.currentUser.name}}
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="!authService.isLoggedIn" >
-            <a class="nav-link" [class.active]="router.url == '/login'" [routerLink]="['/login']">
-              Login
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="!authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/signup'" [routerLink]="['/signup']">
-              Signup
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn">
-            <a class="nav-link" [class.active]="router.url == '/logout'" [routerLink]="['/logout']">
-              Logout
-            </a>
-        </li>
-    </nav>
-  </div>
+    <div class="container">
+        <h1 class="logo">
+          <a [routerLink]="['/']">Invow</a>
+        </h1>
+        <nav class="nav nav-pills pull-xs-right">
+            <li class="nav-item" *ngIf="!authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/c/popular'" [routerLink]="['/c/popular']">
+                  Popular
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/c/last'" [routerLink]="['/c/last']">
+                  Last
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')">
+                <a class="nav-link" [class.active]="router.url == '/admin'" [routerLink]="['/admin']">
+                  Admin
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/dashboard'" [routerLink]="['/dashboard']">
+                  Dashboard
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/discover'" [routerLink]="['/discover']">
+                  Discover
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/u/'+authService.currentUser._id" [routerLink]="['/u', authService.currentUser._id]">
+                  {{authService.currentUser.name}}
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn" >
+                <a class="nav-link" [class.active]="router.url == '/signin'" [routerLink]="['/signin']">
+                  Signin
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/signup'" [routerLink]="['/signup']">
+                  Signup
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn">
+                <a class="nav-link" [class.active]="router.url == '/logout'" [routerLink]="['/logout']">
+                  Logout
+                </a>
+            </li>
+        </nav>
+    </div>
 </header>
