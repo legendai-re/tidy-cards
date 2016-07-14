@@ -6,11 +6,11 @@ import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === 'build') {
-  enableProdMode();
+    enableProdMode();
 }
 
 bootstrap(AppComponent, [
-  HTTP_PROVIDERS,
-  APP_ROUTER_PROVIDERS
-  ])
+    HTTP_PROVIDERS,
+    APP_ROUTER_PROVIDERS
+    ])
 .catch(err => console.error(err));

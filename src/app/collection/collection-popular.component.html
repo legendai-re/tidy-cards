@@ -1,13 +1,13 @@
 <section class="section">
-  <div class="container">
-    <h2>Popular collections</h2>
-    <ul class="items">
-      <li *ngFor="let collection of collections" (click)="onSelect(collection)">
-        <a [routerLink]="['/c', collection._id]" >
-          <b>{{collection.title}}</b>
-          <p>created by {{collection._author?.name}}</p>
-        </a>
-      </li>
-    </ul>
-  </div>
+    <div class="container">
+        <h2>Popular collections</h2>
+        <ul class="items">
+            <li *ngFor="let collection of collections" (click)="onSelect(collection)">
+                <a [routerLink]="['/c', collection._id]" >
+                    <b>{{collection.title}}</b>
+                    <p>created by {{collection._author?.name}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
 </section>
