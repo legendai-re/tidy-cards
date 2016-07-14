@@ -1,10 +1,16 @@
-<h2>Signup</h2>
-<div>
-	<form (ngSubmit)="onSignupSubmit()">
-		<input [(ngModel)]="signupData.username" type="text" placeholder="username" required />
-		<input [(ngModel)]="signupData.email" type="email" placeholder="email" required />
-		<input [(ngModel)]="signupData.password" type="password" placeholder="password" required />
-		<input [(ngModel)]="signupData.passwordRepeat" type="password" placeholder="repeat password" required />		
-		<button type="submit">Signup</button>
-	</form>	
-</div>
+<section class="section">
+  <div class="container">
+    <form class="form-signin" (ngSubmit)="onSignupSubmit()">
+      <h2 class="form-signin-heading">Please sign up</h2>
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input [(ngModel)]="signupData.username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input [(ngModel)]="signupData.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input [(ngModel)]="signupData.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <label for="inputPassword" class="sr-only">Repeat password</label>
+      <input [(ngModel)]="signupData.passwordRepeat" type="password" id="inputPassword" class="form-control" placeholder="Repeat password" required="">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+  </div>
+</section>

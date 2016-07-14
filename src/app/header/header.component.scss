@@ -1,7 +1,14 @@
 @import '../../style/app.scss';
 
 .header {
-  padding: 20px 0
+  background: $purple;
+  width: 100%;
+  height: 260px;
+  padding: 20px 0;
+
+  a {
+    color: $white;
+  }
 }
 
 .logo {
