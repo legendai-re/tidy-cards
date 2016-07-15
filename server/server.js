@@ -8,6 +8,7 @@ var express 			= require('express');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 var session 			= require('express-session');
+var Twitter             = require('twitter');
 var path 				= require('path');
 var db 					= require('./mongoose');
 var models				= require('./models');
@@ -16,11 +17,11 @@ var app = express();
 app.set('port', (process.env.PORT || 2016));
 
 var compiler = webpack({
-   
+
     output: { path: '/' }
 });
 
-app.use(webpackDevMiddleware(compiler, {	
+app.use(webpackDevMiddleware(compiler, {
 }));
 
 app.use(cookieParser());
@@ -32,6 +33,13 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+var client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+});
 
 require('./security')(app);
 require('./routes')(app);

@@ -19,7 +19,7 @@ export class CollectionCreateComponent implements OnInit {
     public uploader;
     public collectionCreated: boolean;
 
-    constructor( private collectionService: CollectionService, private imgUploadService: ImgUploadService ) {
+    constructor(private collectionService: CollectionService, private imgUploadService: ImgUploadService ) {
         this.uploader = imgUploadService.uploader;
     }
 
