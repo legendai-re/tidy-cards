@@ -1,21 +1,23 @@
 <section class="section">
-  <div class="container">
-    <h2>My collections</h2>
-    <div>
-        <li *ngFor="let collection of myCollections">
-            <myCollectionCard [collection]=collection></myCollectionCard>
-        </li>
-        <li>
-            <myCreateCollection></myCreateCollection>
-        </li>
+    <div class="container">
+        <h2 class="section-title">My collections</h2>
+        <div class="row">
+            <div class="col-xs-2" *ngFor="let collection of myCollections">
+                <myCollectionCard [collection]=collection></myCollectionCard>
+            </div>
+            <div class="col-xs-2">
+                <myCreateCollection></myCreateCollection>
+            </div>
+        </div>
     </div>
-    <hr />
-
-    <h2>My favorite collections</h2>
-    <div>
-        <li *ngFor="let collection of myFavoriteCollections">
-            <myCollectionCard [collection]=collection></myCollectionCard>
-        </li>
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">My favorite collections</h2>
+        <div class="row">
+            <div class="col-xs-2" *ngFor="let collection of myFavoriteCollections">
+                <myCollectionCard [collection]=collection></myCollectionCard>
+            </div>
+        </div>
     </div>
-  </div>
 </section>

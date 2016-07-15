@@ -1,6 +1,25 @@
-<div *ngIf="collection">
+<article class="card" *ngIf="collection">
     <a [routerLink]="['/c', collection._id]" >
-        <b>{{collection.title}}</b>
-        <p>created by {{collection._author?.name}}</p>
+        <div class="card-thumbnail thumbnail">
+            <img [src]="collection._thumbnail?.getPath('original')" />
+        </div>
     </a>
-</div>
+    <!-- <a [routerLink]="['/c', collection._id]" >
+        <div class="card-color"></div>
+    </a> -->
+    <div class="card-container">
+        <a [routerLink]="['/c', collection._id]" >
+            <div class="card-content has-thumbnail">
+                <h3 class="card-title">{{collection.title}}</h3>
+                <p class="card-caption">Enter a caption here to describe the collection…</p>
+            </div>
+        </a>
+        <div class="card-details">
+            <a href="#" title="{{collection._author?.name}}">
+                <div class="avatar avatar--60">
+                    <img src="https://www.alexandrejolly.com/avatar_red.png" alt="{{collection._author?.name}} avatar">
+                </div>
+            </a>
+        </div>
+    </div>
+</article>

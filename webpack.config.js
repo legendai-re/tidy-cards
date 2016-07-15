@@ -46,7 +46,6 @@ module.exports = function makeWebpackConfig() {
   config.entry = isTest ? {} : {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
-    'bootstrap-loader': 'bootstrap-loader',
     'app': './src/main.ts' // our angular app
   };
 
@@ -95,6 +94,8 @@ module.exports = function makeWebpackConfig() {
       // copy those assets to output
       {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
 
+      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?importLoaders=1&limit=100000' },
+
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
 
@@ -123,9 +124,6 @@ module.exports = function makeWebpackConfig() {
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
       {test: /\.html$/, loader: 'raw'},
-
-      // Bootstrap 4
-      { test: /bootstrap[\/\\]dist[\/\\]js[\/\\]umd[\/\\]/, loader: 'imports?jQuery=jquery' }
     ],
     postLoaders: [],
     noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
