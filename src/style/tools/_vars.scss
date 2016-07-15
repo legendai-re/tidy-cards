@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500);
+
+// VARS
+
+// fonts
+
+$font-primary:             Fira Sans, Helvetica, sans-serif;
+
+//colors
+
+$purple:                    #6B5DFF;
+
+$black:                     #282828;
+$grey:                      #777777;
+$grey-light:                #BBBBBB;
+$whitesmoke:                #F5F5F5;
+$white:                     #FFFFFF;
+
+// collection colors
+
+$collection-yellow:         #FFFF7C;
+$collection-blue:           #78D6FF;
+$collection-orange:         #FFD373;
+$collection-red:            #FF887A;
+$collection-green:          #CBFF8A;
+$collection-cyan:           #A4FFEB;
+$collection-grey:           #CFD8DC;
+
+$collection-default-color:  $collection-grey;
+
+// components
+
+$images-overlay:            rgba(0,0,0,.6);
+$border-color:              rgba(0,0,0,.1);
+$box-shadow-color:          rgba(0,0,0,.04);

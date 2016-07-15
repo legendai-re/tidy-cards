@@ -7,6 +7,7 @@ import { ImgUploadService }     from './image/image-upload.service';
 import { AuthService }          from './auth/auth.service';
 import { HeaderComponent}       from './header/header.component';
 
+import 'bootstrap/dist/js/bootstrap.js';
 import '../style/app.scss';
 
 @Component({

@@ -1,0 +1,85 @@
+@import '../../style/app.scss';
+
+.card {
+    background: $white;
+    width: 100%;
+    height: 300px;
+    border: none;
+    box-shadow: 0 1px 4px $box-shadow-color;
+    color: $black;
+    border-radius: 3px;
+    overflow: hidden;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid $border-color;
+        border-radius: 3px;
+    }
+
+    a, a:hover, a:focus, a:active {
+        text-decoration: none;
+    }
+}
+
+.card-thumbnail {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 0;
+
+    &:after {
+        content: "";
+        position: absolute;
+        background: $images-overlay;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.card-color {
+    background-color: $collection-default-color;
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    z-index: 0;
+}
+
+.card-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.card-content {
+    width: 100%;
+    height: 230px;
+}
+
+.card-content.has-thumbnail {
+    color: $white;
+}
+
+.card-title {
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-caption {
+    font-size: 1rem;
+}
+
+.card-details {
+    margin-top: -30px;
+}

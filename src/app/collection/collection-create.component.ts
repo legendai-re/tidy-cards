@@ -11,6 +11,7 @@ import { ImgUploadService }             from '../image/image-upload.service';
 @Component({
     selector: 'myCreateCollection',
     templateUrl: './collection-create.component.html',
+    styleUrls: ['collection-card.component.scss'],
     directives: [FILE_UPLOAD_DIRECTIVES]
 })
 
