@@ -5,9 +5,9 @@ module.exports = function put (req, res) {
 
     q = Collection.findById(req.params.collection_id).populate('_author');
 
-	q.exec(function(err, collection) {        
+	q.exec(function(err, collection) {
         if (err) {console.log(err); res.sendStatus(500); return;}
-        if(!collection) {res.sendStatus(404); return;}
+        if(!collection) {res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id}); return;}
         if(collection._author._id.equals(req.user._id) || req.user.isGranted('ROLE_ADMIN')){
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);

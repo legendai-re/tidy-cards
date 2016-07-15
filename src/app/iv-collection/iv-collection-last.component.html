@@ -1,0 +1,10 @@
+<section class="section">
+  <div class="container">
+    <h2>Last public collections</h2>
+    <ul class="items">
+      <li *ngFor="let collection of collections">
+        <iv-collection-card [collection]=collection></iv-collection-card>
+      </li>
+    </ul>
+  </div>
+</section>

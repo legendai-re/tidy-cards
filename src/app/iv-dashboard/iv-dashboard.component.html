@@ -1,0 +1,23 @@
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">My collections</h2>
+        <div class="row">
+            <div class="col-xs-2" *ngFor="let collection of myCollections">
+                <iv-collection-card [collection]=collection></iv-collection-card>
+            </div>
+            <div class="col-xs-2">
+                <iv-create-collection></iv-create-collection>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">My favorite collections</h2>
+        <div class="row">
+            <div class="col-xs-2" *ngFor="let collection of myFavoriteCollections">
+                <iv-collection-card [collection]=collection></iv-collection-card>
+            </div>
+        </div>
+    </div>
+</section>

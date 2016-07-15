@@ -7,22 +7,23 @@
     <base href="/">
 </head>
 <body>
-    <my-app>Loading...</my-app>
-    <script>window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-      t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
+    <iv-app>Loading...</iv-app>
 
-    t._e = [];
-    t.ready = function(f) {
-      t._e.push(f);
-    };
+    <script>
+    window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));
+    </script>
 
-    return t;
-    }(document, "script", "twitter-wjs"));</script>
 </body>
 </html>

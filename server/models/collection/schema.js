@@ -1,7 +1,7 @@
 module.exports = function getCollectionSchema(Schema) {
 
 	var visibility = require('./visibility.json');
-	
+
 	return new Schema({
 		createdAt: { type: Date },
 		updatedAt: { type: Date },
@@ -17,13 +17,13 @@ module.exports = function getCollectionSchema(Schema) {
 	    },
 	    color: {
 	        type: String ,
-	        required: true,	        
+	        required: true,
 	        validate: {
 	            validator: function(v) {
 	                return new RegExp('^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$').test(v);
 	            },
 	            message: '{VALUE} is not a valid color'
-	        }      
+	        }
 	    },
 	    visibility: {
 	    	type: Number,
@@ -32,5 +32,5 @@ module.exports = function getCollectionSchema(Schema) {
 	    _author : { type: String, ref: 'User' },
 	    _thumbnail : { type: String, ref: 'Image' },
 	});
-    
+
 }

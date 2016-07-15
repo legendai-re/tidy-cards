@@ -1,0 +1,10 @@
+<main>
+  <div *ngIf="authService.authInitialized">
+    <div class="collapse">
+      <p>isLoggedIn: {{ authService.isLoggedIn }}</p>
+      <pre>{{ authService.currentUser | json }}</pre>
+    </div>
+    <iv-header></iv-header>
+    <router-outlet></router-outlet>
+  </div>
+</main>

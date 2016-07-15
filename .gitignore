@@ -47,6 +47,7 @@ Thumbs.db
 /src/*/__build__/
 __build__/**
 .webpack.json
+.sass-cache
 
 # Doc #
 /doc/

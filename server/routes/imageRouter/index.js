@@ -1,7 +1,7 @@
 var express    		= require('express');
 var isGranted       = require('../../security/isGranted');
 var multer      	= require('multer')
-var mongoose    	= require('mongoose');   
+var mongoose    	= require('mongoose');
 var aws 			= require('aws-sdk')
 var multerS3 		= require('multer-s3')
 var imagesTypes     = require('../../models/image/imageTypes.json');
@@ -13,24 +13,24 @@ var s3 = new aws.S3({params: {Bucket: 'landlordokolivier'}});
 var upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'landlordokolivier/dev_uploads',
+    bucket: 'landlordokolivier/invow/'+process.env.IMAGES_FOLDER,
     metadata: function (req, file, callback) {
       callback(null, {fieldName: file.fieldname});
     },
     key: function (req, file, callback) {
-              
-      	var Image = mongoose.model('Image');        
+
+      	var Image = mongoose.model('Image');
 	    var image = new Image();
-        var type = getTypeFromReq(req); 
-        image.type = type.name;         
+        var type = getTypeFromReq(req);
+        image.type = type.name;
 	    image.mime = getMimeFromFile(file);
 
         if(!image.type || !image.mime){
             callback(true, null)
             return;
-        }    	
-    		    
-	    image.save(function(err){	        
+        }
+
+	    image.save(function(err){
 	        req.image = image;
 	        callback(null, type.path + '/original/' + image._id + '.' + image.mime)
 	    });
@@ -39,10 +39,10 @@ var upload = multer({
 });
 
 function getTypeFromReq(req){
-    var typeId = req.query.type;    
-    for(var key in imagesTypes){       
+    var typeId = req.query.type;
+    for(var key in imagesTypes){
         if(imagesTypes[key]._id == typeId)
-            return imagesTypes[key];        
+            return imagesTypes[key];
     }
     console.log("Bad type");
     return false;
@@ -55,7 +55,7 @@ function getMimeFromFile(file){
         case 'image/png':
             return 'png';
         case 'image/gif':
-            return 'gif';            
+            return 'gif';
         default :
             console.log("Bad mime");
             return false;

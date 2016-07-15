@@ -1,0 +1,35 @@
+<h2>Collection detail</h2>
+<div *ngIf="collection">
+    <h3>{{collection.title}}</h3>
+    <img [src]="collection._thumbnail?.getPath('original')" />
+    <div>
+        <p>title: {{collection.title}}</p>
+        <p>color: #{{collection.color}}</p>
+    </div>
+    <div>
+        <p>
+            created by <b>{{collection._author?.name}}</b>
+            <small>@{{collection._author?.username}}</small>
+        </p>
+        <small>
+            created the {{collection.createdAt | date }}
+        </small>
+    </div>
+    <div>
+        <input type="text" name="link" [(ngModel)]="link" />
+        <input type="submit" value="check" (click)="checkLink()" />
+        <div *ngIf="isYoutube">
+            <iframe width="560" height="315" [src]="youtubeId" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div *ngIf="isImage">
+            <img [src]="imageUrl" />
+        </div>
+        <div *ngIf="isRandom">
+            <a target="_blank" [href]="randomUrl">{{link}}</a>
+        </div>
+         <div *ngIf="isTweet">
+            <div [innerHTML]="tweetData.html"></div>
+        </div>
+    </div>
+
+</div>

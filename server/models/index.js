@@ -1,8 +1,11 @@
-
 User = require('./user');
-Collection = require('./collection');
-Image = require('./image');
-
 exports.userModel = User.userModel;
+
+Collection = require('./collection');
 exports.collectionModel = Collection.collectionModel;
+
+Image = require('./image');
 exports.imageModel = Image.imageModel;
+
+Item = require('./item');
+exports.itemModel = Item.itemModel;

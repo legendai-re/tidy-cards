@@ -6,10 +6,10 @@ module.exports = function put (req, res) {
 
 	User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
-        if(!user) {res.sendStatus(404); return;}
+        if(!user) {res.status(404).send({ error: 'cannot find user with id: '+req.params.user_id}); return;}
         if(user._id.equals(req.user._id) || req.user.isGranted('ROLE_ADMIN')){
-                    
-            if(req.body._starredCollection)                
+
+            if(req.body._starredCollection)
                 addStarredCollection(req.body._starredCollection, user);
             else
                 updateProfile(req, user);
@@ -17,7 +17,7 @@ module.exports = function put (req, res) {
         }else{
         	res.sendStatus(401);
         }
-    }); 
+    });
 
 
     function addStarredCollection(collection_id, user){
