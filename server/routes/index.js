@@ -8,6 +8,7 @@ module.exports = function(app) {
     var imageRouter         = require('./imageRouter');
     var itemRouter          = require('./itemRouter');
 
+    app.use('/fonts', express.static(path.resolve(__dirname, '../../dist/fonts')));
     app.use('/css', express.static(path.resolve(__dirname, '../../dist/css')));
     app.use('/img', express.static(path.resolve(__dirname, '../../dist/img')));
     app.use('/js', express.static(path.resolve(__dirname, '../../dist/js')));

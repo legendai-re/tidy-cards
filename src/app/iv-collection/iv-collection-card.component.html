@@ -1,6 +1,6 @@
 <article class="card" *ngIf="collection">
     <a [routerLink]="['/c', collection._id]" >
-        <div class="card-thumbnail thumbnail">
+        <div class="thumbnail card-thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
         </div>
     </a>

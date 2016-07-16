@@ -18,11 +18,11 @@ $grid-breakpoints: (
   // Extra small screen / phone
   xs: 0,
   // Small screen / phone
-  sm: 544px,
+  sm: 380px,
   // Medium screen / tablet
-  md: 768px,
+  md: 700px,
   // Large screen / desktop
-  lg: 992px,
+  lg: 1020px,
   // Extra large screen / wide desktop
   xl: 1320px
 ) !default;
@@ -33,9 +33,9 @@ $grid-breakpoints: (
 // Define the maximum width of `.container` for different screen sizes.
 
 $container-max-widths: (
-  sm: 576px,
-  md: 720px,
-  lg: 940px,
+  sm: 320px,
+  md: 640px,
+  lg: 960px,
   xl: 1280px
 ) !default;
 
@@ -44,5 +44,5 @@ $container-max-widths: (
 //
 // Set the number of columns and specify the width of the gutters.
 
-$grid-columns:               8 !default;
-$grid-gutter-width:          1.25rem !default; // 30px
+$grid-columns:               12 !default;
+$grid-gutter-width:          20px !default; // 20px

@@ -10,7 +10,7 @@ import { IvImgUploadService }             from '../iv-image/iv-image-upload.serv
 @Component({
     selector: 'iv-create-collection',
     templateUrl: './iv-collection-create.component.html',
-    styleUrls: ['iv-collection-card.component.scss'],
+    styleUrls: ['iv-collection-card.component.scss', 'iv-collection-create.component.scss'],
     directives: [FILE_UPLOAD_DIRECTIVES]
 })
 

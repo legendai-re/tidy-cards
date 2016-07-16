@@ -9,3 +9,19 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga" on;
 }
+
+a,
+area,
+button,
+.btn,
+.button,
+[role="button"],
+input,
+label,
+select,
+summary,
+textarea {
+    &:hover, &:active, &:focus {
+        outline: none;
+    }
+}

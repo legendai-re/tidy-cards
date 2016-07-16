@@ -9,7 +9,7 @@
         <form class="form-inline header-search-form">
             <div class="input-group">
                 <span class="input-group-addon" id="header-search">
-                    <i class="ico ico-magnifying-glass"></i>
+                    <i class="material-icons">search</i>
                 </span>
                 <input class="form-control" type="text" placeholder="Search on Invow..." aria-describedby="header-search">
             </div>
@@ -24,11 +24,6 @@
             <li class="nav-item" *ngIf="!authService.isLoggedIn">
                 <a class="nav-link" [class.active]="router.url == '/c/last'" [routerLink]="['/c/last']">
                     Last
-                </a>
-            </li>
-            <li class="nav-item" *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')">
-                <a class="nav-link" [class.active]="router.url == '/admin'" [routerLink]="['/admin']">
-                    Admin
                 </a>
             </li>
             <li class="nav-item" *ngIf="authService.isLoggedIn">
@@ -47,13 +42,10 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" [routerLink]="['/u', authService.currentUser._id]">
-                        Profile
+                        Profile/Settings
                     </a>
-                    <a class="dropdown-item" href="#">
-                        Another action
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        Something else here
+                    <a class="dropdown-item" *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')" [routerLink]="['/admin']">
+                        Admin
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" [class.active]="router.url == '/logout'" [routerLink]="['/logout']">
