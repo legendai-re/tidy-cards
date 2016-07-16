@@ -12,3 +12,9 @@ exports.itemModel = Item.itemModel;
 
 ItemUrl = require('./item/itemUrl');
 exports.itemUrlModel = Item.itemUrlModel;
+
+ItemYoutube = require('./item/itemYoutube');
+exports.itemYoutubeModel = Item.itemYoutubeModel;
+
+ItemImage = require('./item/itemImage');
+exports.itemImageModel = Item.itemImageModel;

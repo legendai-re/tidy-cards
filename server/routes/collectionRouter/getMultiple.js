@@ -8,7 +8,7 @@ module.exports = function getMultiple (req, res) {
 	var rq = req.query;
 
 	getQueryFiler(rq, req, function(filterObj){
-		var q = Collection.find(filterObj).sort({'createdAt': 1}).limit(20);	
+		var q = Collection.find(filterObj).sort({'createdAt': 1}).limit(20);
 
 		if(rq.populate){
 			q.populate(rq.populate);
@@ -31,9 +31,9 @@ module.exports = function getMultiple (req, res) {
 	    	res.json({data: collections});
 	    });
 	})
-	
+
 	function getQueryFiler(rq, req, callback){
-		var filterObj = {};		
+		var filterObj = {};
 
 		if(rq.search)
 			filterObj.title = { $regex:  '.*'+rq.search+'.*', $options: 'i'};
@@ -41,26 +41,26 @@ module.exports = function getMultiple (req, res) {
 		if(rq._author){
 			filterObj._author = rq._author;
 			if(req.user && req.user.isGranted('ROLE_USER'))
-				filterObj.$or = [{visibility: visibility.PUBLIC}, {_author: req.user._id}]
+				filterObj.$or = [{visibility: visibility.PUBLIC.id}, {_author: req.user._id}]
 			else
-				filterObj.visibility = visibility.PUBLIC;
+				filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
 		}else if(rq._starredBy){
 			getStarredByQuery(rq, req, function(starredByQuery){
-				callback(starredByQuery);				
+				callback(starredByQuery);
 			})
 		}else{
-			filterObj.visibility = visibility.PUBLIC;
+			filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
-		}											
+		}
 	}
 
 	function getStarredByQuery(rq, req, callback){
 		var filterObj = {};
 		User.findById(rq._starredBy).select('+_starredCollections').exec(function (err, user){
-			if (err) {console.log(err); res.sendStatus(500); return;}					
+			if (err) {console.log(err); res.sendStatus(500); return;}
 			if(!req.user || req.user._id != rq._starredBy)
-				filterObj.visibility = visibility.PUBLIC
+				filterObj.visibility = visibility.PUBLIC.id
 			filterObj._id = {$in: user._starredCollections};
 			callback(filterObj);
 		});

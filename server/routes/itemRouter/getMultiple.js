@@ -1,7 +1,11 @@
 module.exports = function getMultiple (req, res) {
 
-    var mongoose    = require('mongoose');
-    var Item        = mongoose.model('Item');
+    var mongoose        = require('mongoose');
+    var itemTypes       = require('../../models/item/itemTypes.json');
+    var Item            = mongoose.model('Item');
+    var ItemUrl         = mongoose.model('ItemUrl');
+    var ItemYoutube     = mongoose.model('ItemYoutube');
+    var ItemImage       = mongoose.model('ItemImage');
 
     var rq = req.query;
 
@@ -31,7 +35,9 @@ module.exports = function getMultiple (req, res) {
 
         q.exec(function(err, items){
             if (err) {console.log(err); res.sendStatus(500); return;}
-            res.json({data: items});
+            addItemsContent(0, items, function(err, items){
+                res.json({data: items});
+            })
         });
     })
 
@@ -47,6 +53,44 @@ module.exports = function getMultiple (req, res) {
         }else{
             filterObj.visibility = visibility.PUBLIC;
             callback(filterObj);
+        }
+    }
+
+    function addItemsContent(i, items, callback){
+        switch(items[i].type){
+            case itemTypes.URL:
+                ItemUrl.findById(items[i]._content, function(err, itemUrl){
+                    items[i]._content = itemUrl;
+                    i++;
+                    if(i==items.length){
+                        callback(null, items);
+                    }else{
+                        addItemsContent(i, items, callback);
+                    }
+                });
+                break;
+            case itemTypes.IMAGE:
+                ItemImage.findById(items[i]._content, function(err, itemImage){
+                    items[i]._content = itemImage;
+                    if(i==items.length){
+                        callback(null, items);
+                    }else{
+                        addItemsContent(i, items, callback);
+                    }
+                });
+                break;
+            case itemTypes.YOUTUBE:
+                ItemUrl.findById(items[i]._content, function(err, itemYoutube){
+                    items[i]._content = itemYoutube;
+                    if(i==items.length){
+                        callback(null, items);
+                    }else{
+                        addItemsContent(i, items, callback);
+                    }
+                });
+                break;
+            case itemTypes.TWEET:
+                break;
         }
     }
 

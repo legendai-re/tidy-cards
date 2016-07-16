@@ -1,4 +1,4 @@
-<article class="card create-collection" style="background-color: #{{collection.color}};">
+<article class="card create-collection" [style.background-color]="'#'+collection.color">
     <form (ngSubmit)="onCreatCollectionSubmit()">
         <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
@@ -10,20 +10,20 @@
                 <textarea class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection..."></textarea>
                 <div class="btn-group">
                     <button type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">remove_red_eye</i> Visibility: {{collection.visibility}}
+                        <i class="material-icons">remove_red_eye</i> Visibility: {{selectedVisibility.desc}}
                     </button>
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header">Who should see this?</h6>
-                        <a (click)="collection.visibility=1" class="dropdown-item">
+                        <a (click)="selectedVisibility=visibilityList.PRIVATE" class="dropdown-item">
                             <span>Only me</span>
                             <small>Only me</small>
                             <!-- mettre un clé/valeur pour afficher un texte humain dans l'ui (e.g.: private/Only me, public/Public, unindexed/Unindexed) -->
                         </a>
-                        <a (click)="collection.visibility=2" class="dropdown-item">
+                        <a (click)="selectedVisibility=visibilityList.PUBLIC" class="dropdown-item">
                             <span>Public</span>
                             <small>Anyone can see this</small>
                         </a>
-                        <a (click)="collection.visibility=3" class="dropdown-item">
+                        <a (click)="selectedVisibility=visibilityList.UNINDEXED" class="dropdown-item">
                             <span>Unindexed</span>
                             <small>People with the link</small>
                         </a>
@@ -39,28 +39,28 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-color">
                         <!-- <h6 class="dropdown-header">Edit the color</h6> -->
-                        <a (click)="collection.color='CFD8DC'" class="dropdown-item-color collection-color-grey" [class.selected]="collection.color=='CFD8DC'">
+                        <a (click)="clickColor('CFD8DC')" class="dropdown-item-color collection-color-grey" [class.selected]="collection.color=='CFD8DC'">
                             Grey
                         </a>
-                        <a (click)="collection.color='FF887A'" class="dropdown-item-color collection-color-red" [class.selected]="collection.color=='FF887A'">
+                        <a (click)="clickColor('FF887A')" class="dropdown-item-color collection-color-red" [class.selected]="collection.color=='FF887A'">
                             Red
                         </a>
-                        <a (click)="collection.color='FFD373'" class="dropdown-item-color collection-color-orange" [class.selected]="collection.color=='FFD373'">
+                        <a (click)="clickColor('FFD373')" class="dropdown-item-color collection-color-orange" [class.selected]="collection.color=='FFD373'">
                             Orange
                         </a>
-                        <a (click)="collection.color='FFFF7C'" class="dropdown-item-color collection-color-yellow" [class.selected]="collection.color=='FFFF7C'">
+                        <a (click)="clickColor('FFFF7C')" class="dropdown-item-color collection-color-yellow" [class.selected]="collection.color=='FFFF7C'">
                             Yellow
                         </a>
-                        <a (click)="collection.color='A4ABFF'" class="dropdown-item-color collection-color-purple" [class.selected]="collection.color=='A4ABFF'">
+                        <a (click)="clickColor('A4ABFF')" class="dropdown-item-color collection-color-purple" [class.selected]="collection.color=='A4ABFF'">
                             Purple
                         </a>
-                        <a (click)="collection.color='78D6FF'" class="dropdown-item-color collection-color-blue" [class.selected]="collection.color=='78D6FF'">
-                            Blue (78D6FF)
+                        <a (click)="clickColor('78D6FF')" class="dropdown-item-color collection-color-blue" [class.selected]="collection.color=='78D6FF'">
+                            Blue
                         </a>
-                        <a (click)="collection.color='A4FFEB'" class="dropdown-item-color collection-color-cyan" [class.selected]="collection.color=='A4FFEB'">
+                        <a (click)="clickColor('A4FFEB')" class="dropdown-item-color collection-color-cyan" [class.selected]="collection.color=='A4FFEB'">
                             Cyan
                         </a>
-                        <a (click)="collection.color='CBFF8A'" class="dropdown-item-color collection-color-green" [class.selected]="collection.color=='CBFF8A'">
+                        <a (click)="clickColor('CBFF8A')" class="dropdown-item-color collection-color-green" [class.selected]="collection.color=='CBFF8A'">
                             Green
                         </a>
                     </div>

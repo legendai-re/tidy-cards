@@ -1,5 +1,14 @@
 {
-    "PRIVATE": 1,
-    "PUBLIC": 2,
-    "UNINDEXED": 3
+    "PRIVATE":{
+        "id": 1,
+        "desc": "Only me"
+    },
+    "PUBLIC": {
+        "id": 2,
+        "desc": "Public"
+    },
+    "UNINDEXED": {
+        "id": 3,
+        "desc": "Unindexed"
+    }
 }

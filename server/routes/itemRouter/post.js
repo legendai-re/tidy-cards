@@ -5,18 +5,21 @@ module.exports = function post (req, res) {
     var Collection      = mongoose.model('Collection');
     var Item            = mongoose.model('Item');
     var ItemUrl         = mongoose.model('ItemUrl');
+    var ItemYoutube     = mongoose.model('ItemYoutube');
+    var ItemImage       = mongoose.model('ItemImage');
 
-    if(!req.body.title || !req.body.description || !req.body._collection || !req.body.type || !typeOk(req.body.type)){
+    if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
         var item =  new Item();
-        item.title = req.body.title;
-        item.description = req.body.description;
+        if(req.body.description){
+            item.description = req.body.description;
+        }
         item.type = req.body.type;
         Collection.findById(req.body._collection, function(err, collection){
-            if (err) {console.log(err); res.sendStatus(500); return;}
-            if (!collection){res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
+            if(err) {console.log(err); res.sendStatus(500); return;}
+            if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
             if(collection._author!=req.user._id) {res.status(401).send({ error: "only the author of the collection can add item" }); return;}
 
             createItemContent(item, req, function(err, content){
@@ -45,8 +48,10 @@ module.exports = function post (req, res) {
                 return createItemUrl(req, callback);
                 break;
             case itemTypes.IMAGE:
+                return createImage(req, callback);
                 break;
             case itemTypes.YOUTUBE:
+                return createItemYoutube(req, callback);
                 break;
             case itemTypes.TWEET:
                 break;
@@ -55,7 +60,7 @@ module.exports = function post (req, res) {
 
     function createItemUrl(req, callback){
         if(!req.body._content || !req.body._content.url){
-            callback("url not defined", null);
+            callback("itemUrl : some required parameters was not provided", null);
             return;
         }
         var itemUrl = new ItemUrl();
@@ -66,4 +71,31 @@ module.exports = function post (req, res) {
         });
     }
 
+    function createItemYoutube(req, callback){
+        if(!req.body._content || !req.body._content.url || !req.body._content.embedUrl || !req.body._content.videoId){
+            callback("itemYoutube : some required parameters was not provided", null);
+            return;
+        }
+        var itemYoutube = new ItemYoutube();
+        itemYoutube.url = req.body._content.url;
+        itemYoutube.embedUrl = req.body._content.embedUrl;
+        itemYoutube.videoId = req.body._content.videoId;
+        itemYoutube.save(function(err){
+            if(err)console.log(err);
+            callback(err, itemYoutube)
+        });
+    }
+
+    function createImage(req, callback){
+        if(!req.body._content || !req.body._content.url){
+            callback("itemImage : some required parameters was not provided", null);
+            return;
+        }
+        var itemImage = new ItemImage();
+        itemImage.url = req.body._content.url;
+        itemImage.save(function(err){
+            if(err)console.log(err);
+            callback(err, itemImage)
+        });
+    }
 }

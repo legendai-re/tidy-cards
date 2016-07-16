@@ -53,7 +53,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
                     this.tweetData = data;
                     this.isTweet = true;
                     //twttr.widgets.load();
-                })
+                });
             }else if(this.getYoutubeVideoId(this.link)){
                 this.isYoutube = true;
                 this.youtubeId = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/"+this.getYoutubeVideoId(this.link));

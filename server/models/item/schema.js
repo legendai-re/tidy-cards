@@ -5,23 +5,12 @@ module.exports = function getItemSchema(Schema) {
     return new Schema({
         createdAt: { type: Date },
         updatedAt: { type: Date },
-        title: {
-            type: String,
-            required: true,
-            default: 'My new item',
-            validate: {
-                validator: function(v) {
-                    return (v.length < 100);
-                },
-                message: '{VALUE} is not a title'
-            }
-        },
         description: {
             type: String,
             required: false,
             validate: {
                 validator: function(v) {
-                    return (v.length < 100);
+                    return (v.length < 1024);
                 },
                 message: '{VALUE} is not a title'
             }
@@ -32,7 +21,7 @@ module.exports = function getItemSchema(Schema) {
             default: itemTypes.URL
         },
         _content: {
-            type: String,
+            type: Schema.Types.Mixed,
             required: false,
         },
         _collection: { type: String, ref: 'Collection' },

@@ -15,7 +15,7 @@ export class IvImage {
 
     public static createFormJson(obj) {
         if (!obj) {
-            return new IvImage();
+            return null;
         }
 
         return new IvImage(

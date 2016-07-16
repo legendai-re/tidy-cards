@@ -17,7 +17,7 @@ module.exports = function getOne (req, res) {
         var _authorId = collection._author._id ? collection._author._id : collection._author;
         if(!collection){
         	 res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id});
-        }else if(collection.visibility == visibility.PRIVATE && (!req.user || String(req.user._id)!=_authorId)){
+        }else if(collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId)){
         	res.sendStatus(401);
         }else{
         	res.json({data: collection});
