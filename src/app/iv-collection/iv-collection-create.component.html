@@ -1,4 +1,4 @@
-<article class="card create-collection">
+<article class="card create-collection" style="background-color: #{{collection.color}};">
     <form (ngSubmit)="onCreatCollectionSubmit()">
         <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
@@ -15,14 +15,17 @@
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header">Who should see this?</h6>
                         <a (click)="collection.visibility=1" class="dropdown-item">
-                            Only me<br><small>Only me</small>
+                            <span>Only me</span>
+                            <small>Only me</small>
                             <!-- mettre un clé/valeur pour afficher un texte humain dans l'ui (e.g.: private/Only me, public/Public, unindexed/Unindexed) -->
                         </a>
                         <a (click)="collection.visibility=2" class="dropdown-item">
-                            Public<br><small>Anyone can see this</small>
+                            <span>Public</span>
+                            <small>Anyone can see this</small>
                         </a>
                         <a (click)="collection.visibility=3" class="dropdown-item">
-                            Unindexed<br><small>People with the link</small>
+                            <span>Unindexed</span>
+                            <small>People with the link</small>
                         </a>
                     </div>
                 </div>

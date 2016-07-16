@@ -16,3 +16,9 @@
 .dropdown-divider {
     background-color: $border-color;
 }
+
+.dropdown-item small {
+    margin-top: -3px;
+    display: block;
+    color: $grey;
+}

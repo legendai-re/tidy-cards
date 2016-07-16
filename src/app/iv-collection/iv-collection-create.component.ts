@@ -27,7 +27,7 @@ export class IvCollectionCreateComponent implements OnInit {
     ngOnInit() {
         this.collection = new IvCollection();
         this.collection.visibility = IvCollection.VISIBILITY.PRIVATE;
-        this.collection.color = 'CFD8DC';
+        this.collection.color = '';
         this.collectionCreated = false;
     }
 
