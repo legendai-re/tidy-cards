@@ -103,6 +103,11 @@
     float: right;
 }
 
+.card-visibility {
+    float: right;
+    cursor: help;
+}
+
 .card-stats {
     height: 18px;
     margin-bottom: 12px;
@@ -115,7 +120,7 @@
 }
 
 .card-nb {
-    padding-top: 13px;
+    padding-top: 17px;
     line-height: 1;
     font-size: .875rem;
     text-align: right;

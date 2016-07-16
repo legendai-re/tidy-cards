@@ -20,7 +20,7 @@
             </a>
             <div class="card-details-infos">
                 <div class="card-stats" [class.has-thumbnail]="collection._thumbnail">
-                    <ul class="stats-list">
+                    <ul *ngIf="collection.visibility.id != 'PRIVATE'" class="stats-list">
                         <li class="stat-item-list">
                             <i class="material-icons stat-icon">mode_comment</i> 0
                         </li>
@@ -28,6 +28,9 @@
                             <i class="material-icons stat-icon">star</i> 0
                         </li>
                     </ul>
+                    <div *ngIf="collection.visibility.id == 'PRIVATE'" class="card-visibility" title="Visibility: {{collection.visibility.desc}}">
+                        <i class="material-icons stat-icon">remove_red_eye</i>
+                    </div>
                 </div>
                 <div class="card-nb">1 item</div>
             </div>
