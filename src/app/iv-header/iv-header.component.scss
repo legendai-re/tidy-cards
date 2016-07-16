@@ -36,13 +36,12 @@
     input {
         background-color: rgba(0,0,0,.15);
         color: $white;
-        border-radius: 3px;
         border: none;
         padding: 9px;
         font-size: 1.125rem;
         line-height: 1rem;
 
-        @include color-placeholder(rgba(255,255,255,.75))
+        @include color-placeholder($placeholder-whiter);
     }
 }
 

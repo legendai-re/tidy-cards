@@ -3,6 +3,7 @@
    ========================================================================== */
 
 @import '../../style/tools/_vars.scss';
+@import '../../style/tools/_mixins.scss';
 
 .create-collection {
     z-index: 2;
@@ -13,6 +14,8 @@
     width: 100%;
     padding: 0;
     border: none;
+
+    @include color-placeholder($placeholder-blacker);
 }
 
 .input-card-caption {
@@ -25,7 +28,7 @@
     border: none;
     padding: 0;
     font-size: .875rem;
-    color: $grey;
+    color: $text-blacker;
 }
 
 .card-visibily .material-icons {
@@ -48,7 +51,7 @@
 .card-action {
     height: 38px;
     outline: none;
-    color: $grey;
+    color: $text-blacker;
 }
 
 .color-card, .btn-card-create {
