@@ -36,28 +36,28 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-color">
                         <!-- <h6 class="dropdown-header">Edit the color</h6> -->
-                        <a (click)="collection.color=CFD8DC" class="dropdown-item-color collection-color-grey selected">
+                        <a (click)="collection.color='CFD8DC'" class="dropdown-item-color collection-color-grey" [class.selected]="collection.color=='CFD8DC'">
                             Grey
                         </a>
-                        <a (click)="collection.color=FF887A" class="dropdown-item-color collection-color-red">
+                        <a (click)="collection.color='FF887A'" class="dropdown-item-color collection-color-red" [class.selected]="collection.color=='FF887A'">
                             Red
                         </a>
-                        <a (click)="collection.color=FFD373" class="dropdown-item-color collection-color-orange">
+                        <a (click)="collection.color='FFD373'" class="dropdown-item-color collection-color-orange" [class.selected]="collection.color=='FFD373'">
                             Orange
                         </a>
-                        <a (click)="collection.color=FFFF7C" class="dropdown-item-color collection-color-yellow">
+                        <a (click)="collection.color='FFFF7C'" class="dropdown-item-color collection-color-yellow" [class.selected]="collection.color=='FFFF7C'">
                             Yellow
                         </a>
-                        <a (click)="collection.color=A4ABFF" class="dropdown-item-color collection-color-purple">
+                        <a (click)="collection.color='A4ABFF'" class="dropdown-item-color collection-color-purple" [class.selected]="collection.color=='A4ABFF'">
                             Purple
                         </a>
-                        <a (click)="collection.color=333333" class="dropdown-item-color collection-color-blue">
+                        <a (click)="collection.color='78D6FF'" class="dropdown-item-color collection-color-blue" [class.selected]="collection.color=='78D6FF'">
                             Blue (78D6FF)
                         </a>
-                        <a (click)="collection.color=A4FFEB" class="dropdown-item-color collection-color-cyan">
+                        <a (click)="collection.color='A4FFEB'" class="dropdown-item-color collection-color-cyan" [class.selected]="collection.color=='A4FFEB'">
                             Cyan
                         </a>
-                        <a (click)="collection.color=CBFF8A" class="dropdown-item-color collection-color-green">
+                        <a (click)="collection.color='CBFF8A'" class="dropdown-item-color collection-color-green" [class.selected]="collection.color=='CBFF8A'">
                             Green
                         </a>
                     </div>
