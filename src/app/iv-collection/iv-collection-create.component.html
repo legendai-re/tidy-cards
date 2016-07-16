@@ -10,20 +10,20 @@
                 <textarea class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection..."></textarea>
                 <div class="btn-group">
                     <button type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">remove_red_eye</i> Visibility: {{selectedVisibility.desc}}
+                        <i class="material-icons">remove_red_eye</i> Visibility: {{collection.visibility.desc}}
                     </button>
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header">Who should see this?</h6>
-                        <a (click)="selectedVisibility=visibilityList.PRIVATE" class="dropdown-item">
+                        <a (click)="collection.visibility=visibilityList.PRIVATE" class="dropdown-item">
                             <span>Only me</span>
                             <small>Only me</small>
                             <!-- mettre un clé/valeur pour afficher un texte humain dans l'ui (e.g.: private/Only me, public/Public, unindexed/Unindexed) -->
                         </a>
-                        <a (click)="selectedVisibility=visibilityList.PUBLIC" class="dropdown-item">
+                        <a (click)="collection.visibility=visibilityList.PUBLIC" class="dropdown-item">
                             <span>Public</span>
                             <small>Anyone can see this</small>
                         </a>
-                        <a (click)="selectedVisibility=visibilityList.UNINDEXED" class="dropdown-item">
+                        <a (click)="collection.visibility=visibilityList.UNINDEXED" class="dropdown-item">
                             <span>Unindexed</span>
                             <small>People with the link</small>
                         </a>

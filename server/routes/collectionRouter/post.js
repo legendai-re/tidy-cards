@@ -11,7 +11,7 @@ module.exports = function post (req, res) {
         var collection =  new Collection();
         collection.title = req.body.title;
         collection.color = req.body.color;
-        collection.visibility = req.body.visibility;
+        collection.visibility = req.body.visibility.id;
         if(req.body._thumbnail && req.body._thumbnail._id){
             collection._thumbnail = req.body._thumbnail._id;
         }
@@ -22,11 +22,9 @@ module.exports = function post (req, res) {
     }
 
 
-    function visibilityOk(visibilityId){
-        for(var key in visibility){
-            if(visibility[key].id==visibilityId)
-                return true;
-        }
+    function visibilityOk(reqVisibility){
+        if(visibility[reqVisibility.id] != null)
+            return true;
         return false;
     }
 }

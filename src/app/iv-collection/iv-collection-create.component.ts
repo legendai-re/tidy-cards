@@ -19,7 +19,6 @@ export class IvCollectionCreateComponent implements OnInit {
     public uploader;
     public collectionCreated: boolean;
     public visibilityList: any;
-    public selectedVisibility: any;
 
     constructor(private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService ) {
         this.uploader = imgUploadService.uploader;
@@ -29,7 +28,7 @@ export class IvCollectionCreateComponent implements OnInit {
 
     ngOnInit() {
         this.collection = new IvCollection();
-        this.selectedVisibility = IvCollection.VISIBILITY.PRIVATE;
+        this.collection.visibility = IvCollection.VISIBILITY.PRIVATE;
         this.collection.color = 'FFFFFF';
         this.collectionCreated = false;
     }
@@ -52,7 +51,6 @@ export class IvCollectionCreateComponent implements OnInit {
         if(this.collection.color == 'FFFFFF' ){
             this.collection.color = 'CFD8DC';
         }
-        this.collection.visibility = this.selectedVisibility.id;
         this.collectionService.postCollection(this.collection).subscribe(collection => {
             this.collection._id = collection._id;
             this.collectionCreated = true;

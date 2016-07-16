@@ -26,7 +26,7 @@ module.exports = function getCollectionSchema(Schema) {
 	        }
 	    },
 	    visibility: {
-	    	type: Number,
+	    	type: String,
 	    	default: visibility.PRIVATE.id
 	    },
 	    _author : { type: String, ref: 'User' },

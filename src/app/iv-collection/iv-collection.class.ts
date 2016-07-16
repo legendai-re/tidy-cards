@@ -10,9 +10,9 @@ export class IvCollection {
     public color: string;
     public _author: IvUser;
     public _thumbnail: IvImage;
-    public visibility: number;
+    public visibility;
 
-    constructor(_id?: string, createdAt?: Date | string, updatedAt?: Date | string, title?: string, color?: string, _author?: IvUser, _thumbnail?: IvImage, visibility?: number) {
+    constructor(_id?: string, createdAt?: Date | string, updatedAt?: Date | string, title?: string, color?: string, _author?: IvUser, _thumbnail?: IvImage, visibility?) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -20,7 +20,7 @@ export class IvCollection {
         this.color = color;
         this._author = _author;
         this._thumbnail = _thumbnail;
-        this.visibility = visibility;
+        this.visibility = typeof updatedAt === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
     }
 
     public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json'); ; }
