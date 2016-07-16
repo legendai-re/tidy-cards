@@ -8,7 +8,6 @@ var express 			= require('express');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 var session 			= require('express-session');
-var Twitter             = require('twitter');
 var path 				= require('path');
 var db 					= require('./mongoose');
 var models				= require('./models');
@@ -17,7 +16,6 @@ var app = express();
 app.set('port', (process.env.PORT || 2016));
 
 var compiler = webpack({
-
     output: { path: '/' }
 });
 

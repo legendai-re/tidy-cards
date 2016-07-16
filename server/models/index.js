@@ -9,3 +9,6 @@ exports.imageModel = Image.imageModel;
 
 Item = require('./item');
 exports.itemModel = Item.itemModel;
+
+ItemUrl = require('./item/itemUrl');
+exports.itemUrlModel = Item.itemUrlModel;
