@@ -1,4 +1,9 @@
-@import '../../style/app.scss';
+/* ==========================================================================
+   HEADER COMPONENT
+   ========================================================================== */
+
+@import '../../style/tools/_vars.scss';
+@import '../../style/tools/_mixins.scss';
 
 .header {
     background: $purple;
@@ -25,6 +30,7 @@
         background: rgba(0,0,0,.15);
         border: none;
         color: $white;
+        padding: 4px 0 0 9px;
     }
 
     input {
@@ -32,7 +38,7 @@
         color: $white;
         border-radius: 3px;
         border: none;
-        padding: 9px 9px 9px 38px;
+        padding: 9px;
         font-size: 1.125rem;
         line-height: 1rem;
 

@@ -1,23 +1,79 @@
-<article class="card">
-    <div class="card-container">
-        <form (ngSubmit)="onCreatCollectionSubmit()">
-            <legend>New Collection</legend>
-            <div>
-                <input [(ngModel)]="collection.title" type="text" placeholder="title" required />
-                <input [(ngModel)]="collection.color" type="text" placeholder="color" required />
+<article class="card create-collection">
+    <form (ngSubmit)="onCreatCollectionSubmit()">
+        <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
+            <img [src]="collection._thumbnail?.getPath('original')" />
+        </div>
+        <!-- <div class="card-color"></div> -->
+        <div class="card-container">
+            <div class="card-content" [class.has-thumbnail]="collection._thumbnail != empty">
+                <input class="input-card-title card-title" [(ngModel)]="collection.title" type="text" placeholder="Create a collection..." required />
+                <textarea class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection..."></textarea>
+                <div class="btn-group">
+                    <button type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">remove_red_eye</i> Visibility: {{collection.visibility}}
+                    </button>
+                    <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Who should see this?</h6>
+                        <a (click)="collection.visibility=1" class="dropdown-item">
+                            Only me<br><small>Only me</small>
+                            <!-- mettre un clé/valeur pour afficher un texte humain dans l'ui (e.g.: private/Only me, public/Public, unindexed/Unindexed) -->
+                        </a>
+                        <a (click)="collection.visibility=2" class="dropdown-item">
+                            Public<br><small>Anyone can see this</small>
+                        </a>
+                        <a (click)="collection.visibility=3" class="dropdown-item">
+                            Unindexed<br><small>People with the link</small>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <input (click)="collection.visibility=1" type="radio" name="collection_visibility" value="1" checked />PRIVATE
-                <input (click)="collection.visibility=2" type="radio" name="collection_visibility" value="2" />PUBLIC
-                <input (click)="collection.visibility=3" type="radio" name="collection_visibility" value="3" />UNINDEXED
+        </div>
+        <div class="card-create">
+            <div class="card-actions form-inline">
+                <div class="btn-group form-group card-action dropup">
+                    <button type="button" class="file-icon-only" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">palette</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-color">
+                        <!-- <h6 class="dropdown-header">Edit the color</h6> -->
+                        <a (click)="collection.color=CFD8DC" class="dropdown-item-color collection-color-grey selected">
+                            Grey
+                        </a>
+                        <a (click)="collection.color=FF887A" class="dropdown-item-color collection-color-red">
+                            Red
+                        </a>
+                        <a (click)="collection.color=FFD373" class="dropdown-item-color collection-color-orange">
+                            Orange
+                        </a>
+                        <a (click)="collection.color=FFFF7C" class="dropdown-item-color collection-color-yellow">
+                            Yellow
+                        </a>
+                        <a (click)="collection.color=A4ABFF" class="dropdown-item-color collection-color-purple">
+                            Purple
+                        </a>
+                        <a (click)="collection.color=333333" class="dropdown-item-color collection-color-blue">
+                            Blue (78D6FF)
+                        </a>
+                        <a (click)="collection.color=A4FFEB" class="dropdown-item-color collection-color-cyan">
+                            Cyan
+                        </a>
+                        <a (click)="collection.color=CBFF8A" class="dropdown-item-color collection-color-green">
+                            Green
+                        </a>
+                    </div>
+                </div>
+
+                <label class="file form-group card-action">
+                    <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader">
+                    <span class="file-icon-only material-icons">
+                        photo
+                    </span>
+                </label>
+
+                <button class="btn btn-card-create form-group pull-xs-right" type="submit">
+                    Create
+                </button>
             </div>
-            <div>
-                <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
-            </div>
-            <div *ngIf="collection._thumbnail">
-                <img [src]="collection._thumbnail?.getPath('original')" />
-            </div>
-            <button type="submit">Create collection</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </article>

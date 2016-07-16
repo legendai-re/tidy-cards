@@ -1,0 +1,18 @@
+.dropdown-menu {
+    border-radius: 3px;
+    border: 1px solid $border-color;
+
+}
+
+.dropdown-header {
+    margin-bottom: .125rem;
+    color: $grey;
+}
+
+.dropdown-item {
+    padding: 3px 15px;
+}
+
+.dropdown-divider {
+    background-color: $border-color;
+}

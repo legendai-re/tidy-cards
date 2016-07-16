@@ -1,4 +1,8 @@
-@import '../../style/app.scss';
+/* ==========================================================================
+   COLLECTION CARD COMPONENT
+   ========================================================================== */
+
+@import '../../style/tools/_vars.scss';
 
 .card {
     background: $white;
@@ -8,7 +12,7 @@
     box-shadow: 0 1px 4px $box-shadow-color;
     color: $black;
     border-radius: 3px;
-    overflow: hidden;
+    margin-bottom: 20px;
 
     &:before {
         content: "";
@@ -27,13 +31,18 @@
     }
 }
 
-.card-thumbnail {
+.card-thumbnail, .card-color {
+    background: $collection-default-color;
     width: 100%;
     height: 250px;
     overflow: hidden;
     position: absolute;
     z-index: 0;
+    border-radius: 3px 3px 0 0;
 
+}
+
+.card-thumbnail {
     &:after {
         content: "";
         position: absolute;
@@ -45,20 +54,17 @@
     }
 }
 
-.card-color {
-    background-color: $collection-default-color;
-    width: 100%;
-    height: 250px;
-    position: absolute;
-    z-index: 0;
+.card-color {}
+
+.card-container, .card-details {
+    position: relative;
+    z-index: 1;
 }
 
 .card-container {
-    position: relative;
-    z-index: 1;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 20px 20px 0;
 }
 
 .card-content {
@@ -73,6 +79,7 @@
 .card-title {
     font-weight: normal;
     font-size: 1.5rem;
+    line-height: 1.125;
     margin-bottom: 10px;
 }
 

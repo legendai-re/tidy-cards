@@ -1,0 +1,167 @@
+/* ==========================================================================
+   CREATE COLLECTION CARD COMPONENT
+   ========================================================================== */
+
+@import '../../style/tools/_vars.scss';
+
+.create-collection {
+    z-index: 2;
+}
+
+.input-card-title, .input-card-caption {
+    background: transparent;
+    width: 100%;
+    padding: 0;
+    border: none;
+}
+
+.input-card-caption {
+    height: 150px;
+    resize: none;
+}
+
+.card-visibily {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: .875rem;
+    color: $grey;
+}
+
+.card-visibily .material-icons {
+    font-size: 1.125rem;
+    vertical-align: sub;
+    line-height: 1;
+}
+
+.card-create {
+    position: relative;
+    background: $box-shadow-color;
+    width: 100%;
+    height: 50px;
+    padding: 5px 10px;
+    border-radius: 0 0 3px 3px;
+}
+
+.card-actions {}
+
+.card-action {
+    height: 38px;
+    outline: none;
+    color: $grey;
+}
+
+.color-card, .btn-card-create {
+    &:hover {
+        background: $hover-dark-color;
+    }
+}
+
+.file-card, .color-card {
+    color: $grey;
+}
+
+.color-card {
+    background: transparent;
+    border: none;
+    padding: 7px;
+    line-height: 1rem;
+    vertical-align: middle;
+}
+
+.dropdown-menu-color {
+    padding-left: 5px;
+    padding-right: 5px;
+    min-width: 148px;
+}
+
+.dropdown-item-color {
+    width: 24px;
+    height: 24px;
+    background: $collection-default-color;
+    display: inline-block;
+    margin: 5px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    position: relative;
+    color: transparent;
+    cursor: pointer;
+
+    &:hover {
+        border: 2px solid $border-color;
+
+        &.selected:after {
+            padding: 2px 0;
+        }
+    }
+
+    &.selected {
+        &:after {
+            content: "check";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            color: $images-overlay;
+            text-align: center;
+            padding: 4px 0;
+
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 16px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+}
+
+.collection-color-grey {
+    background: $collection-grey;
+}
+
+.collection-color-red {
+    background: $collection-red;
+}
+
+.collection-color-orange {
+    background: $collection-orange;
+}
+
+.collection-color-yellow {
+    background: $collection-yellow;
+}
+
+.collection-color-purple {
+    background: $collection-purple;
+}
+
+.collection-color-blue {
+    background: $collection-blue;
+}
+
+.collection-color-cyan {
+    background: $collection-cyan;
+}
+
+.collection-color-green {
+    background: $collection-green;
+}
+
+
+.btn-card-create {
+    background: transparent;
+    font-weight: bold;
+    color: $purple;
+    outline: none;
+}
