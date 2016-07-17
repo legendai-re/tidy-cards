@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
-import { IvCollectionService }            from './iv-collection.service';
-import { IvCollection }                   from './iv-collection.class';
+import { IvCollectionService }          from './iv-collection.service';
+import { IvCollection }                 from './iv-collection.class';
 import {FILE_UPLOAD_DIRECTIVES }        from 'ng2-file-upload';
-import { IvImage }                        from '../iv-image/iv-image.class';
-import { IvImgUploadService }             from '../iv-image/iv-image-upload.service';
+import { IvImage }                      from '../iv-image/iv-image.class';
+import { IvImgUploadService }           from '../iv-image/iv-image-upload.service';
 
 @Component({
     selector: 'iv-create-collection',

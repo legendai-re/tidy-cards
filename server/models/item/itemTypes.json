@@ -1,6 +1,14 @@
 {
-    "URL": 1,
-    "IMAGE": 2,
-    "YOUTUBE": 3,
-    "TWEET": 4
+    "URL": {
+        "id": "URL"
+    },
+    "IMAGE":  {
+        "id": "IMAGE"
+    },
+    "YOUTUBE":  {
+        "id": "YOUTUBE"
+    },
+    "TWEET":  {
+        "id": "TWEET"
+    }
 }

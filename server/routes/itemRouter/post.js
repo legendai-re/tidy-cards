@@ -16,7 +16,7 @@ module.exports = function post (req, res) {
         if(req.body.description){
             item.description = req.body.description;
         }
-        item.type = req.body.type;
+        item.type = req.body.type.id;
         Collection.findById(req.body._collection, function(err, collection){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
@@ -34,27 +34,27 @@ module.exports = function post (req, res) {
         });
     }
 
-    function typeOk(typeId){
-        for(var key in itemTypes){
-            if(itemTypes[key]==typeId)
-                return true;
-        }
+    function typeOk(reqType){
+        if(itemTypes[reqType.id] != null)
+            return true;
         return false;
     }
 
     function createItemContent(item, req, callback){
         switch(item.type){
-            case itemTypes.URL:
+            case itemTypes.URL.id:
                 return createItemUrl(req, callback);
                 break;
-            case itemTypes.IMAGE:
+            case itemTypes.IMAGE.id:
                 return createImage(req, callback);
                 break;
-            case itemTypes.YOUTUBE:
+            case itemTypes.YOUTUBE.id:
                 return createItemYoutube(req, callback);
                 break;
-            case itemTypes.TWEET:
+            case itemTypes.TWEET.id:
                 break;
+            default:
+                callback('Unknow itemType', item);
         }
     }
 

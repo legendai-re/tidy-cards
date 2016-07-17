@@ -9,5 +9,6 @@ export class IvApiUrl {
     public static get USERS(): string { return 'api/users' ; }
     public static get IMAGES(): string { return 'api/images' ; }
     public static get COLLECTIONS(): string { return 'api/collections' ; }
+    public static get ITEMS(): string { return 'api/items' ; }
 
 }

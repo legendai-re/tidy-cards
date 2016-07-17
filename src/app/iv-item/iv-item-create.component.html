@@ -1,0 +1,21 @@
+<div>
+    <form (ngSubmit)="onCreatItemSubmit()">
+        <legend>Create new item</legend>
+        <input type="text" [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
+        <textarea [(ngModel)]="item.description"></textarea>
+
+        <div *ngIf="loadingContent">
+            Loading...
+        </div>
+
+        <div *ngIf="item._content">
+            <div *ngIf="item.type == itemTypes.URL">
+                <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+            </div>
+            <div *ngIf="item.type == itemTypes.YOUTUBE">
+                <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <input type="submit" value="Create" />
+    </form>
+</div>

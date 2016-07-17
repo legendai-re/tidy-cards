@@ -20,10 +20,10 @@ export class IvCollection {
         this.color = color;
         this._author = _author;
         this._thumbnail = _thumbnail;
-        this.visibility = typeof updatedAt === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
+        this.visibility = typeof visibility === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
     }
 
-    public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json'); ; }
+    public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json');}
 
     public static createFormJson(obj) {
         return new IvCollection(

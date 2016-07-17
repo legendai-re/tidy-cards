@@ -15,21 +15,5 @@
             created the {{collection.createdAt | date }}
         </small>
     </div>
-    <div>
-        <input type="text" name="link" [(ngModel)]="link" />
-        <input type="submit" value="check" (click)="checkLink()" />
-        <div *ngIf="isYoutube">
-            <iframe width="560" height="315" [src]="youtubeId" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div *ngIf="isImage">
-            <img [src]="imageUrl" />
-        </div>
-        <div *ngIf="isRandom">
-            <a target="_blank" [href]="randomUrl">{{link}}</a>
-        </div>
-         <div *ngIf="isTweet">
-            <div [innerHTML]="tweetData.html"></div>
-        </div>
-    </div>
-
+    <iv-item-create [collection]=collection></iv-item-create>
 </div>

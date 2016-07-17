@@ -2,6 +2,8 @@ import { Component, OnInit }    from '@angular/core';
 import { Router }               from '@angular/router';
 import { ROUTER_DIRECTIVES }    from '@angular/router';
 import { IvCollectionService }  from './iv-collection/iv-collection.service';
+import { IvItemService }        from './iv-item/iv-item.service';
+import { IvItemContentService } from './iv-item/iv-item-content.service';
 import { IvUserService }        from './iv-user/iv-user.service';
 import { IvImgUploadService }   from './iv-image/iv-image-upload.service';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
@@ -15,7 +17,7 @@ import '../style/app.scss';
     templateUrl: './iv-app.component.html',
     styleUrls: ['./iv-app.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvHeaderComponent],
-    providers: [IvCollectionService, IvUserService, IvImgUploadService]
+    providers: [IvItemService, IvItemContentService, IvCollectionService, IvUserService, IvImgUploadService]
 })
 
 export class IvAppComponent {

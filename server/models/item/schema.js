@@ -16,9 +16,9 @@ module.exports = function getItemSchema(Schema) {
             }
         },
         type: {
-            type: Number,
+            type: String,
             required: true,
-            default: itemTypes.URL
+            default: itemTypes.URL.id
         },
         _content: {
             type: Schema.Types.Mixed,

@@ -58,7 +58,7 @@ module.exports = function getMultiple (req, res) {
 
     function addItemsContent(i, items, callback){
         switch(items[i].type){
-            case itemTypes.URL:
+            case itemTypes.URL.id:
                 ItemUrl.findById(items[i]._content, function(err, itemUrl){
                     items[i]._content = itemUrl;
                     i++;
@@ -69,7 +69,7 @@ module.exports = function getMultiple (req, res) {
                     }
                 });
                 break;
-            case itemTypes.IMAGE:
+            case itemTypes.IMAGE.id:
                 ItemImage.findById(items[i]._content, function(err, itemImage){
                     items[i]._content = itemImage;
                     if(i==items.length){
@@ -79,7 +79,7 @@ module.exports = function getMultiple (req, res) {
                     }
                 });
                 break;
-            case itemTypes.YOUTUBE:
+            case itemTypes.YOUTUBE.id:
                 ItemUrl.findById(items[i]._content, function(err, itemYoutube){
                     items[i]._content = itemYoutube;
                     if(i==items.length){
@@ -89,7 +89,7 @@ module.exports = function getMultiple (req, res) {
                     }
                 });
                 break;
-            case itemTypes.TWEET:
+            case itemTypes.TWEET.id:
                 break;
         }
     }
