@@ -33,6 +33,8 @@
     }
 
     .input-card-title, .input-card-caption {
+        color: $white;
+
         @include color-placeholder($placeholder-whiter);
     }
 
