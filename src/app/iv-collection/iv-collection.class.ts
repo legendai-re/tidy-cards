@@ -1,5 +1,6 @@
 import { IvUser }     from '../iv-user/iv-user.class';
 import { IvImage }    from '../iv-image/iv-image.class';
+import { IvItem }     from '../iv-item/iv-item.class';
 
 export class IvCollection {
 
@@ -11,6 +12,7 @@ export class IvCollection {
     public _author: IvUser;
     public _thumbnail: IvImage;
     public visibility;
+    public _items: IvItem[];
 
     constructor(_id?: string, createdAt?: Date | string, updatedAt?: Date | string, title?: string, color?: string, _author?: IvUser, _thumbnail?: IvImage, visibility?) {
         this._id = _id;

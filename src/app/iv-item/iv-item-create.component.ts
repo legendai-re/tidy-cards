@@ -68,7 +68,6 @@ export class IvItemCreateComponent implements OnInit {
                 this.item._id = itemResponse._id;
                 this.item.createdAt = itemResponse.createdAt;
                 this.item._content._id = itemResponse._content._id;
-                console.log(this.item);
                 this.itemCreated = true;
             });
         }

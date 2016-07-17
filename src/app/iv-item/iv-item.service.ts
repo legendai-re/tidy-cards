@@ -1,4 +1,5 @@
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
 import { IvItem }                 from './iv-item.class';
@@ -24,7 +25,7 @@ export class IvItemService {
     }*/
 
     public getItems (params: URLSearchParams): Observable<IvItem[]> {
-        return this.http.get(IvApiUrl.COLLECTIONS, { search: params })
+        return this.http.get(IvApiUrl.ITEMS, { search: params })
         .map(this.handleItems)
         .catch(this.handleError);
     }

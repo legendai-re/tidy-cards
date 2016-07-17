@@ -15,5 +15,17 @@
             created the {{collection.createdAt | date }}
         </small>
     </div>
+    <ul *ngIf="itemLoaded">
+        <li *ngFor="let item of collection._items">
+            <p>description: {{item.description}}</p>
+            <p>type: {{item.type.id}}</p>
+            <div *ngIf="item.type.id == 'URL'">
+                <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+            </div>
+            <div *ngIf="item.type.id == 'YOUTUBE'">
+                <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </li>
+    </ul>
     <iv-item-create [collection]=collection></iv-item-create>
 </div>

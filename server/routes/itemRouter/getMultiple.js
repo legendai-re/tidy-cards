@@ -35,6 +35,7 @@ module.exports = function getMultiple (req, res) {
 
         q.exec(function(err, items){
             if (err) {console.log(err); res.sendStatus(500); return;}
+            if(items.length < 1) { res.json({data: []}); return};
             addItemsContent(0, items, function(err, items){
                 res.json({data: items});
             })
@@ -72,6 +73,7 @@ module.exports = function getMultiple (req, res) {
             case itemTypes.IMAGE.id:
                 ItemImage.findById(items[i]._content, function(err, itemImage){
                     items[i]._content = itemImage;
+                    i++;
                     if(i==items.length){
                         callback(null, items);
                     }else{
@@ -80,8 +82,9 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.YOUTUBE.id:
-                ItemUrl.findById(items[i]._content, function(err, itemYoutube){
+                ItemYoutube.findById(items[i]._content, function(err, itemYoutube){
                     items[i]._content = itemYoutube;
+                    i++;
                     if(i==items.length){
                         callback(null, items);
                     }else{
@@ -91,6 +94,8 @@ module.exports = function getMultiple (req, res) {
                 break;
             case itemTypes.TWEET.id:
                 break;
+            default:
+                console.log("unknow type");
         }
     }
 

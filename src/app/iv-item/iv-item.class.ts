@@ -7,7 +7,7 @@ export class IvItem {
     public createdAt: Date;
     public updatedAt: Date;
     public description: string;
-    public type: string;
+    public type: any;
     public _content: any;
     public _collection: string;
 
@@ -16,7 +16,7 @@ export class IvItem {
         createdAt?: Date | string,
         updatedAt?: Date | string,
         description?: string,
-        type?: string,
+        type?: any,
         _content?: IvItemUrl | IvItemYoutube,
         _collection?: string) {
         this._id = _id;
