@@ -1,11 +1,11 @@
-<article class="card create-collection" [style.background-color]="'#'+collection.color">
+<article class="card create-collection" [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color">
     <form (ngSubmit)="onCreatCollectionSubmit()">
         <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
         </div>
         <!-- <div class="card-color"></div> -->
         <div class="card-container">
-            <div class="card-content" [class.has-thumbnail]="collection._thumbnail != empty">
+            <div class="card-content">
                 <input class="input-card-title card-title" [(ngModel)]="collection.title" type="text" placeholder="Create a collection..." required />
                 <textarea class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection..."></textarea>
                 <div class="btn-group">
