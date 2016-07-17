@@ -18,6 +18,9 @@ CollectionSchema.methods.addItem = function addItem(item, callback) {
         if (err) {callback(err, iem); return;}
         callback(false, item);
     });
+    this.itemsCount++;
+    this.save(function(err){
+    });
 }
 
 Collection = mongoose.model('Collection', CollectionSchema);

@@ -12,6 +12,10 @@ module.exports = function getItemUrlSchema(Schema) {
                 },
                 message: '{VALUE} is not a title'
             }
+        },
+        imageUrl: {
+            type: String,
+            required: false
         }
     });
 

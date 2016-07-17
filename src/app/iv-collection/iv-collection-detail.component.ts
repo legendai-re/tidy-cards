@@ -42,6 +42,8 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     initItems(){
         let getParams = new URLSearchParams();
         getParams.set('_collection', this.collection._id);
+        getParams.set('sort_field', 'createdAt');
+        getParams.set('sort_dir', '-1');
         this.itemService.getItems(getParams).subscribe((_items) => {
             this.collection._items = _items;
             for(var key in this.collection._items){

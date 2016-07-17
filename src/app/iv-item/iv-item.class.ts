@@ -1,5 +1,6 @@
 import { IvItemUrl }     from './iv-item-url.class';
 import { IvItemYoutube }     from './iv-item-youtube.class';
+import { IvItemImage }     from './iv-item-image.class';
 
 export class IvItem {
 
@@ -17,7 +18,7 @@ export class IvItem {
         updatedAt?: Date | string,
         description?: string,
         type?: any,
-        _content?: IvItemUrl | IvItemYoutube,
+        _content?: IvItemUrl | IvItemYoutube | IvItemImage,
         _collection?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
@@ -49,6 +50,8 @@ export class IvItem {
                 return IvItemUrl.createFormJson(obj._content);
             case IvItem.ITEM_TYPES.YOUTUBE.id:
                 return IvItemYoutube.createFormJson(obj._content);
+            case IvItem.ITEM_TYPES.IMAGE.id:
+                return IvItemImage.createFormJson(obj._content);
             default:
                 return null;
         }

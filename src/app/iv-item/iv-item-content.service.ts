@@ -5,6 +5,7 @@ import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-brows
 import { IvItem }                 from './iv-item.class';
 import { IvItemUrl }              from './iv-item-url.class';
 import { IvItemYoutube }          from './iv-item-youtube.class';
+import { IvItemImage }            from './iv-item-image.class';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
 
 @Injectable()
@@ -17,7 +18,11 @@ export class IvItemContentService {
             var result;
             this.getIsImage(entryUrl).subscribe((success) => {
                 if(success){
-
+                    result = {
+                        type: IvItem.ITEM_TYPES.IMAGE,
+                        _content: this.createItemImage(entryUrl)
+                    };
+                    resolve(result);
                 }else if(this.getIsTweet(entryUrl)){
                     this.getEmbedTweet(entryUrl).subscribe((data)=>{
 
@@ -29,19 +34,40 @@ export class IvItemContentService {
                     };
                     resolve(result);
                 }else{
-                    result = {
-                        type: IvItem.ITEM_TYPES.URL,
-                        _content: this.createItemUrl(entryUrl)
-                    };
-                    resolve(result);
+                    var noHttpUrl = this.removeHttp(entryUrl);
+                    var host = noHttpUrl.split('/')[0];
+                    var path = noHttpUrl.substr(host.length);
+                    if(host=='' && path==''){
+                        resolve(null);
+                    }else{
+                        this.getFirstImage(host, path).subscribe((response: any) => {
+                            if(response.error){
+                                resolve(null);
+                            }else{
+                                var imageUrl = response.data;
+                                result = {
+                                    type: IvItem.ITEM_TYPES.URL,
+                                    _content: this.createItemUrl(entryUrl, imageUrl)
+                                };
+                                resolve(result);
+                            }
+                        }, () => {
+                            resolve(null);
+                        })
+                    }
                 }
             })
         })
     }
 
-    private createItemUrl(entryUrl){
+    private createItemUrl(entryUrl, imageUrl){
         var itemUrl = new IvItemUrl();
         itemUrl.url = entryUrl;
+        if(!(imageUrl.substring(0, 7) == 'http://' || imageUrl.substring(0, 8) == 'https://')){
+            itemUrl.imageUrl = 'http://' + imageUrl;
+        }else{
+            itemUrl.imageUrl = imageUrl;
+        }
         return itemUrl;
     }
 
@@ -54,6 +80,12 @@ export class IvItemContentService {
         return itemYoutube;
     }
 
+    private createItemImage(entryUrl){
+        var itemImage = new IvItemImage();
+        itemImage.url = entryUrl;
+        return itemImage;
+    }
+
     private getYoutubeVideoId(url) {
         var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         return (url.match(p)) ? RegExp.$1 : null;
@@ -62,6 +94,31 @@ export class IvItemContentService {
     private getIsTweet(url){
         var p = /^(?:https?:\/\/)?(?:www\.)?twitter\.com\/(\w+)\/status(es)?\/(\d{18})(\/)?$/;
         return (url.match(p)) ? true : false;
+    }
+
+    private getIsUrl(url){
+        var p = /^([^:]+):\/\/([-\w._]+)(\/[-\w._]\?(.+)?)?$/ig;
+        return (url.match(p)) ? true : false;
+    }
+
+    private removeHttp(url){
+        if(url.substring(0, 7) == 'http://'){
+            url = url.substr(7);
+        }else if(url.substring(0, 8) == 'https://'){
+            url = url.substr(8);
+        }
+        return url;
+    }
+
+    private getFirstImage(host, path){
+        let params = new URLSearchParams();
+        params.set('host', host);
+        params.set('path', encodeURIComponent(path));
+        return this.http.get(IvApiUrl.ITEMS_URL, { search: params })
+        .map(function(res: Response) {
+            let body = res.json();
+            return body;
+        });
     }
 
     private getIsImage(url): Observable<Boolean> {
@@ -98,8 +155,8 @@ export class IvItemContentService {
         params.set('format', 'json');
         params.set('callback', 'JSONP_CALLBACK');
         return this.jsonp
-               .get('https://publish.twitter.com/oembed', { search: params })
-               .map(this.handleEmbedTweet);
+        .get('https://publish.twitter.com/oembed', { search: params })
+        .map(this.handleEmbedTweet);
     }
 
     private handleEmbedTweet(res: Response) {

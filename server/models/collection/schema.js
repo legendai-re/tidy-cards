@@ -29,6 +29,10 @@ module.exports = function getCollectionSchema(Schema) {
 	    	type: String,
 	    	default: visibility.PRIVATE.id
 	    },
+        itemsCount: {
+            type: Number,
+            default: 0
+        },
 	    _author : { type: String, ref: 'User' },
 	    _thumbnail : { type: String, ref: 'Image' },
 	});

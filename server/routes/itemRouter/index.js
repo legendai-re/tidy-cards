@@ -3,6 +3,11 @@ var isGranted       = require('../../security/isGranted');
 
 var router = express.Router();
 
+router.route('/url')
+    .get(function(req, res){
+       require('./itemContent/getItemUrl')(req, res);
+    });
+
 router.route('/')
     .post(isGranted('ROLE_USER'), function(req, res) {
         require('./post')(req, res);

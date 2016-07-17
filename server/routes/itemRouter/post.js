@@ -65,6 +65,9 @@ module.exports = function post (req, res) {
         }
         var itemUrl = new ItemUrl();
         itemUrl.url = req.body._content.url;
+        if(req.body._content.imageUrl){
+            itemUrl.imageUrl = req.body._content.imageUrl;
+        }
         itemUrl.save(function(err){
             if(err)console.log(err);
             callback(err, itemUrl)

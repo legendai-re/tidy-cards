@@ -21,7 +21,7 @@
                         <div class="collection-page-stats">
                             <ul class="stats-list">
                                 <li class="stat-item-list">
-                                    1 item
+                                    {{collection.itemsCount}} item
                                 </li>
                                 <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
                                     <i class="material-icons stat-icon">mode_comment</i> 0
@@ -47,7 +47,11 @@
                     <p>description: {{item.description}}</p>
                     <p>type: {{item.type.id}}</p>
                     <div *ngIf="item.type.id == 'URL'">
+                        <img *ngIf="item._content.imageUrl" [src]="item._content.imageUrl" />
                         <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+                    </div>
+                    <div *ngIf="item.type.id == 'IMAGE'">
+                        <img [src]="item._content.url" />
                     </div>
                     <div *ngIf="item.type.id == 'YOUTUBE'">
                         <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>

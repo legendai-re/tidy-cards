@@ -3,9 +3,13 @@
         <div class="item-new-embeded-content" *ngIf="loadingContent">
             Loading...
         </div>
-        <div class="item-new-embeded-content" *ngIf="item._content">
+        <div class="item-new-embeded-content" *ngIf="item._content && validUrl">
             <div *ngIf="item.type == itemTypes.URL">
+                <img *ngIf="item._content.imageUrl" [src]="item._content.imageUrl" />
                 <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+            </div>
+            <div *ngIf="item.type == itemTypes.IMAGE">
+                <img [src]="item._content.url" />
             </div>
             <div *ngIf="item.type == itemTypes.YOUTUBE">
                 <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>

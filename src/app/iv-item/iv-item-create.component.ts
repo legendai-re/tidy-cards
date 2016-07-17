@@ -23,6 +23,7 @@ export class IvItemCreateComponent implements OnInit {
     public urlEntry: string;
     public loadingContent: boolean;
     public itemTypes: any;
+    public validUrl: boolean;
     private typingTimer;
     private doneTypingInterval: number;
 
@@ -39,6 +40,7 @@ export class IvItemCreateComponent implements OnInit {
         this.urlEntry = '';
         this.itemCreated = false;
         this.loadingContent = false;
+        this.validUrl = false;
     }
 
     public onUrlKeyUp(){
@@ -57,8 +59,14 @@ export class IvItemCreateComponent implements OnInit {
     private createContentFromUrl(){
        this.loadingContent = true;
        this.itemContentService.getContentFromUrl(this.urlEntry).then((result) => {
-           this.item.type = result.type;
-           this.item._content = result._content;
+           if(result){
+               this.item.type = result.type;
+               this.item._content = result._content;
+               this.validUrl = true;
+           }else{
+               console.log('invalid url');
+               this.validUrl = false;
+           }
            this.loadingContent = false;
        })
     }
