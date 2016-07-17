@@ -50,6 +50,10 @@
     margin-left: 30px;
 }
 
+.nav-pills .nav-item.open > a {
+    color: $white;
+}
+
 .nav > li > a {
     color: $white-op-3-4;
     font-weight: bold;

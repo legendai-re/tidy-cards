@@ -13,6 +13,7 @@
     position: relative;
     box-shadow: 0 1px 4px $box-shadow-color;
     border-radius: 3px;
+    margin: 20px 0;
 
     &:before {
         content: "";
@@ -32,6 +33,18 @@
 .item-new-description {
     position: relative;
     z-index: 1;
+}
+
+.item-new-embeded-content {
+    overflow: hidden;
+    border-radius: 3px 3px 0 0;
+}
+
+.loading-content {
+    padding: 20px;
+    background: $collection-grey;
+    font-size: 1.25rem;
+    text-align: center;
 }
 
 .item-new-url,

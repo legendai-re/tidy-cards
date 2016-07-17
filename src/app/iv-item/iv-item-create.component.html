@@ -1,6 +1,6 @@
 <div class="item-new extended"><!-- collapsed/extended -->
     <form (ngSubmit)="onCreatItemSubmit()">
-        <div class="item-new-embeded-content" *ngIf="loadingContent">
+        <div class="item-new-embeded-content loading-content" *ngIf="loadingContent">
             Loading...
         </div>
         <div class="item-new-embeded-content" *ngIf="item._content && validUrl">
@@ -11,14 +11,29 @@
             <div *ngIf="item.type == itemTypes.IMAGE">
                 <img [src]="item._content.url" />
             </div>
-            <div *ngIf="item.type == itemTypes.YOUTUBE">
-                <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="item.type == itemTypes.YOUTUBE">
+                <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
             </div>
         </div>
         <input class="item-new-url" type="text" placeholder="Enter your url..." [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
         <textarea class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description"></textarea>
 
         <div class="item-create">
+            <div class="btn-group form-action active">
+                <button class="btn-icon" type="button">
+                    <i class="material-icons icon">comment</i>
+                </button>
+            </div>
+            <div class="btn-group form-action">
+                <button class="btn-icon" type="button">
+                    <i class="material-icons icon">comment</i>
+                </button>
+            </div>
+            <div class="btn-group form-action">
+                <button class="btn-icon text-danger" type="button">
+                    <i class="material-icons icon">link</i><span>Reset url</span>
+                </button>
+            </div>
             <input class="btn btn-create pull-xs-right" type="submit" value="Add" />
         </div>
     </form>

@@ -1,3 +1,17 @@
+.form-actions {}
+
+.form-action {
+    height: 38px;
+    outline: none;
+    color: $text-blacker;
+    vertical-align: middle;
+}
+
+.form-action.open,
+.form-action.active {
+    color: $black-op-3-4;
+}
+
 .file {
     overflow: hidden;
     margin: 0;
@@ -9,16 +23,17 @@
     }
 }
 
-.file-icon-only {
-    display: inline-block;
+.btn-icon {
+    display: inline-flex;
     position: relative;
     background: transparent;
-    width: 38px;
+    width: auto;
     height: 38px;
     padding: 7px;
     border: none;
     border-radius: 3px;
     overflow: hidden;
+    font-size: .875rem;
 
     &:hover {
         background: $hover-dark-color;
@@ -37,6 +52,10 @@
     &:after {
         display: none;
     }
+}
+
+.icon + span {
+    padding: 2px 5px 0;
 }
 
 .form-control,
