@@ -14,10 +14,26 @@
         </a>
         <div class="card-details">
             <a href="#" title="{{collection._author?.name}}">
-                <div class="avatar avatar--60">
+                <div class="card-avatar avatar avatar--60">
                     <img src="https://www.alexandrejolly.com/avatar_red.png" alt="{{collection._author?.name}} avatar">
                 </div>
             </a>
+            <div class="card-details-infos">
+                <div class="card-stats" [class.has-thumbnail]="collection._thumbnail">
+                    <ul *ngIf="collection.visibility.id != 'PRIVATE'" class="stats-list">
+                        <li class="stat-item-list">
+                            <i class="material-icons stat-icon">mode_comment</i> 0
+                        </li>
+                        <li class="stat-item-list">
+                            <i class="material-icons stat-icon">star</i> 0
+                        </li>
+                    </ul>
+                    <div *ngIf="collection.visibility.id == 'PRIVATE'" class="card-visibility" title="Visibility: {{collection.visibility.desc}}">
+                        <i class="material-icons stat-icon">remove_red_eye</i>
+                    </div>
+                </div>
+                <div class="card-nb">1 item</div>
+            </div>
         </div>
     </div>
 </article>

@@ -34,3 +34,20 @@ $images-overlay:            rgba(0,0,0,.6);
 $border-color:              rgba(0,0,0,.1);
 $hover-dark-color:          rgba(0,0,0,.1);
 $box-shadow-color:          rgba(0,0,0,.04);
+
+$black-op-1-4:              rgba(0,0,0,.25);
+$black-op-1-3:              rgba(0,0,0,.33);
+$black-op-1-2:              rgba(0,0,0,.5);
+$black-op-2-3:              rgba(0,0,0,.66);
+$black-op-3-4:              rgba(0,0,0,.75);
+
+$white-op-1-4:              rgba(255,255,255,.25);
+$white-op-1-3:              rgba(255,255,255,.33);
+$white-op-1-2:              rgba(255,255,255,.5);
+$white-op-2-3:              rgba(255,255,255,.66);
+$white-op-3-4:              rgba(255,255,255,.75);
+
+$text-blacker:              $black-op-1-2;
+$text-whiter:               $white-op-1-2;
+$placeholder-blacker:       $black-op-1-2;
+$placeholder-whiter:        $white-op-3-4;
