@@ -16,7 +16,6 @@
     background: $white;
     width: 40px;
     height: 40px;
-    display: block;
     float: left;
     overflow: hidden;
     text-indent: -9999px;
@@ -35,13 +34,18 @@
 
     input {
         background-color: rgba(0,0,0,.15);
+        width: 100%;
         color: $white;
         border: none;
         padding: 9px;
         font-size: 1.125rem;
         line-height: 1rem;
-        min-width: 370px;
 
+        @include rwd-md {
+            width: 367px;
+        }
+    }
+    input {
         @include color-placeholder($placeholder-whiter);
     }
 }
