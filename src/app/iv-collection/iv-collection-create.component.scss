@@ -79,15 +79,6 @@
     border-radius: 0 0 3px 3px;
 }
 
-.card-actions {}
-
-.card-action {
-    height: 38px;
-    outline: none;
-    color: $text-blacker;
-    vertical-align: middle;
-}
-
 .color-card {
     &:hover {
         background: $hover-dark-color;
