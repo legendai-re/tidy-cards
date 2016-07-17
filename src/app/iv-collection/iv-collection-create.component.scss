@@ -9,6 +9,11 @@
     z-index: 2;
 }
 
+.create-collection .card-thumbnail {
+    height: 300px;
+    border-radius: 3px;
+}
+
 .input-card-title, .input-card-caption {
     background: transparent;
     width: 100%;
@@ -16,6 +21,32 @@
     border: none;
 
     @include color-placeholder($placeholder-blacker);
+}
+
+.has-thumbnail {
+    .card-create {
+        background: $hover-light-color;
+    }
+
+    .card-visibily, .card-action {
+        color: $white-op-3-4;
+    }
+
+    .input-card-title, .input-card-caption {
+        @include color-placeholder($placeholder-whiter);
+    }
+
+    .file-icon-only:hover {
+        background: $hover-light-color;
+    }
+
+    .btn-create {
+        color: $white;
+
+        &:hover {
+            background: $hover-light-color;
+        }
+    }
 }
 
 .input-card-caption {
