@@ -65,8 +65,24 @@ module.exports = function post (req, res) {
         }
         var itemUrl = new ItemUrl();
         itemUrl.url = req.body._content.url;
-        if(req.body._content.imageUrl){
-            itemUrl.imageUrl = req.body._content.imageUrl;
+        itemUrl.host = req.body._content.host;
+        if(req.body._content.image){
+            itemUrl.image = req.body._content.image;
+        }
+        if(req.body._content.title){
+            itemUrl.title = req.body._content.title;
+        }
+        if(req.body._content.description){
+            itemUrl.description = req.body._content.description;
+        }
+        if(req.body._content.author){
+            itemUrl.author = req.body._content.author;
+        }
+        if(req.body._content.type){
+            itemUrl.type = req.body._content.type;
+        }
+        if(req.body._content.site_name){
+            itemUrl.site_name = req.body._content.site_name;
         }
         itemUrl.save(function(err){
             if(err)console.log(err);

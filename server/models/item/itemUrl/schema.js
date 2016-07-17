@@ -13,7 +13,31 @@ module.exports = function getItemUrlSchema(Schema) {
                 message: '{VALUE} is not a title'
             }
         },
-        imageUrl: {
+        host: {
+            type: String,
+            required: false
+        },
+        image: {
+            type: String,
+            required: false
+        },
+        title: {
+            type: String,
+            required: false
+        },
+        description: {
+            type: String,
+            required: false
+        },
+        author: {
+            type: String,
+            required: false
+        },
+        type: {
+            type: String,
+            required: false
+        },
+        site_name: {
             type: String,
             required: false
         }

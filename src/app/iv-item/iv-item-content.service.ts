@@ -37,17 +37,18 @@ export class IvItemContentService {
                     var noHttpUrl = this.removeHttp(entryUrl);
                     var host = noHttpUrl.split('/')[0];
                     var path = noHttpUrl.substr(host.length);
-                    if(host=='' && path==''){
+                    if(host==''){
                         resolve(null);
                     }else{
                         this.getFirstImage(host, path).subscribe((response: any) => {
                             if(response.error){
                                 resolve(null);
                             }else{
-                                var imageUrl = response.data;
+                                var itemUrl = IvItemUrl.createFormJson(response.data);
+                                itemUrl.url = entryUrl;
                                 result = {
                                     type: IvItem.ITEM_TYPES.URL,
-                                    _content: this.createItemUrl(entryUrl, imageUrl)
+                                    _content: itemUrl
                                 };
                                 resolve(result);
                             }
@@ -58,17 +59,6 @@ export class IvItemContentService {
                 }
             })
         })
-    }
-
-    private createItemUrl(entryUrl, imageUrl){
-        var itemUrl = new IvItemUrl();
-        itemUrl.url = entryUrl;
-        if(!(imageUrl.substring(0, 7) == 'http://' || imageUrl.substring(0, 8) == 'https://')){
-            itemUrl.imageUrl = 'http://' + imageUrl;
-        }else{
-            itemUrl.imageUrl = imageUrl;
-        }
-        return itemUrl;
     }
 
     private createItemYoutube(entryUrl, videoId){

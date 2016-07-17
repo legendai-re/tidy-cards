@@ -24,6 +24,7 @@ export class IvItemCreateComponent implements OnInit {
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
+    public addDescription: boolean;
     private typingTimer;
     private doneTypingInterval: number;
 
@@ -41,6 +42,7 @@ export class IvItemCreateComponent implements OnInit {
         this.itemCreated = false;
         this.loadingContent = false;
         this.validUrl = false;
+        this.addDescription = false;
     }
 
     public onUrlKeyUp(){
@@ -69,6 +71,12 @@ export class IvItemCreateComponent implements OnInit {
            }
            this.loadingContent = false;
        })
+    }
+
+    public resetItemContent(){
+        this.urlEntry = '';
+        this.item._content = null;
+        this.validUrl = false;
     }
 
     public onCreatItemSubmit() {
