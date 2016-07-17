@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown" *ngIf="authService.isLoggedIn">
-                <a class="nav-link dropdown-toggle" [class.active]="router.url == '/u/'+authService.currentUser._id" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     {{authService.currentUser.name}}
                 </a>
                 <div class="dropdown-menu">

@@ -32,7 +32,7 @@
         </div>
         <div class="card-create">
             <div class="card-actions form-inline">
-                <div class="btn-group form-group card-action dropup">
+                <div class="btn-group card-action dropup">
                     <button type="button" class="file-icon-only" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">palette</i>
                     </button>
@@ -65,14 +65,14 @@
                     </div>
                 </div>
 
-                <label class="file form-group card-action">
+                <label class="file card-action">
                     <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader">
                     <span class="file-icon-only material-icons">
                         photo
                     </span>
                 </label>
 
-                <button class="btn btn-card-create form-group pull-xs-right" type="submit">
+                <button class="btn btn-create pull-xs-right" type="submit">
                     Create
                 </button>
             </div>

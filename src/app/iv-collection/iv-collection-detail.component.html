@@ -1,31 +1,61 @@
-<h2>Collection detail</h2>
-<div *ngIf="collection">
-    <h3>{{collection.title}}</h3>
-    <img [src]="collection._thumbnail?.getPath('original')" />
-    <div>
-        <p>title: {{collection.title}}</p>
-        <p>color: #{{collection.color}}</p>
-    </div>
-    <div>
-        <p>
-            created by <b>{{collection._author?.name}}</b>
-            <small>@{{collection._author?.username}}</small>
-        </p>
-        <small>
-            created the {{collection.createdAt | date }}
-        </small>
-    </div>
-    <ul *ngIf="itemLoaded">
-        <li *ngFor="let item of collection._items">
-            <p>description: {{item.description}}</p>
-            <p>type: {{item.type.id}}</p>
-            <div *ngIf="item.type.id == 'URL'">
-                <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+<section *ngIf="collection" class="section collection-page">
+    <div class="container">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="collection-page-header">
+                <h2 class="collection-page-title">{{collection.title}}</h2>
+                <div class="collection-page-details">
+                    <a href="#" title="{{collection._author?.name}}">
+                        <div class="collection-page-avatar avatar avatar--60">
+                            <img src="https://www.alexandrejolly.com/avatar_red.png" alt="{{collection._author?.name}} avatar">
+                        </div>
+                    </a>
+                    <div class="collection-page-details-infos">
+                        <div class="collection-page-metas">
+                            <p class="collection-page-author">
+                                A collection by <strong>{{collection._author?.name}}</strong>
+                            </p>
+                            <p class="collection-page-dates">
+                                {{collection.createdAt | date }} • last modifications: today
+                            </p>
+                        </div>
+                        <div class="collection-page-stats">
+                            <ul class="stats-list">
+                                <li class="stat-item-list">
+                                    1 item
+                                </li>
+                                <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
+                                    <i class="material-icons stat-icon">mode_comment</i> 0
+                                </li>
+                                <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
+                                    <i class="material-icons stat-icon">star</i> 0
+                                </li>
+                                <li *ngIf="collection.visibility.id == 'PRIVATE'" class="stat-item-list">
+                                    <i class="material-icons stat-icon">remove_red_eye</i> Visibility: {{collection.visibility.desc}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="item.type.id == 'YOUTUBE'">
-                <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </li>
-    </ul>
-    <iv-item-create [collection]=collection></iv-item-create>
-</div>
+
+            <iv-item-create [collection]=collection></iv-item-create>
+
+            <img [src]="collection._thumbnail?.getPath('original')" />
+
+            <ul *ngIf="itemLoaded">
+                <li *ngFor="let item of collection._items">
+                    <p>description: {{item.description}}</p>
+                    <p>type: {{item.type.id}}</p>
+                    <div *ngIf="item.type.id == 'URL'">
+                        <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+                    </div>
+                    <div *ngIf="item.type.id == 'YOUTUBE'">
+                        <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+

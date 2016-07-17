@@ -1,0 +1,48 @@
+/* ==========================================================================
+   COLLECTION PAGE COMPONENT
+   ========================================================================== */
+
+@import '../../style/tools/_vars.scss';
+@import '../../style/tools/_mixins.scss';
+
+.collection-page-header {
+    &:before,
+    &:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+.collection-page-title {
+    font-size: 3rem;
+    line-height: 4rem;
+    margin-bottom: 32px;
+    color: $white;
+}
+
+.collection-page-avatar {
+    float: left;
+}
+
+.collection-page-metas {
+    float: left;
+    padding-left: 15px;
+}
+
+.collection-page-author {
+    font-size: 1.25rem;
+    color: $white;
+    margin-bottom: 8px;
+}
+
+.collection-page-dates {
+    font-size: .875rem;
+    color: $grey;
+}
+
+.collection-page-stats {
+    float: right;
+    padding-top: 6px;
+    color: $white;
+}

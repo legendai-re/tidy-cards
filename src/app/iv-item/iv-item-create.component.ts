@@ -13,6 +13,7 @@ import { IvItemContentService }         from './iv-item-content.service';
 
 @Component({
     selector: 'iv-item-create',
+    styleUrls: ['iv-item-create.component.scss'],
     templateUrl: './iv-item-create.component.html'
 })
 

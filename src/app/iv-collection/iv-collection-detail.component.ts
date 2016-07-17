@@ -10,6 +10,7 @@ import { IvItemCreateComponent }          from '../iv-item/iv-item-create.compon
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
+    styleUrls: ['iv-collection-detail.component.scss'],
     directives: [IvItemCreateComponent]
 })
 

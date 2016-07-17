@@ -20,7 +20,7 @@ export class IvCollectionCreateComponent implements OnInit {
     public collectionCreated: boolean;
     public visibilityList: any;
 
-    constructor(private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService ) {
+    constructor(private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService, private router: Router) {
         this.uploader = imgUploadService.uploader;
         this.visibilityList = IvCollection.VISIBILITY;
     }
@@ -54,6 +54,7 @@ export class IvCollectionCreateComponent implements OnInit {
         this.collectionService.postCollection(this.collection).subscribe(collection => {
             this.collection._id = collection._id;
             this.collectionCreated = true;
+            this.router.navigate(['/c', this.collection._id]);
         });
     }
 
