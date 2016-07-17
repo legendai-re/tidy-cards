@@ -3,6 +3,7 @@
    ========================================================================== */
 
 @import '../../style/tools/_vars.scss';
+@import '../../style/tools/_mixins.scss';
 
 .card {
     background: $white;
@@ -125,23 +126,4 @@
     font-size: .875rem;
     text-align: right;
     color: $grey;
-}
-
-// todo: move to modules/stats
-.stats-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    float: right;
-}
-
-.stat-item-list {
-    float: left;
-    margin-left: 15px;
-}
-
-.stat-icon {
-    line-height: 1;
-    font-size: 1.125rem;
-    vertical-align: sub;
 }

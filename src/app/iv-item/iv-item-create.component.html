@@ -1,14 +1,9 @@
-<div>
+<div class="item-new extended"><!-- collapsed/extended -->
     <form (ngSubmit)="onCreatItemSubmit()">
-        <legend>Create new item</legend>
-        <input type="text" [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
-        <textarea [(ngModel)]="item.description"></textarea>
-
-        <div *ngIf="loadingContent">
+        <div class="item-new-embeded-content" *ngIf="loadingContent">
             Loading...
         </div>
-
-        <div *ngIf="item._content">
+        <div class="item-new-embeded-content" *ngIf="item._content">
             <div *ngIf="item.type == itemTypes.URL">
                 <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
             </div>
@@ -16,6 +11,11 @@
                 <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
-        <input type="submit" value="Create" />
+        <input class="item-new-url" type="text" placeholder="Enter your url..." [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
+        <textarea class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description"></textarea>
+
+        <div class="item-create">
+            <input class="btn btn-create pull-xs-right" type="submit" value="Add" />
+        </div>
     </form>
 </div>

@@ -52,9 +52,10 @@
     height: 38px;
     outline: none;
     color: $text-blacker;
+    vertical-align: middle;
 }
 
-.color-card, .btn-card-create {
+.color-card {
     &:hover {
         background: $hover-dark-color;
     }
@@ -159,13 +160,4 @@
 
 .collection-color-green {
     background: $collection-green;
-}
-
-
-.btn-card-create {
-    background: transparent;
-    font-weight: 500;
-    color: $black-op-3-4;
-    outline: none;
-    text-transform: uppercase;
 }

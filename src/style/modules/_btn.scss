@@ -1,0 +1,11 @@
+.btn-create {
+    background: transparent;
+    font-weight: 500;
+    color: $black-op-3-4;
+    outline: none;
+    text-transform: uppercase;
+
+    &:hover {
+        background: $hover-dark-color;
+    }
+}

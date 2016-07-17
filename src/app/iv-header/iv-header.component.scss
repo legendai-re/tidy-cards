@@ -40,6 +40,7 @@
         padding: 9px;
         font-size: 1.125rem;
         line-height: 1rem;
+        min-width: 370px;
 
         @include color-placeholder($placeholder-whiter);
     }
@@ -50,12 +51,12 @@
 }
 
 .nav > li > a {
-    color: rgba(255, 255, 255, 0.75);
+    color: $white-op-3-4;
     font-weight: bold;
     position: relative;
     padding: .5rem 0;
 
-    &:hover {
+    &.active, &:hover, &:focus, &:active {
         color: $white;
     }
 
