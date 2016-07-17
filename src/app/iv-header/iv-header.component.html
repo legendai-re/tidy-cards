@@ -1,6 +1,9 @@
 <header class="header clearfix">
     <div class="container">
-        <div class="logo">
+        <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
+            &#9776;
+        </button>
+        <div class="logo collapse navbar-toggleable-md">
             <h1>
                 <a [routerLink]="['/']">Invow</a>
             </h1>
@@ -15,7 +18,7 @@
             </div>
         </form>
 
-        <nav class="nav nav-pills pull-xs-right">
+        <nav class="nav nav-pills pull-xs-right collapse navbar-toggleable-md">
             <li class="nav-item" *ngIf="!authService.isLoggedIn">
                 <a class="nav-link" [class.active]="router.url == '/c/popular'" [routerLink]="['/c/popular']">
                     Popular

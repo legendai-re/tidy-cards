@@ -15,7 +15,7 @@
                                 A collection by <strong>{{collection._author?.name}}</strong>
                             </p>
                             <p class="collection-page-dates">
-                                {{collection.createdAt | date }} • last modifications: today
+                                <span>{{collection.createdAt | date }}</span> <span *ngIf="collection.modifiedAt">• last modifications: {{collection.modifiedAt | date }}</span>
                             </p>
                         </div>
                         <div class="collection-page-stats">
@@ -42,22 +42,33 @@
 
             <img [src]="collection._thumbnail?.getPath('original')" />
 
-            <ul *ngIf="itemLoaded">
-                <li *ngFor="let item of collection._items">
-                    <p>description: {{item.description}}</p>
-                    <p>type: {{item.type.id}}</p>
-                    <div *ngIf="item.type.id == 'URL'">
-                        <img *ngIf="item._content.imageUrl" [src]="item._content.imageUrl" />
-                        <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+            <div class="items-list" *ngIf="!itemLoaded">
+                <article>
+                    <p>There is no items in the colletion yet...</p>
+                </article>
+            </div>
+
+            <div class="items-list" *ngIf="itemLoaded">
+                <article class="item" *ngFor="let item of collection._items">
+                    <div class="item-container">
+                        <div class="item-embeded-content" *ngIf="item.type.id == 'URL'">
+                            <img *ngIf="item._content.imageUrl" [src]="item._content.imageUrl" />
+                            <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+                        </div>
+                        <figure class="figure item-embeded-content center-block" *ngIf="item.type.id == 'IMAGE'">
+                            <img data-src="" class="figure-img img-fluid img-rounded" alt="A generic square placeholder image with rounded corners in a figure." [src]="item._content.url">
+                            <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
+                        <div class="embed-responsive embed-responsive-16by9 item-embeded-content" *ngIf="item.type.id == 'YOUTUBE'">
+                            <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
+                        </div>
+                        <div class="item-content" *ngIf="item.description">
+                            <!-- <p>type: {{item.type.id}}</p> -->
+                            <p>{{item.description}}</p>
+                        </div>
                     </div>
-                    <div *ngIf="item.type.id == 'IMAGE'">
-                        <img [src]="item._content.url" />
-                    </div>
-                    <div *ngIf="item.type.id == 'YOUTUBE'">
-                        <iframe width="560" height="315" [src]="item._content.trustedEmbedUrl" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </li>
-            </ul>
+                </article>
+            </div>
         </div>
     </div>
 </section>
