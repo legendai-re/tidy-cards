@@ -22,7 +22,7 @@ module.exports = function getUserSchema(Schema) {
 	                return (v.length > 1);
 	            },
 	            message: '{VALUE} is not a valid password'
-	        }      
+	        }
 	    },
 	    email: {
 	        type: String,
@@ -39,7 +39,7 @@ module.exports = function getUserSchema(Schema) {
 	                return (v.length > 1 && v.length < 30);
 	            },
 	            message: '{VALUE} is not a valid name'
-	        } 
+	        }
 	    },
 	    bio: {
 	        type: String,
@@ -49,12 +49,13 @@ module.exports = function getUserSchema(Schema) {
 	                return (v.length < 1000);
 	            },
 	            message: 'Bio is to long'
-	        } 
+	        }
 	    },
 	    _starredCollections: {
 	    	select: false,
-	    	type: Array //Relation to Collection	    	
-	    }
-	});	
-    
+	    	type: Array //Relation to Collection
+	    },
+        _avatar: { type: String, ref: 'Image' }
+	});
+
 }

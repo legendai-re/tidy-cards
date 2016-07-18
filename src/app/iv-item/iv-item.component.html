@@ -1,0 +1,8 @@
+<iv-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]="item._content"></iv-item-url>
+<iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></iv-item-tweet>
+<iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></iv-item-youtube>
+<iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></iv-item-image>
+
+<div class="item-content" *ngIf="item.description">
+    <p>{{item.description}}</p>
+</div>

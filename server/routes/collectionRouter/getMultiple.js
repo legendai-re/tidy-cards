@@ -10,9 +10,11 @@ module.exports = function getMultiple (req, res) {
 	getQueryFiler(rq, req, function(filterObj){
 		var q = Collection.find(filterObj).sort({'createdAt': 1}).limit(20);
 
-		if(rq.populate){
-			q.populate(rq.populate);
-		}
+		q.populate('_thumbnail');
+		q.populate({
+            path: '_author',
+            populate: { path: '_avatar' }
+        });
 
 		if(rq.skip)
 			q.limit(parseInt(rq.skip));

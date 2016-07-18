@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy }   from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
@@ -8,11 +8,12 @@ import { IvItemService }                  from '../iv-item/iv-item.service';
 import { IvCollection }                   from './iv-collection.class';
 import { IvItemCreateComponent }          from '../iv-item/iv-item-create.component';
 import { IvHeaderService }                from '../iv-header/iv-header.service';
+import { IvItemComponent }                from '../iv-item/iv-item.component';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
     styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [IvItemCreateComponent]
+    directives: [IvItemCreateComponent, IvItemComponent]
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
@@ -20,9 +21,13 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public itemLoaded: boolean;
     private sub: any;
 
-    @Output() updateHeader = new EventEmitter();
-
-    constructor(private headerService: IvHeaderService, private sanitizer: DomSanitizationService, private route: ActivatedRoute, private router: Router, private collectionService: IvCollectionService,private itemService: IvItemService) {
+    constructor(
+        private headerService: IvHeaderService,
+        private sanitizer: DomSanitizationService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private collectionService: IvCollectionService,
+        private itemService: IvItemService) {
     }
 
     ngOnInit() {

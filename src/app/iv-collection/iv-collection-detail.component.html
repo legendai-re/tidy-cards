@@ -6,7 +6,7 @@
                 <div class="collection-page-details">
                     <a href="#" title="{{collection._author?.name}}">
                         <div class="collection-page-avatar avatar avatar--60">
-                            <img src="https://www.alexandrejolly.com/avatar_red.png" alt="{{collection._author?.name}} avatar">
+                            <img [src]="collection._author._avatar.getPath('original')" alt="{{collection._author?.name}} avatar">
                         </div>
                     </a>
                     <div class="collection-page-details-infos">
@@ -50,7 +50,8 @@
 
             <div class="items-list" *ngIf="itemLoaded">
                 <article class="item" *ngFor="let item of collection._items">
-                    <div class="item-container">
+                    <iv-item [item]=item></iv-item>
+                    <!--<div class="item-container">
                         <div class="item-embeded-content" *ngIf="item.type.id == 'URL'">
                             <img *ngIf="item._content.image" [src]="item._content.image" />
                             <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
@@ -66,10 +67,9 @@
                             <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
                         </div>
                         <div class="item-content" *ngIf="item.description">
-                            <!-- <p>type: {{item.type.id}}</p> -->
                             <p>{{item.description}}</p>
                         </div>
-                    </div>
+                    </div>-->
                 </article>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import { IvImage }    from '../iv-image/iv-image.class';
+
 export class IvUser {
 
     public _id: string;
@@ -9,6 +11,7 @@ export class IvUser {
     public password: string;
     public roles: string[];
     public bio: string;
+    public _avatar: IvImage;
 
     constructor(
         _id?: string,
@@ -19,7 +22,8 @@ export class IvUser {
         email?: string,
         password?: string,
         roles?: string[],
-        bio?: string) {
+        bio?: string,
+        _avatar?: IvImage) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -29,6 +33,7 @@ export class IvUser {
         this.password = password;
         this.roles = roles;
         this.bio = bio;
+        this._avatar = _avatar;
     }
 
     public static createFormJson(obj) {
@@ -41,7 +46,8 @@ export class IvUser {
             obj.email,
             obj.password,
             obj.roles,
-            obj.bio
+            obj.bio,
+            IvImage.createFormJson(obj._avatar)
             );
     }
 

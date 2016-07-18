@@ -17,10 +17,19 @@ export class IvUserService {
 
     constructor (private http: Http) {}
 
-    public getUser (_id: string, params: URLSearchParams): Observable<IvUser> {
+    public getUser(_id: string, params: URLSearchParams): Observable<IvUser> {
         return this.http.get(IvApiUrl.USERS + '/' + _id, { search: params })
         .map(this.handleUser)
         .catch(this.handleError);
+    }
+
+    public putUser(user: IvUser): Observable<IvUser> {
+        let body = JSON.stringify(user);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.USERS + '/' + user._id, body, options)
+            .map(this.handleUser)
+            .catch(this.handleError);
     }
 
     private handleUsers(res: Response) {

@@ -33,6 +33,9 @@ module.exports = function put (req, res) {
     function updateProfile(req, user){
         user.name = (req.body.name || user.name);
         user.bio = (req.body.bio || user.bio);
+        if(req.body._avatar && req.body._avatar._id){
+            user._avatar = req.body._avatar._id;
+        }
         user.save(function(err) {
             if (err) {console.log(err); res.sendStatus(500); return;}
             res.json({data: user});

@@ -8,9 +8,11 @@ module.exports = function getOne (req, res) {
 
 	var q = Collection.findById(req.params.collection_id);
 
-	if(rq.populate){
-		q.populate(rq.populate);
-	}
+	q.populate('_thumbnail');
+    q.populate({
+        path: '_author',
+        populate: { path: '_avatar' }
+    });
 
 	q.exec(function(err, collection){
         if(err) {console.log(err); res.sendStatus(500); return;}

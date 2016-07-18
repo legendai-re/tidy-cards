@@ -24,6 +24,22 @@
             <small>Change my security settings</small>
         </h2>
 
+        <div>
+            <input type="text" [(ngModel)]="tmpUser.name" />
+            <input type="submit" (click)="updateName()" value="save" />
+        </div>
+
+        <div>
+            <div *ngIf="!tmpUser._avatar">
+                <img [src]="authService.currentUser._avatar.getPath('original')" />
+            </div>
+            <div *ngIf="tmpUser._avatar">
+                <img [src]="tmpUser._avatar.getPath('original')" />
+                <input type="submit" (click)="updateAvatar()" value="save" />
+                <input type="submit" (click)="cancelUpdateAvatar()" value="cancel" />
+            </div>
+            <input (change)="onAvatarFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
+        </div>
         <hr>
     </div>
 </section>
