@@ -7,6 +7,7 @@ module.exports = function post (req, res) {
     var ItemUrl         = mongoose.model('ItemUrl');
     var ItemYoutube     = mongoose.model('ItemYoutube');
     var ItemImage       = mongoose.model('ItemImage');
+    var ItemTweet       = mongoose.model('ItemTweet');
 
     if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
         res.status(400).send({ error: 'some required parameters was not provided'});
@@ -44,15 +45,12 @@ module.exports = function post (req, res) {
         switch(item.type){
             case itemTypes.URL.id:
                 return createItemUrl(req, callback);
-                break;
             case itemTypes.IMAGE.id:
-                return createImage(req, callback);
-                break;
+                return createItemImage(req, callback);
             case itemTypes.YOUTUBE.id:
                 return createItemYoutube(req, callback);
-                break;
             case itemTypes.TWEET.id:
-                break;
+                return createItemTweet(req, callback);
             default:
                 callback('Unknow itemType', item);
         }
@@ -66,24 +64,14 @@ module.exports = function post (req, res) {
         var itemUrl = new ItemUrl();
         itemUrl.url = req.body._content.url;
         itemUrl.host = req.body._content.host;
-        if(req.body._content.image){
-            itemUrl.image = req.body._content.image;
-        }
-        if(req.body._content.title){
-            itemUrl.title = req.body._content.title;
-        }
-        if(req.body._content.description){
-            itemUrl.description = req.body._content.description;
-        }
-        if(req.body._content.author){
-            itemUrl.author = req.body._content.author;
-        }
-        if(req.body._content.type){
-            itemUrl.type = req.body._content.type;
-        }
-        if(req.body._content.site_name){
-            itemUrl.site_name = req.body._content.site_name;
-        }
+
+        itemUrl.image = req.body._content.image;
+        itemUrl.title = req.body._content.title;
+        itemUrl.description = req.body._content.description;
+        itemUrl.author = req.body._content.author;
+        itemUrl.type = req.body._content.type;
+        itemUrl.site_name = req.body._content.site_name;
+
         itemUrl.save(function(err){
             if(err)console.log(err);
             callback(err, itemUrl)
@@ -105,7 +93,7 @@ module.exports = function post (req, res) {
         });
     }
 
-    function createImage(req, callback){
+    function createItemImage(req, callback){
         if(!req.body._content || !req.body._content.url){
             callback("itemImage : some required parameters was not provided", null);
             return;
@@ -116,5 +104,27 @@ module.exports = function post (req, res) {
             if(err)console.log(err);
             callback(err, itemImage)
         });
+    }
+
+    function createItemTweet(req, callback){
+        if(!req.body._content || !req.body._content.url || !req.body._content.html){
+            callback("itemUrl : some required parameters was not provided", null);
+            return;
+        }
+        var itemTweet = new ItemTweet();
+        itemTweet.url = req.body._content.url;
+        itemTweet.html = req.body._content.html;
+        itemTweet.author_name = req.body._content.author_name;
+        itemTweet.author_url = req.body._content.author_url;
+        itemTweet.width = req.body._content.width;
+        itemTweet.height = req.body._content.height;
+        itemTweet.type = req.body._content.type;
+        itemTweet.provider_name = req.body._content.provider_name;
+        itemTweet.version = req.body._content.version;
+        itemTweet.save(function(err){
+            if(err)console.log(err);
+            callback(err, itemTweet)
+        });
+
     }
 }

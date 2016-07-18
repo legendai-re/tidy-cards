@@ -52,8 +52,11 @@
                 <article class="item" *ngFor="let item of collection._items">
                     <div class="item-container">
                         <div class="item-embeded-content" *ngIf="item.type.id == 'URL'">
-                            <img *ngIf="item._content.imageUrl" [src]="item._content.imageUrl" />
+                            <img *ngIf="item._content.image" [src]="item._content.image" />
                             <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
+                        </div>
+                        <div class="item-embeded-content" *ngIf="item.type.id == 'TWEET'">
+                            <div [innerHtml]="item._content.html"></div>
                         </div>
                         <figure class="figure item-embeded-content center-block" *ngIf="item.type.id == 'IMAGE'">
                             <img data-src="" class="figure-img img-fluid img-rounded" alt="A generic square placeholder image with rounded corners in a figure." [src]="item._content.url">

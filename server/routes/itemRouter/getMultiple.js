@@ -6,6 +6,7 @@ module.exports = function getMultiple (req, res) {
     var ItemUrl         = mongoose.model('ItemUrl');
     var ItemYoutube     = mongoose.model('ItemYoutube');
     var ItemImage       = mongoose.model('ItemImage');
+    var ItemTweet       = mongoose.model('ItemTweet');
 
     var rq = req.query;
 
@@ -93,6 +94,15 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.TWEET.id:
+                ItemTweet.findById(items[i]._content, function(err, itemTweet){
+                    items[i]._content = itemTweet;
+                    i++;
+                    if(i==items.length){
+                        callback(null, items);
+                    }else{
+                        addItemsContent(i, items, callback);
+                    }
+                });
                 break;
             default:
                 console.log("unknow type");

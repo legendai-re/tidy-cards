@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, OnDestroy, EventEmitter, Input } from '@angular/core';
-import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
+import { SafeResourceUrl, DomSanitizationService, SafeScript } from '@angular/platform-browser';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { Observable }                   from 'rxjs/Observable';
 import { URLSearchParams  }             from '@angular/http';
@@ -24,6 +24,7 @@ export class IvItemCreateComponent implements OnInit {
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
+    public tweetRendered: boolean;
     public addDescription: boolean;
     private typingTimer;
     private doneTypingInterval: number;
@@ -69,6 +70,10 @@ export class IvItemCreateComponent implements OnInit {
            if(result){
                this.item.type = result.type;
                this.item._content = result._content;
+               this.tweetRendered = false;
+               this.renderTweet().subscribe((success) => {
+                    this.tweetRendered = true;
+               })
                this.validUrl = true;
            }else{
                console.log('invalid url');
@@ -76,6 +81,18 @@ export class IvItemCreateComponent implements OnInit {
            }
            this.loadingContent = false;
        })
+    }
+
+    private renderTweet(): Observable<Boolean>{
+         return Observable.create(observer => {
+            setTimeout(()=>{
+                window.document.getElementById('render_tweet').click();
+                setTimeout(()=>{
+                    observer.next(true);
+                    observer.complete();
+                },500);
+            },200)
+        })
     }
 
     public resetItemContent(){

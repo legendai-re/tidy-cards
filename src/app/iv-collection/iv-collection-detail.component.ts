@@ -65,7 +65,14 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
             this.collection._items = _items;
             this.createTrustedRessources();
             this.itemLoaded = true;
+            this.renderTweets();
         });
+    }
+
+    private renderTweets(){
+        setTimeout(()=>{
+           window.document.getElementById('render_tweet').click();
+       },200)
     }
 
     private createTrustedRessources(){
@@ -80,6 +87,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         if(event.value){
             this.collection._items.unshift(event.value);
             this.collection.itemsCount++;
+            this.renderTweets();
         }
     }
 

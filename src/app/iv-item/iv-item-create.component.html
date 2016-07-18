@@ -11,6 +11,9 @@
             <div *ngIf="item.type == itemTypes.IMAGE">
                 <img [src]="item._content.url" />
             </div>
+            <div *ngIf="item.type == itemTypes.TWEET" [class.collapse]="!tweetRendered">
+                <div [innerHtml]="item._content.html" ></div>
+            </div>
             <div class="embed-responsive embed-responsive-16by9" *ngIf="item.type == itemTypes.YOUTUBE">
                 <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
             </div>

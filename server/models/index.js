@@ -18,3 +18,6 @@ exports.itemYoutubeModel = Item.itemYoutubeModel;
 
 ItemImage = require('./item/itemImage');
 exports.itemImageModel = Item.itemImageModel;
+
+ItemTweet = require('./item/itemTweet');
+exports.itemTweetModel = Item.itemTweetModel;

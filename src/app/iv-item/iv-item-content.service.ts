@@ -6,6 +6,7 @@ import { IvItem }                 from './iv-item.class';
 import { IvItemUrl }              from './iv-item-url.class';
 import { IvItemYoutube }          from './iv-item-youtube.class';
 import { IvItemImage }            from './iv-item-image.class';
+import { IvItemTweet }            from './iv-item-tweet.class';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
 
 @Injectable()
@@ -25,6 +26,11 @@ export class IvItemContentService {
                     resolve(result);
                 }else if(this.getIsTweet(entryUrl)){
                     this.getEmbedTweet(entryUrl).subscribe((data)=>{
+                        result = {
+                            type: IvItem.ITEM_TYPES.TWEET,
+                            _content: IvItemTweet.createFormJson(data)
+                        };
+                        resolve(result);
                         //window.twttr.widgets.load();
                     });
                 }else if(this.getYoutubeVideoId(entryUrl)){
