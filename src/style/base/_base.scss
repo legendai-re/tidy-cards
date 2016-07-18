@@ -10,6 +10,10 @@ body {
     -moz-font-feature-settings: "liga" on;
 }
 
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    position: relative;
+}
+
 a,
 area,
 button,
