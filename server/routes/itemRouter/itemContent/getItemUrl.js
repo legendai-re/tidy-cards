@@ -25,8 +25,12 @@ module.exports = function getItemUrl (req, res) {
                     if(img == '' || img == null || img == undefined){
                         img = $('img:first').attr("src");
                         if(img != null && img != '' && img != undefined){
-                            if(img[0] == '/')
-                                img = req.query.host + img;
+                            if(!(img.substring(0, 7) == 'http://' || img.substring(0, 8) == 'https://')){
+                                if(img[0] == '/')
+                                    img = req.query.host + img;
+                                else
+                                    img = req.query.host + '/' + img;
+                            }
                         }
                     }
                     if(img != null && img != '' && img != undefined){
