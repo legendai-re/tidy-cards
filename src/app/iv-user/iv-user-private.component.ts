@@ -35,7 +35,8 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public updateName() {
-        this.userService.putUser(this.tmpUser).subscribe((user) => {
+        var user = IvUser.createFormJson({_id: this.tmpUser._id, name: this.tmpUser.name});
+        this.userService.putUser(user).subscribe((user) => {
             this.authService.currentUser.name = this.tmpUser.name;
             console.log('name updated');
         })
@@ -47,7 +48,8 @@ export class IvUserPrivateComponent implements OnInit {
 
     public updateAvatar() {
         if(this.tmpUser._avatar){
-            this.userService.putUser(this.tmpUser).subscribe((user) => {
+            var user = IvUser.createFormJson({_id: this.tmpUser._id, _avatar: this.tmpUser._avatar});
+            this.userService.putUser(user).subscribe((user) => {
                 this.authService.currentUser._avatar = this.tmpUser._avatar;
                 this.tmpUser._avatar = null;
                 console.log('avatar updated');

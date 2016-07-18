@@ -30,7 +30,7 @@
         </div>
 
         <div>
-            <div *ngIf="!tmpUser._avatar">
+            <div *ngIf="!tmpUser._avatar && authService.currentUser._avatar">
                 <img [src]="authService.currentUser._avatar.getPath('original')" />
             </div>
             <div *ngIf="tmpUser._avatar">

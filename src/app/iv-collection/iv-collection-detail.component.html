@@ -6,7 +6,7 @@
                 <div class="collection-page-details">
                     <a href="#" title="{{collection._author?.name}}">
                         <div class="collection-page-avatar avatar avatar--60">
-                            <img [src]="collection._author._avatar.getPath('original')" alt="{{collection._author?.name}} avatar">
+                            <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('original')" alt="{{collection._author?.name}} avatar">
                         </div>
                     </a>
                     <div class="collection-page-details-infos">
@@ -39,8 +39,6 @@
             </div>
 
             <iv-item-create [collection]=collection (newItem)="onNewItem($event);"></iv-item-create>
-
-            <img [src]="collection._thumbnail?.getPath('original')" />
 
             <div class="items-list" *ngIf="!itemLoaded">
                 <article>

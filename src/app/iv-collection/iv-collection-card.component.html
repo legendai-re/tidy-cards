@@ -15,7 +15,7 @@
         <div class="card-details">
             <a href="#" title="{{collection._author?.name}}">
                 <div class="card-avatar avatar avatar--60">
-                    <img [src]="collection._author._avatar.getPath('original')" alt="{{collection._author?.name}} avatar">
+                    <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('original')" alt="{{collection._author?.name}} avatar">
                 </div>
             </a>
             <div class="card-details-infos">
