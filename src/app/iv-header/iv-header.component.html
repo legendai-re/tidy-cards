@@ -1,5 +1,5 @@
-<header class="header clearfix" [style.background-color]="'#'+color" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
-    <div class="container" >
+<header class="header" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
+    <div class="container radial-cover">
         <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
         </button>

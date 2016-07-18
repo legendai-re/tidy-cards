@@ -28,7 +28,7 @@
         background: $hover-light-color;
     }
 
-    .card-visibily, .card-action {
+    .card-visibily, .form-action {
         color: $white-op-3-4;
     }
 
@@ -38,7 +38,7 @@
         @include color-placeholder($placeholder-whiter);
     }
 
-    .file-icon-only:hover {
+    .btn-icon:hover {
         background: $hover-light-color;
     }
 
