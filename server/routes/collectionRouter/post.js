@@ -15,6 +15,9 @@ module.exports = function post (req, res) {
         if(req.body._thumbnail && req.body._thumbnail._id){
             collection._thumbnail = req.body._thumbnail._id;
         }
+        if(req.body.bio){
+            collection.bio = req.body.bio;
+        }
         req.user.addCollection(collection, function(err, collection){
             if (err) {console.log(err); res.sendStatus(422); return;}
             res.json({'data': collection});

@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <iv-item-create [collection]=collection></iv-item-create>
+            <iv-item-create [collection]=collection (newItem)="onNewItem($event);"></iv-item-create>
 
             <img [src]="collection._thumbnail?.getPath('original')" />
 

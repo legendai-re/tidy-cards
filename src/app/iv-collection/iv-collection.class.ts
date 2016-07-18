@@ -13,6 +13,7 @@ export class IvCollection {
     public _thumbnail: IvImage;
     public visibility;
     public itemsCount: number;
+    public bio: string;
     public _items: IvItem[];
 
     constructor(
@@ -24,7 +25,8 @@ export class IvCollection {
         _author?: IvUser,
         _thumbnail?: IvImage,
         visibility?: any,
-        itemsCount?: number) {
+        itemsCount?: number,
+        bio?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -34,6 +36,7 @@ export class IvCollection {
         this._thumbnail = _thumbnail;
         this.visibility = typeof visibility === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
         this.itemsCount = itemsCount;
+        this.bio = bio;
     }
 
     public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json');}
@@ -48,7 +51,8 @@ export class IvCollection {
             IvUser.createFormJson(obj._author),
             IvImage.createFormJson(obj._thumbnail),
             obj.visibility,
-            obj.itemsCount
+            obj.itemsCount,
+            obj.bio
             );
     }
 

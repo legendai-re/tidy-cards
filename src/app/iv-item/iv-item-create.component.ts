@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy, EventEmitter, Input } from '@angular/core';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { Observable }                   from 'rxjs/Observable';
@@ -29,6 +29,7 @@ export class IvItemCreateComponent implements OnInit {
     private doneTypingInterval: number;
 
     @Input('collection') collection: IvCollection;
+    @Output() newItem = new EventEmitter();
 
     constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService, private itemContentService: IvItemContentService) {
         this.doneTypingInterval = 1000;
@@ -36,6 +37,10 @@ export class IvItemCreateComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.init();
+    }
+
+    private init(){
         this.item = new IvItem();
         this.item._collection = this.collection._id;
         this.urlEntry = '';
@@ -86,6 +91,10 @@ export class IvItemCreateComponent implements OnInit {
                 this.item.createdAt = itemResponse.createdAt;
                 this.item._content._id = itemResponse._content._id;
                 this.itemCreated = true;
+                this.newItem.emit({
+                    value: this.item
+                });
+                this.init();
             });
         }
     }

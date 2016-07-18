@@ -25,7 +25,6 @@ export class IvCollectionCreateComponent implements OnInit {
         this.visibilityList = IvCollection.VISIBILITY;
     }
 
-
     ngOnInit() {
         this.collection = new IvCollection();
         this.collection.visibility = IvCollection.VISIBILITY.PRIVATE;

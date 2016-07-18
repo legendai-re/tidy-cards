@@ -9,7 +9,7 @@
         <a [routerLink]="['/c', collection._id]" >
             <div class="card-content" [class.has-thumbnail]="collection._thumbnail">
                 <h3 class="card-title">{{collection.title}}</h3>
-                <p class="card-caption">Enter a caption here to describe the collection…</p>
+                <p class="card-caption">{{collection.bio}}</p>
             </div>
         </a>
         <div class="card-details">

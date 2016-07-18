@@ -15,6 +15,16 @@ module.exports = function getCollectionSchema(Schema) {
 	            message: '{VALUE} is not a title'
 	        }
 	    },
+        bio: {
+            type: String,
+            required: false,
+            validate: {
+                validator: function(v) {
+                    return (v.length < 1000);
+                },
+                message: '{VALUE} is not a bio'
+            }
+        },
 	    color: {
 	        type: String ,
 	        required: true,

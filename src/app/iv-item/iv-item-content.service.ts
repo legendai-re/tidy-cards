@@ -25,7 +25,7 @@ export class IvItemContentService {
                     resolve(result);
                 }else if(this.getIsTweet(entryUrl)){
                     this.getEmbedTweet(entryUrl).subscribe((data)=>{
-
+                        //window.twttr.widgets.load();
                     });
                 }else if(this.getYoutubeVideoId(entryUrl)){
                     result = {
