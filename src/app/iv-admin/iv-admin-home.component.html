@@ -1,6 +1,18 @@
 <section class="section">
     <div class="container">
         <h2>Admin</h2>
-        <p>Admin page...</p>
+        <div style="margin-top: 100px;">
+            <a (click)="deleteAllButUsers()">Delete all but users</a>
+            <div>
+                db.collections.drop();<br/>
+                db.images.drop();<br/>
+                db.items.drop();<br/>
+                db.itemurls.drop();<br/>
+                db.itemimages.drop();<br/>
+                db.itemyoutubes.drop();<br/>
+                db.itemtweets.drop();<br/>
+            </div>
+            <a (click)="generateCollectionAndItems()">Generate data</a>
+        </div>
     </div>
 </section>

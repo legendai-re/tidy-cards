@@ -7,6 +7,7 @@ module.exports = function(app) {
     var collectionRouter    = require('./collectionRouter');
     var imageRouter         = require('./imageRouter');
     var itemRouter          = require('./itemRouter');
+    var devRouter           = require('./devRouter');
 
     app.use('/fonts', express.static(path.resolve(__dirname, '../../dist/fonts')));
     app.use('/css', express.static(path.resolve(__dirname, '../../dist/css')));
@@ -19,6 +20,8 @@ module.exports = function(app) {
     app.use('/api/collections', collectionRouter);
     app.use('/api/images', imageRouter);
     app.use('/api/items', itemRouter);
+
+    app.use('/api/dev', devRouter);
 
     app.get('/*', function(req, res) {
         res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
