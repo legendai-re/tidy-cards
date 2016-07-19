@@ -49,25 +49,6 @@
             <div class="items-list" *ngIf="itemLoaded">
                 <article class="item" *ngFor="let item of collection._items">
                     <iv-item [item]=item></iv-item>
-                    <!--<div class="item-container">
-                        <div class="item-embeded-content" *ngIf="item.type.id == 'URL'">
-                            <img *ngIf="item._content.image" [src]="item._content.image" />
-                            <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
-                        </div>
-                        <div class="item-embeded-content" *ngIf="item.type.id == 'TWEET'">
-                            <div [innerHtml]="item._content.html"></div>
-                        </div>
-                        <figure class="figure item-embeded-content center-block" *ngIf="item.type.id == 'IMAGE'">
-                            <img data-src="" class="figure-img img-fluid img-rounded" alt="A generic square placeholder image with rounded corners in a figure." [src]="item._content.url">
-                            <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        </figure>
-                        <div class="embed-responsive embed-responsive-16by9 item-embeded-content" *ngIf="item.type.id == 'YOUTUBE'">
-                            <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
-                        </div>
-                        <div class="item-content" *ngIf="item.description">
-                            <p>{{item.description}}</p>
-                        </div>
-                    </div>-->
                 </article>
             </div>
         </div>

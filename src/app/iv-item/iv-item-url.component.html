@@ -1,2 +1,20 @@
-<img *ngIf="itemUrl.image" [src]="itemUrl.image" />
-<a [href]="itemUrl.url" target="_blank">{{itemUrl.url}}</a>
+<div class="item-embeded-container"[class.item-article]="itemUrl.type == 'article'" [class.item-no-image]="!itemUrl.image">
+    <a [href]="itemUrl.url" target="_blank">
+        <div class="item-embeded-image" *ngIf="itemUrl.image && itemUrl.type">
+            <div class="item-img-container">
+                <img [src]="itemUrl.image" />
+            </div>
+        </div>
+        <div class="item-embeded-content" [class.item-no-img]="!itemUrl.image">
+            <div class="item-embeded-no-type" *ngIf="itemUrl.image && !itemUrl.type">
+                <img [src]="itemUrl.image" />
+            </div>
+            <h3 class="item-title" *ngIf="itemUrl.title">{{itemUrl.title}}</h3>
+            <p class="item-desc" *ngIf="itemUrl.description">{{itemUrl.description}}</p>
+            <p class="item-metas">
+                <span class="item-host">{{itemUrl.host}} && {{itemUrl.type}}</span>
+                <span class="item-author" *ngIf="itemUrl.author">| by {{itemUrl.author}}</span>
+            </p>
+        </div>
+    </a>
+</div>

@@ -5,7 +5,7 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 @Component({
     selector: 'iv-item-tweet',
     templateUrl: 'iv-item-tweet.component.html',
-    styleUrls: ['iv-item-tweet.component.scss'],
+    styleUrls: ['iv-item.component.scss', 'iv-item-tweet.component.scss'],
     directives: [ROUTER_DIRECTIVES]
 })
 
