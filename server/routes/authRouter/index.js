@@ -15,6 +15,12 @@ router.route('/twitter')
 router.route('/twitter/callback')
     .get(passport.authenticate('twitter', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
 
+router.route('/google')
+    .get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+router.route('/google/callback')
+    .get(passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+
 router.route('/login')
 	.post(passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);

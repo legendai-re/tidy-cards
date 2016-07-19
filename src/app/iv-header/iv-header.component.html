@@ -1,13 +1,15 @@
-<header class="header" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
+<header class="header" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
     <div class="container">
         <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
         </button>
-        <div class="logo collapse navbar-toggleable-md">
-            <h1>
-                <a [routerLink]="['/']">Invow</a>
-            </h1>
-        </div>
+        <a [routerLink]="['/']">
+            <div class="logo collapse navbar-toggleable-md">
+                <h1>
+                    Invow
+                </h1>
+            </div>
+        </a>
 
         <form class="form-inline header-search-form">
             <div class="input-group">
@@ -58,12 +60,7 @@
             </li>
             <li class="nav-item" *ngIf="!authService.isLoggedIn" >
                 <a class="nav-link" [class.active]="router.url == '/signin'" [routerLink]="['/signin']">
-                    Signin
-                </a>
-            </li>
-            <li class="nav-item" *ngIf="!authService.isLoggedIn">
-                <a class="nav-link" [class.active]="router.url == '/signup'" [routerLink]="['/signup']">
-                    Signup
+                    Signin/Signup
                 </a>
             </li>
         </nav>

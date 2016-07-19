@@ -1,21 +1,25 @@
-import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
+import { Component, OnInit }   from '@angular/core';
+import { ROUTER_DIRECTIVES, Router }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 
 @Component({
-    templateUrl: './iv-signin.component.html'
+    selector: 'iv-signin',
+    templateUrl: './iv-signin.component.html',
+    directives: [ROUTER_DIRECTIVES]
 })
 
-export class IvSigninComponent {
-    message: string;
-    username: string;
-    password: string;
+export class IvSigninComponent implements OnInit{
+
+    public username: string;
+    public password: string;
 
     constructor(public authService: IvAuthService, public router: Router) {
     }
 
+    ngOnInit(){
+    }
+
     onLoginSubmit() {
-        this.message = 'Trying to log in ...';
         this.authService.login(this.username, this.password).then(success => {
             if (success) {
                 this.router.navigate(['/']);
@@ -23,7 +27,4 @@ export class IvSigninComponent {
         });
     }
 
-    logout() {
-        this.authService.logout();
-    }
 }

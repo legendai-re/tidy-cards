@@ -3,14 +3,12 @@ import { GrantedAnonymous } from './iv-auth.guard';
 import { GrantedAdmin }     from './iv-auth.guard';
 import { HomeGuard }        from './iv-auth.guard';
 import { IvAuthService }      from './iv-auth.service';
-import { IvSigninComponent }  from './iv-signin.component';
-import { IvSignupComponent }  from './iv-signup.component';
+import { IvAuthComponent }  from './iv-auth.component';
 import { IvLogoutComponent }  from './iv-logout.component';
 
 export const IvAuthRoutes = [
-{ path: 'signin', component: IvSigninComponent, canActivate: [GrantedAnonymous] },
-{ path: 'logout', component: IvLogoutComponent, canActivate: [GrantedUser] },
-{ path: 'signup', component: IvSignupComponent, canActivate: [GrantedAnonymous] }
+{ path: 'signin', component: IvAuthComponent, canActivate: [GrantedAnonymous] },
+{ path: 'logout', component: IvLogoutComponent, canActivate: [GrantedUser] }
 ];
 
 export const IV_AUTH_PROVIDERS = [GrantedUser, GrantedAdmin, GrantedAnonymous, IvAuthService, HomeGuard];

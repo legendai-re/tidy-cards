@@ -4,19 +4,10 @@
             Loading...
         </div>
         <div class="item-new-embeded-content" *ngIf="item._content && validUrl">
-            <div *ngIf="item.type == itemTypes.URL">
-                <img *ngIf="item._content.image" [src]="item._content.image" />
-                <a [href]="item._content.url" target="_blank">{{item._content.url}}</a>
-            </div>
-            <div *ngIf="item.type == itemTypes.IMAGE">
-                <img [src]="item._content.url" />
-            </div>
-            <div *ngIf="item.type == itemTypes.TWEET" [class.collapse]="!tweetRendered">
-                <div [innerHtml]="item._content.html" ></div>
-            </div>
-            <div class="embed-responsive embed-responsive-16by9" *ngIf="item.type == itemTypes.YOUTUBE">
-                <iframe class="embed-responsive-item" [src]="item._content.trustedEmbedUrl" allowfullscreen></iframe>
-            </div>
+            <iv-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]=item._content ></iv-item-url>
+            <iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]=item._content ></iv-item-image>
+            <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]=item._content [class.collapse]="!tweetRendered"></iv-item-tweet>
+            <iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]=item._content ></iv-item-youtube>
         </div>
         <input *ngIf="!validUrl" class="item-new-url" type="text" placeholder="Enter your url..." [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
         <textarea *ngIf="addDescription" class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description"></textarea>

@@ -1,10 +1,12 @@
 import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
+import { ROUTER_DIRECTIVES, Router }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 import { IvUser }        from '../iv-user/iv-user.class';
 
 @Component({
-    templateUrl: './iv-signup.component.html'
+    selector: 'iv-signup',
+    templateUrl: './iv-signup.component.html',
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class IvSignupComponent {
@@ -30,6 +32,7 @@ export class IvSignupComponent {
             );
         this.authService.signup(user).then(success => {
             console.log(success);
+            this.router.navigate(['/']);
         });
     }
 

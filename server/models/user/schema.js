@@ -23,6 +23,13 @@ module.exports = function getUserSchema(Schema) {
                 select: false
             }
         },
+        google: {
+            id: String,
+            token: {
+                type: String,
+                select: false
+            }
+        },
         connectionTypes: {
             type: [String]
         },

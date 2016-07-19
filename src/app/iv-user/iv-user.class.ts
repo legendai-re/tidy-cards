@@ -14,6 +14,7 @@ export class IvUser {
     public _avatar: IvImage;
     public facebook: any;
     public twitter: any;
+    public google: any;
 
     constructor(
         _id?: string,
@@ -27,7 +28,8 @@ export class IvUser {
         bio?: string,
         _avatar?: IvImage,
         facebook?: any,
-        twitter?: any) {
+        twitter?: any,
+        google?: any) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -40,6 +42,7 @@ export class IvUser {
         this._avatar = _avatar;
         this.facebook = facebook;
         this.twitter = twitter;
+        this.google = google;
     }
 
     public static createFormJson(obj) {
@@ -55,7 +58,8 @@ export class IvUser {
             obj.bio,
             IvImage.createFormJson(obj._avatar),
             obj.facebook,
-            obj.twitter
+            obj.twitter,
+            obj.google
             );
     }
 

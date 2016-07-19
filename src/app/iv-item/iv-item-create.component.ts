@@ -9,12 +9,17 @@ import { IvItem }                       from './iv-item.class';
 import { IvItemUrl }                    from './iv-item-url.class';
 import { IvItemYoutube }                from './iv-item-youtube.class';
 import { IvItemService }                from './iv-item.service'
+import { IvItemYoutubeComponent } from './iv-item-youtube.component';
+import { IvItemUrlComponent } from './iv-item-url.component';
+import { IvItemTweetComponent } from './iv-item-tweet.component';
+import { IvItemImageComponent } from './iv-item-image.component';
 import { IvItemContentService }         from './iv-item-content.service';
 
 @Component({
     selector: 'iv-item-create',
     styleUrls: ['iv-item-create.component.scss'],
-    templateUrl: './iv-item-create.component.html'
+    templateUrl: './iv-item-create.component.html',
+    directives: [IvItemTweetComponent, IvItemUrlComponent, IvItemYoutubeComponent, IvItemImageComponent]
 })
 
 export class IvItemCreateComponent implements OnInit {
