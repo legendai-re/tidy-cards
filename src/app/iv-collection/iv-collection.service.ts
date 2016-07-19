@@ -38,6 +38,10 @@ export class IvCollectionService {
         .catch(this.handleError);
     }
 
+    public deleteCollection (_id: string): Observable<any> {
+        return this.http.delete(IvApiUrl.COLLECTIONS + '/' + _id);
+    }
+
     private handleCollections(res: Response) {
         let body = res.json();
         let cs = [];

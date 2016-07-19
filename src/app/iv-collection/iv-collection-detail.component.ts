@@ -37,7 +37,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    initCollection(params){
+    private initCollection(params){
         let id = params['collection_id'];
         let getParams = new URLSearchParams();
         getParams.set('populate', '_author+_thumbnail');
@@ -61,7 +61,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    initItems(){
+    private initItems(){
         let getParams = new URLSearchParams();
         getParams.set('_collection', this.collection._id);
         getParams.set('sort_field', 'createdAt');
@@ -88,11 +88,28 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         }
     }
 
+    public deleteCollection(){
+        this.collectionService.deleteCollection(this.collection._id).subscribe((e) => {
+            this.router.navigate(['/dashboard']);
+        })
+    }
+
     public onNewItem(event){
         if(event.value){
             this.collection._items.unshift(event.value);
             this.collection.itemsCount++;
             this.renderTweets();
+        }
+    }
+
+    public onDeletedItem(event){
+        if(event.value && event.value._id){
+            for(var i=0; i<this.collection._items.length; i++){
+                if(this.collection._items[i]._id == event.value._id){
+                    this.collection._items.splice(i, 1);
+                    this.collection.itemsCount--;
+                }
+            }
         }
     }
 

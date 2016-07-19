@@ -22,6 +22,10 @@ router.route('/:item_id')
     })
     .put(isGranted('ROLE_USER'), function(req, res) {
         //require('./put')(req, res);
+    })
+    .delete(isGranted('ROLE_USER'), function(req, res) {
+        require('./delete')(req, res);
     });
+
 
 module.exports = router;

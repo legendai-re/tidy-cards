@@ -1,14 +1,15 @@
 module.exports = function getMultiple (req, res) {
 
-	var mongoose	= require('mongoose');
 	var visibility  = require('../../models/collection/visibility.json');
-	var Collection 	= mongoose.model('Collection');
-	var User 	 	= mongoose.model('User');
+    var lifeStates  = require('../../models/lifeStates.json');
+    var models      = require('../../models');
+
 
 	var rq = req.query;
 
 	getQueryFiler(rq, req, function(filterObj){
-		var q = Collection.find(filterObj).sort({'createdAt': 1}).limit(20);
+		var q = models.Collection.find(filterObj).sort({'createdAt': 1}).limit(20);
+        q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
 		q.populate('_thumbnail');
 		q.populate({
@@ -59,7 +60,7 @@ module.exports = function getMultiple (req, res) {
 
 	function getStarredByQuery(rq, req, callback){
 		var filterObj = {};
-		User.findById(rq._starredBy).select('+_starredCollections').exec(function (err, user){
+		models.User.findById(rq._starredBy).select('+_starredCollections').exec(function (err, user){
 			if (err) {console.log(err); res.sendStatus(500); return;}
 			if(!req.user || req.user._id != rq._starredBy)
 				filterObj.visibility = visibility.PUBLIC.id

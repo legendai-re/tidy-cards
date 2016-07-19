@@ -1,23 +1,23 @@
 User = require('./user');
-exports.userModel = User.userModel;
+exports.User = User.userModel;
 
 Collection = require('./collection');
-exports.collectionModel = Collection.collectionModel;
+exports.Collection = Collection.collectionModel;
 
 Image = require('./image');
-exports.imageModel = Image.imageModel;
+exports.Image = Image.imageModel;
 
 Item = require('./item');
-exports.itemModel = Item.itemModel;
+exports.Item = Item.itemModel;
 
 ItemUrl = require('./item/itemUrl');
-exports.itemUrlModel = Item.itemUrlModel;
+exports.ItemUrl = ItemUrl.itemUrlModel;
 
 ItemYoutube = require('./item/itemYoutube');
-exports.itemYoutubeModel = Item.itemYoutubeModel;
+exports.ItemYoutube = ItemYoutube.itemYoutubeModel;
 
 ItemImage = require('./item/itemImage');
-exports.itemImageModel = Item.itemImageModel;
+exports.ItemImage = ItemImage.itemImageModel;
 
 ItemTweet = require('./item/itemTweet');
-exports.itemTweetModel = Item.itemTweetModel;
+exports.ItemTweet = ItemTweet.itemTweetModel;

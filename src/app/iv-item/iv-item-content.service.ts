@@ -31,7 +31,6 @@ export class IvItemContentService {
                             _content: IvItemTweet.createFormJson(data)
                         };
                         resolve(result);
-                        //window.twttr.widgets.load();
                     });
                 }else if(this.getYoutubeVideoId(entryUrl)){
                     result = {
@@ -146,6 +145,9 @@ export class IvItemContentService {
     }
 
     private getEmbedTweet (url: string){
+        if(url.charAt(url.length-1) == '/'){
+            url = url.substring(0, url.length - 1);
+        }
         let params = new URLSearchParams();
         params.set('url', encodeURI(url));
         params.set('format', 'json');

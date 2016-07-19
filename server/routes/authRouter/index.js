@@ -1,6 +1,9 @@
 var express    		= require('express');
 var passport		= require('passport');
+var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
+var store           = new ExpressBrute.MemoryStore();
+var bruteforce      = new ExpressBrute(store);
 var router          = express.Router();
 
 router.route('/facebook')
@@ -22,7 +25,7 @@ router.route('/google/callback')
     .get(passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
 
 router.route('/login')
-	.post(passport.authenticate('local'), function(req, res){
+	.post(bruteforce.prevent, passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);
     });
 

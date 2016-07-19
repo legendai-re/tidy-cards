@@ -1,18 +1,17 @@
 module.exports = function postSignup(req, res) {
 
-    var mongoose    = require('mongoose');
     var bCrypt      = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
-    var User        = mongoose.model('User');
+    var models      = require('../../models');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
         res.sendStatus(400);
         res.end();
     }else{
-        User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}] }, function(err, user){
+        models.User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}] }, function(err, user){
             if (err) {res.sendStatus(500); return;}
             if(!user){
-                var user =  new User();
+                var user =  new models.User();
                 user.email = req.body.email;
                 user.unsafeUsername = req.body.username;
                 user.name = req.body.username;

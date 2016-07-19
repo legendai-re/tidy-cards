@@ -5,6 +5,8 @@ var mongoose    	= require('mongoose');
 var aws 			= require('aws-sdk')
 var multerS3 		= require('multer-s3')
 var imagesTypes     = require('../../models/image/imageTypes.json');
+var models          = require('../../models');
+
 aws.config.region = 'eu-west-1';
 
 var router = express.Router();
@@ -19,8 +21,7 @@ var upload = multer({
     },
     key: function (req, file, callback) {
 
-      	var Image = mongoose.model('Image');
-	    var image = new Image();
+	    var image = new models.Image();
         var type = getTypeFromReq(req);
         image.type = type.name;
 	    image.mime = getMimeFromFile(file);

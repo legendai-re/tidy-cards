@@ -1,10 +1,16 @@
 module.exports = function getCollectionSchema(Schema) {
 
 	var visibility = require('./visibility.json');
+    var lifeStates = require('../lifeStates.json');
 
 	return new Schema({
 		createdAt: { type: Date },
 		updatedAt: { type: Date },
+        lifeState: {
+            type: String,
+            required: true,
+            default: lifeStates.ACTIVE.id
+        },
 	    title: {
 	        type: String,
 	        required: true,

@@ -1,9 +1,8 @@
 module.exports = function put (req, res) {
 
-	var mongoose	= require('mongoose');
-	var Collection	= mongoose.model('Collection');
+    var models      = require('../../models');
 
-    q = Collection.findById(req.params.collection_id).populate('_author');
+    q = models.Collection.findById(req.params.collection_id).populate('_author');
 
 	q.exec(function(err, collection) {
         if (err) {console.log(err); res.sendStatus(500); return;}

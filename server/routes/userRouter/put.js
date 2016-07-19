@@ -1,10 +1,8 @@
 module.exports = function put (req, res) {
 
-	var mongoose	= require('mongoose');
-	var User 		= mongoose.model('User');
-    var Collection  = mongoose.model('Collection');
+    var models      = require('../../models');
 
-	User.findById(req.params.user_id, function(err, user) {
+	models.User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
         if(!user) {res.status(404).send({ error: 'cannot find user with id: '+req.params.user_id}); return;}
         if(user._id.equals(req.user._id) || req.user.isGranted('ROLE_ADMIN')){
@@ -21,9 +19,9 @@ module.exports = function put (req, res) {
 
 
     function addStarredCollection(collection_id, user){
-        Collection.findById(collection_id, function(err, collection){
+        models.Collection.findById(collection_id, function(err, collection){
             if (err) {console.log(err); res.sendStatus(500); return;}
-            user.addStarredCollection(User, collection, function(err){
+            user.addStarredCollection(models.User, collection, function(err){
                 if (err) {console.log(err); res.sendStatus(500); return;}
                 res.sendStatus(200);
             })

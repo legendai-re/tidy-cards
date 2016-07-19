@@ -1,14 +1,13 @@
 module.exports = function post (req, res) {
 
-	var mongoose		= require('mongoose');
     var visibility      = require('../../models/collection/visibility.json');
-	var Collection 		= mongoose.model('Collection');
+    var models          = require('../../models');
 
 	if(!req.body.title || !req.body.color || !req.body.visibility || !visibilityOk(req.body.visibility)){
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        var collection =  new Collection();
+        var collection =  new models.Collection();
         collection.title = req.body.title;
         collection.color = req.body.color;
         collection.visibility = req.body.visibility.id;

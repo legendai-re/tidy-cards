@@ -1,0 +1,11 @@
+{
+    "ACTIVE":{
+        "id": "ACTIVE"
+    },
+    "ARCHIVED":{
+        "id": "ARCHIVED"
+    },
+    "DESTROYED":{
+        "id": "DESTROYED"
+    }
+}

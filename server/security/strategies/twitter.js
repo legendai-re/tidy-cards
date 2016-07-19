@@ -1,9 +1,8 @@
 module.exports = function getTwitterStrategy(TwitterStrategy){
 
-    var mongoose        = require('mongoose');
     var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../connectionTypes.json');
-    var User = mongoose.model('User');
+    var models          = require('../../models');
 
     return new TwitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -12,7 +11,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
         passReqToCallback : true
     },
     function(req, accessToken, tokenSecret, profile, done) {
-        User.findOne({'twitter.id': profile.id}).exec(function(err, user) {
+        models.User.findOne({'twitter.id': profile.id}).exec(function(err, user) {
             if (err) { return done(err); }
             if(user && req.user){
                 done('Twitter account already used');
@@ -26,7 +25,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
         });
 
         var createUser = function(){
-            var newUser = new User();
+            var newUser = new models.User();
             newUser.twitter.id = profile.id;
             newUser.twitter.token = accessToken;
             newUser.unsafeUsername = ( profile.username || 'anonyme');

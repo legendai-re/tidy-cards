@@ -1,13 +1,11 @@
 module.exports = function(app) {
 
     var passport        = require('passport');
-    var mongoose        = require('mongoose');
     var FacebookStrategy = require('passport-facebook').Strategy;
     var TwitterStrategy = require('passport-twitter').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var LocalStrategy   = require('passport-local').Strategy;
-
-    var User = mongoose.model('User');
+    var models          = require('../models');
 
     app.use(passport.initialize());
 
@@ -26,7 +24,7 @@ module.exports = function(app) {
     });
 
     passport.deserializeUser(function(id, done) {
-        User.findById(id).populate('_avatar').exec(function(err, user) {
+        models.User.findById(id).populate('_avatar').exec(function(err, user) {
              done(err, user);
         });
     });

@@ -1,12 +1,8 @@
 module.exports = function getMultiple (req, res) {
 
-    var mongoose        = require('mongoose');
     var itemTypes       = require('../../models/item/itemTypes.json');
-    var Item            = mongoose.model('Item');
-    var ItemUrl         = mongoose.model('ItemUrl');
-    var ItemYoutube     = mongoose.model('ItemYoutube');
-    var ItemImage       = mongoose.model('ItemImage');
-    var ItemTweet       = mongoose.model('ItemTweet');
+    var lifeStates      = require('../../models/lifeStates.json');
+    var models          = require('../../models');
 
     var rq = req.query;
 
@@ -16,7 +12,8 @@ module.exports = function getMultiple (req, res) {
     }
 
     getQueryFiler(rq, req, function(filterObj){
-        var q = Item.find(filterObj).sort({'createdAt': 1}).limit(20);
+        var q = models.Item.find(filterObj).sort({'createdAt': 1}).limit(20);
+        q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
         if(rq.populate){
             q.populate(rq.populate);
@@ -37,7 +34,7 @@ module.exports = function getMultiple (req, res) {
         q.exec(function(err, items){
             if (err) {console.log(err); res.sendStatus(500); return;}
             if(items.length < 1) { res.json({data: []}); return};
-            addItemsContent(0, items, function(err, items){
+            addItemsContent(0, items,  function(err, items){
                 res.json({data: items});
             })
         });
@@ -61,7 +58,7 @@ module.exports = function getMultiple (req, res) {
     function addItemsContent(i, items, callback){
         switch(items[i].type){
             case itemTypes.URL.id:
-                ItemUrl.findById(items[i]._content, function(err, itemUrl){
+                models.ItemUrl.findById(items[i]._content, function(err, itemUrl){
                     items[i]._content = itemUrl;
                     i++;
                     if(i==items.length){
@@ -72,7 +69,7 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.IMAGE.id:
-                ItemImage.findById(items[i]._content, function(err, itemImage){
+                models.ItemImage.findById(items[i]._content, function(err, itemImage){
                     items[i]._content = itemImage;
                     i++;
                     if(i==items.length){
@@ -83,7 +80,7 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.YOUTUBE.id:
-                ItemYoutube.findById(items[i]._content, function(err, itemYoutube){
+                models.ItemYoutube.findById(items[i]._content, function(err, itemYoutube){
                     items[i]._content = itemYoutube;
                     i++;
                     if(i==items.length){
@@ -94,7 +91,7 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.TWEET.id:
-                ItemTweet.findById(items[i]._content, function(err, itemTweet){
+                models.ItemTweet.findById(items[i]._content, function(err, itemTweet){
                     items[i]._content = itemTweet;
                     i++;
                     if(i==items.length){

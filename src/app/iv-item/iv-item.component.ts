@@ -1,5 +1,6 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { IvItem } from './iv-item.class';
+import { IvItemService } from './iv-item.service';
 import { IvItemYoutubeComponent } from './iv-item-youtube.component';
 import { IvItemUrlComponent } from './iv-item-url.component';
 import { IvItemTweetComponent } from './iv-item-tweet.component';
@@ -17,10 +18,21 @@ export class IvItemComponent {
 
     public itemTypes: any;
 
-    constructor() {
+    @Input('item') item: IvItem;
+    @Output() deletedItem = new EventEmitter();
+
+    constructor(private itemService: IvItemService) {
         this.itemTypes = IvItem.ITEM_TYPES;
     }
 
-    @Input('item') item: IvItem;
+    public deleteItem(){
+        this.itemService.deleteItem(this.item._id).subscribe((e) => {
+            this.deletedItem.emit({
+                value: this.item
+            });
+        });
+    }
+
+
 
 }

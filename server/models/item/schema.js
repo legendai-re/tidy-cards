@@ -1,10 +1,16 @@
 module.exports = function getItemSchema(Schema) {
 
     var itemTypes = require('./itemTypes.json');
+    var lifeStates = require('../lifeStates.json');
 
     return new Schema({
         createdAt: { type: Date },
         updatedAt: { type: Date },
+        lifeState: {
+            type: String,
+            required: true,
+            default: lifeStates.ACTIVE.id
+        },
         description: {
             type: String,
             required: false,

@@ -2,8 +2,7 @@ module.exports = function getItemUrl (req, res) {
 
     var http            = require('http');
     var jsdom           = require('jsdom');
-    var mongoose        = require('mongoose');
-    var ItemUrl         = mongoose.model('ItemUrl');
+    var models          = require('../../../models');
 
     if(!req.query.host){
         res.status(400).send({ error: 'some required parameters was not provided'});
@@ -19,14 +18,16 @@ module.exports = function getItemUrl (req, res) {
                     res.json({error: true, data: null});
                 }else{
                     var $ = window.$;
-                    var itemUrl = new ItemUrl();
+                    var itemUrl = new models.ItemUrl();
 
                     img = $('meta[property="og:image"]').attr("content");
                     if(img == '' || img == null || img == undefined){
                         img = $('img:first').attr("src");
                         if(img != null && img != '' && img != undefined){
                             if(!(img.substring(0, 7) == 'http://' || img.substring(0, 8) == 'https://')){
-                                if(img[0] == '/')
+                                if(img[0] == '/' && img[1] == '/')
+                                    img = 'http:' + img;
+                                else if(img[0] == '/')
                                     img = req.query.host + img;
                                 else
                                     img = req.query.host + '/' + img;

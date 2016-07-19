@@ -1,8 +1,7 @@
 module.exports = function getGoogleStrategy(GoogleStrategy){
 
-    var mongoose        = require('mongoose');
     var connectionTypes = require('../connectionTypes.json');
-    var User = mongoose.model('User');
+    var models          = require('../../models');
 
    return new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
@@ -11,7 +10,7 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
         passReqToCallback : true
     },
     function(req, accessToken, refreshToken, profile, done) {
-        User.findOne({'google.id': profile.id}).exec(function(err, user) {
+        models.User.findOne({'google.id': profile.id}).exec(function(err, user) {
             if (err) { return done(err); }
             if(user && req.user){
                 done('google account already used');
@@ -25,7 +24,7 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
         });
 
         var createUser = function(){
-            var newUser = new User();
+            var newUser = new models.User();
             newUser.google.id = profile.id;
             newUser.google.token = accessToken;
             newUser.unsafeUsername = (profile.displayName || 'anonyme');

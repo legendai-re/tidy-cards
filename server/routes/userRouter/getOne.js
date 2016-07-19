@@ -1,11 +1,10 @@
 module.exports = function getOne (req, res) {
 
-	var mongoose	= require('mongoose');
-	var User 		= mongoose.model('User');
+    var models      = require('../../models');
 
     var rq = req.query;
 
-    var q = User.findById(req.params.user_id);
+    var q = models.User.findById(req.params.user_id);
 
     if(rq.populate){
         q.populate(rq.populate);

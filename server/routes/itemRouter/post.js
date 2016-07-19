@@ -1,24 +1,18 @@
 module.exports = function post (req, res) {
 
-    var mongoose        = require('mongoose');
     var itemTypes       = require('../../models/item/itemTypes.json');
-    var Collection      = mongoose.model('Collection');
-    var Item            = mongoose.model('Item');
-    var ItemUrl         = mongoose.model('ItemUrl');
-    var ItemYoutube     = mongoose.model('ItemYoutube');
-    var ItemImage       = mongoose.model('ItemImage');
-    var ItemTweet       = mongoose.model('ItemTweet');
+    var models          = require('../../models');
 
     if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        var item =  new Item();
+        var item =  new models.Item();
         if(req.body.description){
             item.description = req.body.description;
         }
         item.type = req.body.type.id;
-        Collection.findById(req.body._collection, function(err, collection){
+        models.Collection.findById(req.body._collection, function(err, collection){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
             if(collection._author!=req.user._id) {res.status(401).send({ error: "only the author of the collection can add item" }); return;}
@@ -61,7 +55,7 @@ module.exports = function post (req, res) {
             callback("itemUrl : some required parameters was not provided", null);
             return;
         }
-        var itemUrl = new ItemUrl();
+        var itemUrl = new models.ItemUrl();
         itemUrl.url = req.body._content.url;
         itemUrl.host = req.body._content.host;
 
@@ -83,7 +77,7 @@ module.exports = function post (req, res) {
             callback("itemYoutube : some required parameters was not provided", null);
             return;
         }
-        var itemYoutube = new ItemYoutube();
+        var itemYoutube = new models.ItemYoutube();
         itemYoutube.url = req.body._content.url;
         itemYoutube.embedUrl = req.body._content.embedUrl;
         itemYoutube.videoId = req.body._content.videoId;
@@ -98,7 +92,7 @@ module.exports = function post (req, res) {
             callback("itemImage : some required parameters was not provided", null);
             return;
         }
-        var itemImage = new ItemImage();
+        var itemImage = new models.ItemImage();
         itemImage.url = req.body._content.url;
         itemImage.save(function(err){
             if(err)console.log(err);
@@ -111,7 +105,7 @@ module.exports = function post (req, res) {
             callback("itemUrl : some required parameters was not provided", null);
             return;
         }
-        var itemTweet = new ItemTweet();
+        var itemTweet = new models.ItemTweet();
         itemTweet.url = req.body._content.url;
         itemTweet.html = req.body._content.html;
         itemTweet.author_name = req.body._content.author_name;

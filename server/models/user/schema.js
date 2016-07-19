@@ -1,8 +1,15 @@
 module.exports = function getUserSchema(Schema) {
 
+    var lifeStates = require('../lifeStates.json');
+
 	return new Schema({
 		createdAt: { type: Date },
 		updatedAt: { type: Date },
+        lifeState: {
+            type: String,
+            required: true,
+            default: lifeStates.ACTIVE.id
+        },
         local: {
             password: {
                 type: String,

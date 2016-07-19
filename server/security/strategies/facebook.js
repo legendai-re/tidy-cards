@@ -1,8 +1,7 @@
 module.exports = function getLocalStrategy(FacebookStrategy){
 
-    var mongoose        = require('mongoose');
     var connectionTypes = require('../connectionTypes.json');
-    var User = mongoose.model('User');
+    var models          = require('../../models');
 
    return new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
@@ -11,7 +10,7 @@ module.exports = function getLocalStrategy(FacebookStrategy){
         passReqToCallback : true
     },
     function(req, accessToken, refreshToken, profile, done) {
-        User.findOne({'facebook.id': profile.id}).exec(function(err, user) {
+        models.User.findOne({'facebook.id': profile.id}).exec(function(err, user) {
             if (err) { return done(err); }
             if(user && req.user){
                 done('facebook account already used');
@@ -25,7 +24,7 @@ module.exports = function getLocalStrategy(FacebookStrategy){
         });
 
         var createUser = function(){
-            var newUser = new User();
+            var newUser = new models.User();
             newUser.facebook.id = profile.id;
             newUser.facebook.token = accessToken;
             newUser.unsafeUsername = (profile.displayName || 'anonyme');

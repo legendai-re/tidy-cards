@@ -15,8 +15,11 @@ router.route('/:collection_id')
     .get(function(req, res){
        require('./getOne')(req, res);
     })
-    .put(isGranted('ROLE_USER'), function(req, res) {        
+    .put(isGranted('ROLE_USER'), function(req, res) {
         require('./put')(req, res);
+    })
+    .delete(isGranted('ROLE_USER'), function(req, res) {
+        require('./delete')(req, res);
     });
 
 module.exports = router;

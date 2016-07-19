@@ -39,6 +39,10 @@ export class IvItemService {
         .catch(this.handleError);
     }
 
+    public deleteItem (_id: string): Observable<any> {
+        return this.http.delete(IvApiUrl.ITEMS + '/' + _id);
+    }
+
     private handleItems(res: Response) {
         let body = res.json();
         let cs = [];

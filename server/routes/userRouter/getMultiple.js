@@ -1,12 +1,11 @@
 module.exports = function getMultiple (req, res) {
 
-	var mongoose	= require('mongoose');
-	var User 		= mongoose.model('User');
+    var models      = require('../../models');
 
     var rq = req.query;
 
     getQueryFiler(rq, req function(filterObj){
-        var q = User.find(filterObj).sort({'createdAt': 1}).limit(20);
+        var q = models.User.find(filterObj).sort({'createdAt': 1}).limit(20);
 
         if(rq.populate){
             q.populate(rq.populate);

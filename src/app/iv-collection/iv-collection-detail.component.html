@@ -16,6 +16,7 @@
                             </p>
                             <p class="collection-page-dates">
                                 <span>{{collection.createdAt | date }}</span> <span *ngIf="collection.modifiedAt">• last modifications: {{collection.modifiedAt | date }}</span>
+                                <a (click)="deleteCollection()">Delete collection</a>
                             </p>
                         </div>
                         <div class="collection-page-stats">
@@ -45,7 +46,7 @@
                     <p>There is no items in the colletion yet...</p>
                 </article>
                 <article class="item" *ngFor="let item of collection._items">
-                    <iv-item [item]=item></iv-item>
+                    <iv-item [item]=item (deletedItem)="onDeletedItem($event);"></iv-item>
                 </article>
             </div>
         </div>
