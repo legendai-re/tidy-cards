@@ -3,30 +3,46 @@ module.exports = function getUserSchema(Schema) {
 	return new Schema({
 		createdAt: { type: Date },
 		updatedAt: { type: Date },
-	    username: {
-	        type: String,
-	        required: true,
-	        validate: {
-	            validator: function(v) {
-	                return (v.length > 1 && v.length < 30);
-	            },
-	            message: '{VALUE} is not a valid username'
-	        }
-	    },
-	    password: {
-	        type: String ,
-	        required: true,
-	        select: false,
-	        validate: {
-	            validator: function(v) {
-	                return (v.length > 1);
-	            },
-	            message: '{VALUE} is not a valid password'
-	        }
-	    },
+        local: {
+            password: {
+                type: String,
+                select: false
+            }
+        },
+        facebook: {
+            id: String,
+            token: {
+                type: String,
+                select: false
+            }
+        },
+        twitter: {
+            id: String,
+            token: {
+                type: String,
+                select: false
+            }
+        },
+        connectionTypes: {
+            type: [String]
+        },
+        unsafeUsername: {
+            type: String,
+            required: true
+        },
+        facebookId: {
+            type: String,
+            required: false,
+            select: false
+        },
+        twitterId: {
+            type: String,
+            required: false,
+            select: false
+        },
 	    email: {
 	        type: String,
-	        required: true
+	        required: false
 	    },
 	    roles: {
 	        type: Array

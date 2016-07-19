@@ -40,6 +40,11 @@
             </div>
             <input (change)="onAvatarFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
         </div>
+        <div>
+            <h2>Link account</h2>
+            <p><a *ngIf="!authService.currentUser.facebook" href="auth/facebook">Link facebook</a></p>
+            <p><a *ngIf="!authService.currentUser.twitter" href="auth/twitter">Link twitter</a></p>
+        </div>
         <hr>
     </div>
 </section>

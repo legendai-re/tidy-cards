@@ -40,13 +40,10 @@
 
             <iv-item-create [collection]=collection (newItem)="onNewItem($event);"></iv-item-create>
 
-            <div class="items-list" *ngIf="!itemLoaded">
-                <article>
+            <div class="items-list" *ngIf="itemLoaded">
+                <article *ngIf="collection._items.length == 0">
                     <p>There is no items in the colletion yet...</p>
                 </article>
-            </div>
-
-            <div class="items-list" *ngIf="itemLoaded">
                 <article class="item" *ngFor="let item of collection._items">
                     <iv-item [item]=item></iv-item>
                     <!--<div class="item-container">

@@ -12,6 +12,8 @@ export class IvUser {
     public roles: string[];
     public bio: string;
     public _avatar: IvImage;
+    public facebook: any;
+    public twitter: any;
 
     constructor(
         _id?: string,
@@ -23,7 +25,9 @@ export class IvUser {
         password?: string,
         roles?: string[],
         bio?: string,
-        _avatar?: IvImage) {
+        _avatar?: IvImage,
+        facebook?: any,
+        twitter?: any) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -34,6 +38,8 @@ export class IvUser {
         this.roles = roles;
         this.bio = bio;
         this._avatar = _avatar;
+        this.facebook = facebook;
+        this.twitter = twitter;
     }
 
     public static createFormJson(obj) {
@@ -47,7 +53,9 @@ export class IvUser {
             obj.password,
             obj.roles,
             obj.bio,
-            IvImage.createFormJson(obj._avatar)
+            IvImage.createFormJson(obj._avatar),
+            obj.facebook,
+            obj.twitter
             );
     }
 

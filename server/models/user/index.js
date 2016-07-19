@@ -1,21 +1,24 @@
 var mongoose    = require('mongoose');
 var roles       = require('../../security/roles.json');
-var visibility  = require('../collection/visibility.json')
+var visibility  = require('../collection/visibility.json');
+var URLSlugs    = require('mongoose-url-slugs');
 var Schema      = mongoose.Schema;
 
 var UserSchema  = require('./schema')(Schema);
 
-UserSchema.pre('save', function(next) {    
+UserSchema.pre('save', function(next) {
     this.createdAt = new Date();
     next();
 });
 
-UserSchema.pre('update', function(next) {    
+UserSchema.pre('update', function(next) {
     this.updatedAt = Date();
 });
 
-UserSchema.methods.isGranted = function isGranted(role){        
-    if(this.haveRole(role)) return true;    
+UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username'}));
+
+UserSchema.methods.isGranted = function isGranted(role){
+    if(this.haveRole(role)) return true;
     return checkRole(this, role);
 }
 
@@ -27,7 +30,7 @@ function checkRole(user, toFound){
     for(role in roles){
         if((roles[role].indexOf(toFound) > -1)){
             if(user.haveRole(role))return true;
-            else return checkRole(user, role);            
+            else return checkRole(user, role);
         }
     }
     return false;
@@ -39,7 +42,7 @@ UserSchema.methods.addRole = function addRole(role, callback) {
         this.save(function(err){
             if(err)throw err;
             callback({success: true, alert: "Role "+ role + " added."});
-        })       
+        })
     }else{
         callback({success: false, alert: "Role already exist"});
     }
@@ -52,7 +55,7 @@ UserSchema.methods.removeRole = function removeRole(role, callback) {
         this.save(function(err){
             if(err)throw err;
             callback({success: true, alert: "Role "+ role + " removed."});
-        })       
+        })
     }else{
         callback({success: false, alert: "Role didn't exist or you tryed to remove ROLE_USER"});
     }
@@ -61,14 +64,14 @@ UserSchema.methods.removeRole = function removeRole(role, callback) {
 UserSchema.methods.addCollection = function addCollection(collection, callback) {
     collection._author = this._id;
     collection.save(function(err){
-        if (err) {callback(err, collection); return;}                      
+        if (err) {callback(err, collection); return;}
         callback(false, collection);
-    });    
+    });
 }
 
 UserSchema.methods.addStarredCollection = function addStarredCollection(User, collection, callback) {
 
-    if(this._id == collection._author || collection.visibility == visibility.PRIVATE){        
+    if(this._id == collection._author || collection.visibility == visibility.PRIVATE){
         callback('Cannot star you own collection or collection is private');
         return;
     }
@@ -76,13 +79,13 @@ UserSchema.methods.addStarredCollection = function addStarredCollection(User, co
         if(err){
             callback(err);
             return;
-        }        
+        }
         for(var key in user._starredCollections){
             if(user._starredCollections[key] == collection._id){
                 callback('Collection already starred.');
                 return;
             }
-        }                
+        }
         user._starredCollections.push(String(collection._id));
         user.save(function(err){
             if(err)callback(err);

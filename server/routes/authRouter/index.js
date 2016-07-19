@@ -3,13 +3,25 @@ var passport		= require('passport');
 var isGranted       = require('../../security/isGranted');
 var router          = express.Router();
 
+router.route('/facebook')
+    .get(passport.authenticate('facebook'));
+
+router.route('/facebook/callback')
+    .get(passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+
+router.route('/twitter')
+    .get(passport.authenticate('twitter'));
+
+router.route('/twitter/callback')
+    .get(passport.authenticate('twitter', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+
 router.route('/login')
 	.post(passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);
     });
 
 router.route('/logout')
-    .get( function(req, res){        
+    .get( function(req, res){
         require('./getLogout')(req, res);
     });
 
@@ -17,7 +29,7 @@ router.route('/currentuser')
 	.get(isGranted('ROLE_USER'), function(req,res){
         require('./getCurrentuser')(req, res);
     });
- 
+
 router.route('/signup')
 	.post(function(req,res){
         require('./postSignup')(req, res);
@@ -25,10 +37,10 @@ router.route('/signup')
 
 router.route('/roles')
     .put(isGranted('ROLE_ADMIN'), function(req, res){
-        require('./putRoles')(req, res);   
+        require('./putRoles')(req, res);
     })
     .delete(isGranted('ROLE_ADMIN'), function(req, res){
-        require('./deleteRoles')(req, res);    
+        require('./deleteRoles')(req, res);
     });
 
 module.exports = router;

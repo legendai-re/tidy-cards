@@ -43,11 +43,11 @@ module.exports = function getItemUrl (req, res) {
 
                     itemUrl.title = $('meta[property="og:title"]').attr("content");
                     if(itemUrl.title == '' || itemUrl.title == null || itemUrl.title == undefined)
-                        itemUrl.title = $('meta[name="title"]').attr("content");
+                        itemUrl.title = $('title').html();
 
                     itemUrl.description = $('meta[property="og:description"]').attr("content");
                     if(itemUrl.description == '' || itemUrl.description == null || itemUrl.description == undefined)
-                        itemUrl.title = $('meta[name="description"]').attr("content");
+                        itemUrl.description = $('meta[name="description"]').attr("content");
 
                     itemUrl.author = $('meta[name="author"]').attr("content");
                     if(itemUrl.author == '' || itemUrl.author == null || itemUrl.author == undefined)
