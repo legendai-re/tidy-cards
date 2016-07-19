@@ -5,7 +5,7 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 @Component({
     selector: 'iv-item-image',
     templateUrl: 'iv-item-image.component.html',
-    styleUrls: ['iv-item-image.component.scss'],
+    styleUrls: ['iv-item.component.scss', 'iv-item-image.component.scss'],
     directives: [ROUTER_DIRECTIVES]
 })
 
