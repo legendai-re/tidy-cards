@@ -54,22 +54,27 @@
 
 @mixin respond-to($m, $px:0) {
     @if $m == xs {
-        @media (min-width: $xs) {
+        @media (min-width: $screen-xs) {
             @content;
         }
     }
     @else if $m == sm {
-        @media (min-width: $sm) {
+        @media (min-width: $screen-sm) {
             @content;
         }
     }
     @else if $m == md {
-        @media (min-width: $md) {
+        @media (min-width: $screen-md) {
             @content;
         }
     }
     @else if $m == lg {
-        @media (min-width: $lg) {
+        @media (min-width: $screen-lg) {
+            @content;
+        }
+    }
+    @else if $m == xl {
+        @media (min-width: $screen-xl) {
             @content;
         }
     }

@@ -23,7 +23,7 @@
                     <i class="material-icons icon">link</i><span>Reset url</span>
                 </button>
             </div>
-            <input class="btn btn-create pull-xs-right" type="submit" value="Add" />
+            <input class="btn btn-create pull-xs-right" type="submit" value="Add" [disabled]="!item._content && !item.description"/>
         </div>
     </form>
 </div>

@@ -53,9 +53,14 @@ $text-whiter:               $white-op-1-2;
 $placeholder-blacker:       $black-op-1-2;
 $placeholder-whiter:        $white-op-3-4;
 
-$xs: 0;
-$sm: 380px;
-$md: 700px;
-$lg: 1020px;
-$xl: 1320px;
+$screen-xs: 0;
+$screen-sm: 425px; // 380px
+$screen-md: 700px; // 700px
+$screen-lg: 1020px; // 1020px
+$screen-xl: 1320px; // 1320px
+
+$container-sm: 100%; // 320px
+$container-md: 640px; // 640px
+$container-lg: 960px; // 960px
+$container-xl: 1280px; // 1280px
 
