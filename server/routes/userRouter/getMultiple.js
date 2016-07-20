@@ -12,7 +12,7 @@ module.exports = function getMultiple (req, res) {
         }
 
         if(rq.skip)
-            q.limit(parseInt(rq.skip));
+            q.skip(parseInt(rq.skip));
 
         if(rq.limit)
             q.limit(parseInt(rq.limit));

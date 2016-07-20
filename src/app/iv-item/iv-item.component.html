@@ -2,7 +2,7 @@
 <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></iv-item-tweet>
 <iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></iv-item-youtube>
 <iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></iv-item-image>
-<a (click)="deleteItem()">delete</a>
+<a *ngIf="isAuthor" (click)="deleteItem()">delete</a>
 <div class="item-content" *ngIf="item.description">
     <p>{{item.description}}</p>
     <hr/>

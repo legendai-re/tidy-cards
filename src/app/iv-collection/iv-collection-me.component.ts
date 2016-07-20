@@ -1,24 +1,25 @@
 import { Component, OnInit }               from '@angular/core';
 import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
-import { IvCollectionService }               from './iv-collection.service';
-import { IvCollectionCardComponent }         from './iv-collection-card.component';
-import { IvCollection }                      from './iv-collection.class';
+import { IvCollectionService }             from './iv-collection.service';
+import { IvCollectionCardComponent }       from './iv-collection-card.component';
+import { IvCollection }                    from './iv-collection.class';
 import { IvDataLimit }                     from '../iv-shared/iv-data-limit.ts';
+import { IvAuthService }                   from '../iv-auth/iv-auth.service';
 
 @Component({
-    templateUrl: './iv-collection-last.component.html',
+    templateUrl: './iv-collection-me.component.html',
     directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
 })
 
-export class IvCollectionLastComponent implements OnInit {
+export class IvCollectionMeComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
     public collections: IvCollection[];
 
-    constructor( private router: Router, private collectionService: IvCollectionService) {
+    constructor(public authService: IvAuthService, private router: Router, private collectionService: IvCollectionService) {
     }
 
     ngOnInit() {
@@ -43,6 +44,7 @@ export class IvCollectionLastComponent implements OnInit {
         let params = new URLSearchParams();
         params.set('limit', IvDataLimit.COLLECTION.toString());
         params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
+        params.set('_author', this.authService.currentUser._id);
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
         this.collectionService.getCollections(params).subscribe(collections => {

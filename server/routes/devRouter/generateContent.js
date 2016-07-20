@@ -1,9 +1,10 @@
 module.exports = function (req, res) {
 
     var faker = require('faker');
+    var bCrypt = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
     var models          = require('../../models');
-    var itemUrlList     = require('./itemUrlList.json');
+    var itemUrlList     = require('./data/itemUrlList.json');
 
     var colors = ['CFD8DC','FF887A','FFD373','FFFF7C','A4ABFF','78D6FF','A4FFEB','CBFF8A'];
     var visibility = ['PUBLIC', 'PRIVATE', 'UNINDEXED'];
@@ -12,20 +13,44 @@ module.exports = function (req, res) {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
 
+    var collectionNb = req.body.collectionNb;
+    var userNb = req.body.userNb;
+    var userList = null;
+
+    if(userNb && userNb!=0){
+        createUser(0);
+    }else{
+        models.User.find(function(err, users){
+            userList = users;
+            createCollection(0);
+        })
+   }
+
     function createUser(i){
         var user =  new models.User();
         user.email =  i+faker.internet.exampleEmail();
         var username = faker.internet.userName();
         user.unsafeUsername = username;
         user.name = username;
-        user.local.password = 'password'+i;
+        user.local.password = createHash('password');
         user.roles = ['ROLE_USER'];
         user.connectionTypes.push(connectionTypes.LOCAL.id);
-        user.save();
+        user.save(function(err){
+            i++;
+            if(i==userNb){
+                models.User.find(function(err, users){
+                    userList = users;
+                    createCollection(0);
+                })
+            }else{
+                createUser(i);
+            }
+        });
     }
 
-    var collectionNb = 50;
-    createCollection(0);
+    function createHash (password){
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    }
 
     function createCollection(i){
         var itemNb = Math.floor(Math.random() * 30);
@@ -35,7 +60,7 @@ module.exports = function (req, res) {
         collection.itemsCount = itemNb;
         collection.color = colors[Math.floor(Math.random() * colors.length)];
         collection.visibility = visibility[Math.floor(Math.random() * visibility.length)];
-        collection._author = req.user._id;
+        collection._author = userList[Math.floor(Math.random() * userList.length)]._id;
         collection.save(function(err){
 
 
@@ -68,10 +93,7 @@ module.exports = function (req, res) {
             }
 
         });
-
     }
-
-
 
     res.json({message: 'done'});
 }

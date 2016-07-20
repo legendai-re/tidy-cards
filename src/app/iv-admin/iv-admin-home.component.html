@@ -2,15 +2,17 @@
     <div class="container">
         <h2>Admin</h2>
         <div style="margin-top: 100px;">
-            <a (click)="deleteAllButUsers()">Delete all but users</a>
+            <a (click)="deleteAllButUsers()">Delete all <small>(except admins)</small></a>
             <div>
-                db.collections.drop();<br/>
-                db.images.drop();<br/>
-                db.items.drop();<br/>
-                db.itemurls.drop();<br/>
-                db.itemimages.drop();<br/>
-                db.itemyoutubes.drop();<br/>
-                db.itemtweets.drop();<br/>
+                Generate
+                <input type="number" name="collectionNb"  [(ngModel)]="collectionNb"/>
+                collections
+            </div>
+            <div>
+                Generate
+                <input type="number" name="userNb"  [(ngModel)]="userNb"/>
+                users
+                <small>(delete all and set this to 0 to create colletions made by you only).</small>
             </div>
             <a (click)="generateCollectionAndItems()">Generate data</a>
         </div>

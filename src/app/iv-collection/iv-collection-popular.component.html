@@ -5,6 +5,9 @@
             <div class="col-xs-3" *ngFor="let collection of collections">
                 <iv-collection-card [collection]=collection></iv-collection-card>
             </div>
+            <a *ngIf="haveMoreCollections && !loadingCollections"(click)="loadNextPage()">Load more</a>
+            <p *ngIf="loadingCollections">Loading...</p>
+            <p *ngIf="!haveMoreCollections">There is no more collections to load</p>
         </div>
     </div>
 </section>

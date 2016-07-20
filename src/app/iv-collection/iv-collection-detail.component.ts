@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
+import { IvAuthService }                  from '../iv-auth/iv-auth.service';
 import { IvCollectionService }            from './iv-collection.service';
 import { IvItemService }                  from '../iv-item/iv-item.service';
 import { IvCollection }                   from './iv-collection.class';
@@ -19,9 +20,11 @@ import { IvItemComponent }                from '../iv-item/iv-item.component';
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public collection: IvCollection;
     public itemLoaded: boolean;
+    public isAuthor: boolean;
     private sub: any;
 
     constructor(
+        private authService: IvAuthService,
         private headerService: IvHeaderService,
         private sanitizer: DomSanitizationService,
         private route: ActivatedRoute,
@@ -31,6 +34,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.isAuthor = false;
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
             this.initCollection(params);
@@ -43,6 +47,8 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         getParams.set('populate', '_author+_thumbnail');
         this.collectionService.getCollection(id, getParams).subscribe((collection) => {
             this.collection = collection;
+            if(collection._author._id == this.authService.currentUser._id)
+                this.isAuthor = true;
             this.emitUpdateHeaderEvent();
             this.initItems();
         }, () => {});

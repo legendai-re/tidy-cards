@@ -12,12 +12,19 @@ import { IvApiUrl }                 from '../iv-shared/iv-api-url';
 
 export class IvAdminHomeComponent {
 
-    constructor (private http: Http) {}
+    public collectionNb: number;
+    public userNb: number;
+
+    constructor (private http: Http) {
+        this.collectionNb = 500;
+        this.userNb = 10;
+    }
 
     public generateCollectionAndItems(){
+        let body = JSON.stringify({collectionNb: this.collectionNb, userNb: this.userNb});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        this.http.post("api/dev/generate-content", "", options).subscribe((e) => {
+        this.http.post("api/dev/generate-content", body, options).subscribe((e) => {
             console.log('done');
         })
     }

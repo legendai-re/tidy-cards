@@ -19,6 +19,7 @@ export class IvItemComponent {
     public itemTypes: any;
 
     @Input('item') item: IvItem;
+    @Input('isAuthor') isAuthor: boolean;
     @Output() deletedItem = new EventEmitter();
 
     constructor(private itemService: IvItemService) {
