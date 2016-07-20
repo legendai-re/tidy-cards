@@ -7,7 +7,7 @@ module.exports = function (req, res) {
     var callback = function(err){
     }
 
-    models.User.remove( { email : { $nin: ["olivier28.coue@gmail.com", "hello@alexandrejolly.com", "mr.ylloj@gmail.com"] } }, callback )
+    models.User.remove( { email : { $nin: ["olivier28.coue@gmail.com", "accounts@alexandrejolly.com"] } }, callback )
     models.Collection.remove({}, callback)
     models.Image.remove({}, callback)
     models.Item.remove({}, callback)
