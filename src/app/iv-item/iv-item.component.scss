@@ -25,6 +25,12 @@
     p:last-child {
         margin-bottom: 0;
     }
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .item-embeded-image {
@@ -66,7 +72,7 @@
     width: 33%;
     overflow: hidden;
     float: left;
-    height: 100%;
+    min-height: 100px;
 
     &:before, &:after {
         content: "";
@@ -95,7 +101,7 @@
         color: $white;
         padding: 180px 20px 20px;
 
-        &:after {
+        &:before {
             content: "";
             top: 0;
             left: 0;
