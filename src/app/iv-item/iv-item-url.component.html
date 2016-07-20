@@ -9,12 +9,14 @@
             <div class="item-embeded-no-type" *ngIf="itemUrl.image && !itemUrl.type">
                 <img [src]="itemUrl.image" />
             </div>
-            <h3 class="item-title" *ngIf="itemUrl.title">{{itemUrl.title}}</h3>
-            <p class="item-desc" *ngIf="itemUrl.description">{{itemUrl.description}}</p>
-            <p class="item-metas">
-                <span class="item-host">{{itemUrl.host}} && {{itemUrl.type}}</span>
-                <span class="item-author" *ngIf="itemUrl.author">| by {{itemUrl.author}}</span>
-            </p>
+            <div class="item-embeded-content-wrapper">
+                <h3 class="item-title" *ngIf="itemUrl.title">{{itemUrl.title}}</h3>
+                <p class="item-desc" *ngIf="itemUrl.description">{{itemUrl.description}}</p>
+                <p class="item-metas" *ngIf="itemUrl.host || itemUrl.author">
+                    <span class="item-host">{{itemUrl.host}} {{itemUrl.type}}</span>
+                    <span class="item-author" *ngIf="itemUrl.author">| by {{itemUrl.author}}</span>
+                </p>
+            </div>
         </div>
     </a>
 </div>
