@@ -10,6 +10,7 @@ import { IvCollection }                   from './iv-collection.class';
 import { IvItemCreateComponent }          from '../iv-item/iv-item-create.component';
 import { IvHeaderService }                from '../iv-header/iv-header.service';
 import { IvItemComponent }                from '../iv-item/iv-item.component';
+import { IvDataLimit }                    from '../iv-shared/iv-data-limit.ts';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
@@ -18,7 +19,11 @@ import { IvItemComponent }                from '../iv-item/iv-item.component';
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
+
     public collection: IvCollection;
+    public pageNb: number;
+    public haveMoreItems: boolean;
+    public loadingItems: boolean;
     public itemLoaded: boolean;
     public isAuthor: boolean;
     private sub: any;
@@ -34,6 +39,9 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.pageNb = 0;
+        this.loadingItems = false;
+        this.haveMoreItems = true;
         this.isAuthor = false;
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
@@ -47,10 +55,11 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         getParams.set('populate', '_author+_thumbnail');
         this.collectionService.getCollection(id, getParams).subscribe((collection) => {
             this.collection = collection;
+            this.collection._items = [];
             if(collection._author._id == this.authService.currentUser._id)
                 this.isAuthor = true;
             this.emitUpdateHeaderEvent();
-            this.initItems();
+            this.loadItems();
         }, () => {});
     }
 
@@ -67,17 +76,36 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    private initItems(){
-        let getParams = new URLSearchParams();
-        getParams.set('_collection', this.collection._id);
-        getParams.set('sort_field', 'createdAt');
-        getParams.set('sort_dir', '-1');
-        this.itemService.getItems(getParams).subscribe((_items) => {
-            this.collection._items = _items;
-            this.createTrustedRessources();
-            this.itemLoaded = true;
-            this.renderTweets();
+    private loadItems(){
+        this.loadingItems = true;
+        let params = new URLSearchParams();
+        params.set('_collection', this.collection._id);
+        params.set('limit', IvDataLimit.ITEM.toString());
+        params.set('skip', (IvDataLimit.ITEM * this.pageNb).toString());
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '-1');
+        this.itemService.getItems(params).subscribe((items) => {
+            this.onItemsReceived(items);
         });
+    }
+
+    private onItemsReceived(items){
+        items = this.createTrustedRessources(items);
+        for(let i in items)
+            this.collection._items.push(items[i]);
+        this.renderTweets();
+        this.haveMoreItems = (items.length==IvDataLimit.ITEM);
+        this.loadingItems = false;
+        this.itemLoaded = true;
+    }
+
+    private createTrustedRessources(items){
+        for(var key in items){
+            if(items[key].type.id == 'YOUTUBE'){
+                items[key]._content.trustedEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(items[key]._content.embedUrl);
+            }
+        }
+        return items;
     }
 
     private renderTweets(){
@@ -86,11 +114,12 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
        },200)
     }
 
-    private createTrustedRessources(){
-        for(var key in this.collection._items){
-            if(this.collection._items[key].type.id == 'YOUTUBE'){
-                this.collection._items[key]._content.trustedEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.collection._items[key]._content.embedUrl);
-            }
+    public loadNextPage(){
+        if(this.haveMoreItems){
+            this.pageNb++;
+            this.loadItems();
+        }else{
+            console.log('no more items');
         }
     }
 

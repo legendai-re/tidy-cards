@@ -1,6 +1,7 @@
 import { IvUser }     from '../iv-user/iv-user.class';
 import { IvImage }    from '../iv-image/iv-image.class';
 import { IvItem }     from '../iv-item/iv-item.class';
+import { IvStar }     from '../iv-star/iv-star.class';
 
 export class IvCollection {
 
@@ -14,6 +15,8 @@ export class IvCollection {
     public visibility;
     public itemsCount: number;
     public bio: string;
+    public _star: IvStar;
+    public starsCount: number;
     public _items: IvItem[];
 
     constructor(
@@ -26,7 +29,9 @@ export class IvCollection {
         _thumbnail?: IvImage,
         visibility?: any,
         itemsCount?: number,
-        bio?: string) {
+        bio?: string,
+        _star?: IvStar,
+        starsCount?: number) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -37,11 +42,15 @@ export class IvCollection {
         this.visibility = typeof visibility === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
         this.itemsCount = itemsCount;
         this.bio = bio;
+        this._star = _star;
+        this.starsCount = starsCount
     }
 
     public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json');}
 
     public static createFormJson(obj) {
+        if(!obj)
+            return null;
         return new IvCollection(
             obj._id,
             obj.createdAt,
@@ -52,7 +61,9 @@ export class IvCollection {
             IvImage.createFormJson(obj._thumbnail),
             obj.visibility,
             obj.itemsCount,
-            obj.bio
+            obj.bio,
+            IvStar.createFormJson(obj._star),
+            obj.starsCount
             );
     }
 

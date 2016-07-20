@@ -49,8 +49,24 @@ module.exports = function getCollectionSchema(Schema) {
             type: Number,
             default: 0
         },
+        starsCount: {
+            type: Number,
+            default: 0
+        },
+
+        //User session related, not saved in database
+        _star: { type: String, ref: 'Star' },
+
+        //Relations
 	    _author : { type: String, ref: 'User' },
 	    _thumbnail : { type: String, ref: 'Image' },
-	});
+	},{
+        toObject: {
+            virtuals: true
+        },
+        toJSON: {
+            virtuals: true
+        }
+    });
 
 }

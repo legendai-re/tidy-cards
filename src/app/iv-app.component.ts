@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild }    from '@angular/core';
 import { Router }               from '@angular/router';
 import { ROUTER_DIRECTIVES, ActivatedRoute }    from '@angular/router';
 import { IvCollectionService }  from './iv-collection/iv-collection.service';
+import { IvStarService }        from './iv-star/iv-star.service';
 import { IvItemService }        from './iv-item/iv-item.service';
 import { IvItemContentService } from './iv-item/iv-item-content.service';
 import { IvUserService }        from './iv-user/iv-user.service';
@@ -19,7 +20,7 @@ import '../style/app.scss';
     templateUrl: './iv-app.component.html',
     styleUrls: ['./iv-app.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvHeaderComponent],
-    providers: [IvHeaderService, IvItemService, IvItemContentService, IvCollectionService, IvUserService, IvImgUploadService]
+    providers: [IvStarService, IvHeaderService, IvItemService, IvItemContentService, IvCollectionService, IvUserService, IvImgUploadService]
 })
 
 export class IvAppComponent {

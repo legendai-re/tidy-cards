@@ -15,6 +15,11 @@
                 <small>(delete all and set this to 0 to create colletions made by you only).</small>
             </div>
             <a (click)="generateCollectionAndItems()">Generate data</a>
+            <div>
+                <span>state: </span>
+                <span *ngIf="isWorking">In progress..</span>
+                <span *ngIf="!isWorking">Ready</span>
+            </div>
         </div>
     </div>
 </section>

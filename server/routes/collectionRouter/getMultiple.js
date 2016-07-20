@@ -1,5 +1,6 @@
 module.exports = function getMultiple (req, res) {
 
+    var async       = require('async');
 	var visibility  = require('../../models/collection/visibility.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
@@ -31,7 +32,13 @@ module.exports = function getMultiple (req, res) {
 
 		q.exec(function(err, collections){
 	    	if (err) {console.log(err); res.sendStatus(500); return;}
-	    	res.json({data: collections});
+            if(req.user){
+                addIsStarred(req.user, collections, function(collectionsResult){
+                    res.json({data: collections});
+                })
+            }else{
+                res.json({data: collections});
+            }
 	    });
 	})
 
@@ -60,12 +67,29 @@ module.exports = function getMultiple (req, res) {
 
 	function getStarredByQuery(rq, req, callback){
 		var filterObj = {};
-		models.User.findById(rq._starredBy).select('+_starredCollections').exec(function (err, user){
+		models.Star.find({_user: rq._starredBy}).exec(function (err, stars){
 			if (err) {console.log(err); res.sendStatus(500); return;}
 			if(!req.user || req.user._id != rq._starredBy)
 				filterObj.visibility = visibility.PUBLIC.id
-			filterObj._id = {$in: user._starredCollections};
+            var ids = [];
+            for(var i in stars)
+                ids.push(stars[i]._collection)
+			filterObj._id = {$in: ids};
 			callback(filterObj);
 		});
 	}
+
+    function addIsStarred(user, collections, callback){
+        async.times(collections.length, function(n, next) {
+            models.Star.findOne({_user: user._id, _collection: collections[n]._id}, function(err, star){
+                if(star)next(err, star);
+                else next(err, null);
+            })
+        }, function(err, results) {
+            for(var i in results){
+                collections[i]._star = results[i];
+            }
+           callback(collections);
+        });
+    }
 }

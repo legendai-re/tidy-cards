@@ -21,3 +21,6 @@ exports.ItemImage = ItemImage.itemImageModel;
 
 ItemTweet = require('./item/itemTweet');
 exports.ItemTweet = ItemTweet.itemTweetModel;
+
+Star = require('./star');
+exports.Star = Star.starModel;

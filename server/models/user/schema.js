@@ -81,10 +81,6 @@ module.exports = function getUserSchema(Schema) {
 	            message: 'Bio is to long'
 	        }
 	    },
-	    _starredCollections: {
-	    	select: false,
-	    	type: Array //Relation to Collection
-	    },
         _avatar: { type: String, ref: 'Image' }
 	});
 

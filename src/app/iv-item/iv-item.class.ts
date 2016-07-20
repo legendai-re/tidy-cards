@@ -33,6 +33,8 @@ export class IvItem {
     public static get ITEM_TYPES() { return require('../../../server/models/item/itemTypes.json');}
 
     public static createFormJson(obj) {
+        if(!obj)
+            return null;
         return new IvItem(
             obj._id,
             obj.createdAt,

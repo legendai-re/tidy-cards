@@ -49,6 +49,10 @@
                     <iv-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event);"></iv-item>
                 </article>
             </div>
+
+            <a *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">Load more</a>
+            <p *ngIf="loadingItems">Loading...</p>
+            <p *ngIf="!haveMoreItems">There is no more items to load</p>
         </div>
     </div>
 </section>

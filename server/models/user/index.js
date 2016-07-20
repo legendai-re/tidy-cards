@@ -69,31 +69,6 @@ UserSchema.methods.addCollection = function addCollection(collection, callback) 
     });
 }
 
-UserSchema.methods.addStarredCollection = function addStarredCollection(User, collection, callback) {
-
-    if(this._id == collection._author || collection.visibility == visibility.PRIVATE){
-        callback('Cannot star you own collection or collection is private');
-        return;
-    }
-    User.findById(this._id).select('+_starredCollections').exec(function(err, user){
-        if(err){
-            callback(err);
-            return;
-        }
-        for(var key in user._starredCollections){
-            if(user._starredCollections[key] == collection._id){
-                callback('Collection already starred.');
-                return;
-            }
-        }
-        user._starredCollections.push(String(collection._id));
-        user.save(function(err){
-            if(err)callback(err);
-            else callback(false);
-        });
-    })
-}
-
 User = mongoose.model('User', UserSchema);
 
 exports.userModel = User;

@@ -24,8 +24,8 @@
                         <li class="stat-item-list">
                             <i class="material-icons stat-icon">mode_comment</i> 0
                         </li>
-                        <li class="stat-item-list">
-                            <i class="material-icons stat-icon">star</i> 0
+                        <li class="stat-item-list" [class.starred]="collection._star"  (click)="onStarCliked()" >
+                            <i class="material-icons stat-icon">star</i> {{collection.starsCount}}
                         </li>
                     </ul>
                     <div *ngIf="collection.visibility.id == 'PRIVATE'" class="card-visibility" title="Visibility: {{collection.visibility.desc}}">

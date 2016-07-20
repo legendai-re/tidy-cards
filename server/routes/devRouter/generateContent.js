@@ -52,7 +52,7 @@ module.exports = function (req, res) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
     }
 
-    function createCollection(i){
+    function createCollection(i, cb){
         var itemNb = Math.floor(Math.random() * 30);
         var collection =  new models.Collection();
         collection.title = faker.lorem.words().capitalizeFirstLetter();
@@ -62,7 +62,6 @@ module.exports = function (req, res) {
         collection.visibility = visibility[Math.floor(Math.random() * visibility.length)];
         collection._author = userList[Math.floor(Math.random() * userList.length)]._id;
         collection.save(function(err){
-
 
             creatItem(0);
             function creatItem(x){
@@ -82,10 +81,13 @@ module.exports = function (req, res) {
                     item._collection = collection._id;
                     item.save(function(err){
                         x++;
-                        if(i>=collectionNb)return;
+                        if(i>=collectionNb){
+                            res.json({message: 'done'});
+                            return
+                        }
                         if(x>=itemNb){
                             i++;
-                            if(i>=collectionNb)return;
+                            if(i>=collectionNb)return res.json({message: 'done'});
                             else createCollection(i);
                         }else creatItem(x);
                     })
@@ -95,5 +97,5 @@ module.exports = function (req, res) {
         });
     }
 
-    res.json({message: 'done'});
+
 }
