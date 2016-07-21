@@ -56,7 +56,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         this.collectionService.getCollection(id, getParams).subscribe((collection) => {
             this.collection = collection;
             this.collection._items = [];
-            if(collection._author._id == this.authService.currentUser._id)
+            if(this.authService.isLoggedIn && collection._author._id == this.authService.currentUser._id)
                 this.isAuthor = true;
             this.emitUpdateHeaderEvent();
             this.loadItems();
