@@ -50,9 +50,11 @@
                 </article>
             </div>
 
-            <a *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">Load more</a>
-            <p *ngIf="loadingItems">Loading...</p>
-            <p *ngIf="!haveMoreItems">There is no more items to load</p>
+            <div class="col-xs-12">
+                <a class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">Load more...</a>
+                <p class="loading-more" *ngIf="loadingItems">Loading...</p>
+                <p class="no-more" *ngIf="!haveMoreItems">You’ve reached the end of the list</p>
+            </div>
         </div>
     </div>
 </section>
