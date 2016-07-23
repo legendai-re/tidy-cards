@@ -3,7 +3,7 @@ var aws             = require('aws-sdk')
 var multerS3        = require('multer-s3')
 var request         = require('request');
 var fs              = require('fs')
-var gm              = require('gm');
+var gm              = require('gm'), imageMagick = gm.subClass({ imageMagick: true });
 var async           = require('async')
 var imagesTypes     = require('../../models/image/imageTypes.json');
 var models          = require('../../models');
