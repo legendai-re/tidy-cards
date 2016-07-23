@@ -15,7 +15,7 @@ UserSchema.pre('update', function(next) {
     this.updatedAt = Date();
 });
 
-UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username'}));
+UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username', update: true}));
 
 UserSchema.methods.isGranted = function isGranted(role){
     if(this.haveRole(role)) return true;

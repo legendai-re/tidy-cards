@@ -42,17 +42,12 @@ module.exports = function getUserSchema(Schema) {
         },
         unsafeUsername: {
             type: String,
-            required: true
+            required: false
         },
-        facebookId: {
+        username: {
             type: String,
-            required: false,
-            select: false
-        },
-        twitterId: {
-            type: String,
-            required: false,
-            select: false
+            required: true,
+            unique: true
         },
 	    email: {
 	        type: String,

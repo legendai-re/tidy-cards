@@ -16,4 +16,9 @@ router.route('/:user_id')
         require('./put')(req, res);
     });
 
+router.route('/helpers/valid-username')
+    .get(function(req, res){
+       require('./getValidUsername')(req, res);
+    });
+
 module.exports = router;

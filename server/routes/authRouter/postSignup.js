@@ -3,14 +3,15 @@ module.exports = function postSignup(req, res) {
     var bCrypt      = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
     var models      = require('../../models');
+    var usernameValidator = require('../../helpers/username-validator');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
-        res.sendStatus(400);
+        res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        models.User.findOne({ $or: [{username: req.body.username}, {email: req.body.email}] }, function(err, user){
+        models.User.findOne({ $or: [{username: req.body.username.toLowerCase()}, {email: req.body.email.toLowerCase()}] }, function(err, user){
             if (err) {res.sendStatus(500); return;}
-            if(!user){
+            if(!user || !usernameValidator.isValid(req.body.username)){
                 var user =  new models.User();
                 user.email = req.body.email;
                 user.unsafeUsername = req.body.username;
@@ -19,7 +20,7 @@ module.exports = function postSignup(req, res) {
                 user.roles = (process.env.ADMIN_EMAILS.indexOf(req.body.email) > -1 ) ? ['ROLE_USER', 'ROLE_ADMIN'] : ['ROLE_USER'];
                 user.connectionTypes.push(connectionTypes.LOCAL.id);
                 user.save(function(err){
-                    if (err) {res.sendStatus(422); return;}
+                    if (err) {console.log(err); res.sendStatus(422); return;}
                     req.login(user, function(err) {
                         if (err) {res.sendStatus(500); return;}
                         req.user.local.password = "";
@@ -27,7 +28,7 @@ module.exports = function postSignup(req, res) {
                     });
                 });
             }else{
-                res.sendStatus(422);
+                res.status(422).send({ error: 'email/username already taken or username is not valid'});
             }
         });
     }

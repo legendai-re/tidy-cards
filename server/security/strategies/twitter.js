@@ -3,6 +3,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
     var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
+    var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
 
     return new TwitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -28,7 +29,10 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
             var newUser = new models.User();
             newUser.twitter.id = profile.id;
             newUser.twitter.token = accessToken;
-            newUser.unsafeUsername = ( profile.username || 'anonyme');
+            if(profile.displayName)
+                newUser.unsafeUsername = (forbiddenUsernames.indexOf(profile.displayName.toLowerCase()) > -1 ) ? 'forbidden-name' : profile.displayName;
+            else
+                newUser.unsafeUsername = 'anonyme';
             newUser.name = ( profile.displayName || 'anonyme');
             newUser.roles = ['ROLE_USER'];
             newUser.connectionTypes = [connectionTypes.TWITTER.id];

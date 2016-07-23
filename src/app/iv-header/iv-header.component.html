@@ -46,7 +46,7 @@
                     {{authService.currentUser.name}}
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" [routerLink]="['/u', authService.currentUser._id]">
+                    <a class="dropdown-item" [routerLink]="['/', authService.currentUser.username]">
                         Profile/Settings
                     </a>
                     <a class="dropdown-item" *ngIf="authService.currentUser?.isGranted('ROLE_ADMIN')" [routerLink]="['/admin']">

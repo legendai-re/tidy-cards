@@ -1,10 +1,16 @@
 module.exports = function getOne (req, res) {
 
     var models      = require('../../models');
+    var mongoose    = require('mongoose');
+
 
     var rq = req.query;
+    var q = null;
 
-    var q = models.User.findById(req.params.user_id);
+    if(mongoose.Types.ObjectId.isValid(req.params.user_id))
+        q = models.User.findById(req.params.user_id);
+    else
+        q = models.User.findOne({username: req.params.user_id});
 
     if(rq.populate){
         q.populate(rq.populate);

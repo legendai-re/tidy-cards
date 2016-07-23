@@ -19,8 +19,8 @@ export class IvUserService {
 
     public getUser(_id: string, params: URLSearchParams): Observable<IvUser> {
         return this.http.get(IvApiUrl.USERS + '/' + _id, { search: params })
-        .map(this.handleUser)
-        .catch(this.handleError);
+            .map(this.handleUser)
+            .catch(this.handleError);
     }
 
     public putUser(user: IvUser): Observable<IvUser> {
@@ -29,6 +29,14 @@ export class IvUserService {
         let options = new RequestOptions({ headers: headers });
         return this.http.put(IvApiUrl.USERS + '/' + user._id, body, options)
             .map(this.handleUser)
+            .catch(this.handleError);
+    }
+
+    public getValidUsername(username: string): Observable<boolean>{
+        let params = new URLSearchParams();
+        params.set('username', username);
+        return this.http.get(IvApiUrl.VALID_USERNAME, { search: params })
+            .map(this.handleValidUsername)
             .catch(this.handleError);
     }
 
@@ -44,6 +52,11 @@ export class IvUserService {
     private handleUser(res: Response) {
         let body = res.json();
         return IvUser.createFormJson(body.data) || {};
+    }
+
+    private handleValidUsername(res: Response){
+        let body = res.json();
+        return body.data.isValid;
     }
 
     private handleError (error: any) {

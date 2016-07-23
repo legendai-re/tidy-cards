@@ -2,8 +2,9 @@ module.exports = function getLocalStrategy(FacebookStrategy){
 
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
+    var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
 
-   return new FacebookStrategy({
+    return new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: process.env.HOST + "/auth/facebook/callback",
@@ -27,7 +28,10 @@ module.exports = function getLocalStrategy(FacebookStrategy){
             var newUser = new models.User();
             newUser.facebook.id = profile.id;
             newUser.facebook.token = accessToken;
-            newUser.unsafeUsername = (profile.displayName || 'anonyme');
+            if(profile.displayName)
+                newUser.unsafeUsername = (forbiddenUsernames.indexOf(profile.displayName.toLowerCase()) > -1 ) ? 'forbidden-name' : profile.displayName;
+            else
+                newUser.unsafeUsername = 'anonyme';
             newUser.name = profile.displayName;
             newUser.roles = ['ROLE_USER'];
             newUser.connectionTypes = [connectionTypes.FACEBOOK.id];

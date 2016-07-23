@@ -2,8 +2,9 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
 
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
+    var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
 
-   return new GoogleStrategy({
+    return new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: process.env.HOST + "/auth/google/callback",
@@ -27,7 +28,10 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
             var newUser = new models.User();
             newUser.google.id = profile.id;
             newUser.google.token = accessToken;
-            newUser.unsafeUsername = (profile.displayName || 'anonyme');
+            if(profile.displayName)
+                newUser.unsafeUsername = usernameValidator.isValid(profile.displayName) ? profile.displayName : 'user';
+            else
+                newUser.unsafeUsername = 'anonyme';
             newUser.name = profile.displayName;
             newUser.roles = ['ROLE_USER'];
             newUser.connectionTypes = [connectionTypes.GOOGLE.id];

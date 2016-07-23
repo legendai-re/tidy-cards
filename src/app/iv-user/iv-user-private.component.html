@@ -14,7 +14,16 @@
         <hr>
 
         <p><b>My username</b></p>
-        <p><small>http://invow.io/{{authService.currentUser.username}}</small></p>
+        <div>
+            <input type="text" [(ngModel)]="tmpUser.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" />
+            <input type="submit" value="update" [disabled]="!usernameValid" (click)="updateUsername()" />
+            <small>http://invow.io/{{tmpUser.username}}</small>
+            <div *ngIf="tmpUser.username != authService.currentUser.username">
+                <small *ngIf="validatingUsername">validation in progress..</small>
+                <small *ngIf="!validatingUsername && usernameValid">valid</small>
+                <small *ngIf="!validatingUsername && !usernameValid">invalid</small>
+            </div>
+        </div>
 
         <p><b>My email</b></p>
         <p><small>{{authService.currentUser.email}}</small></p>

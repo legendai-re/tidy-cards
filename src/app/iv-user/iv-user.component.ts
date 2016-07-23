@@ -22,7 +22,7 @@ export class IvUserComponent implements OnInit, OnDestroy  {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             let userId = params['user_id'];
-            if (this.authService.isLoggedIn && this.authService.currentUser._id === userId) {
+            if (this.authService.isLoggedIn && this.authService.currentUser.username === userId) {
                 this.displayPublic = false;
             } else {
                 this.displayPublic = true;

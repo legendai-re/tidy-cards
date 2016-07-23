@@ -4,7 +4,7 @@ module.exports = function getLocalStrategy(LocalStrategy){
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
 
-   return new LocalStrategy(
+    return new LocalStrategy(
 
         function (username, password, done) {
             var isValidPassword = function(user, password){
