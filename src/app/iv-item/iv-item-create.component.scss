@@ -35,10 +35,18 @@
     z-index: 1;
 }
 
+.item-new-preview {
+    margin: 0 0 10px;
+    display: block;
+    font-weight: bold;
+    color: rgba(0,0,0,.5);
+}
+
 .item-new-embeded-content {
     background: $collection-grey;
     overflow: hidden;
     border-radius: 3px 3px 0 0;
+    padding: 20px;
 }
 
 .item-new-embeded-content {
@@ -46,6 +54,14 @@
         max-width: 100%;
         display: block;
         margin: 0 auto;
+    }
+}
+
+.item-new-embeded-content .item-embeded-container {
+    margin: 0!important;
+
+    .item-embeded-image, .item-embeded-content {
+        border-radius: 0;
     }
 }
 
@@ -87,4 +103,5 @@
     height: 50px;
     padding: 5px 10px;
     border-radius: 0 0 3px 3px;
+    margin-top: 5px;
 }

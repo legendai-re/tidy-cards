@@ -15,7 +15,7 @@ CollectionSchema.pre('update', function(next) {
 CollectionSchema.methods.addItem = function addItem(item, callback) {
     item._collection = this._id;
     item.save(function(err){
-        if (err) {callback(err, iem); return;}
+        if (err) {callback(err, item); return;}
         callback(false, item);
     });
     this.itemsCount++;
