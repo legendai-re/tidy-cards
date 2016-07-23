@@ -65,7 +65,7 @@ function getMimeFromFile(file){
 var afterUpload = function(image){
     var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/' + 'original' + '/' + image._id + '.' + image.mime)
                 .pipe(fs.createWriteStream(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' + image.mime ))
-                .on('error', (e) => {console.log(err);})
+                .on('error', (e) => {console.log(e)})
 
     r.on('finish', () => {
         gm(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' +image.mime)
