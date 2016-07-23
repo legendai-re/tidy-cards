@@ -62,13 +62,15 @@ function getMimeFromFile(file){
     }
 }
 
+var tmpPath = 'server/helpers/image-uploader/tmp-uploads/';
+
 var afterUpload = function(image){
     var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/' + 'original' + '/' + image._id + '.' + image.mime)
-                .pipe(fs.createWriteStream(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' + image.mime ))
-                .on('error', (e) => {console.log(e)})
+                .pipe(fs.createWriteStream(tmpPath +'original/'+ image._id + '.' + image.mime ))
+                .on('error', (e) => {console.log("pipe error");console.log(e);})
 
     r.on('finish', () => {
-        gm(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' +image.mime)
+        gm(tmpPath +'original/'+ image._id + '.' +image.mime)
             .identify(function (err, data) {
                 if (err) console.log(err)
 
@@ -77,22 +79,22 @@ var afterUpload = function(image){
                 var height = data.size.height;
 
                 async.times(sizes.length, function(n, next) {
-                    gm(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' + image.mime)
-                    .thumb(sizes[n].x,sizes[n].y, __dirname + '../../../tmp-uploads/'+sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){
+                    gm(tmpPath +'original/'+ image._id + '.' + image.mime)
+                    .thumb(sizes[n].x,sizes[n].y, tmpPath +sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){
                         awsUpload(image, sizes[n]);
                         next(null);
                     })
                 }, function(err, results) {
                     if(err)
                         console.log(err);
-                    fs.unlink(__dirname + '../../../tmp-uploads/original/'+ image._id + '.' + image.mime);
+                    fs.unlink(tmpPath + 'original/'+ image._id + '.' + image.mime);
                 });
             });
     });
 }
 
 function awsUpload(image, size){
-    var imageLocalPath = __dirname + '../../../tmp-uploads/'+size.x+'x'+size.y+'/'+ image._id + '.' +image.mime;
+    var imageLocalPath = tmpPath+size.x+'x'+size.y+'/'+ image._id + '.' +image.mime;
     fs.readFile(imageLocalPath, function(err, data) {
         s3.createBucket({Bucket: process.env.S3_BUCKET}, function() {
             var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/'+size.x+'x'+size.y+'/'+ image._id + '.' +image.mime, Body: data};
