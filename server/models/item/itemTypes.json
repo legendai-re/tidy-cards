@@ -10,5 +10,8 @@
     },
     "TWEET":  {
         "id": "TWEET"
+    },
+    "TEXT":  {
+        "id": "TEXT"
     }
 }

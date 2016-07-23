@@ -15,6 +15,7 @@ export class IvUser {
     public facebook: any;
     public twitter: any;
     public google: any;
+    public local: any;
 
     constructor(
         _id?: string,
@@ -29,7 +30,8 @@ export class IvUser {
         _avatar?: IvImage,
         facebook?: any,
         twitter?: any,
-        google?: any) {
+        google?: any,
+        local: any) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -43,9 +45,12 @@ export class IvUser {
         this.facebook = facebook;
         this.twitter = twitter;
         this.google = google;
+        this.local = local;
     }
 
     public static createFormJson(obj) {
+        if(!obj)
+            return null;
         return new IvUser(
             obj._id,
             obj.createdAt,
@@ -59,7 +64,8 @@ export class IvUser {
             IvImage.createFormJson(obj._avatar),
             obj.facebook,
             obj.twitter,
-            obj.google
+            obj.google,
+            obj.local
             );
     }
 

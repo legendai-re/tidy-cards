@@ -63,6 +63,15 @@ export class IvAuthService {
         return Observable.throw(errMsg);
     }
 
+    public putUnlink (type: string): Observable<Boolean> {
+        let body = JSON.stringify({type: type});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.UNLINK, body, options)
+            .map((res) => {return true})
+            .catch(this.handleError);
+    }
+
     login (username: string, password: string): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.postLogin(username, password).subscribe(user => {

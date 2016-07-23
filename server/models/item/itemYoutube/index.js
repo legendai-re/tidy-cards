@@ -4,12 +4,10 @@ var Schema      = mongoose.Schema;
 var ItemYoutubeSchema = require('./schema')(Schema);
 
 ItemYoutubeSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-ItemYoutubeSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 ItemYoutube = mongoose.model('ItemYoutube', ItemYoutubeSchema);

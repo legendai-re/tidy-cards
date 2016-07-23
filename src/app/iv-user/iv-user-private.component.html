@@ -51,9 +51,20 @@
         </div>
         <div>
             <h2>Link account</h2>
-            <p><a *ngIf="!authService.currentUser.facebook" href="auth/facebook">Link facebook</a></p>
-            <p><a *ngIf="!authService.currentUser.twitter" href="auth/twitter">Link twitter</a></p>
-            <p><a *ngIf="!authService.currentUser.google" href="auth/google">Link google</a></p>
+            <p><a *ngIf="!authService.currentUser.facebook?.id" href="auth/facebook">Link facebook</a></p>
+            <div *ngIf="authService.currentUser.facebook?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.twitter?.id)">
+                <a href="auth/facebook">Unlink facebook</a>
+            </div>
+
+            <p><a *ngIf="!authService.currentUser.twitter?.id" href="auth/twitter">Link twitter</a></p>
+            <div *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.facebook?.id)">
+                <a href="auth/facebook">Unlink twitter</a>
+            </div>
+
+            <p><a *ngIf="!authService.currentUser.google?.id" href="auth/google">Link google</a></p>
+            <div *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.twitter?.id || authService.currentUser.facebook?.id)">
+                <a href="auth/facebook">Unlink google</a>
+            </div>
         </div>
         <hr>
     </div>

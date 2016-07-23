@@ -13,7 +13,7 @@ module.exports = function (req, res) {
         },
         function(callback){
              models.Collection.remove({}, function(err){
-                callback(null, 'user')
+                callback(null, 'collection')
              });
         },
         function(callback){
@@ -47,7 +47,6 @@ module.exports = function (req, res) {
             })
         }],
         function(err, results){
-            console.log(results);
             res.json({message: 'done'});
         }
     )

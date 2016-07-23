@@ -4,7 +4,9 @@ module.exports = function (req, res) {
     var bCrypt = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
     var models          = require('../../models');
+    var itemTypes       = require('../../models/item/itemTypes');
     var itemUrlList     = require('./data/itemUrlList.json');
+    var itemYoutubeList = require('./data/itemYoutubeList.json');
 
     var colors = ['CFD8DC','FF887A','FFD373','FFFF7C','A4ABFF','78D6FF','A4FFEB','CBFF8A'];
     var visibility = ['PUBLIC', 'PRIVATE', 'UNINDEXED'];
@@ -65,19 +67,19 @@ module.exports = function (req, res) {
 
             creatItem(0);
             function creatItem(x){
-                var itemUrl = new models.ItemUrl();
+                var types = ['URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL','YOUTUBE'];
+                var type = types[Math.floor(Math.random() * types.length)];
                 var item = new models.Item();
-                randItemUrl = itemUrlList[Math.floor(Math.random() * itemUrlList.length)];
-                itemUrl.url = randItemUrl.url;
-                itemUrl.host = randItemUrl.host;
-                itemUrl.image = randItemUrl.image;
-                itemUrl.title = randItemUrl.title;
-                itemUrl.description = randItemUrl.description;
-                itemUrl.author = randItemUrl.author;
-                itemUrl.type = randItemUrl.type;
-                itemUrl.site_name = randItemUrl.site_name;
-                itemUrl.save(function(err){
-                    item._content = itemUrl._id;
+                item.type = type;
+
+                if(type == 'URL')
+                    var content = getItemUrl();
+                if(type == 'YOUTUBE')
+                    var content = getItemYoutube();
+
+                content.save(function(err){
+                    if(err)console.log(err);
+                    item._content = content._id;
                     item._collection = collection._id;
                     item.save(function(err){
                         x++;
@@ -97,5 +99,25 @@ module.exports = function (req, res) {
         });
     }
 
+    function getItemUrl(){
+        var itemUrl = new models.ItemUrl();
+        randItemUrl = itemUrlList[Math.floor(Math.random() * itemUrlList.length)];
+        itemUrl.url = randItemUrl.url;
+        itemUrl.host = randItemUrl.host;
+        itemUrl.image = randItemUrl.image;
+        itemUrl.title = randItemUrl.title;
+        itemUrl.description = randItemUrl.description;
+        itemUrl.author = randItemUrl.author;
+        itemUrl.site_name = randItemUrl.site_name;
+        return itemUrl;
+    }
 
+    function getItemYoutube(){
+        var itemYoutube = new models.ItemYoutube();
+        randItemYoutube = itemYoutubeList[Math.floor(Math.random() * itemYoutubeList.length)];
+        itemYoutube.url = randItemYoutube.url;
+        itemYoutube.embedUrl = randItemYoutube.embedUrl;
+        itemYoutube.videoId = randItemYoutube.videoId
+        return itemYoutube;
+    }
 }

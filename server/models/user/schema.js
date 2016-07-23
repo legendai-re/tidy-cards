@@ -11,6 +11,10 @@ module.exports = function getUserSchema(Schema) {
             default: lifeStates.ACTIVE.id
         },
         local: {
+            active: {
+                type: Boolean,
+                default: false
+            },
             password: {
                 type: String,
                 select: false

@@ -61,11 +61,14 @@ export class IvItemCreateComponent implements OnInit {
         new Promise((resolve, reject) => {
             this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
         }).then((e)=>{
-            this.createContentFromUrl();
+            if((!this.item._content) || (this.urlEntry != this.item._content.url))
+                this.createContentFromUrl();
         })
     }
 
     public onUrlKeyDown(){
+        if((!this.item._content) || (this.urlEntry != this.item._content.url))
+            this.loadingContent = true;
         clearTimeout(this.typingTimer);
     }
 
@@ -81,7 +84,7 @@ export class IvItemCreateComponent implements OnInit {
                })
                this.validUrl = true;
            }else{
-               console.log('invalid url');
+               this.item._content = null;
                this.validUrl = false;
            }
            this.loadingContent = false;
@@ -107,11 +110,13 @@ export class IvItemCreateComponent implements OnInit {
     }
 
     public onCreatItemSubmit() {
-        if(this.item._content){
+        if(!this.item._content)this.item.type = IvItem.ITEM_TYPES.TEXT;
+        if(this.item._content && this.item._content.url==this.urlEntry || !this.item._content && this.item.description){
             this.itemService.postItem(this.item).subscribe(itemResponse => {
                 this.item._id = itemResponse._id;
                 this.item.createdAt = itemResponse.createdAt;
-                this.item._content._id = itemResponse._content._id;
+                if(itemResponse._content)
+                    this.item._content._id = itemResponse._content._id;
                 this.itemCreated = true;
                 this.newItem.emit({
                     value: this.item

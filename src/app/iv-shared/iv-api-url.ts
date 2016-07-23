@@ -5,6 +5,7 @@ export class IvApiUrl {
     public static get SIGNUP(): string { return 'auth/signup'; }
     public static get CURRENT_USER(): string { return 'auth/currentuser'; }
     public static get ROLES(): string { return 'auth/roles'; }
+    public static get UNLINK(): string { return 'auth/unlink'; }
 
     public static get USERS(): string { return 'api/users' ; }
     public static get VALID_USERNAME(): string { return 'api/users/helpers/valid-username' ; }

@@ -4,12 +4,10 @@ var Schema      = mongoose.Schema;
 var ItemTweetSchema = require('./schema')(Schema);
 
 ItemTweetSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-ItemTweetSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 ItemTweet = mongoose.model('ItemTweet', ItemTweetSchema);

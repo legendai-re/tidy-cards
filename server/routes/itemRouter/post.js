@@ -12,6 +12,7 @@ module.exports = function post (req, res) {
             item.description = req.body.description;
         }
         item.type = req.body.type.id;
+        console.log(item.type);
         models.Collection.findById(req.body._collection, function(err, collection){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
@@ -19,7 +20,9 @@ module.exports = function post (req, res) {
 
             createItemContent(item, req, function(err, content){
                 if (err){res.status(400).send({ error: "error while creating item content"}); return;}
-                item._content = content._id;
+                if(!content && !item.description){res.status(400).send({ error: "you must add a description if there is no url"}); return;}
+                if(content)
+                    item._content = content._id;
                 collection.addItem(item, function(err, item){
                     if(err) {console.log(err); res.sendStatus(500); return;}
                     res.json({data: item});
@@ -45,8 +48,10 @@ module.exports = function post (req, res) {
                 return createItemYoutube(req, callback);
             case itemTypes.TWEET.id:
                 return createItemTweet(req, callback);
+            case itemTypes.TEXT.id:
+                return callback(null, null);
             default:
-                callback('Unknow itemType', item);
+                return callback("unknow type", null);
         }
     }
 

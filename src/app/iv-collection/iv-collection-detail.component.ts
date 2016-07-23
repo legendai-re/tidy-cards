@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, OnDestroy }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
-import { Router, ActivatedRoute }         from '@angular/router';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
 import { IvAuthService }                  from '../iv-auth/iv-auth.service';
 import { IvCollectionService }            from './iv-collection.service';
@@ -15,7 +15,7 @@ import { IvDataLimit }                    from '../iv-shared/iv-data-limit.ts';
 @Component({
     templateUrl: './iv-collection-detail.component.html',
     styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [IvItemCreateComponent, IvItemComponent]
+    directives: [ROUTER_DIRECTIVES, IvItemCreateComponent, IvItemComponent]
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {

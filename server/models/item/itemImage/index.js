@@ -4,12 +4,10 @@ var Schema      = mongoose.Schema;
 var ItemImageSchema = require('./schema')(Schema);
 
 ItemImageSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-ItemImageSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 ItemImage = mongoose.model('ItemImage', ItemImageSchema);

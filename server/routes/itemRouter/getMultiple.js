@@ -101,8 +101,16 @@ module.exports = function getMultiple (req, res) {
                     }
                 });
                 break;
+            case itemTypes.TEXT.id:
+                i++;
+                if(i==items.length){
+                    callback(null, items);
+                }else{
+                    addItemsContent(i, items, callback);
+                }
+                break;
             default:
-                console.log("unknow type");
+                console.log(items[i])
         }
     }
 

@@ -1,5 +1,6 @@
 module.exports = function getTwitterStrategy(TwitterStrategy){
 
+    var slug = require('slug')
     var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
@@ -29,9 +30,10 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
             var newUser = new models.User();
             newUser.twitter.id = profile.id;
             newUser.twitter.token = accessToken;
-            if(profile.displayName)
-                newUser.unsafeUsername = (forbiddenUsernames.indexOf(profile.displayName.toLowerCase()) > -1 ) ? 'forbidden-name' : profile.displayName;
-            else
+            if(profile.displayName){
+                var slugDdisplayName = slug(profile.displayName, '-');
+                newUser.unsafeUsername = (forbiddenUsernames.indexOf(slugDdisplayName.toLowerCase()) > -1 ) ? 'forbidden-name' : slugDdisplayName;
+            }else
                 newUser.unsafeUsername = 'anonyme';
             newUser.name = ( profile.displayName || 'anonyme');
             newUser.roles = ['ROLE_USER'];

@@ -1,15 +1,18 @@
 <div class="item-new extended"><!-- collapsed/extended -->
     <form (ngSubmit)="onCreatItemSubmit()">
-        <div class="item-new-embeded-content loading-content" *ngIf="loadingContent">
+        <div class="item-new-embeded-content loading-content" *ngIf="urlEntry && loadingContent">
             Loading...
         </div>
-        <div class="item-new-embeded-content" *ngIf="item._content && validUrl">
+        <div class="item-new-embeded-content loading-content" *ngIf="urlEntry && !loadingContent && !validUrl">
+            Invalid Url
+        </div>
+        <div class="item-new-embeded-content" *ngIf="!loadingContent && item._content && validUrl">
             <iv-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]=item._content ></iv-item-url>
             <iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]=item._content ></iv-item-image>
             <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]=item._content [class.collapse]="!tweetRendered"></iv-item-tweet>
             <iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]=item._content ></iv-item-youtube>
         </div>
-        <input *ngIf="!validUrl" class="item-new-url" type="text" placeholder="Enter your url..." [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
+        <input class="item-new-url" type="text" placeholder="Enter your url..." [(ngModel)]="urlEntry" (keyup)="onUrlKeyUp()" (keydown)="onUrlKeyDown()" />
         <textarea *ngIf="addDescription" class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description"></textarea>
 
         <div class="item-create">
@@ -23,7 +26,7 @@
                     <i class="material-icons icon">link</i><span>Reset url</span>
                 </button>
             </div>
-            <input class="btn btn-create pull-xs-right" type="submit" value="Add" [disabled]="!item._content && !item.description"/>
+            <input class="btn btn-create pull-xs-right" type="submit" value="Add" [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"/>
         </div>
     </form>
 </div>

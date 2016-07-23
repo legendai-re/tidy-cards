@@ -7,12 +7,10 @@ var Schema      = mongoose.Schema;
 var UserSchema  = require('./schema')(Schema);
 
 UserSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-UserSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username', update: true}));

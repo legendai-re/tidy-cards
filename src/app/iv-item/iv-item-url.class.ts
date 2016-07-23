@@ -11,6 +11,7 @@ export class IvItemUrl {
     public author: string;
     public type: string;
     public site_name: string;
+    public noHttpUrl: string;
 
     constructor(
         _id?: string,
@@ -35,6 +36,7 @@ export class IvItemUrl {
         this.author = author;
         this.type = type;
         this.site_name = site_name;
+        this.noHttpUrl = this.removeHttp(this.url);
     }
 
     public static createFormJson(obj) {
@@ -58,5 +60,15 @@ export class IvItemUrl {
             obj.type,
             obj.site_name
             );
+    }
+
+    public removeHttp(url){
+        if(!url) return '';
+        if(url.substring(0, 7) == 'http://'){
+            url = url.substr(7);
+        }else if(url.substring(0, 8) == 'https://'){
+            url = url.substr(8);
+        }
+        return url;
     }
 }

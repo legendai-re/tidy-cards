@@ -4,12 +4,10 @@ var Schema      = mongoose.Schema;
 var StarSchema = require('./schema')(Schema);
 
 StarSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-StarSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 Star = mongoose.model('Star', StarSchema);

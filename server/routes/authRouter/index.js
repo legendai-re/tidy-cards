@@ -24,8 +24,13 @@ router.route('/google')
 router.route('/google/callback')
     .get(passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
 
+router.route('/unlink')
+	.put(isGranted('ROLE_USER'), function(req, res){
+        require('./putUnlinkAccount')(req, res);
+    });
+
 router.route('/login')
-	.post(bruteforce.prevent, passport.authenticate('local'), function(req, res){
+    .post(bruteforce.prevent, passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);
     });
 

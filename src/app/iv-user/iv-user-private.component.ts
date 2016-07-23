@@ -99,4 +99,20 @@ export class IvUserPrivateComponent implements OnInit {
             })
         }
     }
+
+    private unlinkAccount(type: string){
+        this.authService.putUnlink(type).subscribe((sucess) => {
+            switch (type) {
+                case 'FACEBOOK':
+                    this.authService.currentUser.facebook = null;
+                    break;
+                case 'TWITTER':
+                    this.authService.currentUser.twitter = null;
+                    break;
+                case 'GOOGLE':
+                    this.authService.currentUser.google = null;
+                    break;
+            }
+        })
+    }
 }

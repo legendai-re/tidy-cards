@@ -12,7 +12,8 @@ import { IvApiUrl }               from '../iv-shared/iv-api-url';
 @Injectable()
 export class IvItemContentService {
 
-    constructor (private jsonp: Jsonp, private sanitizer: DomSanitizationService, private http: Http) {}
+    constructor (private jsonp: Jsonp, private sanitizer: DomSanitizationService, private http: Http) {
+    }
 
     public getContentFromUrl(entryUrl): Promise<any>{
         return new Promise((resolve, reject) => {
@@ -51,6 +52,7 @@ export class IvItemContentService {
                             }else{
                                 var itemUrl = IvItemUrl.createFormJson(response.data);
                                 itemUrl.url = entryUrl;
+                                itemUrl.noHttpUrl = this.removeHttp(entryUrl);
                                 result = {
                                     type: IvItem.ITEM_TYPES.URL,
                                     _content: itemUrl

@@ -15,6 +15,7 @@ SESSION_NAME=localinvow
 ADMIN_EMAILS=[]
 IMAGES_URL=https://s3-eu-west-1.amazonaws.com/mybucketname/
 IMAGES_FOLDER=dev
+S3_BUCKET=my_bucket
 AWS_ACCESS_KEY_ID=my_aws_id
 AWS_SECRET_ACCESS_KEY=my_aws_secret
 FACEBOOK_APP_ID=my_facebook_app_id

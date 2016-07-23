@@ -17,6 +17,7 @@ module.exports = function postSignup(req, res) {
                 user.unsafeUsername = req.body.username;
                 user.name = req.body.username;
                 user.local.password = createHash(req.body.password);
+                user.local.active = true;
                 user.roles = (process.env.ADMIN_EMAILS.indexOf(req.body.email) > -1 ) ? ['ROLE_USER', 'ROLE_ADMIN'] : ['ROLE_USER'];
                 user.connectionTypes.push(connectionTypes.LOCAL.id);
                 user.save(function(err){

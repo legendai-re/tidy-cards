@@ -1,5 +1,6 @@
 module.exports = function getGoogleStrategy(GoogleStrategy){
 
+    var slug = require('slug')
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
     var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
@@ -28,9 +29,10 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
             var newUser = new models.User();
             newUser.google.id = profile.id;
             newUser.google.token = accessToken;
-            if(profile.displayName)
-                newUser.unsafeUsername = usernameValidator.isValid(profile.displayName) ? profile.displayName : 'user';
-            else
+            if(profile.displayName){
+                var slugDdisplayName = slug(profile.displayName, '-');
+                newUser.unsafeUsername = (forbiddenUsernames.indexOf(slugDdisplayName.toLowerCase()) > -1 ) ? 'forbidden-name' : slugDdisplayName;
+            }else
                 newUser.unsafeUsername = 'anonyme';
             newUser.name = profile.displayName;
             newUser.roles = ['ROLE_USER'];
