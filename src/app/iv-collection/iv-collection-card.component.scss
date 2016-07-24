@@ -41,6 +41,18 @@
     z-index: 0;
     border-radius: 3px 3px 0 0;
 
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid $border-color;
+        border-bottom: 0;
+        border-radius: 3px 3px 0 0;
+    }
 }
 
 .card-thumbnail {
@@ -65,13 +77,13 @@
 .card-container {
     width: 100%;
     height: 100%;
-    padding: 20px 20px 0;
 }
 
 .card-content {
     width: 100%;
-    height: 230px;
+    height: 250px;
     color: $black;
+    padding: 20px;
 
     &.has-thumbnail {
         color: $white;
@@ -90,8 +102,9 @@
 }
 
 .card-details {
-    height: 60px;
-    margin-top: -30px;
+    height: 100px;
+    margin-top: -50px;
+    padding: 20px;
 }
 
 .card-avatar {
