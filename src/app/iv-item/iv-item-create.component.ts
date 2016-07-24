@@ -23,6 +23,7 @@ import { IvItemContentService }         from './iv-item-content.service';
 })
 
 export class IvItemCreateComponent implements OnInit {
+    public mode: string;
     public item: IvItem;
     public itemCreated: boolean;
     public urlEntry: string;
@@ -34,8 +35,10 @@ export class IvItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
+    @Input('item') inputItem: IvItem;
     @Input('collection') collection: IvCollection;
     @Output() newItem = new EventEmitter();
+    @Output() updateCanceled = new EventEmitter();
 
     constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService, private itemContentService: IvItemContentService) {
         this.doneTypingInterval = 1000;
@@ -47,13 +50,32 @@ export class IvItemCreateComponent implements OnInit {
     }
 
     private init(){
+        this.itemCreated = false;
+        this.loadingContent = false;
+        this.addDescription = false;
+        if(this.inputItem!=null){
+            this.initUpdateMode();
+        }else{
+            this.initCreateMode();
+        }
+    }
+
+    private initCreateMode(){
+        this.mode = 'CREATE';
         this.item = new IvItem();
         this.item._collection = this.collection._id;
         this.urlEntry = '';
-        this.itemCreated = false;
-        this.loadingContent = false;
         this.validUrl = false;
-        this.addDescription = false;
+    }
+
+    private initUpdateMode(){
+        this.mode = 'UPDATE';
+        this.item = IvItem.createFormJson(this.inputItem);
+        if(this.item._content!=null){
+            this.urlEntry = this.item._content.url;
+            this.validUrl = true;
+        }
+        if(this.item.description)this.addDescription = true;
     }
 
     public onUrlKeyUp(){
@@ -109,21 +131,44 @@ export class IvItemCreateComponent implements OnInit {
         this.validUrl = false;
     }
 
-    public onCreatItemSubmit() {
-        if(!this.item._content)this.item.type = IvItem.ITEM_TYPES.TEXT;
-        if(this.item._content && this.item._content.url==this.urlEntry || !this.item._content && this.item.description){
-            this.itemService.postItem(this.item).subscribe(itemResponse => {
-                this.item._id = itemResponse._id;
-                this.item.createdAt = itemResponse.createdAt;
-                if(itemResponse._content)
-                    this.item._content._id = itemResponse._content._id;
-                this.itemCreated = true;
-                this.newItem.emit({
-                    value: this.item
-                });
-                this.init();
-            });
+    public onItemSubmit(){
+        if(this.isValidToSave()){
+            if(this.mode == 'CREATE')
+                this.createItem();
+            else
+                this.updateItem();
         }
     }
 
+    private isValidToSave(){
+        if(!this.item._content)this.item.type = IvItem.ITEM_TYPES.TEXT;
+        return this.item._content && this.item._content.url==this.urlEntry || !this.item._content && this.item.description;
+    }
+
+    private createItem() {
+        this.itemService.postItem(this.item).subscribe(itemResponse => {
+            this.item._id = itemResponse._id;
+            this.item.createdAt = itemResponse.createdAt;
+            if(itemResponse._content)
+                this.item._content._id = itemResponse._content._id;
+            this.itemCreated = true;
+            this.newItem.emit({
+                value: this.item
+            });
+            this.init();
+        });
+    }
+
+    private updateItem(){
+        this.itemService.putItem(this.item).subscribe(itemResponse => {
+            this.item.updatedAt = itemResponse.updatedAt;
+            this.newItem.emit({
+                value: this.item
+            });
+        })
+    }
+
+    public cancelUpdate(){
+        this.updateCanceled.emit({});
+    }
 }

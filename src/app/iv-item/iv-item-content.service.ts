@@ -73,7 +73,6 @@ export class IvItemContentService {
         itemYoutube.url = entryUrl;
         itemYoutube.videoId = videoId;
         itemYoutube.embedUrl = 'https://www.youtube.com/embed/'+videoId;
-        itemYoutube.trustedEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(itemYoutube.embedUrl);
         return itemYoutube;
     }
 

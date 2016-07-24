@@ -4,12 +4,10 @@ var Schema      = mongoose.Schema;
 var ItemSchema = require('./schema')(Schema);
 
 ItemSchema.pre('save', function(next) {
-    this.createdAt = new Date();
-    next();
-});
-
-ItemSchema.pre('update', function(next) {
+    if(!this.createdAt)
+        this.createdAt = new Date();
     this.updatedAt = Date();
+    next();
 });
 
 Item = mongoose.model('Item', ItemSchema);

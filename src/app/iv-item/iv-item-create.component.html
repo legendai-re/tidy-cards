@@ -1,5 +1,5 @@
 <div class="item-new extended"><!-- collapsed/extended -->
-    <form (ngSubmit)="onCreatItemSubmit()">
+    <form (ngSubmit)="onItemSubmit()">
         <div class="item-new-embeded-content loading-content" *ngIf="urlEntry && loadingContent">
             Loading...
         </div>
@@ -27,7 +27,11 @@
                     <i class="material-icons icon">link</i><span>Reset url</span>
                 </button>
             </div>
-            <input class="btn btn-create pull-xs-right" type="submit" value="Add" [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"/>
+
+            <input *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit" value="Add" [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"/>
+
+            <input *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit" value="Update" [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"/>
+            <a *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" (click)="cancelUpdate()">Cancel</a>
         </div>
     </form>
 </div>

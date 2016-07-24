@@ -66,7 +66,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     private emitUpdateHeaderEvent(){
         var type = this.collection._thumbnail ? 'IMAGE' : 'COLOR';
         var color = this.collection.color;
-        var image = this.collection._thumbnail ? this.collection._thumbnail.getPath('original') : '';
+        var image = this.collection._thumbnail ? this.collection._thumbnail.getPath('1000x400') : '';
         this.headerService.emitUpdateHeaderEvent({
             value:{
                 type: type,
@@ -90,22 +90,12 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     private onItemsReceived(items){
-        items = this.createTrustedRessources(items);
         for(let i in items)
             this.collection._items.push(items[i]);
         this.renderTweets();
         this.haveMoreItems = (items.length==IvDataLimit.ITEM);
         this.loadingItems = false;
         this.itemLoaded = true;
-    }
-
-    private createTrustedRessources(items){
-        for(var key in items){
-            if(items[key].type.id == 'YOUTUBE'){
-                items[key]._content.trustedEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(items[key]._content.embedUrl);
-            }
-        }
-        return items;
     }
 
     private renderTweets(){

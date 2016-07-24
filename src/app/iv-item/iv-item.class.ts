@@ -47,7 +47,7 @@ export class IvItem {
     }
 
     public static getContent(obj){
-        var type = typeof obj.type === 'string' ? IvItem.ITEM_TYPES[obj.type] : type;
+        var type = typeof obj.type === 'string' ? IvItem.ITEM_TYPES[obj.type] : obj.type;
         switch (type.id) {
             case IvItem.ITEM_TYPES.URL.id:
                 return IvItemUrl.createFormJson(obj._content);

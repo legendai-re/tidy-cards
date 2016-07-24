@@ -18,12 +18,6 @@ export class IvItemService {
 
     constructor (private http: Http) {}
 
-    /*public getCollection (_id: string, params: URLSearchParams): Observable<IvCollection> {
-        return this.http.get(IvApiUrl.COLLECTIONS + '/' + _id, { search: params })
-        .map(this.handleCollection)
-        .catch(this.handleError);
-    }*/
-
     public getItems (params: URLSearchParams): Observable<IvItem[]> {
         return this.http.get(IvApiUrl.ITEMS, { search: params })
         .map(this.handleItems)
@@ -35,6 +29,15 @@ export class IvItemService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(IvApiUrl.ITEMS, body, options)
+        .map(this.handleItem)
+        .catch(this.handleError);
+    }
+
+    public putItem (item: IvItem): Observable<IvItem> {
+        let body = JSON.stringify(item);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.ITEMS + '/' + item._id, body, options)
         .map(this.handleItem)
         .catch(this.handleError);
     }

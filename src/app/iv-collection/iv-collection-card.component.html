@@ -1,7 +1,7 @@
 <article class="card" *ngIf="collection">
     <a [routerLink]="['/c', collection._id]" >
         <div *ngIf="collection._thumbnail" class="thumbnail card-thumbnail">
-            <img [src]="collection._thumbnail?.getPath('original')" />
+            <img [src]="collection._thumbnail?.getPath('300x250')" />
         </div>
         <div *ngIf="!collection._thumbnail" [style.background-color]="'#'+collection.color" class="card-color"></div>
     </a>
