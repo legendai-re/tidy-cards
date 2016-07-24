@@ -6,25 +6,25 @@ module.exports = function putUnlinkAccount(req, res) {
     }else{
         switch(req.body.type){
             case 'FACEBOOK':
-                if(!user.locale.active && !user.twitter.id && !user.google.id)
+                if(!req.user.local.active && !req.user.twitter.id && !req.user.google.id)
                     return res.status(400).send({ error: "you must have one way to connect"});
-                user.facebook.id = null;
+                req.user.facebook.id = null;
                 break;
             case 'TWITTER':
-                if(!user.locale.active && !user.facebook.id && !user.google.id)
+                if(!req.user.local.active && !req.user.facebook.id && !req.user.google.id)
                     return res.status(400).send({ error: "you must have one way to connect"});
-                user.twitter.id = null;
+                req.user.twitter.id = null;
                 break;
             case 'GOOGLE':
-                if(!user.locale.active && !user.twitter.id && !user.facebook.id)
+                if(!req.user.local.active && !req.user.twitter.id && !req.user.facebook.id)
                     return res.status(400).send({ error: "you must have one way to connect"});
-                user.google.id = null;
+                req.user.google.id = null;
                 break;
         }
 
-        user.save(function(err){
+        req.user.save(function(err){
             if (err) {console.log(err); res.sendStatus(500); return;}
-            res.jon({data: {message: req.body.type + 'unlinked'}})
+            res.json({data: {message: req.body.type + 'unlinked'}})
         })
     }
 }

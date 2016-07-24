@@ -100,7 +100,7 @@ export class IvUserPrivateComponent implements OnInit {
         }
     }
 
-    private unlinkAccount(type: string){
+    public unlinkAccount(type: string){
         this.authService.putUnlink(type).subscribe((sucess) => {
             switch (type) {
                 case 'FACEBOOK':
