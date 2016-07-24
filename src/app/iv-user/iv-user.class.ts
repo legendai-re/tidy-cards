@@ -31,7 +31,7 @@ export class IvUser {
         facebook?: any,
         twitter?: any,
         google?: any,
-        local: any) {
+        local?: any) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
