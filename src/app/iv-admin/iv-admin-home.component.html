@@ -2,6 +2,8 @@
     <div class="container">
         <h2>Admin</h2>
         <div style="margin-top: 100px;">
+            <div><a [routerLink]="['/admin/featured']">Featured management</a></div>
+
             <a (click)="deleteAllButUsers()">Delete all <small>(except admins)</small></a>
             <div>
                 Generate

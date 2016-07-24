@@ -64,14 +64,12 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     private emitUpdateHeaderEvent(){
-        var type = this.collection._thumbnail ? 'IMAGE' : 'COLOR';
-        var color = this.collection.color;
-        var image = this.collection._thumbnail ? this.collection._thumbnail.getPath('1000x400') : '';
         this.headerService.emitUpdateHeaderEvent({
             value:{
-                type: type,
-                color: color,
-                image: image
+                type: this.collection._thumbnail ? 'IMAGE' : 'COLOR',
+                color: this.collection.color,
+                image:  this.collection._thumbnail ? this.collection._thumbnail.getPath('1000x400') : '',
+                title: this.collection.title
             }
         });
     }

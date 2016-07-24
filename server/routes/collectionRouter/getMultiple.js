@@ -5,11 +5,10 @@ module.exports = function getMultiple (req, res) {
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
 
-
 	var rq = req.query;
 
 	getQueryFiler(rq, req, function(filterObj){
-		var q = models.Collection.find(filterObj).sort({'createdAt': 1}).limit(20);
+		var q = models.Collection.find(filterObj).limit(20);
         q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
 		q.populate('_thumbnail');
@@ -18,17 +17,17 @@ module.exports = function getMultiple (req, res) {
             populate: { path: '_avatar' }
         });
 
+        if(rq.sort_field && rq.sort_dir && (parseInt(rq.sort_dir)==1 || parseInt(rq.sort_dir)==-1)){
+            var sortObj = {};
+            sortObj[rq.sort_field] = parseInt(rq.sort_dir);
+            q.sort(sortObj);
+        }
+
 		if(rq.skip)
 			q.skip(parseInt(rq.skip));
 
 		if(rq.limit)
 			q.limit(parseInt(rq.limit));
-
-		if(rq.sort_field && rq.sort_dir && (parseInt(rq.sort_dir)==1 || parseInt(rq.sort_dir)==-1)){
-			var sortObj = {};
-			sortObj[rq.sort_field] = rq.sort_dir;
-			q.sort(sortObj);
-		}
 
 		q.exec(function(err, collections){
 	    	if (err) {console.log(err); res.sendStatus(500); return;}
@@ -47,6 +46,10 @@ module.exports = function getMultiple (req, res) {
 
 		if(rq.search)
 			filterObj.title = { $regex:  '.*'+rq.search+'.*', $options: 'i'};
+        if(rq.isFeatured)
+            filterObj.isFeatured = true;
+        if(rq.isOnDiscover)
+            filterObj.isOnDiscover = true;
 
 		if(rq._author){
 			filterObj._author = rq._author;

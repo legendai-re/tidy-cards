@@ -11,6 +11,7 @@ var models          = require('../../models');
 aws.config.region = 'eu-west-1';
 
 var s3 = new aws.S3({params: {Bucket: process.env.S3_BUCKET}});
+
 var upload = multer({
   storage: multerS3({
     s3: s3,
@@ -73,11 +74,7 @@ var afterUpload = function(image){
         gm(tmpPath +'original/'+ image._id + '.' +image.mime)
             .identify(function (err, data) {
                 if (err) console.log(err)
-
                 var sizes = imagesTypes[image.type].sizes;
-                var width = data.size.width;
-                var height = data.size.height;
-
                 async.times(sizes.length, function(n, next) {
                     gm(tmpPath +'original/'+ image._id + '.' + image.mime)
                     .thumb(sizes[n].x,sizes[n].y, tmpPath +sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){

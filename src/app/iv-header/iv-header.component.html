@@ -21,22 +21,12 @@
         </form>
 
         <nav class="nav nav-pills pull-xs-right collapse navbar-toggleable-md">
-            <li class="nav-item" *ngIf="!authService.isLoggedIn">
-                <a class="nav-link" [class.active]="router.url == '/c/popular'" [routerLink]="['/c/popular']">
-                    Popular
-                </a>
-            </li>
-            <li class="nav-item" *ngIf="!authService.isLoggedIn">
-                <a class="nav-link" [class.active]="router.url == '/c/last'" [routerLink]="['/c/last']">
-                    Last
-                </a>
-            </li>
             <li class="nav-item" *ngIf="authService.isLoggedIn">
                 <a class="nav-link" [class.active]="router.url == '/dashboard'" [routerLink]="['/dashboard']">
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item" *ngIf="authService.isLoggedIn">
+            <li class="nav-item">
                 <a class="nav-link" [class.active]="router.url == '/discover'" [routerLink]="['/discover']">
                     Discover
                 </a>
@@ -66,4 +56,7 @@
         </nav>
     </div>
     <div *ngIf="!image" class="container radial-cover"></div>
+    <div class="page-wrapper">
+        <h2 class="collection-page-title">{{title}}</h2>
+    </div>
 </header>

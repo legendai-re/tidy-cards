@@ -16,6 +16,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     public type: string;
     public color: string;
     public image: any;
+    public title: string;
     public noHeader: boolean;
     private sub: any;
     private defaultColor: string;
@@ -43,6 +44,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             this.type = event.value.type;
             this.color = event.value.color;
             this.image = event.value.image;
+            this.title = event.value.title;
         }
     }
 
@@ -50,6 +52,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         this.noHeader = false;
         this.color = this.defaultColor;
         this.image = null;
+        this.title = '';
     }
 
     ngOnDestroy() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute }       from '@angular/router';
+import { Router, ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from '@angular/http';
 import { Observable }             from 'rxjs/Observable';
 import { IvApiUrl }                 from '../iv-shared/iv-api-url';
@@ -7,7 +7,8 @@ import { IvApiUrl }                 from '../iv-shared/iv-api-url';
 
 @Component({
     templateUrl: './iv-admin-home.component.html',
-    styleUrls: ['./iv-admin-home.component.scss']
+    styleUrls: ['./iv-admin-home.component.scss'],
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class IvAdminHomeComponent {

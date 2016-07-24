@@ -12,8 +12,7 @@ export class IvApiUrl {
     public static get IMAGES(): string { return 'api/images' ; }
     public static get COLLECTIONS(): string { return 'api/collections' ; }
     public static get ITEMS(): string { return 'api/items' ; }
-    public static get STAR(): string { return 'api/stars' ; }
-
     public static get ITEMS_URL(): string { return 'api/items/url' ; }
+    public static get STAR(): string { return 'api/stars' ; }
 
 }

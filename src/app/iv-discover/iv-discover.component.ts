@@ -13,48 +13,50 @@ import { IvDataLimit }                     from '../iv-shared/iv-data-limit.ts';
 })
 export class IvDiscoverComponent implements OnInit {
 
-    public pageNb: number;
-    public haveMoreCollections: boolean;
-    public loadingCollections: boolean;
-    public collections: IvCollection[];
+    public featuredCollections: IvCollection[];
+    public popularCollections: IvCollection[];
+    public lastCollections: IvCollection[];
 
     constructor( private router: Router, private collectionService: IvCollectionService) {
     }
 
     ngOnInit() {
-        this.pageNb = 0;
-        this.loadingCollections = false;
-        this.haveMoreCollections = true;
-        this.collections = [];
-        this.loadCollections();
+        this.loadFeaturedCollections();
+        this.loadPopularCollections();
+        this.loadLastCollections();
     }
 
-    public loadNextPage(){
-        if(this.haveMoreCollections){
-            this.pageNb++;
-            this.loadCollections();
-        }else{
-            console.log('no more collections');
-        }
-    }
-
-    private loadCollections(){
-        this.loadingCollections = true;
+    private loadFeaturedCollections(){
         let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
+        params.set('limit', '8');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
+        params.set('isFeatured', 'true');
+        params.set('isOnDiscover', 'true');
         this.collectionService.getCollections(params).subscribe(collections => {
-            this.onCollectionsReceived(collections);
+            this.featuredCollections = collections;
         }, () => {});
     }
 
-    private onCollectionsReceived(collections){
-        for(let i in collections)
-            this.collections.push(collections[i]);
-        this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
-        this.loadingCollections = false;
+    private loadPopularCollections(){
+        let params = new URLSearchParams();
+        params.set('limit', '8');
+        params.set('sort_field', 'starsCount');
+        params.set('sort_dir', '-1');
+        this.collectionService.getCollections(params).subscribe(collections => {
+            this.popularCollections = collections;
+        }, () => {});
     }
+
+    private loadLastCollections(){
+        let params = new URLSearchParams();
+        params.set('limit', '8');
+        params.set('sort_field', 'createdAt');
+        params.set('sort_dir', '-1');
+        this.collectionService.getCollections(params).subscribe(collections => {
+            this.lastCollections = collections;
+        }, () => {});
+    }
+
 
 }

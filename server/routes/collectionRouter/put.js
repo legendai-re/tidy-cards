@@ -8,6 +8,12 @@ module.exports = function put (req, res) {
         if (err) {console.log(err); res.sendStatus(500); return;}
         if(!collection) {res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id}); return;}
         if(collection._author._id.equals(req.user._id) || req.user.isGranted('ROLE_ADMIN')){
+
+            if(req.user.isGranted('ROLE_ADMIN')){
+                collection.isFeatured = req.body.isFeatured;
+                collection.isOnDiscover = req.body.isOnDiscover;
+            }
+
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
             collection.bio = (req.body.bio || collection.bio);

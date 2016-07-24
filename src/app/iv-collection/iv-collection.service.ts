@@ -38,6 +38,15 @@ export class IvCollectionService {
         .catch(this.handleError);
     }
 
+    public putCollection (collection: IvCollection): Observable<IvCollection> {
+        let body = JSON.stringify(collection);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.COLLECTIONS + '/' + collection._id, body, options)
+        .map(this.handleCollection)
+        .catch(this.handleError);
+    }
+
     public deleteCollection (_id: string): Observable<any> {
         return this.http.delete(IvApiUrl.COLLECTIONS + '/' + _id);
     }

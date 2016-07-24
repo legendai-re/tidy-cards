@@ -53,6 +53,14 @@ module.exports = function getCollectionSchema(Schema) {
             type: Number,
             default: 0
         },
+        isFeatured: {
+            type: Boolean,
+            default: false
+        },
+        isOnDiscover: {
+            type: Boolean,
+            default: false
+        },
 
         //User session related, not saved in database
         _star: { type: String, ref: 'Star' },

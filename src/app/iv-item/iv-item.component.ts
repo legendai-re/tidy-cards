@@ -34,7 +34,6 @@ export class IvItemComponent implements OnInit{
 
     public updateItemIntent(){
         this.intentToUpdate = true;
-        console.log('update');
     }
 
     public onItemUpdatedCanceled(){
