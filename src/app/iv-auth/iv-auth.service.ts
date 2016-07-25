@@ -101,14 +101,16 @@ export class IvAuthService {
     initCurrentUser(): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.getCurrentUser().subscribe(user => {
-                this.currentUser = user;
-                this.isLoggedIn = true;
-                this.authInitialized = true;
-                resolve(true);
-            }, () => {
-                this.isLoggedIn = false;
-                this.authInitialized = true;
-                resolve(false);
+                if(user._id){
+                    this.currentUser = user;
+                    this.isLoggedIn = true;
+                    this.authInitialized = true;
+                    resolve(true);
+                }else{
+                    this.isLoggedIn = false;
+                    this.authInitialized = true;
+                    resolve(false);
+                }
             });
         });
     }

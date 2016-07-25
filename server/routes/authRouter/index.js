@@ -40,7 +40,7 @@ router.route('/logout')
     });
 
 router.route('/currentuser')
-	.get(isGranted('ROLE_USER'), function(req,res){
+	.get(function(req,res){
         require('./getCurrentuser')(req, res);
     });
 

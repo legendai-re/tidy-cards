@@ -18,53 +18,62 @@ export class IvItemContentService {
     public getContentFromUrl(entryUrl): Promise<any>{
         return new Promise((resolve, reject) => {
             var result;
-            this.getIsImage(entryUrl).subscribe((success) => {
-                if(success){
+
+            this.getIsImage(entryUrl).subscribe((sucess)=>{
+                if(sucess){
                     result = {
                         type: IvItem.ITEM_TYPES.IMAGE,
                         _content: this.createItemImage(entryUrl)
                     };
                     resolve(result);
-                }else if(this.getIsTweet(entryUrl)){
-                    this.getEmbedTweet(entryUrl).subscribe((data)=>{
-                        result = {
-                            type: IvItem.ITEM_TYPES.TWEET,
-                            _content: IvItemTweet.createFormJson(data)
-                        };
-                        resolve(result);
-                    });
-                }else if(this.getYoutubeVideoId(entryUrl)){
-                    result = {
-                        type: IvItem.ITEM_TYPES.YOUTUBE,
-                        _content: this.createItemYoutube(entryUrl, this.getYoutubeVideoId(entryUrl))
-                    };
-                    resolve(result);
-                }else{
-                    var noHttpUrl = this.removeHttp(entryUrl);
-                    var host = noHttpUrl.split('/')[0];
-                    var path = noHttpUrl.substr(host.length);
-                    if(host==''){
-                        resolve(null);
-                    }else{
-                        this.getFirstImage(host, path).subscribe((response: any) => {
-                            if(response.error){
-                                resolve(null);
-                            }else{
-                                var itemUrl = IvItemUrl.createFormJson(response.data);
-                                itemUrl.url = entryUrl;
-                                itemUrl.noHttpUrl = this.removeHttp(entryUrl);
-                                result = {
-                                    type: IvItem.ITEM_TYPES.URL,
-                                    _content: itemUrl
-                                };
-                                resolve(result);
-                            }
-                        }, () => {
-                            resolve(null);
-                        })
-                    }
                 }
             })
+
+            if(this.simpleGetIsImage(entryUrl)){
+                result = {
+                    type: IvItem.ITEM_TYPES.IMAGE,
+                    _content: this.createItemImage(entryUrl)
+                };
+                resolve(result);
+            }else if(this.getIsTweet(entryUrl)){
+                this.getEmbedTweet(entryUrl).subscribe((data)=>{
+                    result = {
+                        type: IvItem.ITEM_TYPES.TWEET,
+                        _content: IvItemTweet.createFormJson(data)
+                    };
+                    resolve(result);
+                });
+            }else if(this.getYoutubeVideoId(entryUrl)){
+                result = {
+                    type: IvItem.ITEM_TYPES.YOUTUBE,
+                    _content: this.createItemYoutube(entryUrl, this.getYoutubeVideoId(entryUrl))
+                };
+                resolve(result);
+            }else{
+                var noHttpUrl = this.removeHttp(entryUrl);
+                var host = noHttpUrl.split('/')[0];
+                var path = noHttpUrl.substr(host.length);
+                if(host==''){
+                    resolve(null);
+                }else{
+                    this.getFirstImage(host, path).subscribe((response: any) => {
+                        if(response.error){
+                            resolve(null);
+                        }else{
+                            var itemUrl = IvItemUrl.createFormJson(response.data);
+                            itemUrl.url = entryUrl;
+                            itemUrl.noHttpUrl = this.removeHttp(entryUrl);
+                            result = {
+                                type: IvItem.ITEM_TYPES.URL,
+                                _content: itemUrl
+                            };
+                            resolve(result);
+                        }
+                    }, () => {
+                        resolve(null);
+                    })
+                }
+            }
         })
     }
 
@@ -117,9 +126,13 @@ export class IvItemContentService {
         });
     }
 
+    private simpleGetIsImage(url){
+         return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
+
     private getIsImage(url): Observable<Boolean> {
         return Observable.create(observer => {
-            var timeout = 2000;
+            var timeout = 5000;
             var timedOut = false, timer;
             var img = new Image();
             img.onerror = img.onabort = function() {

@@ -2,21 +2,22 @@ module.exports = function put (req, res) {
 
     var models      = require('../../models');
 
-    q = models.Collection.findById(req.params.collection_id).populate('_author');
+    q = models.Collection.findById(req.params.collection_id);
 
 	q.exec(function(err, collection) {
         if (err) {console.log(err); res.sendStatus(500); return;}
         if(!collection) {res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id}); return;}
-        if(collection._author._id.equals(req.user._id) || req.user.isGranted('ROLE_ADMIN')){
+        if(collection._author == req.user._id || req.user.isGranted('ROLE_ADMIN')){
 
             if(req.user.isGranted('ROLE_ADMIN')){
+                collection.featuredAt = req.body.isFeatured ? new Date() : null;
                 collection.isFeatured = req.body.isFeatured;
                 collection.isOnDiscover = req.body.isOnDiscover;
             }
 
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
-            collection.bio = (req.body.bio || collection.bio);
+            collection.bio = req.body.bio;
             collection._thumbnail = (req.body._thumbnail && req.body._thumbnail._id) ? req.body._thumbnail._id : collection._thumbnail;
             collection.save(function(err) {
                 if (err) {console.log(err); res.sendStatus(500); return;}

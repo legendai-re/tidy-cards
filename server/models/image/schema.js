@@ -10,14 +10,15 @@ module.exports = function getImageSchema(Schema) {
         type: {
             type: String,
             required: true
-        }               
+        },
+        _user : { type: String, ref: 'User' }
     },{
         toObject: {
             virtuals: true
         },
         toJSON: {
-            virtuals: true 
+            virtuals: true
         }
     });
-    
+
 }

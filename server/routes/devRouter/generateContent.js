@@ -35,8 +35,8 @@ module.exports = function (req, res) {
         user.unsafeUsername = username;
         user.name = username;
         user.local.password = createHash('password');
+        user.local.active = true;
         user.roles = ['ROLE_USER'];
-        user.connectionTypes.push(connectionTypes.LOCAL.id);
         user.save(function(err){
             i++;
             if(i==userNb){

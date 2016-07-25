@@ -43,7 +43,7 @@ export class IvCollectionFeaturedComponent implements OnInit {
         let params = new URLSearchParams();
         params.set('limit', IvDataLimit.COLLECTION.toString());
         params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
-        params.set('sort_field', 'createdAt');
+        params.set('sort_field', 'featuredAt');
         params.set('sort_dir', '-1');
         params.set('isFeatured', 'true');
         this.collectionService.getCollections(params).subscribe(collections => {

@@ -25,12 +25,11 @@ var upload = multer({
         var type = getTypeFromReq(req);
         image.type = type.name;
         image.mime = getMimeFromFile(file);
-
+        image._user = req.user._id;
         if(!image.type || !image.mime){
             callback(true, null)
             return;
         }
-
         image.save(function(err){
             req.image = image;
             callback(null, type.path + '/original/' + image._id + '.' + image.mime);
@@ -78,7 +77,7 @@ var afterUpload = function(image){
                 async.times(sizes.length, function(n, next) {
                     gm(tmpPath +'original/'+ image._id + '.' + image.mime)
                     .thumb(sizes[n].x,sizes[n].y, tmpPath +sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){
-                        awsUpload(image, sizes[n]);
+                        awsUpload(image, sizes[n].x+'x'+sizes[n].y);
                         next(null);
                     })
                 }, function(err, results) {
@@ -90,22 +89,36 @@ var afterUpload = function(image){
     });
 }
 
-function awsUpload(image, size){
-    var imageLocalPath = tmpPath+size.x+'x'+size.y+'/'+ image._id + '.' +image.mime;
+function awsUpload(image, size, callback){
+    var imageLocalPath = tmpPath+size+'/'+ image._id + '.' +image.mime;
     fs.readFile(imageLocalPath, function(err, data) {
         s3.createBucket({Bucket: process.env.S3_BUCKET}, function() {
-            var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/'+size.x+'x'+size.y+'/'+ image._id + '.' +image.mime, Body: data};
+            var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/'+size+'/'+ image._id + '.' +image.mime, Body: data};
             s3.putObject(params, function(err, data) {
                 if (err)
                     console.log(err);
-                else
+                else{
                     fs.unlink(imageLocalPath);
+                    if(callback)callback();
+                }
             });
         });
     });
 }
 
+function getSocialNetworkAvatar(image, url){
+    var r = request(url)
+                .pipe(fs.createWriteStream(tmpPath + 'original/'+ image._id + '.' + image.mime ))
+                .on('error', (e) => {console.log("pipe error");console.log(e);})
+    r.on('finish', () => {
+        awsUpload(image, 'original', function(){
+            afterUpload(image);
+        })
+    })
+}
+
 module.exports = {
   upload: upload,
-  afterUpload: afterUpload
+  afterUpload: afterUpload,
+  getSocialNetworkAvatar: getSocialNetworkAvatar
 };

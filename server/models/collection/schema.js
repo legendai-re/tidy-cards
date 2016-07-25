@@ -57,6 +57,7 @@ module.exports = function getCollectionSchema(Schema) {
             type: Boolean,
             default: false
         },
+        featuredAt: { type: Date },
         isOnDiscover: {
             type: Boolean,
             default: false

@@ -29,7 +29,7 @@ export class IvDiscoverComponent implements OnInit {
     private loadFeaturedCollections(){
         let params = new URLSearchParams();
         params.set('limit', '8');
-        params.set('sort_field', 'createdAt');
+        params.set('sort_field', 'featuredAt');
         params.set('sort_dir', '-1');
         params.set('isFeatured', 'true');
         params.set('isOnDiscover', 'true');

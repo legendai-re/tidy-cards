@@ -41,9 +41,6 @@ module.exports = function getUserSchema(Schema) {
                 select: false
             }
         },
-        connectionTypes: {
-            type: [String]
-        },
         unsafeUsername: {
             type: String,
             required: false

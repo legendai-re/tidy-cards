@@ -4,7 +4,9 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
     var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
+    var imagesTypes     = require('../../models/image/imageTypes.json');
     var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
+    var imageUpdloader = require('../../helpers/image-uploader');
 
     return new TwitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -33,22 +35,34 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
             if(profile.displayName){
                 var slugDdisplayName = slug(profile.displayName, '-');
                 newUser.unsafeUsername = (forbiddenUsernames.indexOf(slugDdisplayName.toLowerCase()) > -1 ) ? 'forbidden-name' : slugDdisplayName;
-            }else
+            }else{
                 newUser.unsafeUsername = 'anonyme';
-            newUser.name = ( profile.displayName || 'anonyme');
+            }
+            newUser.name = (profile.displayName || 'anonyme');
             newUser.roles = ['ROLE_USER'];
-            newUser.connectionTypes = [connectionTypes.TWITTER.id];
+            var avatar = createAvatar(newUser, profile);
+            newUser._avatar = avatar._id;
             newUser.save(function(err){
                 if (err) { return done(err); }
+                avatar.save();
+                newUser._avatar = avatar;
                 done(null, newUser)
             })
+        }
+
+        var createAvatar = function(newUser, profile){
+            var image = new models.Image();
+            image.type = imagesTypes.AVATAR.name;
+            image.mime = 'jpg';
+            image._user = newUser._id;
+            imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value);
+            return image;
         }
 
         var linkAccountToTwitter = function(){
             var user           = req.user;
             user.twitter.id    = profile.id;
             user.twitter.token = accessToken;
-            user.connectionTypes.push(connectionTypes.TWITTER.id);
             user.save(function(err) {
                 if (err)
                     throw err;
