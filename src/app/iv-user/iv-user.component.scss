@@ -146,10 +146,10 @@
     padding: 15px 0 5px;
     font-size: 1rem;
     line-height: 1.125rem;
-
-    p {
-        margin: 0;
-    }
+    background: transparent;
+    border: none;
+    width: 100%;
+    resize: none;
 }
 
 .list-item {

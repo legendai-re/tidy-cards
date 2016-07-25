@@ -26,13 +26,12 @@
                 <input *ngIf="tmpUser._avatar" class="btn btn-sm btn-secondary" type="submit" (click)="cancelUpdateAvatar()" value="Cancel" />
 
                 <input *ngIf="tmpUser.name" class="btn btn-sm btn-success" type="submit" (click)="updateName()" value="Save" />
+                <a class="btn btn-sm btn-secondary">Cancel</a>
             </div>
         </div>
         <div class="profile-header-bottom">
-            <div class="profile-infos-bio">
-                <p *ngIf="authService.currentUser.bio">{{authService.currentUser.bio}}</p>
-                <p *ngIf="!authService.currentUser.bio">You don't have bio yet...</p>
-            </div>
+            <textarea *ngIf="authService.currentUser.bio" class="profile-infos-bio" placeholder="Your description here...">{{authService.currentUser.bio}}</textarea>
+            <textarea *ngIf="!authService.currentUser.bio" class="profile-infos-bio" placeholder="Your description here..."></textarea>
         </div>
     </div>
 </div>
