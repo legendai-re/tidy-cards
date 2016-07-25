@@ -32,7 +32,7 @@ var upload = multer({
         }
         image.save(function(err){
             req.image = image;
-            callback(null, type.path + '/original/' + image._id + '.' + image.mime);
+            callback(null, type.path + '/soriginal/' + image._id + '.' + image.mime);
         });
     }
   })
@@ -65,7 +65,7 @@ function getMimeFromFile(file){
 var tmpPath = 'server/helpers/image-uploader/tmp-uploads/';
 
 var afterUpload = function(image){
-    var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/' + 'original' + '/' + image._id + '.' + image.mime)
+    var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/s' + 'original' + '/' + image._id + '.' + image.mime)
                 .pipe(fs.createWriteStream(tmpPath +'original/'+ image._id + '.' + image.mime ))
                 .on('error', (e) => {console.log("pipe error");console.log(e);})
 
@@ -93,7 +93,7 @@ function awsUpload(image, size, callback){
     var imageLocalPath = tmpPath+size+'/'+ image._id + '.' +image.mime;
     fs.readFile(imageLocalPath, function(err, data) {
         s3.createBucket({Bucket: process.env.S3_BUCKET}, function() {
-            var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/'+size+'/'+ image._id + '.' +image.mime, Body: data};
+            var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/s'+size+'/'+ image._id + '.' +image.mime, Body: data};
             s3.putObject(params, function(err, data) {
                 if (err)
                     console.log(err);

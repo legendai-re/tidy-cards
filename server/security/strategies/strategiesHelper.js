@@ -33,7 +33,8 @@ function createAvatar(newUser, profile){
     image.type = imagesTypes.AVATAR.name;
     image.mime = 'jpg';
     image._user = newUser._id;
-    imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value);
+    if(profile.photos[0])
+        imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value);
     return image;
 }
 

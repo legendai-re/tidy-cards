@@ -23,6 +23,7 @@ export class IvUserPublicComponent implements OnInit, OnDestroy  {
         this.sub = this.route.params.subscribe(params => {
             let userId = params['user_id'];
             let getParams = new URLSearchParams();
+            getParams.set('populate', '_avatar');
             this.userService.getUser(userId, getParams).subscribe((user) => {
                 this.user = user;
             }, () => {});

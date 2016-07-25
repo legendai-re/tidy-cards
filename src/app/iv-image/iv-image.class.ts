@@ -31,6 +31,6 @@ export class IvImage {
     }
 
     public getPath(size: string) {
-        return this.baseUrl + '/' + this.type.path + '/' + size + '/' + this._id + '.' + this.mime;
+        return this.baseUrl + '/' + this.type.path + '/s' + size + '/' + this._id + '.' + this.mime;
     }
 }

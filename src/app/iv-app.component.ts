@@ -11,7 +11,6 @@ import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvHeaderComponent }    from './iv-header/iv-header.component';
 import { IvHeaderService }      from './iv-header/iv-header.service';
 
-
 import 'bootstrap/dist/js/bootstrap.js';
 import '../style/app.scss';
 
@@ -29,4 +28,5 @@ export class IvAppComponent {
         authService.initCurrentUser().then(success => {
         });
     }
+
 }

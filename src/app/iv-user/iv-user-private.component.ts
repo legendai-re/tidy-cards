@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Renderer }    from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer, ElementRef, AfterViewInit }    from '@angular/core';
 import { Router }               from '@angular/router';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import {FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
@@ -16,9 +16,9 @@ import { IvUserService }        from './iv-user.service';
 
 export class IvUserPrivateComponent implements OnInit {
 
-    @ViewChild('nameInput') nameInput;
-    @ViewChild('usernameInput') usernameInput;
-    @ViewChild('emailInput') emailInput;
+    @ViewChild('nameInput') nameInput: ElementRef;
+    @ViewChild('usernameInput') usernameInput: ElementRef;
+    @ViewChild('emailInput') emailInput: ElementRef;
 
     public updateNameIntent: boolean;
 
