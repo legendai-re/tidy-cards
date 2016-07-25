@@ -3,10 +3,10 @@
         <img *ngIf="!tmpUser._avatar && authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('140x140')"  alt="{{authService.currentUser?.name}} avatar">
         {{authService.currentUser.name.charAt(0)}}
 
-        <div class="profile-avatar-tmp" *ngIf="tmpUser._avatar">
+        <div *ngIf="updateNameIntent && tmpUser._avatar" class="profile-avatar-tmp">
             <img [src]="tmpUser._avatar.getPath('original')" />
         </div>
-        <div class="profile-avatar-uploader">
+        <div *ngIf="updateNameIntent" class="profile-avatar-uploader">
             <span class="profile-avatar-uploader-icon material-icons">cloud_upload</span>
             <input (change)="onAvatarFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
         </div>

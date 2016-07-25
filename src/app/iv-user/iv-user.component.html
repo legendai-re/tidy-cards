@@ -1,12 +1,12 @@
 <section class="section" *ngIf="displayPublic">
-    <div class="container">
+    <div class="container profile-wrapper">
         <iv-public-profile></iv-public-profile>
     </div>
 </section>
 
 <section class="section" *ngIf="!displayPublic">
     <div class="container">
-        <div class="page-wrapper private-profile-wrapper">
+        <div class="page-wrapper profile-wrapper">
             <iv-private-profile></iv-private-profile>
         </div>
     </div>

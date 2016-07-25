@@ -9,7 +9,7 @@
     background-color: $purple;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background-position: center;
     width: 100%;
     min-height: 260px;
     padding: 30px 0;
@@ -117,6 +117,12 @@
             bottom: 0;
         }
     }
+}
+
+.menu-avatar {
+    float: right;
+    margin: -.5rem 0 -.5rem 1rem;
+    border: none;
 }
 
 .collection-page-title {

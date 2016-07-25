@@ -1,2 +1,30 @@
-<h1>{{user?.name}}</h1>
-<p><small>@{{user?.username}}</small></p>
+<div class="profile-header">
+    <div *ngIf="user" class="profile-avatar avatar avatar--140">
+        <img *ngIf="user?._avatar" [src]="user?._avatar.getPath('140x140')"  alt="{{user?.name}} avatar">
+        {{user?.name.charAt(0)}}
+    </div>
+    <div class="profile-header-infos">
+        <div class="profile-header-top">
+            <div class="profile-infos-name">
+                <h2 class="profile-name">
+                    {{user?.name}}
+                </h2>
+                <h3 class="profile-username">@{{user?.username}}</h3>
+            </div>
+            <div class="profile-infos-stats">
+                <div class="profile-stats-item">
+                    <span class="profile-stat-value">0</span>
+                    <span class="profile-stat-label">Collections</span>
+                </div>
+                <div class="profile-stats-item">
+                    <span class="profile-stat-value">0</span>
+                    <span class="profile-stat-label">Favorites</span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-header-bottom">
+            <p *ngIf="user?.bio" class="profile-infos-bio">{{user?.bio}}</p>
+            <p *ngIf="!user?.bio" class="profile-infos-bio">This user doesn't have bio yet...</p>
+        </div>
+    </div>
+</div>
