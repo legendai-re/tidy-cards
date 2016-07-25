@@ -15,7 +15,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class IvAuthService {
-    constructor (private http: Http, private router: Router) {}
+    constructor (private http: Http, private router: Router) {
+        this.initCurrentUser().then(success => {
+            console.log(success);
+        });
+    }
 
     authInitialized: boolean = false;
     isLoggedIn: boolean = false;
