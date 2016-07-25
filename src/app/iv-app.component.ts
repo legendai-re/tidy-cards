@@ -26,7 +26,7 @@ import '../style/app.scss';
 export class IvAppComponent {
 
     constructor(public authService: IvAuthService, public router: Router, private activeRoute: ActivatedRoute) {
-       /* authService.initCurrentUser().then(success => {
-        });*/
+        authService.initCurrentUser().then(success => {
+        });
     }
 }

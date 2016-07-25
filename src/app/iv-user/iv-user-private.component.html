@@ -81,7 +81,7 @@
             <p class="list-item-description">Use my Facebook account to login. <strong>We will never post to Facebook or message your friends without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.facebook?.id">
-            <a class="btn btn-sm btn--facebook" href="auth/facebook">Link Facebook</a>
+            <a class="btn btn-sm btn--facebook" href="http://invow.xyz/auth/facebook">Link Facebook</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.facebook?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.twitter?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('FACEBOOK')">Unlink Facebook</a>
@@ -93,7 +93,7 @@
             <p class="list-item-description">Use my Twitter account to login. <strong>We will never post to Twitter or message your followers without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.twitter?.id">
-            <a class="btn btn-sm btn--twitter" href="auth/twitter">Link Twitter</a>
+            <a class="btn btn-sm btn--twitter" href="http://invow.xyz/auth/twitter">Link Twitter</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.facebook?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('TWITTER')">Unlink Twitter</a>
@@ -105,7 +105,7 @@
             <p class="list-item-description">Use my Google account to login. <strong>We will never post to Google or message your friends without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.google?.id">
-            <a class="btn btn-sm btn--google" href="auth/google">Link Google</a>
+            <a class="btn btn-sm btn--google" href="http://invow.xyz/auth/google">Link Google</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.google?.id && (authService.currentUser.local?.active || authService.currentUser.twitter?.id || authService.currentUser.facebook?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('GOOGLE')">Unlink Google</a>

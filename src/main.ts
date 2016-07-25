@@ -11,7 +11,6 @@ if (process.env.ENV === 'build') {
 }
 
 bootstrap(IvAppComponent, [
-    IvAuthService,
     HTTP_PROVIDERS,
     JSONP_PROVIDERS,
     IV_APP_ROUTER_PROVIDERS
