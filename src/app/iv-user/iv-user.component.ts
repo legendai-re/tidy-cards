@@ -7,6 +7,7 @@ import { IvUserPrivateComponent }         from './iv-user-private.component';
 
 @Component({
     templateUrl: './iv-user.component.html',
+    styleUrls: ['iv-user.component.scss'],
     directives: [IvUserPublicComponent, IvUserPrivateComponent]
 })
 

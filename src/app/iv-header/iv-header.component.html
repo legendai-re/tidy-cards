@@ -54,9 +54,9 @@
                 </a>
             </li>
         </nav>
+        <div *ngIf="title" class="page-wrapper">
+            <h2 class="collection-page-title">{{title}}</h2>
+        </div>
     </div>
     <div *ngIf="!image" class="container radial-cover"></div>
-    <div class="page-wrapper">
-        <h2 class="collection-page-title">{{title}}</h2>
-    </div>
 </header>

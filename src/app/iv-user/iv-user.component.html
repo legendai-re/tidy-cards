@@ -1,6 +1,13 @@
-<div *ngIf="displayPublic">
-    <iv-public-profile></iv-public-profile>
-</div>
-<div *ngIf="!displayPublic">
-    <iv-private-profile></iv-private-profile>
-</div>
+<section class="section" *ngIf="displayPublic">
+    <div class="container">
+        <iv-public-profile></iv-public-profile>
+    </div>
+</section>
+
+<section class="section" *ngIf="!displayPublic">
+    <div class="container">
+        <div class="page-wrapper private-profile-wrapper">
+            <iv-private-profile></iv-private-profile>
+        </div>
+    </div>
+</section>
