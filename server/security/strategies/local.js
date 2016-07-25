@@ -11,7 +11,7 @@ module.exports = function getLocalStrategy(LocalStrategy){
                 return bCrypt.compareSync(password, user.local.password);
             }
 
-            models.User.findOne({ $or: [{username: username}, {email: username}], connectionTypes: connectionTypes.LOCAL.id }).populate('_avatar').select('+local.password').exec(function (err, user) {
+            models.User.findOne({ $or: [{username: username}, {email: username}] }).populate('_avatar').select('+local.password').exec(function (err, user) {
                 if (err) {
                     return done(err);
                 }
