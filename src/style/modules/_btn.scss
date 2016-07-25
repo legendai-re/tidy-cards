@@ -9,3 +9,69 @@
         background: $hover-dark-color;
     }
 }
+
+.btn {
+    line-height: 1.1;
+    border-radius: 3px;
+}
+
+.btn-sm {
+    padding: 6px 10px 5px;
+    font-size: .875rem;
+}
+
+.btn-secondary-outline {
+    color: $black-light;
+}
+
+.btn--light-op {
+    background: rgba(0,0,0,.1);
+    color: $white;
+    border: 1px solid transparent;
+
+    &:hover {
+        background: rgba(0,0,0,.25);
+    }
+}
+
+.btn--dark-op {
+    background: rgba(255,255,255,.25);
+    color: $black;
+    border: 1px solid transparent;
+
+    &:hover {
+        background: rgba(255,255,255,.5);
+    }
+}
+
+.btn--facebook, .btn--twitter, .btn--google {
+    color: $white;
+
+    &:hover {
+        color: $white;
+    }
+}
+
+.btn--facebook {
+    background: $color-facebook;
+
+    &:hover {
+        background: darken($color-facebook, 15%);
+    }
+}
+
+.btn--twitter {
+    background: $color-twitter;
+
+    &:hover {
+        background: darken($color-twitter, 15%);
+    }
+}
+
+.btn--google {
+    background: $color-google;
+
+    &:hover {
+        background: darken($color-google, 15%);
+    }
+}

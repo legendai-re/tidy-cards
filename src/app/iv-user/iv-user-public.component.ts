@@ -7,6 +7,7 @@ import { IvUser }                         from './iv-user.class';
 
 @Component({
     selector: 'iv-public-profile',
+    styleUrls: ['iv-user.component.scss'],
     templateUrl: './iv-user-public.component.html'
 })
 

@@ -9,6 +9,7 @@ import { IvUserService }                from './iv-user.service';
 
 @Component({
     selector: 'iv-private-profile',
+    styleUrls: ['iv-user.component.scss'],
     templateUrl: './iv-user-private.component.html',
     directives: [FILE_UPLOAD_DIRECTIVES]
 })

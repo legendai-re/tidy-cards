@@ -6,10 +6,12 @@
     text-align: center;
     font-size: 1.5rem;
     color: $black-op-1-2;
+    position: relative;
 
     img {
         width: 100%;
         height: 100%;
+        border-radius: 2px;
     }
 }
 
@@ -17,4 +19,10 @@
     width: 60px;
     height: 60px;
     line-height: 53px;
+}
+
+.avatar--140 {
+    width: 140px;
+    height: 140px;
+    line-height: 133px;
 }
