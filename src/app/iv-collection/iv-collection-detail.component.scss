@@ -5,6 +5,10 @@
 @import '../../style/tools/_vars.scss';
 @import '../../style/tools/_mixins.scss';
 
+.collection-page {
+    margin-top: -35px;
+}
+
 .item {
     margin: 10px 0;
 }
@@ -16,13 +20,6 @@
         clear: both;
         display: table;
     }
-}
-
-.collection-page-title {
-    font-size: 3rem;
-    line-height: 4rem;
-    margin-bottom: 32px;
-    color: $white;
 }
 
 .collection-page-avatar {
