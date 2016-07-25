@@ -34,6 +34,10 @@
             <li class="nav-item dropdown" *ngIf="authService.isLoggedIn">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     {{authService.currentUser.name}}
+                    <div class="menu-avatar avatar avatar--40">
+                        <img *ngIf="authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('40x40')"  alt="{{authService.currentUser?.name}} avatar">
+                        {{authService.currentUser.name.charAt(0)}}
+                    </div>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" [routerLink]="['/', authService.currentUser.username]">
