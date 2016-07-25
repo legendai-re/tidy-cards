@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild }    from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router }               from '@angular/router';
-import { ROUTER_DIRECTIVES, ActivatedRoute }    from '@angular/router';
+import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { IvCollectionService }  from './iv-collection/iv-collection.service';
 import { IvStarService }        from './iv-star/iv-star.service';
 import { IvItemService }        from './iv-item/iv-item.service';

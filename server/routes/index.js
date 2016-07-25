@@ -8,7 +8,6 @@ module.exports = function(app) {
     var imageRouter         = require('./imageRouter');
     var itemRouter          = require('./itemRouter');
     var starRouter          = require('./starRouter');
-
     var devRouter           = require('./devRouter');
 
     app.use('/fonts', express.static(path.resolve(__dirname, '../../dist/fonts')));
@@ -29,4 +28,5 @@ module.exports = function(app) {
     app.get('/*', function(req, res) {
         res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
     });
+
 }
