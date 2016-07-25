@@ -1,11 +1,11 @@
-import { Component, OnInit }    from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer }    from '@angular/core';
 import { Router }               from '@angular/router';
-import { IvAuthService }          from '../iv-auth/iv-auth.service';
-import {FILE_UPLOAD_DIRECTIVES }        from 'ng2-file-upload';
-import { IvImage }                      from '../iv-image/iv-image.class';
-import { IvImgUploadService }           from '../iv-image/iv-image-upload.service';
-import { IvUser }                from './iv-user.class';
-import { IvUserService }                from './iv-user.service';
+import { IvAuthService }        from '../iv-auth/iv-auth.service';
+import {FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
+import { IvImage }              from '../iv-image/iv-image.class';
+import { IvImgUploadService }   from '../iv-image/iv-image-upload.service';
+import { IvUser }               from './iv-user.class';
+import { IvUserService }        from './iv-user.service';
 
 @Component({
     selector: 'iv-private-profile',
@@ -16,8 +16,17 @@ import { IvUserService }                from './iv-user.service';
 
 export class IvUserPrivateComponent implements OnInit {
 
+    @ViewChild('nameInput') nameInput;
+    @ViewChild('usernameInput') usernameInput;
+    @ViewChild('emailInput') emailInput;
+
+    public updateNameIntent: boolean;
+
     public usernameValid: boolean;
     public validatingUsername: boolean;
+    public updateUsernameIntent: boolean;
+
+    public updateEmailIntent: boolean;
 
     public uploader;
     public tmpAvatar: IvImage;
@@ -25,7 +34,7 @@ export class IvUserPrivateComponent implements OnInit {
     private typingUsernameTimer;
     private doneTypingUsernameInterval: number;
 
-    constructor(private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
+    constructor(private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
         this.uploader = imgUploadService.uploader;
         this.doneTypingUsernameInterval = 1000;
     }
@@ -36,6 +45,42 @@ export class IvUserPrivateComponent implements OnInit {
 
         this.usernameValid = false;
         this.validatingUsername = false;
+    }
+
+    public startUpdateName(){
+        this.updateNameIntent = true;
+        setTimeout( () => {
+            this._renderer.invokeElementMethod(this.nameInput.nativeElement, 'focus', []);
+        }, 100);
+    }
+
+    public cancelUpdateName(){
+        this.updateNameIntent = false;
+        this.tmpUser.name = JSON.parse(JSON.stringify(this.authService.currentUser.name));
+    }
+
+    public startUpdateUsername(){
+        this.updateUsernameIntent = true;
+        setTimeout( () => {
+            this._renderer.invokeElementMethod(this.usernameInput.nativeElement, 'focus', []);
+        }, 100);
+    }
+
+    public cancelUpdateUsername(){
+        this.updateUsernameIntent = false;
+        this.tmpUser.username = JSON.parse(JSON.stringify(this.authService.currentUser.username));
+    }
+
+    public startUpdateEmail(){
+        this.updateEmailIntent = true;
+        setTimeout( () => {
+            this._renderer.invokeElementMethod(this.emailInput.nativeElement, 'focus', []);
+        }, 100);
+    }
+
+    public cancelUpdateEmail(){
+        this.updateEmailIntent = false;
+        this.tmpUser.email = JSON.parse(JSON.stringify(this.authService.currentUser.email));
     }
 
     public onUsernameKeyUp(){
@@ -65,8 +110,9 @@ export class IvUserPrivateComponent implements OnInit {
             if(isValid){
                 var user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
                 this.userService.putUser(user).subscribe((user) => {
-                    this.authService.currentUser.username = this.tmpUser.username;
-                    console.log('username updated');
+                    this.tmpUser.username = user.username;
+                    this.authService.currentUser.username = user.username;
+                    this.updateUsernameIntent = false;
                 })
             }
         });
@@ -79,10 +125,13 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public updateName() {
-        var user = IvUser.createFormJson({_id: this.tmpUser._id, name: this.tmpUser.name});
+        var user = IvUser.createFormJson({_id: this.tmpUser._id, name: this.tmpUser.name, bio: this.tmpUser.bio});
         this.userService.putUser(user).subscribe((user) => {
-            this.authService.currentUser.name = this.tmpUser.name;
-            console.log('name updated');
+            this.tmpUser.name = user.name;
+            this.tmpUser.bio = user.bio;
+            this.authService.currentUser.name = user.name;
+            this.authService.currentUser.bio = user.bio;
+            this.updateNameIntent = false;
         })
     }
 
@@ -96,7 +145,6 @@ export class IvUserPrivateComponent implements OnInit {
             this.userService.putUser(user).subscribe((user) => {
                 this.authService.currentUser._avatar = this.tmpUser._avatar;
                 this.tmpUser._avatar = null;
-                console.log('avatar updated');
             })
         }
     }

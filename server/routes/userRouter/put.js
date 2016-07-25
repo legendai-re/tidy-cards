@@ -18,7 +18,7 @@ module.exports = function put (req, res) {
 
     function updateProfile(req, user){
         user.name = (req.body.name || user.name);
-        user.bio = (req.body.bio || user.bio);
+        user.bio = req.body.bio;
         if(req.body._avatar && req.body._avatar._id){
             user._avatar = req.body._avatar._id;
         }
