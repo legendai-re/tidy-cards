@@ -25,7 +25,14 @@ import '../style/app.scss';
 export class IvAppComponent {
 
     constructor(public authService: IvAuthService, public router: Router, private activeRoute: ActivatedRoute) {
+        var url = null;
+        this.router.events.subscribe((route) => {
+            if(!url)
+                url=route.url;
+        })
         authService.initCurrentUser().then(success => {
+            if(url)
+                this.router.navigate([url]);
         });
     }
 
