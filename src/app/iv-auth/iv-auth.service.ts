@@ -1,4 +1,4 @@
-import { Injectable }       from '@angular/core';
+import { Injectable, EventEmitter }       from '@angular/core';
 import { Router }           from '@angular/router';
 import { Http, Response, Headers, RequestOptions }   from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
@@ -15,12 +15,15 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class IvAuthService {
-    constructor (private http: Http, private router: Router) {
-    }
 
+    authInitializedEmitter: any;
     authInitialized: boolean = false;
     isLoggedIn: boolean = false;
     currentUser: IvUser = null;
+
+    constructor (private http: Http, private router: Router) {
+        this.authInitializedEmitter = new EventEmitter();
+    }
 
     private postLogin (username: string, password: string): Observable<IvUser> {
         let body = JSON.stringify({ username: username, password: password });
@@ -73,6 +76,10 @@ export class IvAuthService {
             .catch(this.handleError);
     }
 
+    getAuthInitializedEmitter() {
+        return this.authInitializedEmitter;
+    }
+
     login (username: string, password: string): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.postLogin(username, password).subscribe(user => {
@@ -112,6 +119,7 @@ export class IvAuthService {
                     this.authInitialized = true;
                     resolve(false);
                 }
+                this.authInitializedEmitter.emit({sucess: this.isLoggedIn});
             });
         });
     }
