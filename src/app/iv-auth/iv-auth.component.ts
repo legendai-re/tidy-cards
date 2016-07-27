@@ -8,6 +8,7 @@ import { IvSigninComponent } from './iv-signin.component';
 
 @Component({
     templateUrl: './iv-auth.component.html',
+    styleUrls: ['./iv-auth.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvSignupComponent, IvSigninComponent]
 })
 

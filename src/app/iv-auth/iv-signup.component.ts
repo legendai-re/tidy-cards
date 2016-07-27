@@ -6,6 +6,7 @@ import { IvUser }        from '../iv-user/iv-user.class';
 @Component({
     selector: 'iv-signup',
     templateUrl: './iv-signup.component.html',
+    styleUrls: ['./iv-auth.component.scss'],
     directives: [ROUTER_DIRECTIVES]
 })
 
