@@ -20,14 +20,18 @@ export class IvUserPrivateComponent implements OnInit {
     @ViewChild('usernameInput') usernameInput: ElementRef;
     @ViewChild('emailInput') emailInput: ElementRef;
 
-    public updateNameIntent: boolean;
+    public updateGeneralInfoIntent: boolean;
+    public isUpdadingGeneralInfo: boolean;
 
+    public avatarFileInput: any;
+    public isUploadingAvatar: boolean;
     public usernameValid: boolean;
     public validatingUsername: boolean;
+
     public updateUsernameIntent: boolean;
+    public isUpdatingUsername: boolean;
 
     public updateEmailIntent: boolean;
-
     public uploader;
     public tmpAvatar: IvImage;
     public tmpUser: IvUser;
@@ -47,16 +51,21 @@ export class IvUserPrivateComponent implements OnInit {
         this.validatingUsername = false;
     }
 
-    public startUpdateName(){
-        this.updateNameIntent = true;
+    public startUpdateGeneralInfo(){
+        this.updateGeneralInfoIntent = true;
         setTimeout( () => {
             this._renderer.invokeElementMethod(this.nameInput.nativeElement, 'focus', []);
         }, 100);
     }
 
-    public cancelUpdateName(){
-        this.updateNameIntent = false;
+    public cancelUpdateGeneralInfo(){
+        if(this.isUpdadingGeneralInfo)
+            return;
+        this.updateGeneralInfoIntent = false;
+        this.tmpUser._avatar = null;
         this.tmpUser.name = JSON.parse(JSON.stringify(this.authService.currentUser.name));
+        this.tmpUser.bio = this.authService.currentUser.bio ? JSON.parse(JSON.stringify(this.authService.currentUser.bio)) : "";
+        this.isUploadingAvatar = false;
     }
 
     public startUpdateUsername(){
@@ -67,6 +76,8 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public cancelUpdateUsername(){
+        if(this.isUpdatingUsername)
+            return;
         this.updateUsernameIntent = false;
         this.tmpUser.username = JSON.parse(JSON.stringify(this.authService.currentUser.username));
     }
@@ -106,6 +117,7 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     private updateUsername(){
+        this.isUpdatingUsername = true;
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
             if(isValid){
                 var user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
@@ -113,40 +125,46 @@ export class IvUserPrivateComponent implements OnInit {
                     this.tmpUser.username = user.username;
                     this.authService.currentUser.username = user.username;
                     this.updateUsernameIntent = false;
+                    this.isUpdatingUsername = false;
                 })
             }
         });
     }
 
     public onAvatarFileChange(event) {
+        this.isUploadingAvatar = true;
         this.imgUploadService.tryUploadAndGetImage(event, IvImage.getTypes().AVATAR).subscribe(image => {
-            this.tmpUser._avatar = image;
+            if(image && this.updateGeneralInfoIntent)
+                this.tmpUser._avatar = image;
+            this.isUploadingAvatar = false;
         });
     }
 
-    public updateName() {
-        var user = IvUser.createFormJson({_id: this.tmpUser._id, name: this.tmpUser.name, bio: this.tmpUser.bio});
+    public updateGeneralInfo() {
+        if(this.isUploadingAvatar)
+            return;
+        this.isUpdadingGeneralInfo = true;
+        var user = new IvUser();
+        user._id = this.tmpUser._id;
+        user.name = this.tmpUser.name;
+        user.bio = this.tmpUser.bio;
+        if(this.tmpUser._avatar)
+            user._avatar = this.tmpUser._avatar;
         this.userService.putUser(user).subscribe((user) => {
-            this.tmpUser.name = user.name;
-            this.tmpUser.bio = user.bio;
             this.authService.currentUser.name = user.name;
             this.authService.currentUser.bio = user.bio;
-            this.updateNameIntent = false;
-        })
-    }
-
-    public cancelUpdateAvatar() {
-        this.tmpUser._avatar = null;
-    }
-
-    public updateAvatar() {
-        if(this.tmpUser._avatar){
-            var user = IvUser.createFormJson({_id: this.tmpUser._id, _avatar: this.tmpUser._avatar});
-            this.userService.putUser(user).subscribe((user) => {
+            if(this.tmpUser._avatar)
                 this.authService.currentUser._avatar = this.tmpUser._avatar;
-                this.tmpUser._avatar = null;
-            })
-        }
+            this.tmpUser.name = user.name;
+            this.tmpUser.bio = user.bio;
+            this.tmpUser._avatar = null;
+            this.updateGeneralInfoIntent = false;
+            this.isUpdadingGeneralInfo = false;
+        }, (err) => {
+            console.log('sry something went wrong while updating your general info');
+            this.isUpdadingGeneralInfo = false;
+            this.cancelUpdateGeneralInfo();
+        })
     }
 
     public unlinkAccount(type: string){

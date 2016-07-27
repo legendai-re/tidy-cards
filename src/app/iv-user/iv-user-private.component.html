@@ -3,33 +3,35 @@
         <img *ngIf="!tmpUser._avatar && authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('140x140')"  alt="{{authService.currentUser?.name}} avatar">
         {{authService.currentUser.name.charAt(0)}}
 
-        <div *ngIf="updateNameIntent && tmpUser._avatar" class="profile-avatar-tmp">
+        <div *ngIf="updateGeneralInfoIntent && tmpUser._avatar" class="profile-avatar-tmp">
             <img [src]="tmpUser._avatar.getPath('original')" />
         </div>
-        <div *ngIf="updateNameIntent" class="profile-avatar-uploader">
+        <div *ngIf="updateGeneralInfoIntent" class="profile-avatar-uploader">
             <span class="profile-avatar-uploader-icon material-icons">cloud_upload</span>
             <input (change)="onAvatarFileChange($event)" type="file" ng2FileSelect [uploader]="uploader" />
         </div>
+    </div>
+    <div *ngIf="updateGeneralInfoIntent">
+        <small *ngIf="isUploadingAvatar">uploading...</small>
+        <small *ngIf="!isUploadingAvatar && tmpUser._avatar">ready</small>
     </div>
     <div class="profile-header-infos">
         <div class="profile-header-top">
             <div class="profile-infos-name">
                 <h2 class="profile-name">
-                    <input #nameInput [disabled]="!updateNameIntent" [(ngModel)]="tmpUser.name" type="text" />
+                    <input #nameInput [disabled]="!updateGeneralInfoIntent" [(ngModel)]="tmpUser.name" type="text" />
                 </h2>
                 <h3 class="profile-username">@{{authService.currentUser.username}}</h3>
             </div>
             <div class="profile-infos-edit">
-                <input *ngIf="tmpUser._avatar" class="btn btn-sm btn-success" type="submit" (click)="updateAvatar()" value="Save" />
-                <input *ngIf="tmpUser._avatar" class="btn btn-sm btn-secondary" type="submit" (click)="cancelUpdateAvatar()" value="Cancel" />
-
-                <input *ngIf="!updateNameIntent" (click)="startUpdateName()" class="btn btn-sm btn--light-op" type="submit" value="Edit" />
-                <input *ngIf="updateNameIntent" (click)="updateName()" [disabled]="!tmpUser.name" class="btn btn-sm btn-success" type="submit" value="Save" />
-                <a *ngIf="updateNameIntent" (click)="cancelUpdateName()" class="btn btn-sm btn-secondary">Cancel</a>
+                <small *ngIf="isUpdadingGeneralInfo">saving information...</small>
+                <input *ngIf="!updateGeneralInfoIntent" (click)="startUpdateGeneralInfo()" class="btn btn-sm btn--light-op" type="submit" value="Edit" />
+                <input *ngIf="updateGeneralInfoIntent" (click)="updateGeneralInfo()" [disabled]="isUpdadingGeneralInfo || isUploadingAvatar || !tmpUser.name" class="btn btn-sm btn-success" type="submit" value="Save" />
+                <a *ngIf="updateGeneralInfoIntent" (click)="cancelUpdateGeneralInfo()" class="btn btn-sm btn-secondary">Cancel</a>
             </div>
         </div>
         <div class="profile-header-bottom">
-            <textarea [(ngModel)]="tmpUser.bio" [disabled]="!updateNameIntent" class="profile-infos-bio" placeholder="Your description here...">{{tmpUser.bio}}</textarea>
+            <textarea [(ngModel)]="tmpUser.bio" [disabled]="!updateGeneralInfoIntent" class="profile-infos-bio" placeholder="Your description here...">{{tmpUser.bio}}</textarea>
         </div>
     </div>
 </div>
@@ -52,8 +54,9 @@
             </div>
         </div>
         <div class="list-item-actions">
+            <small *ngIf="updateUsernameIntent && isUpdatingUsername">saving information...</small>
             <input *ngIf="!updateUsernameIntent" (click)="startUpdateUsername()" class="btn btn-sm btn-secondary-outline" type="submit" value="Edit username"/>
-            <input *ngIf="updateUsernameIntent" [disabled]="!usernameValid" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="Save"/>
+            <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || !usernameValid" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="Save"/>
             <a *ngIf="updateUsernameIntent" (click)="cancelUpdateUsername()" class="btn btn-sm btn-secondary">Cancel</a>
         </div>
     </div>

@@ -23,7 +23,6 @@ export class IvUserComponent implements OnInit, OnDestroy  {
         this.displayPublic = true;
         this.authSub = this.authService.getAuthInitializedEmitter()
         .subscribe((value) => {
-            console.log("value");
             this.routeProfile(this.userId);
         });
     }

@@ -23,8 +23,22 @@ module.exports = function getOne (req, res) {
         if(collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId)){
         	res.sendStatus(401);
         }else{
-        	res.json({data: collection});
+            if(req.user){
+                getStar(req.user, collection, function(err, star){
+                    if(err) {console.log(err); res.sendStatus(500); return;}
+                    collection._star = star;
+                    res.json({data: collection});
+                })
+            }else{
+                res.json({data: collection});
+            }
         }
     })
 
+    function getStar(user, collection, callback){
+        models.Star.findOne({_user: user._id, _collection: collection._id}, function(err, star){
+            if(err)callback(err, null);
+            callback(null, star);
+        })
+    }
 }

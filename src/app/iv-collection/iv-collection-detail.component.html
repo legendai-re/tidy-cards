@@ -28,7 +28,7 @@
                                 <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
                                     <i class="material-icons stat-icon">mode_comment</i> 0
                                 </li>
-                                <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
+                                <li *ngIf="collection.visibility.id != 'PRIVATE'" (click)="onStarCliked()" class="stat-item-list">
                                     <i class="material-icons stat-icon">star</i> {{collection.starsCount}}
                                 </li>
                                 <li *ngIf="collection.visibility.id == 'PRIVATE'" class="stat-item-list">

@@ -4,6 +4,7 @@ import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-brows
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
 import { IvAuthService }                  from '../iv-auth/iv-auth.service';
+import { IvStarService }                  from '../iv-star/iv-star.service';
 import { IvCollectionService }            from './iv-collection.service';
 import { IvItemService }                  from '../iv-item/iv-item.service';
 import { IvCollection }                   from './iv-collection.class';
@@ -26,6 +27,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public loadingItems: boolean;
     public itemLoaded: boolean;
     public isAuthor: boolean;
+    public isUpdatingStar: boolean;
     private sub: any;
 
     constructor(
@@ -35,7 +37,8 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private collectionService: IvCollectionService,
-        private itemService: IvItemService) {
+        private itemService: IvItemService,
+        private starService: IvStarService) {
     }
 
     ngOnInit() {
@@ -114,6 +117,33 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public deleteCollection(){
         this.collectionService.deleteCollection(this.collection._id).subscribe((e) => {
             this.router.navigate(['/dashboard']);
+        })
+    }
+
+    public onStarCliked(){
+        if(this.isAuthor || this.isUpdatingStar)
+            return;
+        if(!this.collection._star){
+            this.addStarredCollection();
+        }else{
+            this.removeStarredCollection();
+        }
+    }
+
+    private addStarredCollection(){
+        this.isUpdatingStar = true;
+        this.starService.postStar(this.collection).subscribe((star) => {
+            this.collection._star = star;
+            this.collection.starsCount++;
+            this.isUpdatingStar = false;
+        });
+    }
+
+    private removeStarredCollection(){
+        this.starService.deleteStare(this.collection._star).subscribe((response) => {
+            this.collection._star = null;
+            this.collection.starsCount--;
+            this.isUpdatingStar = false;
         })
     }
 

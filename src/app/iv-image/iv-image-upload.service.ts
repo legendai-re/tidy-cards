@@ -41,21 +41,31 @@ export class IvImgUploadService {
                         }
                     }
                 }, 100);
+            }else{
+                this.uploadAndGetImage(null).subscribe(image => {
+                    observer.next(image);
+                    observer.complete();
+                });
             }
         });
     }
 
     private uploadAndGetImage(item): Observable<IvImage> {
         return Observable.create(observer => {
-            item.upload();
-            let interval = setInterval(() => {
-                if ( item._xhr != null && item._xhr.response && item._xhr.response != null && item._xhr.response !== '' ) {
-                    observer.next(IvImage.createFormJson(JSON.parse(item._xhr.response).data));
-                    item.remove();
-                    clearInterval(interval);
-                    observer.complete();
-                }
-            }, 250);
+            if(item){
+                item.upload();
+                let interval = setInterval(() => {
+                    if ( item._xhr != null && item._xhr.response && item._xhr.response != null && item._xhr.response !== '' ) {
+                        observer.next(IvImage.createFormJson(JSON.parse(item._xhr.response).data));
+                        item.remove();
+                        clearInterval(interval);
+                        observer.complete();
+                    }
+                }, 250);
+            }else{
+                observer.next(null);
+                observer.complete();
+            }
         });
     }
 }
