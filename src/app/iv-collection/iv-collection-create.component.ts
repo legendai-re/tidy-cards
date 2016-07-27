@@ -16,6 +16,7 @@ import { IvImgUploadService }           from '../iv-image/iv-image-upload.servic
 
 export class IvCollectionCreateComponent implements OnInit {
     public mode: string;
+    public actionIntent: boolean;
     public collection: IvCollection;
     public uploader;
     public collectionCreated: boolean;
@@ -49,12 +50,17 @@ export class IvCollectionCreateComponent implements OnInit {
     private initUpdateMode(){
         this.mode = 'UPDATE';
         this.collection = IvCollection.createFormJson(this.inputCollection);
+        this.actionIntent = true;
     }
 
     public onThumbnailFileChange(event) {
         this.imgUploadService.tryUploadAndGetImage(event, IvImage.getTypes().COLLECTION_THUMBNAIL).subscribe(image => {
             this.collection._thumbnail = image;
         });
+    }
+
+    public onCollectionFocus(){
+        this.actionIntent = true;
     }
 
     public clickColor(color){

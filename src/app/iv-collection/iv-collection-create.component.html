@@ -1,4 +1,4 @@
-<article class="card create-collection" [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color">
+<article [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color" class="card create-collection">
     <form (ngSubmit)="onCollectionSubmit()">
         <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
@@ -6,10 +6,17 @@
         <!-- <div class="card-color"></div> -->
         <div class="card-container">
             <div class="card-content">
-                <input class="input-card-title card-title" [(ngModel)]="collection.title" type="text" placeholder="Create a collection..." required />
-                <textarea class="input-card-caption card-caption" [(ngModel)]="collection.bio" name="" id="" placeholder="Enter a caption here to describe the collection..."></textarea>
+                <input
+                    (focus)="onCollectionFocus()"
+                    [(ngModel)]="collection.title"
+                    class="input-card-title card-title" type="text" placeholder="Create a collection..." required/>
+                <textarea
+                    (focus)="onCollectionFocus()"
+                    [(ngModel)]="collection.bio"
+                    class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection...">
+                </textarea>
                 <div class="btn-group">
-                    <button type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button [class.collapse]="!actionIntent" type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">remove_red_eye</i> Visibility: {{collection.visibility.desc}}
                     </button>
                     <div class="dropdown-menu">
@@ -30,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-create">
+        <div [class.collapse]="!actionIntent" class="card-create">
             <div class="card-actions form-inline">
                 <div class="btn-group form-action dropup">
                     <button type="button" class="btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,35 +45,67 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-color">
                         <!-- <h6 class="dropdown-header">Edit the color</h6> -->
-                        <a (click)="clickColor('CFD8DC')" class="dropdown-item-color collection-color-grey" [class.selected]="collection.color=='CFD8DC'">
+                        <a
+                            (click)="clickColor('CFD8DC')"
+                            [class.selected]="collection.color=='CFD8DC'"
+                            class="dropdown-item-color collection-color-grey"
+                        >
                             Grey
                         </a>
-                        <a (click)="clickColor('FF887A')" class="dropdown-item-color collection-color-red" [class.selected]="collection.color=='FF887A'">
+                        <a
+                            (click)="clickColor('FF887A')"
+                            [class.selected]="collection.color=='FF887A'"
+                            class="dropdown-item-color collection-color-red"
+                        >
                             Red
                         </a>
-                        <a (click)="clickColor('FFD373')" class="dropdown-item-color collection-color-orange" [class.selected]="collection.color=='FFD373'">
+                        <a
+                            (click)="clickColor('FFD373')"
+                            [class.selected]="collection.color=='FFD373'"
+                            class="dropdown-item-color collection-color-orange"
+                        >
                             Orange
                         </a>
-                        <a (click)="clickColor('FFFF7C')" class="dropdown-item-color collection-color-yellow" [class.selected]="collection.color=='FFFF7C'">
+                        <a
+                            (click)="clickColor('FFFF7C')"
+                            [class.selected]="collection.color=='FFFF7C'"
+                            class="dropdown-item-color collection-color-yellow"
+                        >
                             Yellow
                         </a>
-                        <a (click)="clickColor('A4ABFF')" class="dropdown-item-color collection-color-purple" [class.selected]="collection.color=='A4ABFF'">
+                        <a
+                            (click)="clickColor('A4ABFF')"
+                            [class.selected]="collection.color=='A4ABFF'"
+                            class="dropdown-item-color collection-color-purple"
+                        >
                             Purple
                         </a>
-                        <a (click)="clickColor('78D6FF')" class="dropdown-item-color collection-color-blue" [class.selected]="collection.color=='78D6FF'">
+                        <a
+                            (click)="clickColor('78D6FF')"
+                            [class.selected]="collection.color=='78D6FF'"
+                            class="dropdown-item-color collection-color-blue"
+                        >
                             Blue
                         </a>
-                        <a (click)="clickColor('A4FFEB')" class="dropdown-item-color collection-color-cyan" [class.selected]="collection.color=='A4FFEB'">
+                        <a
+                            (click)="clickColor('A4FFEB')"
+                            [class.selected]="collection.color=='A4FFEB'"
+                            class="dropdown-item-color collection-color-cyan"
+                        >
                             Cyan
                         </a>
-                        <a (click)="clickColor('CBFF8A')" class="dropdown-item-color collection-color-green" [class.selected]="collection.color=='CBFF8A'">
+                        <a
+                            (click)="clickColor('CBFF8A')"
+                            [class.selected]="collection.color=='CBFF8A'"
+                            class="dropdown-item-color collection-color-green"
+                        >
                             Green
                         </a>
                     </div>
                 </div>
 
                 <label class="file form-action">
-                    <input (change)="onThumbnailFileChange($event)" type="file" ng2FileSelect [uploader]="uploader">
+                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" ng2FileSelect type="file">
                     <span class="btn-icon material-icons icon">
                         photo
                     </span>

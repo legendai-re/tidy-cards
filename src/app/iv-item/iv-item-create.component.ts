@@ -24,6 +24,7 @@ import { IvItemContentService }         from './iv-item-content.service';
 
 export class IvItemCreateComponent implements OnInit {
     public mode: string;
+    public actionIntent: boolean;
     public item: IvItem;
     public itemCreated: boolean;
     public urlEntry: string;
@@ -76,6 +77,11 @@ export class IvItemCreateComponent implements OnInit {
             this.validUrl = true;
         }
         if(this.item.description)this.addDescription = true;
+        this.actionIntent = true;
+    }
+
+    public onUrlFocus(){
+        this.actionIntent = true;
     }
 
     public onUrlKeyUp(){
