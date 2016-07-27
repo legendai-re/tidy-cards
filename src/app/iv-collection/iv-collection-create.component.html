@@ -1,5 +1,5 @@
 <article class="card create-collection" [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color">
-    <form (ngSubmit)="onCreatCollectionSubmit()">
+    <form (ngSubmit)="onCollectionSubmit()">
         <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
         </div>
@@ -72,9 +72,15 @@
                     </span>
                 </label>
 
-                <button class="btn btn-create pull-xs-right" type="submit">
+                <button *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit">
                     Create
                 </button>
+                <button *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit">
+                    Update
+                </button>
+                <a *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create pull-xs-right">
+                    Cancel
+                </a>
             </div>
         </div>
     </form>

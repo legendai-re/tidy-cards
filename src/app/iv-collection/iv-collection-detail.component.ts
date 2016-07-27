@@ -5,6 +5,7 @@ import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/rout
 import { Observable }                     from 'rxjs/Observable';
 import { IvAuthService }                  from '../iv-auth/iv-auth.service';
 import { IvStarService }                  from '../iv-star/iv-star.service';
+import { IvCollectionCreateComponent }    from './iv-collection-create.component';
 import { IvCollectionService }            from './iv-collection.service';
 import { IvItemService }                  from '../iv-item/iv-item.service';
 import { IvCollection }                   from './iv-collection.class';
@@ -16,7 +17,7 @@ import { IvDataLimit }                    from '../iv-shared/iv-data-limit.ts';
 @Component({
     templateUrl: './iv-collection-detail.component.html',
     styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvItemCreateComponent, IvItemComponent]
+    directives: [ROUTER_DIRECTIVES, IvCollectionCreateComponent, IvItemCreateComponent, IvItemComponent]
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
@@ -28,6 +29,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public itemLoaded: boolean;
     public isAuthor: boolean;
     public isUpdatingStar: boolean;
+    public updateCollectionIntent: boolean;
     private sub: any;
 
     constructor(
@@ -128,6 +130,26 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         }else{
             this.removeStarredCollection();
         }
+    }
+
+    public startUpdateCollection(){
+        this.updateCollectionIntent = true;
+    }
+
+    public onUpdateCollectionCanceled(){
+        this.updateCollectionIntent = false;
+    }
+
+    public onCollectionUpdated(event){
+        if(event.value){
+            this.collection.title = event.value.title;
+            this.collection.bio = event.value.bio;
+            this.collection.color = event.value.color;
+            this.collection.visibility = event.value.visibility;
+            this.collection._thumbnail = event.value._thumbnail;
+            this.emitUpdateHeaderEvent();
+        }
+        this.updateCollectionIntent = false;
     }
 
     private addStarredCollection(){
