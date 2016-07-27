@@ -2,7 +2,7 @@ import { Component, OnInit }               from '@angular/core';
 import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { IvCollectionService }             from '../iv-collection/iv-collection.service';
-import { IvCollectionCardComponent }       from '../iv-collection/iv-collection-card.component';
+import { IvCollectionCardComponent }       from '../iv-collection/iv-collection-card/iv-collection-card.component';
 import { IvCollection }                    from '../iv-collection/iv-collection.class';
 import { IvDataLimit }                     from '../iv-shared/iv-data-limit.ts';
 

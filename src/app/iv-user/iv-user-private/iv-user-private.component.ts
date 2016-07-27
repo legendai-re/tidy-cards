@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, Renderer, ElementRef, AfterViewInit }    from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer, ElementRef }    from '@angular/core';
 import { Router }               from '@angular/router';
-import { IvAuthService }        from '../iv-auth/iv-auth.service';
-import {FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
-import { IvImage }              from '../iv-image/iv-image.class';
-import { IvImgUploadService }   from '../iv-image/iv-image-upload.service';
-import { IvUser }               from './iv-user.class';
-import { IvUserService }        from './iv-user.service';
+import { FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
+import { IvAuthService }        from '../../iv-auth/iv-auth.service';
+import { IvImage }              from '../../iv-image/iv-image.class';
+import { IvImgUploadService }   from '../../iv-image/iv-image-upload.service';
+import { IvUser }               from '../iv-user.class';
+import { IvUserService }        from '../iv-user.service';
 
 @Component({
     selector: 'iv-private-profile',
-    styleUrls: ['iv-user.component.scss'],
+    styleUrls: ['../iv-user.component.scss'],
     templateUrl: './iv-user-private.component.html',
     directives: [FILE_UPLOAD_DIRECTIVES]
 })
@@ -64,7 +64,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.updateGeneralInfoIntent = false;
         this.tmpUser._avatar = null;
         this.tmpUser.name = JSON.parse(JSON.stringify(this.authService.currentUser.name));
-        this.tmpUser.bio = this.authService.currentUser.bio ? JSON.parse(JSON.stringify(this.authService.currentUser.bio)) : "";
+        this.tmpUser.bio = this.authService.currentUser.bio ? JSON.parse(JSON.stringify(this.authService.currentUser.bio)) : '';
         this.isUploadingAvatar = false;
     }
 
@@ -116,14 +116,14 @@ export class IvUserPrivateComponent implements OnInit {
         })
     }
 
-    private updateUsername(){
+    public updateUsername(){
         this.isUpdatingUsername = true;
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
             if(isValid){
-                var user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
-                this.userService.putUser(user).subscribe((user) => {
-                    this.tmpUser.username = user.username;
-                    this.authService.currentUser.username = user.username;
+                let user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
+                this.userService.putUser(user).subscribe((userResponse) => {
+                    this.tmpUser.username = userResponse.username;
+                    this.authService.currentUser.username = userResponse.username;
                     this.updateUsernameIntent = false;
                     this.isUpdatingUsername = false;
                 })
@@ -144,19 +144,19 @@ export class IvUserPrivateComponent implements OnInit {
         if(this.isUploadingAvatar)
             return;
         this.isUpdadingGeneralInfo = true;
-        var user = new IvUser();
+        let user = new IvUser();
         user._id = this.tmpUser._id;
         user.name = this.tmpUser.name;
         user.bio = this.tmpUser.bio;
         if(this.tmpUser._avatar)
             user._avatar = this.tmpUser._avatar;
-        this.userService.putUser(user).subscribe((user) => {
-            this.authService.currentUser.name = user.name;
-            this.authService.currentUser.bio = user.bio;
+        this.userService.putUser(user).subscribe((userResponse) => {
+            this.authService.currentUser.name = userResponse.name;
+            this.authService.currentUser.bio = userResponse.bio;
             if(this.tmpUser._avatar)
                 this.authService.currentUser._avatar = this.tmpUser._avatar;
-            this.tmpUser.name = user.name;
-            this.tmpUser.bio = user.bio;
+            this.tmpUser.name = userResponse.name;
+            this.tmpUser.bio = userResponse.bio;
             this.tmpUser._avatar = null;
             this.updateGeneralInfoIntent = false;
             this.isUpdadingGeneralInfo = false;

@@ -1,7 +1,7 @@
-import { IvItemUrl }     from './iv-item-url.class';
-import { IvItemYoutube }     from './iv-item-youtube.class';
-import { IvItemImage }     from './iv-item-image.class';
-import { IvItemTweet }     from './iv-item-tweet.class';
+import { IvItemUrl }     from './iv-item-url/iv-item-url.class';
+import { IvItemYoutube } from './iv-item-youtube/iv-item-youtube.class';
+import { IvItemImage }   from './iv-item-image/iv-item-image.class';
+import { IvItemTweet }   from './iv-item-tweet/iv-item-tweet.class';
 
 export class IvItem {
 

@@ -1,17 +1,17 @@
-import { Component, OnInit }               from '@angular/core';
-import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
-import { URLSearchParams  }                from '@angular/http';
-import { IvCollectionService }               from './iv-collection.service';
-import { IvCollectionCardComponent }         from './iv-collection-card.component';
-import { IvCollection }                      from './iv-collection.class';
-import { IvDataLimit }                     from '../iv-shared/iv-data-limit.ts';
+import { Component, OnInit }   from '@angular/core';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { URLSearchParams  }   from '@angular/http';
+import { IvCollectionService }   from '../iv-collection.service';
+import { IvCollectionCardComponent }   from '../iv-collection-card/iv-collection-card.component';
+import { IvCollection }   from '../iv-collection.class';
+import { IvDataLimit }    from '../../iv-shared/iv-data-limit.ts';
 
 @Component({
-    templateUrl: './iv-collection-last.component.html',
+    templateUrl: './iv-collection-popular.component.html',
     directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
 })
 
-export class IvCollectionLastComponent implements OnInit {
+export class IvCollectionPopularComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
@@ -43,7 +43,7 @@ export class IvCollectionLastComponent implements OnInit {
         let params = new URLSearchParams();
         params.set('limit', IvDataLimit.COLLECTION.toString());
         params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
-        params.set('sort_field', 'createdAt');
+        params.set('sort_field', 'starsCount');
         params.set('sort_dir', '-1');
         this.collectionService.getCollections(params).subscribe(collections => {
             this.onCollectionsReceived(collections);
@@ -56,4 +56,5 @@ export class IvCollectionLastComponent implements OnInit {
         this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
         this.loadingCollections = false;
     }
+
 }

@@ -28,3 +28,23 @@
         </div>
     </div>
 </div>
+<section class="section">
+    <div class="container">
+    <h2 class="section-title">Last public collections</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of userCollections">
+                <iv-collection-card [collection]=collection></iv-collection-card>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Favorite collections</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of userStarredCollections">
+                <iv-collection-card [collection]=collection></iv-collection-card>
+            </div>
+        </div>
+    </div>
+</section>

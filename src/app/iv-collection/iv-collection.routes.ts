@@ -1,10 +1,10 @@
 import { RouterConfig }                    from '@angular/router';
 import { GrantedUser }                     from '../iv-auth/iv-auth.guard';
-import { IvCollectionMeComponent }         from './iv-collection-me.component';
-import { IvCollectionLastComponent }       from './iv-collection-last.component';
-import { IvCollectionPopularComponent }    from './iv-collection-popular.component';
-import { IvCollectionFeaturedComponent }    from './iv-collection-featured.component';
-import { IvCollectionDetailComponent }     from './iv-collection-detail.component';
+import { IvCollectionMeComponent }         from './iv-collection-me/iv-collection-me.component';
+import { IvCollectionLastComponent }       from './iv-collection-last/iv-collection-last.component';
+import { IvCollectionPopularComponent }    from './iv-collection-popular/iv-collection-popular.component';
+import { IvCollectionFeaturedComponent }   from './iv-collection-featured/iv-collection-featured.component';
+import { IvCollectionDetailComponent }     from './iv-collection-detail/iv-collection-detail.component';
 
 export const IvCollectionRoutes: RouterConfig = [
 { path: 'c/me',  component: IvCollectionMeComponent, canActivate: [GrantedUser] },

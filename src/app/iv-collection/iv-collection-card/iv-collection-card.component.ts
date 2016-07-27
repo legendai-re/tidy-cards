@@ -1,10 +1,10 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
-import { IvAuthService } from '../iv-auth/iv-auth.service';
-import { IvStarService } from '../iv-star/iv-star.service';
-import { IvCollection } from './iv-collection.class';
-import { IvApiUrl }                 from '../iv-shared/iv-api-url';
+import { IvAuthService } from '../../iv-auth/iv-auth.service';
+import { IvStarService } from '../../iv-star/iv-star.service';
+import { IvCollection } from '../iv-collection.class';
+import { IvApiUrl } from '../../iv-shared/iv-api-url';
 
 @Component({
     selector: 'iv-collection-card',

@@ -1,12 +1,12 @@
-import { Jsonp, Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Jsonp, Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizationService } from '@angular/platform-browser';
 import { IvItem }                 from './iv-item.class';
-import { IvItemUrl }              from './iv-item-url.class';
-import { IvItemYoutube }          from './iv-item-youtube.class';
-import { IvItemImage }            from './iv-item-image.class';
-import { IvItemTweet }            from './iv-item-tweet.class';
+import { IvItemUrl }              from './iv-item-url/iv-item-url.class';
+import { IvItemYoutube }          from './iv-item-youtube/iv-item-youtube.class';
+import { IvItemImage }            from './iv-item-image/iv-item-image.class';
+import { IvItemTweet }            from './iv-item-tweet/iv-item-tweet.class';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class IvItemContentService {
 
     public getContentFromUrl(entryUrl): Promise<any>{
         return new Promise((resolve, reject) => {
-            var result;
+            let result;
 
             this.getIsImage(entryUrl).subscribe((sucess)=>{
                 if(sucess){
@@ -27,7 +27,7 @@ export class IvItemContentService {
                     };
                     resolve(result);
                 }
-            })
+            });
 
             if(this.simpleGetIsImage(entryUrl)){
                 result = {
@@ -50,17 +50,17 @@ export class IvItemContentService {
                 };
                 resolve(result);
             }else{
-                var noHttpUrl = this.removeHttp(entryUrl);
-                var host = noHttpUrl.split('/')[0];
-                var path = noHttpUrl.substr(host.length);
-                if(host==''){
+                let noHttpUrl = this.removeHttp(entryUrl);
+                let host = noHttpUrl.split('/')[0];
+                let path = noHttpUrl.substr(host.length);
+                if(host===''){
                     resolve(null);
                 }else{
                     this.getFirstImage(host, path).subscribe((response: any) => {
                         if(response.error){
                             resolve(null);
                         }else{
-                            var itemUrl = IvItemUrl.createFormJson(response.data);
+                            let itemUrl = IvItemUrl.createFormJson(response.data);
                             itemUrl.url = entryUrl;
                             itemUrl.noHttpUrl = this.removeHttp(entryUrl);
                             result = {
@@ -71,14 +71,14 @@ export class IvItemContentService {
                         }
                     }, () => {
                         resolve(null);
-                    })
+                    });
                 }
             }
-        })
+        });
     }
 
     private createItemYoutube(entryUrl, videoId){
-        var itemYoutube = new IvItemYoutube();
+        let itemYoutube = new IvItemYoutube();
         itemYoutube.url = entryUrl;
         itemYoutube.videoId = videoId;
         itemYoutube.embedUrl = 'https://www.youtube.com/embed/'+videoId;
@@ -86,30 +86,25 @@ export class IvItemContentService {
     }
 
     private createItemImage(entryUrl){
-        var itemImage = new IvItemImage();
+        let itemImage = new IvItemImage();
         itemImage.url = entryUrl;
         return itemImage;
     }
 
     private getYoutubeVideoId(url) {
-        var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        let p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         return (url.match(p)) ? RegExp.$1 : null;
     }
 
     private getIsTweet(url){
-        var p = /^(?:https?:\/\/)?(?:www\.)?twitter\.com\/(\w+)\/status(es)?\/(\d{18})(\/)?$/;
-        return (url.match(p)) ? true : false;
-    }
-
-    private getIsUrl(url){
-        var p = /^([^:]+):\/\/([-\w._]+)(\/[-\w._]\?(.+)?)?$/ig;
+        let p = /^(?:https?:\/\/)?(?:www\.)?twitter\.com\/(\w+)\/status(es)?\/(\d{18})(\/)?$/;
         return (url.match(p)) ? true : false;
     }
 
     private removeHttp(url){
-        if(url.substring(0, 7) == 'http://'){
+        if(url.substring(0, 7) === 'http://'){
             url = url.substr(7);
-        }else if(url.substring(0, 8) == 'https://'){
+        }else if(url.substring(0, 8) === 'https://'){
             url = url.substr(8);
         }
         return url;
@@ -127,14 +122,14 @@ export class IvItemContentService {
     }
 
     private simpleGetIsImage(url){
-         return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+         return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
     }
 
     private getIsImage(url): Observable<Boolean> {
         return Observable.create(observer => {
-            var timeout = 5000;
-            var timedOut = false, timer;
-            var img = new Image();
+            let timeout = 5000;
+            let timedOut = false, timer;
+            let img = new Image();
             img.onerror = img.onabort = function() {
                 if (!timedOut) {
                     clearTimeout(timer);
@@ -159,7 +154,7 @@ export class IvItemContentService {
     }
 
     private getEmbedTweet (url: string){
-        if(url.charAt(url.length-1) == '/'){
+        if(url.charAt(url.length-1) === '/'){
             url = url.substring(0, url.length - 1);
         }
         let params = new URLSearchParams();

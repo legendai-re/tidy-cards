@@ -10,7 +10,7 @@
             <span class="item-new-preview">How it's gonna looks like</span>
             <iv-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]=item._content ></iv-item-url>
             <iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]=item._content ></iv-item-image>
-            <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]=item._content [class.collapse]="!tweetRendered"></iv-item-tweet>
+            <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]=item._content ></iv-item-tweet>
             <iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]=item._content ></iv-item-youtube>
         </div>
         <input

@@ -3,16 +3,16 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
-import { IvAuthService }                  from '../iv-auth/iv-auth.service';
-import { IvStarService }                  from '../iv-star/iv-star.service';
-import { IvCollectionCreateComponent }    from './iv-collection-create.component';
-import { IvCollectionService }            from './iv-collection.service';
-import { IvItemService }                  from '../iv-item/iv-item.service';
-import { IvCollection }                   from './iv-collection.class';
-import { IvItemCreateComponent }          from '../iv-item/iv-item-create.component';
-import { IvHeaderService }                from '../iv-header/iv-header.service';
-import { IvItemComponent }                from '../iv-item/iv-item.component';
-import { IvDataLimit }                    from '../iv-shared/iv-data-limit.ts';
+import { IvAuthService }                  from '../../iv-auth/iv-auth.service';
+import { IvStarService }                  from '../../iv-star/iv-star.service';
+import { IvCollectionCreateComponent }    from '../iv-collection-create/iv-collection-create.component';
+import { IvCollectionService }            from '../iv-collection.service';
+import { IvItemService }                  from '../../iv-item/iv-item.service';
+import { IvCollection }                   from '../iv-collection.class';
+import { IvItemCreateComponent }          from '../../iv-item/iv-item-create/iv-item-create.component';
+import { IvHeaderService }                from '../../iv-header/iv-header.service';
+import { IvItemComponent }                from '../../iv-item/iv-item.component';
+import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
@@ -95,16 +95,9 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     private onItemsReceived(items){
         for(let i in items)
             this.collection._items.push(items[i]);
-        this.renderTweets();
         this.haveMoreItems = (items.length==IvDataLimit.ITEM);
         this.loadingItems = false;
         this.itemLoaded = true;
-    }
-
-    private renderTweets(){
-        setTimeout(()=>{
-           window.document.getElementById('render_tweet').click();
-       },200)
     }
 
     public loadNextPage(){
@@ -173,7 +166,6 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         if(event.value){
             this.collection._items.unshift(event.value);
             this.collection.itemsCount++;
-            this.renderTweets();
         }
     }
 

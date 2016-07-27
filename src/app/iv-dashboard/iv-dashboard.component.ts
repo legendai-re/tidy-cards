@@ -3,8 +3,8 @@ import { IvAuthService }          from '../iv-auth/iv-auth.service';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
 import { IvCollectionService }   from '../iv-collection/iv-collection.service';
-import { IvCollectionCreateComponent }   from '../iv-collection/iv-collection-create.component';
-import { IvCollectionCardComponent }   from '../iv-collection/iv-collection-card.component';
+import { IvCollectionCreateComponent }   from '../iv-collection/iv-collection-create/iv-collection-create.component';
+import { IvCollectionCardComponent }   from '../iv-collection/iv-collection-card/iv-collection-card.component';
 import { IvCollection }   from '../iv-collection/iv-collection.class';
 
 @Component({

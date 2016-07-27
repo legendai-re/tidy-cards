@@ -5,7 +5,7 @@ import { Observable }             from 'rxjs/Observable';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
 import { IvCollectionService }    from '../iv-collection/iv-collection.service';
 import { IvCollection }           from '../iv-collection/iv-collection.class';
-import { IvCollectionCardComponent } from '../iv-collection/iv-collection-card.component';
+import { IvCollectionCardComponent } from '../iv-collection/iv-collection-card/iv-collection-card.component';
 
 @Component({
     templateUrl: './iv-admin-featured.component.html',

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
-import { Observable }                     from 'rxjs/Observable';
-import { IvAuthService }                  from '../iv-auth/iv-auth.service';
-import { IvUser }                         from './iv-user.class';
-import { IvUserPublicComponent }          from './iv-user-public.component';
-import { IvUserPrivateComponent }         from './iv-user-private.component';
+import { Observable }                   from 'rxjs/Observable';
+import { IvAuthService }                from '../iv-auth/iv-auth.service';
+import { IvUser }                       from './iv-user.class';
+import { IvUserPublicComponent }        from './iv-user-public/iv-user-public.component';
+import { IvUserPrivateComponent }       from './iv-user-private/iv-user-private.component';
 
 @Component({
     templateUrl: './iv-user.component.html',

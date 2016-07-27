@@ -1,19 +1,14 @@
-import { Component, OnInit, Output, OnDestroy, EventEmitter, Input } from '@angular/core';
-import { SafeResourceUrl, DomSanitizationService, SafeScript } from '@angular/platform-browser';
-import { Router, ActivatedRoute }       from '@angular/router';
-import { Observable }                   from 'rxjs/Observable';
-import { URLSearchParams  }             from '@angular/http';
-import {FILE_UPLOAD_DIRECTIVES }        from 'ng2-file-upload';
-import { IvCollection }                 from '../iv-collection/iv-collection.class';
-import { IvItem }                       from './iv-item.class';
-import { IvItemUrl }                    from './iv-item-url.class';
-import { IvItemYoutube }                from './iv-item-youtube.class';
-import { IvItemService }                from './iv-item.service'
-import { IvItemYoutubeComponent } from './iv-item-youtube.component';
-import { IvItemUrlComponent } from './iv-item-url.component';
-import { IvItemTweetComponent } from './iv-item-tweet.component';
-import { IvItemImageComponent } from './iv-item-image.component';
-import { IvItemContentService }         from './iv-item-content.service';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { DomSanitizationService } from '@angular/platform-browser';
+import { Observable }             from 'rxjs/Observable';
+import { IvCollection }           from '../../iv-collection/iv-collection.class';
+import { IvItem }                 from '../iv-item.class';
+import { IvItemService }          from '../iv-item.service'
+import { IvItemYoutubeComponent } from '../iv-item-youtube/iv-item-youtube.component';
+import { IvItemUrlComponent }     from '../iv-item-url/iv-item-url.component';
+import { IvItemTweetComponent }   from '../iv-item-tweet/iv-item-tweet.component';
+import { IvItemImageComponent }   from '../iv-item-image/iv-item-image.component';
+import { IvItemContentService }   from '../iv-item-content.service';
 
 @Component({
     selector: 'iv-item-create',
@@ -31,7 +26,6 @@ export class IvItemCreateComponent implements OnInit {
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
-    public tweetRendered: boolean;
     public addDescription: boolean;
     private typingTimer;
     private doneTypingInterval: number;
@@ -106,10 +100,6 @@ export class IvItemCreateComponent implements OnInit {
            if(result){
                this.item.type = result.type;
                this.item._content = result._content;
-               this.tweetRendered = false;
-               this.renderTweet().subscribe((success) => {
-                    this.tweetRendered = true;
-               })
                this.validUrl = true;
            }else{
                this.item._content = null;
@@ -117,18 +107,6 @@ export class IvItemCreateComponent implements OnInit {
            }
            this.loadingContent = false;
        })
-    }
-
-    private renderTweet(): Observable<Boolean>{
-         return Observable.create(observer => {
-            setTimeout(()=>{
-                window.document.getElementById('render_tweet').click();
-                setTimeout(()=>{
-                    observer.next(true);
-                    observer.complete();
-                },500);
-            },200)
-        })
     }
 
     public resetItemContent(){
