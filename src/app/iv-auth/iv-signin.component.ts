@@ -5,6 +5,7 @@ import { IvAuthService } from './iv-auth.service';
 @Component({
     selector: 'iv-signin',
     templateUrl: './iv-signin.component.html',
+    styleUrls: ['./iv-auth.component.scss'],
     directives: [ROUTER_DIRECTIVES]
 })
 

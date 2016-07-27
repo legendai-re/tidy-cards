@@ -1,17 +1,22 @@
-<form class="form-signin" *ngIf="!authService.isLoggedIn" (ngSubmit)="onLoginSubmit()">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <label for="inputEmail" class="sr-only">Username</label>
-    <input [(ngModel)]="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" />
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p><a href="auth/facebook">Connect with facebook</a></p>
-    <p><a href="auth/twitter">Connect with twitter</a></p>
-    <p><a href="auth/google">Connect with google</a></p>
-</form>
-
+<div class="auth-content">
+    <form class="form-signin" *ngIf="!authService.isLoggedIn" (ngSubmit)="onLoginSubmit()">
+        <p class="auth-top-content">Invow is a community to share your passions and interests with the world.</p>
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input [(ngModel)]="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" />
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
+        </div>
+        <!-- <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div> -->
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        <a class="btn btn--facebook btn-block" href="auth/facebook">Sign in with Facebook</a>
+        <a class="btn btn--twitter btn-block" href="auth/twitter">Sign in with Twitter</a>
+        <a class="btn btn-secondary btn-block" href="auth/google">Sign in with Google</a>
+    </form>
+</div>
