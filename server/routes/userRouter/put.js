@@ -20,10 +20,10 @@ module.exports = function put (req, res) {
         user.name = (req.body.name || user.name);
         user.bio = req.body.bio;
         if(req.body._avatar && req.body._avatar._id){
-            models.Image.findById(req.body._avatar._id).exec(function(err, image){
+            models.Image.checkIfOwner(req.body._avatar._id, user, function(err, isOwner){
                 if(err) {console.log(err); res.sendStatus(500); return;}
-                if(image._user!=user._id) return res.status(422).send({ error: 'cannot update avatar, you are not the owner of this image'});
-                user._avatar = image._id;
+                if(!isOwner) return res.status(422).send({ error: 'cannot update avatar, you are not the owner of this image'});
+                user._avatar = req.body._avatar._id;
                 saveUser(user);
             })
         }else{

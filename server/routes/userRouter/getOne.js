@@ -1,13 +1,9 @@
 module.exports = function getOne (req, res) {
 
-    var models      = require('../../models');
-    var mongoose    = require('mongoose');
-
-
     var rq = req.query;
     var q = null;
 
-    if(mongoose.Types.ObjectId.isValid(req.params.user_id))
+    if(isMongoId(req.params.user_id))
         q = models.User.findById(req.params.user_id);
     else
         q = models.User.findOne({username: req.params.user_id});
@@ -33,4 +29,7 @@ module.exports = function getOne (req, res) {
         res.json({data: user});
     })
 
+    function isMongoId(username){
+        return new RegExp("^[0-9a-fA-F]{24}$").test(username);;
+    }
 }

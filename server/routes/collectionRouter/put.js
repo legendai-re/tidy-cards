@@ -1,5 +1,6 @@
 module.exports = function put (req, res) {
 
+    var visibility  = require('../../models/collection/visibility.json');
     var models      = require('../../models');
 
     q = models.Collection.findById(req.params.collection_id);
@@ -15,17 +16,42 @@ module.exports = function put (req, res) {
                 collection.isOnDiscover = req.body.isOnDiscover;
             }
 
+            if(req.body.visibility && visibilityOk(req.body.visibility))
+                collection.visibility = req.body.visibility.id;
+
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
             collection.bio = req.body.bio;
-            collection._thumbnail = (req.body._thumbnail && req.body._thumbnail._id) ? req.body._thumbnail._id : collection._thumbnail;
-            collection.save(function(err) {
-                if (err) {console.log(err); res.sendStatus(500); return;}
-                res.json({data: collection});
-            });
+
+            if(req.body._thumbnail && req.body._thumbnail._id)
+                saveThumbnail(collection, req.body._thumbnail._id, req.user)
+            else
+                saveCollectionAndSendRes(collection);
         }else{
         	res.sendStatus(401);
         }
     });
+
+    function visibilityOk(reqVisibility){
+        if(visibility[reqVisibility.id] != null)
+            return true;
+        return false;
+    }
+
+    function saveThumbnail(collection, imageId, user){
+        models.Image.checkIfOwner(imageId, user, function(err, isOwner){
+            if(err) {console.log(err); res.sendStatus(500); return;}
+            if(!isOwner) return res.status(422).send({ error: 'cannot update avatar, you are not the owner of this image'});
+            collection._thumbnail = imageId;
+            saveCollectionAndSendRes(collection);
+        })
+    }
+
+    function saveCollectionAndSendRes(collection){
+        collection.save(function(err) {
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            res.json({data: collection});
+        });
+    }
 
 }
