@@ -20,28 +20,26 @@ module.exports = function getItemUrl (req, res) {
                         res.json({error: true, data: null});
                     }else{
                         var $ = window.$;
+                        if(!$)
+                            return res.json({error: false, data: null});
+
                         var itemUrl = new models.ItemUrl();
 
                         img = $('meta[property="og:image"]').attr("content");
                         if(img == '' || img == null || img == undefined){
                             img = $('img:first').attr("src");
-                            if(img != null && img != '' && img != undefined){
-                                if(!(img.substring(0, 7) == 'http://' || img.substring(0, 8) == 'https://')){
-                                    if(img[0] == '/' && img[1] == '/')
-                                        img = 'http:' + img;
-                                    else if(img[0] == '/')
-                                        img = req.query.host + img;
-                                    else
-                                        img = req.query.host + '/' + img;
-                                }
-                            }
                         }
+
                         if(img != null && img != '' && img != undefined){
                             if(!(img.substring(0, 7) == 'http://' || img.substring(0, 8) == 'https://')){
-                                itemUrl.image = 'http://' + img;
-                            }else{
-                                itemUrl.image = img;
+                                if(img[0] == '/' && img[1] == '/')
+                                    img = 'http:' + img;
+                                else if(img[0] == '/')
+                                    img = 'http://'+req.query.host + img;
+                                else
+                                    img = 'http://' + req.query.host + '/' + img;
                             }
+                            itemUrl.image = img;
                         }
 
                         itemUrl.title = $('meta[property="og:title"]').attr("content");
