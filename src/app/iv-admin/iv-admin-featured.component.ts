@@ -49,7 +49,8 @@ export class IvAdminFeaturedComponent implements OnInit {
     }
 
     public updateCollection(){
-        this.collectionService.putCollection(this.collection).subscribe((collection) => {
+        let toUpdateCollection = IvCollection.createFormJson({_id: this.collection._id, isFeatured: this.collection.isFeatured, isOnDiscover: this.collection.isOnDiscover})
+        this.collectionService.putCollection(toUpdateCollection).subscribe((collection) => {
             console.log('done')
         })
     }
