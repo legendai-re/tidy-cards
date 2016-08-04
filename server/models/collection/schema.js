@@ -63,7 +63,8 @@ module.exports = function getCollectionSchema(Schema) {
             default: false
         },
 
-        //User session related, not saved in database
+        //Values never saved, only used for frondend, defined after find()
+        position: {type: Number},
         _star: { type: String, ref: 'Star' },
 
         //Relations

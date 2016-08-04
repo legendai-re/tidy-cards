@@ -3,6 +3,7 @@ module.exports = function postSignup(req, res) {
     var bCrypt      = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
     var models      = require('../../models');
+    var sortTypes   = require('../../models/customSort/sortTypes.json');
     var usernameValidator = require('../../helpers/username-validator');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
@@ -19,6 +20,14 @@ module.exports = function postSignup(req, res) {
                 user.local.password = createHash(req.body.password);
                 user.local.active = true;
                 user.roles = (process.env.ADMIN_EMAILS.indexOf(req.body.email) > -1 ) ? ['ROLE_USER', 'ROLE_ADMIN'] : ['ROLE_USER'];
+
+                var myCollectionSort = new models.CustomSort();
+                myCollectionSort.type = sortTypes.MY_COLLECTIONS.id;
+                myCollectionSort._user = user._id;
+                myCollectionSort.save(function(err){
+                    if(err) console.log(err);
+                });
+
                 user.save(function(err){
                     if (err) {console.log(err); res.sendStatus(422); return;}
                     req.login(user, function(err) {

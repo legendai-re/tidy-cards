@@ -1,4 +1,4 @@
-import { Component, OnInit }               from '@angular/core';
+import { Component, OnInit, AfterViewInit }               from '@angular/core';
 import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { IvCollectionService }             from '../iv-collection.service';
@@ -6,17 +6,19 @@ import { IvCollectionCardComponent }       from '../iv-collection-card/iv-collec
 import { IvCollection }                    from '../iv-collection.class';
 import { IvDataLimit }                     from '../../iv-shared/iv-data-limit.ts';
 import { IvAuthService }                   from '../../iv-auth/iv-auth.service';
+declare var JQuery: any;
 
 @Component({
     templateUrl: './iv-collection-me.component.html',
     directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
 })
 
-export class IvCollectionMeComponent implements OnInit {
+export class IvCollectionMeComponent implements OnInit, AfterViewInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
+    public isUpdatingPosition: boolean;
     public collections: IvCollection[];
 
     constructor(public authService: IvAuthService, private router: Router, private collectionService: IvCollectionService) {
@@ -45,17 +47,59 @@ export class IvCollectionMeComponent implements OnInit {
         params.set('limit', IvDataLimit.COLLECTION.toString());
         params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
         params.set('_author', this.authService.currentUser._id);
-        params.set('sort_field', 'createdAt');
-        params.set('sort_dir', '-1');
+        params.set('custom_sort', 'true');
         this.collectionService.getCollections(params).subscribe(collections => {
             this.onCollectionsReceived(collections);
         }, () => {});
     }
 
     private onCollectionsReceived(collections){
+        collections.sort(function(a, b){
+            if(a.position < b.position) return -1;
+            if(a.position > b.position) return 1;
+            return 0;
+        });
         for(let i in collections)
             this.collections.push(collections[i]);
         this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
         this.loadingCollections = false;
+    }
+
+    ngAfterViewInit(){
+        let newIndex;
+        let oldIndex;
+        JQuery("#myCollectionContainer").sortable({
+            handle: '.move-item-button',
+            cancel: '.cancel-sort',
+            start: (event, ui) => {
+                 $(this).attr('data-previndex', ui.item.index());
+            },
+            update: (event, ui) => {
+                newIndex = ui.item.index();
+                oldIndex = $(this).attr('data-previndex');
+                $(this).removeAttr('data-previndex');
+            },
+            stop: (event, ui) => {
+                this.isUpdatingPosition = true;
+                let tmpCollection = this.collections[oldIndex];
+                tmpCollection.position = newIndex;
+                tmpCollection.updatePosition = true;
+
+                this.collectionService.putCollection(tmpCollection).subscribe(collection => {
+                    this.isUpdatingPosition = false;
+                }, (err) => {
+                    this.collections = [];
+                    this.pageNb = 0;
+                    this.loadCollections();
+                    this.isUpdatingPosition = false;
+                });
+
+                this.collections.splice(oldIndex,1);
+                this.collections.splice(newIndex, 0, tmpCollection);
+                for(let i=0; i<this.collections.length; i++){
+                        this.collections[i].position = i;
+                }
+            }
+        }).disableSelection();
     }
 }

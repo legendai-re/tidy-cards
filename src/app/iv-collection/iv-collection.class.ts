@@ -19,6 +19,9 @@ export class IvCollection {
     public starsCount: number;
     public isFeatured: boolean;
     public isOnDiscover: boolean;
+    public position: number;
+
+    public updatePosition: boolean;
     public _items: IvItem[];
 
     constructor(
@@ -35,7 +38,8 @@ export class IvCollection {
         _star?: IvStar,
         starsCount?: number,
         isFeatured?: boolean,
-        isOnDiscover?: boolean) {
+        isOnDiscover?: boolean,
+        position?: number) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -50,6 +54,7 @@ export class IvCollection {
         this.starsCount = starsCount;
         this.isFeatured = isFeatured;
         this.isOnDiscover = isOnDiscover;
+        this.position = position;
     }
 
     public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json');}
@@ -71,7 +76,8 @@ export class IvCollection {
             IvStar.createFormJson(obj._star),
             obj.starsCount,
             obj.isFeatured,
-            obj.isOnDiscover
+            obj.isOnDiscover,
+            obj.position
             );
     }
 

@@ -24,3 +24,6 @@ exports.ItemTweet = ItemTweet.itemTweetModel;
 
 Star = require('./star');
 exports.Star = Star.starModel;
+
+CustomSort = require('./customSort');
+exports.CustomSort = CustomSort.customSortModel;

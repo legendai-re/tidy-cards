@@ -1,3 +1,4 @@
 <div class="embed-responsive embed-responsive-16by9 item-embeded-container">
-    <iframe *ngIf="itemYoutube.trustedEmbedUrl" class="embed-responsive-item" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen></iframe>
+    <img *ngIf="!displayVideo" (click)="displayVideo = true" src="http://img.youtube.com/vi/{{itemYoutube.videoId}}/0.jpg" />
+    <iframe *ngIf="displayVideo && itemYoutube.trustedEmbedUrl" class="embed-responsive-item" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen></iframe>
 </div>

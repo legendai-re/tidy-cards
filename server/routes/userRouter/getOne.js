@@ -1,5 +1,7 @@
 module.exports = function getOne (req, res) {
 
+    var models      = require('../../models');
+
     var rq = req.query;
     var q = null;
 

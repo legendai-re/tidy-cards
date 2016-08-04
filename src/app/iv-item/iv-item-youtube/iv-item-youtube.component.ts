@@ -12,6 +12,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 export class IvItemYoutubeComponent implements OnInit {
 
+    public displayVideo: boolean;
+
     @Input('itemYoutube') itemYoutube: IvItemYoutube;
 
     constructor(private sanitizer: DomSanitizationService) {

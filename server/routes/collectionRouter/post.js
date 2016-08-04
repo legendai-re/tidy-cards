@@ -1,6 +1,7 @@
 module.exports = function post (req, res) {
 
     var visibility      = require('../../models/collection/visibility.json');
+    var sortTypes       = require('../../models/customSort/sortTypes.json');
     var models          = require('../../models');
 
 	if(!req.body.title || !req.body.color || !req.body.visibility || !visibilityOk(req.body.visibility)){
@@ -17,16 +18,38 @@ module.exports = function post (req, res) {
         if(req.body.bio){
             collection.bio = req.body.bio;
         }
-        req.user.addCollection(collection, function(err, collection){
-            if (err) {console.log(err); res.sendStatus(422); return;}
-            res.json({'data': collection});
-        });
+        saveCollection(collection);
     }
-
 
     function visibilityOk(reqVisibility){
         if(visibility[reqVisibility.id] != null)
             return true;
         return false;
+    }
+
+    function saveCollection(collection){
+        req.user.addCollection(collection, function(err, collection){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            addToCustomSort(collection);
+        });
+    }
+
+    function addToCustomSort(){
+        models.CustomSort.findOneAndUpdate(
+            {type: sortTypes.MY_COLLECTIONS.id, _user: req.user._id},
+            { $push: {
+                ids: {
+                    $each: [ collection._id ],
+                    $position: 0
+                }
+            }},
+            function(err, customSort){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            sendResponse(collection);
+        })
+    }
+
+    function sendResponse(collection){
+        res.json({'data': collection});
     }
 }
