@@ -21,7 +21,7 @@
             </a>
             <div class="card-details-infos">
                 <div class="card-stats" [class.has-thumbnail]="collection._thumbnail">
-                    <div class="stat-item-list">
+                    <div *ngIf="sortable" class="stat-item-list">
                         <span class="move-item-button">Drag me</span>
                     </div>
                     <ul *ngIf="collection.visibility.id != 'PRIVATE'" class="stats-list">

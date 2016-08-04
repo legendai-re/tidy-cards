@@ -9,27 +9,29 @@ module.exports = function put (req, res) {
 	q.exec(function(err, collection) {
         if (err) {console.log(err); res.sendStatus(500); return;}
         if(!collection) {res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id}); return;}
-        if(collection._author != req.user._id || !req.user.isGranted('ROLE_ADMIN')) return res.sendStatus(401);
+        if(collection._author == req.user._id || req.user.isGranted('ROLE_ADMIN')){
+            if(req.user.isGranted('ROLE_ADMIN')){
+                collection.featuredAt = req.body.isFeatured ? new Date() : null;
+                collection.isFeatured = req.body.isFeatured;
+                collection.isOnDiscover = req.body.isOnDiscover;
+            }
 
-        if(req.user.isGranted('ROLE_ADMIN')){
-            collection.featuredAt = req.body.isFeatured ? new Date() : null;
-            collection.isFeatured = req.body.isFeatured;
-            collection.isOnDiscover = req.body.isOnDiscover;
+            if(req.body.visibility && visibilityOk(req.body.visibility))
+                collection.visibility = req.body.visibility.id;
+
+            collection.title = (req.body.title || collection.title);
+            collection.color = (req.body.color || collection.color);
+            collection.bio = req.body.bio;
+
+            if(req.body.updatePosition && typeof req.body.position != 'undefined')
+                updatePosition(collection, req.body.position)
+            else if(req.body._thumbnail && req.body._thumbnail._id)
+                saveThumbnail(collection, req.body._thumbnail._id, req.user)
+            else
+                saveCollectionAndSendRes(collection);
+        }else{
+            return res.sendStatus(401);
         }
-
-        if(req.body.visibility && visibilityOk(req.body.visibility))
-            collection.visibility = req.body.visibility.id;
-
-        collection.title = (req.body.title || collection.title);
-        collection.color = (req.body.color || collection.color);
-        collection.bio = req.body.bio;
-
-        if(req.body.updatePosition && typeof req.body.position != 'undefined')
-            updatePosition(collection, req.body.position)
-        else if(req.body._thumbnail && req.body._thumbnail._id)
-            saveThumbnail(collection, req.body._thumbnail._id, req.user)
-        else
-            saveCollectionAndSendRes(collection);
     });
 
     function visibilityOk(reqVisibility){

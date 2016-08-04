@@ -19,6 +19,7 @@ export class IvCollectionCardComponent implements OnInit{
     private isWorking: boolean;
 
     @Input('collection') collection: IvCollection;
+    @Input('sortable') sortable: boolean;
 
     constructor(private starService: IvStarService, private authService: IvAuthService, private http: Http) {
     }

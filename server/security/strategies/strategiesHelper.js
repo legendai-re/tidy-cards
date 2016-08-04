@@ -1,6 +1,7 @@
 var slug               = require('slug');
 var models             = require('../../models');
 var imagesTypes        = require('../../models/image/imageTypes.json');
+var sortTypes          = require('../../models/customSort/sortTypes.json');
 var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
 var imageUpdloader     = require('../../helpers/image-uploader');
 
@@ -20,12 +21,23 @@ var createUser = function(profile, accessToken, strategy, callback){
     newUser.roles = ['ROLE_USER'];
     var avatar = createAvatar(newUser, profile);
     newUser._avatar = avatar._id;
+
+    createMyCollectionSort(newUser);
     newUser.save(function(err){
         if (err) { return callback(err); }
         avatar.save();
         newUser._avatar = avatar;
         callback(null, newUser);
     })
+}
+
+function createMyCollectionSort(newUser){
+    var myCollectionSort = new models.CustomSort();
+    myCollectionSort.type = sortTypes.MY_COLLECTIONS.id;
+    myCollectionSort._user = newUser._id;
+    myCollectionSort.save(function(err){
+        if(err) console.log(err);
+    });
 }
 
 function createAvatar(newUser, profile){
