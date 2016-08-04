@@ -11,7 +11,8 @@ module.exports = function getCustomSortSchema(Schema) {
             type: String,
             required: true
         },
-        _user : { type: String, ref: 'User' }
+        _user : { type: String, ref: 'User' },
+        _collection : { type: String, ref: 'Collection' }
     });
 
 }

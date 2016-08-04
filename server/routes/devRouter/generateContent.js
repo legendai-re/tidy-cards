@@ -5,6 +5,7 @@ module.exports = function (req, res) {
     var connectionTypes = require('../../security/connectionTypes.json');
     var models          = require('../../models');
     var itemTypes       = require('../../models/item/itemTypes');
+    var sortTypes       = require('../../models/customSort/sortTypes');
     var itemUrlList     = require('./data/itemUrlList.json');
     var itemYoutubeList = require('./data/itemYoutubeList.json');
 
@@ -18,7 +19,7 @@ module.exports = function (req, res) {
     var collectionNb = req.body.collectionNb;
     var userNb = req.body.userNb;
     var userList = null;
-
+    var i = 0;
     if(userNb && userNb!=0){
         createUser(0);
     }else{
@@ -38,15 +39,20 @@ module.exports = function (req, res) {
         user.local.active = true;
         user.roles = ['ROLE_USER'];
         user.save(function(err){
-            i++;
-            if(i==userNb){
-                models.User.find(function(err, users){
-                    userList = users;
-                    createCollection(0);
-                })
-            }else{
-                createUser(i);
-            }
+            var myCollectionSort = new models.CustomSort();
+            myCollectionSort.type = sortTypes.MY_COLLECTIONS.id;
+            myCollectionSort._user = user._id;
+            myCollectionSort.save(function(err){
+                i++;
+                if(i==userNb){
+                    models.User.find(function(err, users){
+                        userList = users;
+                        createCollection(0);
+                    })
+                }else{
+                    createUser(i);
+                }
+            });
         });
     }
 
@@ -54,7 +60,7 @@ module.exports = function (req, res) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
     }
 
-    function createCollection(i, cb){
+    function createCollection(cb){
         var itemNb = Math.floor(Math.random() * 30);
         var collection =  new models.Collection();
         collection.title = faker.lorem.words().capitalizeFirstLetter();
@@ -62,26 +68,58 @@ module.exports = function (req, res) {
         collection.itemsCount = itemNb;
         collection.color = colors[Math.floor(Math.random() * colors.length)];
         collection.visibility = visibility[Math.floor(Math.random() * visibility.length)];
-        collection._author = userList[Math.floor(Math.random() * userList.length)]._id;
+        var userId = userList[Math.floor(Math.random() * userList.length)]._id;
+        collection._author = userId;
         collection.save(function(err){
+            models.CustomSort.findOneAndUpdate(
+                {type: sortTypes.MY_COLLECTIONS.id, _user: userId},
+                { $push: {
+                    ids: {
+                        $each: [ collection._id ],
+                        $position: 0
+                    }
+                }},
+                function(err, customSort){
+                    if (err) {console.log(err); res.sendStatus(500); return;}
+                    var itemCustomSort = new models.CustomSort();
+                    itemCustomSort.type = sortTypes.COLLECTION_ITEMS.id;
+                    itemCustomSort._user = userId;
+                    itemCustomSort._collection = collection._id;
+                    itemCustomSort.save(function(err){
+                        if (err) {console.log(err); res.sendStatus(500); return;}
+                        creatItem(itemNb, collection, 0);
+                    });
+                }
+            )
+        });
+    }
 
-            creatItem(0);
-            function creatItem(x){
-                var types = ['URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL','YOUTUBE'];
-                var type = types[Math.floor(Math.random() * types.length)];
-                var item = new models.Item();
-                item.type = type;
+    function creatItem(itemNb, collection, x){
+        var types = ['URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL', 'URL','YOUTUBE'];
+        var type = types[Math.floor(Math.random() * types.length)];
+        var item = new models.Item();
+        item.type = type;
 
-                if(type == 'URL')
-                    var content = getItemUrl();
-                if(type == 'YOUTUBE')
-                    var content = getItemYoutube();
+        if(type == 'URL')
+            var content = getItemUrl();
+        if(type == 'YOUTUBE')
+            var content = getItemYoutube();
 
-                content.save(function(err){
-                    if(err)console.log(err);
-                    item._content = content._id;
-                    item._collection = collection._id;
-                    item.save(function(err){
+        content.save(function(err){
+            if(err)console.log(err);
+            item._content = content._id;
+            item._collection = collection._id;
+            item.save(function(err){
+                models.CustomSort.findOneAndUpdate(
+                    {type: sortTypes.COLLECTION_ITEMS.id, _collection: collection._id},
+                    { $push: {
+                        ids: {
+                            $each: [ item._id ],
+                            $position: 0
+                        }
+                    }},
+                    function(err, customSort){
+                        if (err) {console.log(err); res.sendStatus(500); return;}
                         x++;
                         if(i>=collectionNb){
                             res.json({message: 'done'});
@@ -91,12 +129,11 @@ module.exports = function (req, res) {
                             i++;
                             if(i>=collectionNb)return res.json({message: 'done'});
                             else createCollection(i);
-                        }else creatItem(x);
-                    })
-                })
-            }
-
-        });
+                        }else creatItem(itemNb, collection, x);
+                    }
+                )
+            })
+        })
     }
 
     function getItemUrl(){

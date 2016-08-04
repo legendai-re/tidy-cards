@@ -1,6 +1,7 @@
 module.exports = function (req, res) {
 
     var lifeStates      = require('../../models/lifeStates.json');
+    var sortTypes       = require('../../models/customSort/sortTypes.json');
     var models          = require('../../models');
 
     models.Item.findById(req.params.item_id).populate('_collection').exec(function(err, item){
@@ -12,7 +13,7 @@ module.exports = function (req, res) {
 
         item.save(function(err){
             if(err) {console.log(err); res.sendStatus(500); return;}
-            res.status(200).send({ message: 'item deleted'});
+            removeItemFromCustomSort(item);
         });
 
         models.Collection.findById(item._collection, function(err, collection){
@@ -21,4 +22,18 @@ module.exports = function (req, res) {
         })
 
     });
+
+    function removeItemFromCustomSort(item){
+        models.CustomSort.findOne({ _collection: item._collection._id, type: sortTypes.COLLECTION_ITEMS.id}, function(err, customSort){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            models.CustomSort.update({ _id: customSort._id},{ $pull: { ids: item._id } }, function(err, result){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                sendResponse();
+            })
+        })
+    }
+
+    function sendResponse(){
+        res.status(200).send({ message: 'item deleted'});
+    }
 }

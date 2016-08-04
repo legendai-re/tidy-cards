@@ -30,6 +30,9 @@ module.exports = function getItemSchema(Schema) {
             type: Schema.Types.Mixed,
             required: false,
         },
+
+        position: {type: Number},
+
         _collection: { type: String, ref: 'Collection' },
     });
 

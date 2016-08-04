@@ -30,11 +30,11 @@ module.exports = function post (req, res) {
     function saveCollection(collection){
         req.user.addCollection(collection, function(err, collection){
             if (err) {console.log(err); res.sendStatus(500); return;}
-            addToCustomSort(collection);
+            addToMyCollectionCustomSort(collection);
         });
     }
 
-    function addToCustomSort(){
+    function addToMyCollectionCustomSort(collection){
         models.CustomSort.findOneAndUpdate(
             {type: sortTypes.MY_COLLECTIONS.id, _user: req.user._id},
             { $push: {
@@ -44,9 +44,21 @@ module.exports = function post (req, res) {
                 }
             }},
             function(err, customSort){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                createItemCustomSort(collection);
+            }
+        )
+    }
+
+    function createItemCustomSort(collection){
+        var itemCustomSort = new models.CustomSort();
+        itemCustomSort.type = sortTypes.COLLECTION_ITEMS.id;
+        itemCustomSort._user = req.user._id;
+        itemCustomSort._collection = collection._id;
+        itemCustomSort.save(function(err){
             if (err) {console.log(err); res.sendStatus(500); return;}
             sendResponse(collection);
-        })
+        });
     }
 
     function sendResponse(collection){

@@ -3,6 +3,7 @@
     <div class="item-container-metas">
         <span class="date">{{item.createdAt | date}}</span>
         <div class="item-settings" *ngIf="isAuthor">
+            <a class="edit-item move-item-button">Drag me</a>
             <a class="edit-item" (click)="updateItemIntent()"><i class="material-icons">edit</i>Edit</a>
             <a class="delete-item" (click)="deleteItem()"><i class="material-icons">delete</i>Delete</a>
         </div>

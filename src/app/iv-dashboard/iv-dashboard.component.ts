@@ -61,8 +61,10 @@ export class IvDashboardComponent implements OnInit {
     onCollectionMoved(event){
         let oldIndex = event.value.oldIndex;
         let newIndex = event.value.newIndex;
-        this.isUpdatingPosition = true;
         let tmpCollection = this.myCollections[oldIndex];
+        if(!tmpCollection)
+            return;
+        this.isUpdatingPosition = true;
         tmpCollection.position = newIndex;
         tmpCollection.updatePosition = true;
 
@@ -73,10 +75,11 @@ export class IvDashboardComponent implements OnInit {
             this.isUpdatingPosition = false;
         });
 
+        tmpCollection.updatePosition = false;
         this.myCollections.splice(oldIndex,1);
         this.myCollections.splice(newIndex, 0, tmpCollection);
         for(let i=0; i<this.myCollections.length; i++){
-                this.myCollections[i].position = i;
+            this.myCollections[i].position = i;
         }
     }
 

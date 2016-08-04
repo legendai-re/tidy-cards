@@ -12,6 +12,8 @@ export class IvItem {
     public type: any;
     public _content: any;
     public _collection: string;
+    public position: number;
+    public updatePosition: boolean;
 
     constructor(
         _id?: string,
@@ -20,7 +22,8 @@ export class IvItem {
         description?: string,
         type?: any,
         _content?: IvItemUrl | IvItemYoutube | IvItemImage | IvItemTweet,
-        _collection?: string) {
+        _collection?: string,
+        position?: number) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -28,6 +31,7 @@ export class IvItem {
         this.type = typeof type === 'string' ? IvItem.ITEM_TYPES[type] : type;
         this._content = _content;
         this._collection = _collection;
+        this.position = position;
     }
 
     public static get ITEM_TYPES() { return require('../../../server/models/item/itemTypes.json');}
@@ -42,7 +46,8 @@ export class IvItem {
             obj.description,
             obj.type,
             IvItem.getContent(obj),
-            obj._collection
+            obj._collection,
+            obj.position
             );
     }
 

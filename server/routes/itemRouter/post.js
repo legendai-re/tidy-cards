@@ -2,6 +2,7 @@ module.exports = function post (req, res) {
 
     var itemTypes       = require('../../models/item/itemTypes.json');
     var models          = require('../../models');
+    var sortTypes       = require('../../models/customSort/sortTypes.json');
     var itemContentGenerator = require('../../helpers/item-content-generator');
 
     if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
@@ -25,7 +26,7 @@ module.exports = function post (req, res) {
                     item._content = content._id;
                 collection.addItem(item, function(err, item){
                     if(err) {console.log(err); res.sendStatus(500); return;}
-                    res.json({data: item});
+                    addToCollectionItemsCustomSort(collection, item);
                 });
             });
 
@@ -36,5 +37,25 @@ module.exports = function post (req, res) {
         if(itemTypes[reqType.id] != null)
             return true;
         return false;
+    }
+
+    function addToCollectionItemsCustomSort(collection, item){
+        models.CustomSort.findOneAndUpdate(
+            {type: sortTypes.COLLECTION_ITEMS.id, _collection: collection._id},
+            { $push: {
+                ids: {
+                    $each: [ item._id ],
+                    $position: 0
+                }
+            }},
+            function(err, customSort){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                sendResponse(item);
+            }
+        )
+    }
+
+    function sendResponse(item){
+         res.json({data: item});
     }
 }

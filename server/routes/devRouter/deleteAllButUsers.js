@@ -7,7 +7,7 @@ module.exports = function (req, res) {
 
     async.series([
         function(callback){
-            models.User.remove( { email : { $nin: ["olivier28.coue@gmail.com", "hello@alexandrejolly.com", "mr.ylloj@gmail.com", "accounts@alexandrejolly.com"] } }, function(err){
+            models.User.remove({}, function(err){
                 callback(null, 'user')
             });
         },
@@ -44,6 +44,11 @@ module.exports = function (req, res) {
         function(callback){
             models.Star.remove({}, function(err){
                 callback(null, 'star')
+            })
+        },
+        function(callback){
+            models.CustomSort.remove({}, function(err){
+                callback(null, 'customSort')
             })
         }],
         function(err, results){

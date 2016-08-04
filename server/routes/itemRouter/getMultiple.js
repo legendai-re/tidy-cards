@@ -3,6 +3,7 @@ module.exports = function getMultiple (req, res) {
     var itemTypes       = require('../../models/item/itemTypes.json');
     var lifeStates      = require('../../models/lifeStates.json');
     var models          = require('../../models');
+    var sortTypes       = require('../../models/customSort/sortTypes.json');
 
     var rq = req.query;
 
@@ -11,34 +12,64 @@ module.exports = function getMultiple (req, res) {
         return;
     }
 
-    getQueryFiler(rq, req, function(filterObj){
-        var q = models.Item.find(filterObj).sort({'createdAt': 1}).limit(20);
-        q.where('lifeState').equals(lifeStates.ACTIVE.id);
+    if(rq.custom_sort){
+        manageCustomSort();
+    }else{
+        manageNormalSort();
+    };
 
-        if(rq.populate){
-            q.populate(rq.populate);
-        }
+    function manageCustomSort(){
+        var skip = rq.skip ? parseInt(rq.skip) : 0;
+        var limit = rq.limit ? parseInt(rq.limit) : 8;
+        models.CustomSort.findOne({ _collection: rq._collection, type: sortTypes.COLLECTION_ITEMS.id},{ ids : { $slice : [skip , limit] } }, function(err, customSort){
+            var q = models.Item.find({_id: {$in: customSort.ids} });
 
-        if(rq.skip)
-            q.skip(parseInt(rq.skip));
+            if(rq.populate){
+                q.populate(rq.populate);
+            }
 
-        if(rq.limit)
-            q.limit(parseInt(rq.limit));
+            q.exec(function(err, items){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                for(var i in items){
+                    items[i].position = customSort.ids.indexOf(items[i]._id) + skip;
+                }
+                addItemsContent(0, items,  function(err, items){
+                    res.json({data: items});
+                })
+            });
+        })
+    }
 
-        if(rq.sort_field && rq.sort_dir && (parseInt(rq.sort_dir)==1 || parseInt(rq.sort_dir)==-1)){
-            var sortObj = {};
-            sortObj[rq.sort_field] = rq.sort_dir;
-            q.sort(sortObj);
-        }
+    function manageNormalSort(){
+        getQueryFiler(rq, req, function(filterObj){
+            var q = models.Item.find(filterObj).sort({'createdAt': 1}).limit(20);
+            q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
-        q.exec(function(err, items){
-            if (err) {console.log(err); res.sendStatus(500); return;}
-            if(items.length < 1) { res.json({data: []}); return};
-            addItemsContent(0, items,  function(err, items){
-                res.json({data: items});
-            })
+            if(rq.populate){
+                q.populate(rq.populate);
+            }
+
+            if(rq.skip)
+                q.skip(parseInt(rq.skip));
+
+            if(rq.limit)
+                q.limit(parseInt(rq.limit));
+
+            if(rq.sort_field && rq.sort_dir && (parseInt(rq.sort_dir)==1 || parseInt(rq.sort_dir)==-1)){
+                var sortObj = {};
+                sortObj[rq.sort_field] = rq.sort_dir;
+                q.sort(sortObj);
+            }
+
+            q.exec(function(err, items){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                if(items.length < 1) { res.json({data: []}); return};
+                addItemsContent(0, items,  function(err, items){
+                    res.json({data: items});
+                })
+            });
         });
-    })
+    }
 
     function getQueryFiler(rq, req, callback){
         var filterObj = {};

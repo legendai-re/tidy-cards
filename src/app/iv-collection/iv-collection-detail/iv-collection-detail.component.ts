@@ -13,11 +13,12 @@ import { IvItemCreateComponent }          from '../../iv-item/iv-item-create/iv-
 import { IvHeaderService }                from '../../iv-header/iv-header.service';
 import { IvItemComponent }                from '../../iv-item/iv-item.component';
 import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
+import { IvSortableDirective }            from'../../iv-shared/iv-sortable.directive';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
     styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvCollectionCreateComponent, IvItemCreateComponent, IvItemComponent]
+    directives: [ROUTER_DIRECTIVES, IvCollectionCreateComponent, IvItemCreateComponent, IvItemComponent, IvSortableDirective]
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
@@ -30,6 +31,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public isAuthor: boolean;
     public isUpdatingStar: boolean;
     public updateCollectionIntent: boolean;
+    public isUpdatingPosition: boolean;
     private sub: any;
 
     constructor(
@@ -85,14 +87,18 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         params.set('_collection', this.collection._id);
         params.set('limit', IvDataLimit.ITEM.toString());
         params.set('skip', (IvDataLimit.ITEM * this.pageNb).toString());
-        params.set('sort_field', 'createdAt');
-        params.set('sort_dir', '-1');
+        params.set('custom_sort', 'true');
         this.itemService.getItems(params).subscribe((items) => {
             this.onItemsReceived(items);
         });
     }
 
     private onItemsReceived(items){
+        items.sort(function(a, b){
+            if(a.position < b.position) return -1;
+            if(a.position > b.position) return 1;
+            return 0;
+        });
         for(let i in items)
             this.collection._items.push(items[i]);
         this.haveMoreItems = (items.length==IvDataLimit.ITEM);
@@ -162,9 +168,39 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         })
     }
 
+    public onItemMoved(event){
+        let oldIndex = event.value.oldIndex;
+        let newIndex = event.value.newIndex;
+        let tmpItem = this.collection._items[oldIndex];
+        if(!tmpItem)
+            return;
+        this.isUpdatingPosition = true;
+        tmpItem.position = newIndex;
+        tmpItem.updatePosition = true;
+
+        this.itemService.putItem(tmpItem).subscribe(collection => {
+            this.isUpdatingPosition = false;
+        }, (err) => {
+            this.collection._items = [];
+            this.pageNb = 0;
+            this.loadItems();
+            this.isUpdatingPosition = false;
+        });
+
+        tmpItem.updatePosition = false;
+        this.collection._items.splice(oldIndex,1);
+        this.collection._items.splice(newIndex, 0, tmpItem);
+        for(let i=0; i<this.collection._items.length; i++){
+            this.collection._items[i].position = i;
+        }
+    }
+
     public onNewItem(event){
         if(event.value){
             this.collection._items.unshift(event.value);
+            for(let i=0; i<this.collection._items.length; i++){
+                this.collection._items[i].position = i;
+            }
             this.collection.itemsCount++;
         }
     }
@@ -174,6 +210,9 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
             for(var i=0; i<this.collection._items.length; i++){
                 if(this.collection._items[i]._id == event.value._id){
                     this.collection._items.splice(i, 1);
+                    for(let i=0; i<this.collection._items.length; i++){
+                        this.collection._items[i].position = i;
+                    }
                     this.collection.itemsCount--;
                 }
             }
