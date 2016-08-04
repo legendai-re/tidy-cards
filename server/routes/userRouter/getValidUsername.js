@@ -1,7 +1,7 @@
 module.exports = function getValidUsername (req, res) {
 
     var models      = require('../../models');
-    var usernameValidator = require('../../helpers/username-validator');
+    var usernameValidator = require('../../helpers/user/usernameValidator');
 
     var rq = req.query;
 

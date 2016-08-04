@@ -25,7 +25,7 @@ export class IvUserPrivateComponent implements OnInit {
 
     public avatarFileInput: any;
     public isUploadingAvatar: boolean;
-    public usernameValid: boolean;
+    public usernameState: string;
     public validatingUsername: boolean;
 
     public updateUsernameIntent: boolean;
@@ -47,7 +47,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.tmpUser = IvUser.createFormJson(this.authService.currentUser);
         this.tmpUser._avatar = null;
 
-        this.usernameValid = false;
+        this.usernameState = 'PENDING';
         this.validatingUsername = false;
     }
 
@@ -95,23 +95,23 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public onUsernameKeyUp(){
+        this.usernameState = IvUser.isValidUsername(this.tmpUser.username) ? 'VALIDATING' : 'INVALID';
         clearTimeout(this.typingUsernameTimer);
         new Promise((resolve, reject) => {
             this.typingUsernameTimer = setTimeout(()=>{resolve(true);}, this.doneTypingUsernameInterval);
         }).then((e)=>{
+            if(IvUser.isValidUsername(this.tmpUser.username))
             this.checkUsername();
         })
     }
 
     public onUsernameKeyDown(){
-        this.validatingUsername = true;
-        this.usernameValid = false;
         clearTimeout(this.typingUsernameTimer);
     }
 
     private checkUsername(){
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
-            this.usernameValid = isValid;
+            this.usernameState = isValid ? 'FREE' : 'TAKEN';
             this.validatingUsername = false;
         })
     }

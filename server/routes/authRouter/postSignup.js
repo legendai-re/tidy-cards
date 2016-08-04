@@ -4,7 +4,7 @@ module.exports = function postSignup(req, res) {
     var connectionTypes = require('../../security/connectionTypes.json');
     var models      = require('../../models');
     var sortTypes   = require('../../models/customSort/sortTypes.json');
-    var usernameValidator = require('../../helpers/username-validator');
+    var usernameValidator = require('../../helpers/user/usernameValidator');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
         res.status(400).send({ error: 'some required parameters was not provided'});
@@ -16,6 +16,7 @@ module.exports = function postSignup(req, res) {
                 var user =  new models.User();
                 user.email = req.body.email;
                 user.unsafeUsername = req.body.username;
+                user.username = req.body.username;
                 user.name = req.body.username;
                 user.local.password = createHash(req.body.password);
                 user.local.active = true;

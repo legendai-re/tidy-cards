@@ -47,16 +47,17 @@
             <div *ngIf="updateUsernameIntent" class="list-item-status">
                 <small *ngIf="tmpUser.username === authService.currentUser.username" class="text-success">That’s your current username!</small>
                 <div *ngIf="tmpUser.username != authService.currentUser.username">
-                    <small class="text-muted" *ngIf="validatingUsername">Validation in progress..</small>
-                    <small class="text-success" *ngIf="!validatingUsername && usernameValid">This username is available</small>
-                    <small class="text-danger" *ngIf="!validatingUsername && !usernameValid">This username is not available</small>
+                    <small class="text-muted" *ngIf="usernameState == 'VALIDATING'">Validation in progress..</small>
+                    <small class="text-success" *ngIf="usernameState == 'FREE'">This username is available</small>
+                    <small class="text-danger" *ngIf="usernameState == 'INVALID'">This username is not valid</small>
+                    <small class="text-danger" *ngIf="usernameState == 'TAKEN'">This username is not available</small>
                 </div>
             </div>
         </div>
         <div class="list-item-actions">
             <small *ngIf="updateUsernameIntent && isUpdatingUsername">saving information...</small>
             <input *ngIf="!updateUsernameIntent" (click)="startUpdateUsername()" class="btn btn-sm btn-secondary-outline" type="submit" value="Edit username"/>
-            <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || !usernameValid" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="Save"/>
+            <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || usernameState!='FREE'" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="Save"/>
             <a *ngIf="updateUsernameIntent" (click)="cancelUpdateUsername()" class="btn btn-sm btn-secondary">Cancel</a>
         </div>
     </div>

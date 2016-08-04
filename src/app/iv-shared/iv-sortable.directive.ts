@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 import { IvCollection }   from '../iv-collection/iv-collection.class';
 declare var JQuery: any;
-declare var $:any;
+declare var $: any;
 @Directive({ selector: '[iv-sortable]' })
 export class IvSortableDirective {
 

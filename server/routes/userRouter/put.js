@@ -1,7 +1,7 @@
 module.exports = function put (req, res) {
 
     var models      = require('../../models');
-    var usernameValidator = require('../../helpers/username-validator');
+    var usernameValidator = require('../../helpers/user/usernameValidator');
 
 	models.User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
@@ -35,10 +35,10 @@ module.exports = function put (req, res) {
         if(!usernameValidator.isValid(req.body.username)){
             return res.status(422).send({ error: 'cannot update username: not valid'});
         }
-        models.User.findOne({username: req.body.username.toLowerCase()}, function(err, alreadyExistUser){
+        models.User.findOne({username: req.body.username.toLowerCase(),  _id: { $ne: user._id }}, function(err, alreadyExistUser){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(alreadyExistUser) return res.status(422).send({ error: 'cannot update username: already takken'});
-            user.unsafeUsername = req.body.username;
+            user.username = req.body.username;
             saveUser(user);
         })
     }

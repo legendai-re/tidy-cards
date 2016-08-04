@@ -1,7 +1,7 @@
 var mongoose    = require('mongoose');
 var roles       = require('../../security/roles.json');
 var visibility  = require('../collection/visibility.json');
-var URLSlugs    = require('mongoose-url-slugs');
+var URLSlugs    = require('../../helpers/user/mongooseSlug');
 var Schema      = mongoose.Schema;
 
 var UserSchema  = require('./schema')(Schema);

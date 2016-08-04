@@ -14,7 +14,7 @@ function isMongoId(username){
 }
 
 function isValidFormat(username){
-    return new RegExp('^([0-9a-z-_.]{2,20})+$').test(username);
+    return new RegExp('^([0-9a-zA-Z-_.]{2,20})+$').test(username);
 }
 
 module.exports = {

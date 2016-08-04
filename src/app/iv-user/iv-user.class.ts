@@ -69,6 +69,10 @@ export class IvUser {
             );
     }
 
+    public static isValidUsername(username){
+        return new RegExp('^([0-9a-zA-Z-_.]{2,20})+$').test(username);
+    }
+
     isGranted(role: string) {
         let roles = require('../../../server/security/roles.json');
         if (this.haveRole(role)) {

@@ -2,7 +2,7 @@ var slug               = require('slug');
 var models             = require('../../models');
 var imagesTypes        = require('../../models/image/imageTypes.json');
 var sortTypes          = require('../../models/customSort/sortTypes.json');
-var forbiddenUsernames = require('../../helpers/username-validator/forbiddenUsernames');
+var forbiddenUsernames = require('../../helpers/user/forbiddenUsernames.json');
 var imageUpdloader     = require('../../helpers/image-uploader');
 
 var createUser = function(profile, accessToken, strategy, callback){
@@ -22,21 +22,25 @@ var createUser = function(profile, accessToken, strategy, callback){
     var avatar = createAvatar(newUser, profile);
     newUser._avatar = avatar._id;
 
-    createMyCollectionSort(newUser);
     newUser.save(function(err){
         if (err) { return callback(err); }
-        avatar.save();
-        newUser._avatar = avatar;
-        callback(null, newUser);
+        avatar.save(function(err){
+            if (err) { return callback(err); }
+            newUser._avatar = avatar;
+            createMyCollectionSort(newUser, function(err){
+                if (err) { return callback(err); }
+                callback(null, newUser);
+            })
+        });
     })
 }
 
-function createMyCollectionSort(newUser){
+function createMyCollectionSort(newUser, callback){
     var myCollectionSort = new models.CustomSort();
     myCollectionSort.type = sortTypes.MY_COLLECTIONS.id;
     myCollectionSort._user = newUser._id;
     myCollectionSort.save(function(err){
-        if(err) console.log(err);
+        callback(err)
     });
 }
 
