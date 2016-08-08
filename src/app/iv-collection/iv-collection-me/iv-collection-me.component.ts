@@ -66,16 +66,8 @@ export class IvCollectionMeComponent implements OnInit {
     }
 
     onCollectionMoved(event){
-        let oldIndex = event.value.oldIndex;
-        let newIndex = event.value.newIndex;
-        let tmpCollection = this.collections[oldIndex];
-        if(!tmpCollection)
-            return;
         this.isUpdatingPosition = true;
-        tmpCollection.position = newIndex;
-        tmpCollection.updatePosition = true;
-
-        this.collectionService.putCollection(tmpCollection).subscribe(collection => {
+        this.collectionService.putCollection(event.value.modifiedItem).subscribe(collection => {
             this.isUpdatingPosition = false;
         }, (err) => {
             this.collections = [];
@@ -83,12 +75,5 @@ export class IvCollectionMeComponent implements OnInit {
             this.loadCollections();
             this.isUpdatingPosition = false;
         });
-
-        tmpCollection.updatePosition = false;
-        this.collections.splice(oldIndex,1);
-        this.collections.splice(newIndex, 0, tmpCollection);
-        for(let i=0; i<this.collections.length; i++){
-                this.collections[i].position = i;
-        }
     }
 }

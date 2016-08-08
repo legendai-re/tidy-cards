@@ -43,6 +43,15 @@ export class IvAuthService {
         .catch(this.handleError);
     }
 
+    public putPasswordUpdate (userId: string, password: string, newPassword: string): Observable<any> {
+        let body = JSON.stringify({user_id: userId, password: password, newPassword: newPassword});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.PASSWORD_UPDATE, body, options)
+        .map((res) => {return res.json()})
+        .catch(this.handleError);
+    }
+
     private getCurrentUser (): Observable<IvUser> {
         return this.http.get(IvApiUrl.CURRENT_USER)
         .map(this.handleUser)
@@ -64,7 +73,7 @@ export class IvAuthService {
         let errMsg = (error.message) ? error.message :
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         console.error(errMsg);
-        return Observable.throw(errMsg);
+        return Observable.throw(error.status);
     }
 
     public putUnlink (type: string): Observable<Boolean> {
@@ -80,15 +89,15 @@ export class IvAuthService {
         return this.authInitializedEmitter;
     }
 
-    login (username: string, password: string): Promise<Boolean> {
-        return new Promise<Boolean>((resolve, reject) => {
+    login (username: string, password: string): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
             this.postLogin(username, password).subscribe(user => {
                 this.currentUser = user;
                 this.isLoggedIn = true;
-                resolve(true);
-            }, () => {
+                resolve({success: true});
+            }, (err) => {
                 this.isLoggedIn = false;
-                resolve(false);
+                resolve({success: false, error: err});
             });
         });
     }

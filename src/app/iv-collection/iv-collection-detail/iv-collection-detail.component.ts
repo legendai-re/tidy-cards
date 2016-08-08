@@ -169,16 +169,8 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     public onItemMoved(event){
-        let oldIndex = event.value.oldIndex;
-        let newIndex = event.value.newIndex;
-        let tmpItem = this.collection._items[oldIndex];
-        if(!tmpItem)
-            return;
         this.isUpdatingPosition = true;
-        tmpItem.position = newIndex;
-        tmpItem.updatePosition = true;
-
-        this.itemService.putItem(tmpItem).subscribe(collection => {
+        this.itemService.putItem(event.value.modifiedItem).subscribe(collection => {
             this.isUpdatingPosition = false;
         }, (err) => {
             this.collection._items = [];
@@ -186,20 +178,13 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
             this.loadItems();
             this.isUpdatingPosition = false;
         });
-
-        tmpItem.updatePosition = false;
-        this.collection._items.splice(oldIndex,1);
-        this.collection._items.splice(newIndex, 0, tmpItem);
-        for(let i=0; i<this.collection._items.length; i++){
-            this.collection._items[i].position = i;
-        }
     }
 
     public onNewItem(event){
         if(event.value){
             this.collection._items.unshift(event.value);
-            for(let i=0; i<this.collection._items.length; i++){
-                this.collection._items[i].position = i;
+            for(let i in this.collection._items){
+                this.collection._items[i].position = parseInt(i);
             }
             this.collection.itemsCount++;
         }
@@ -207,11 +192,11 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
 
     public onDeletedItem(event){
         if(event.value && event.value._id){
-            for(var i=0; i<this.collection._items.length; i++){
+            for(let i in this.collection._items){
                 if(this.collection._items[i]._id == event.value._id){
-                    this.collection._items.splice(i, 1);
-                    for(let i=0; i<this.collection._items.length; i++){
-                        this.collection._items[i].position = i;
+                    this.collection._items.splice(parseInt(i), 1);
+                    for(let x in this.collection._items){
+                        this.collection._items[x].position = parseInt(x);
                     }
                     this.collection.itemsCount--;
                 }

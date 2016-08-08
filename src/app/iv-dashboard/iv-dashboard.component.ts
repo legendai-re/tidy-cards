@@ -59,28 +59,13 @@ export class IvDashboardComponent implements OnInit {
     }
 
     onCollectionMoved(event){
-        let oldIndex = event.value.oldIndex;
-        let newIndex = event.value.newIndex;
-        let tmpCollection = this.myCollections[oldIndex];
-        if(!tmpCollection)
-            return;
         this.isUpdatingPosition = true;
-        tmpCollection.position = newIndex;
-        tmpCollection.updatePosition = true;
-
-        this.service.putCollection(tmpCollection).subscribe(collection => {
+        this.service.putCollection(event.value.modifiedItem).subscribe(collection => {
             this.isUpdatingPosition = false;
         }, (err) => {
             this.initMyCollections();
             this.isUpdatingPosition = false;
         });
-
-        tmpCollection.updatePosition = false;
-        this.myCollections.splice(oldIndex,1);
-        this.myCollections.splice(newIndex, 0, tmpCollection);
-        for(let i=0; i<this.myCollections.length; i++){
-            this.myCollections[i].position = i;
-        }
     }
 
 }

@@ -2,7 +2,7 @@
     <form class="form-signin" (ngSubmit)="onSignupSubmit()">
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Username</label>
-            <input [(ngModel)]="signupData.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+            <input [(ngModel)]="signupData.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" (blur)="checkUsername()" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
             <div *ngIf="signupData.username">
                 <small class="text-muted" *ngIf="usernameState == 'VALIDATING'">Validation in progress..</small>
                 <small class="text-success" *ngIf="usernameState == 'FREE'">This username is available</small>

@@ -43,7 +43,7 @@
     <div class="list-item">
         <div class="list-item-infos">
             <h3 class="list-item-title">My username</h3>
-            <p class="list-item-description">http://invow.io/<input #usernameInput [(ngModel)]="tmpUser.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
+            <p class="list-item-description">http://invow.xyz/<input #usernameInput [(ngModel)]="tmpUser.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
             <div *ngIf="updateUsernameIntent" class="list-item-status">
                 <small *ngIf="tmpUser.username === authService.currentUser.username" class="text-success">That’s your current username!</small>
                 <div *ngIf="tmpUser.username != authService.currentUser.username">
@@ -122,6 +122,21 @@
     <p class="section-description">Change my security settings.</p>
 
     <div class="list-item">
-        <p class="list-item-description">Nothing here...</p>
+        <div *ngIf="authService.currentUser.local.active" class="list-item-infos">
+            <h3 class="list-item-title">Change my password</h3>
+            <div><input [(ngModel)]="password" class="list-item-description-darker" type="password" value="" placeholder="Current password" /></div>
+            <div><input [(ngModel)]="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
+            <div><input [(ngModel)]="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
+            <input (click)="updatePassword()" [disabled]="!isUpdatingPassword && !isUpdatePasswordFormValid()" class="btn btn-sm btn-success" type="submit" value="Update"/>
+            <small *ngIf="isUpdatingPassword" class="text-muted">Update in progress..</small>
+            <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'SUCCESS'" class="text-success">Password updated</small>
+            <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'FAILED'" class="text-danger">The password entered do not match with the account password</small>
+        </div>
+        <div *ngIf="!authService.currentUser.local.active" class="list-item-infos">
+            <h3 class="list-item-title">Set a password</h3>
+            <div><input [(ngModel)]="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
+            <div><input [(ngModel)]="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
+            <input (click)="setPassword()" [disabled]="!isUpdatingPassword && !isSetPasswordFormValid()" class="btn btn-sm btn-success" type="submit" value="Set"/>
+        </div>
     </div>
 </div>

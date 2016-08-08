@@ -1,9 +1,9 @@
 module.exports = function postSignup(req, res) {
 
-    var bCrypt      = require('bcrypt-nodejs');
+    var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../../security/connectionTypes.json');
-    var models      = require('../../models');
-    var sortTypes   = require('../../models/customSort/sortTypes.json');
+    var models          = require('../../models');
+    var sortTypes       = require('../../models/customSort/sortTypes.json');
     var usernameValidator = require('../../helpers/user/usernameValidator');
 
 	if(!req.body.username || !req.body.email || !req.body.password){

@@ -25,18 +25,24 @@ export class IvUserPrivateComponent implements OnInit {
 
     public avatarFileInput: any;
     public isUploadingAvatar: boolean;
+
     public usernameState: string;
     public validatingUsername: boolean;
-
     public updateUsernameIntent: boolean;
     public isUpdatingUsername: boolean;
+    public typingUsernameTimer;
+    public doneTypingUsernameInterval: number;
 
     public updateEmailIntent: boolean;
     public uploader;
     public tmpAvatar: IvImage;
     public tmpUser: IvUser;
-    private typingUsernameTimer;
-    private doneTypingUsernameInterval: number;
+
+    public password: string;
+    public newPassword: string;
+    public newPasswordRepeat: string;
+    public isUpdatingPassword: boolean;
+    public passwordUpdateState: string;
 
     constructor(private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
         this.uploader = imgUploadService.uploader;
@@ -101,7 +107,7 @@ export class IvUserPrivateComponent implements OnInit {
             this.typingUsernameTimer = setTimeout(()=>{resolve(true);}, this.doneTypingUsernameInterval);
         }).then((e)=>{
             if(IvUser.isValidUsername(this.tmpUser.username))
-            this.checkUsername();
+                this.checkUsername();
         })
     }
 
@@ -180,6 +186,41 @@ export class IvUserPrivateComponent implements OnInit {
                     this.authService.currentUser.google = null;
                     break;
             }
+        })
+    }
+
+    public isUpdatePasswordFormValid(){
+        return this.password && this.newPassword && this.newPasswordRepeat && this.newPassword.length > 3 && this.newPassword == this.newPasswordRepeat;
+    }
+
+    public isSetPasswordFormValid(){
+        return this.newPassword && this.newPasswordRepeat && this.newPassword.length > 3 && this.newPassword == this.newPasswordRepeat;
+    }
+
+    public updatePassword(){
+        if(!this.isUpdatePasswordFormValid())
+            return;
+        this.isUpdatingPassword = true;
+        this.authService.putPasswordUpdate(this.authService.currentUser._id, this.password, this.newPassword).subscribe((response) => {
+            this.password = '';
+            this.newPassword = '';
+            this.newPasswordRepeat = '';
+            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.isUpdatingPassword = false;
+        })
+    }
+
+    public setPassword(){
+        if(!this.isSetPasswordFormValid())
+            return;
+        this.isUpdatingPassword = true;
+        this.authService.putPasswordUpdate(this.authService.currentUser._id, 'none', this.newPassword).subscribe((response) => {
+            this.password = '';
+            this.newPassword = '';
+            this.newPasswordRepeat = '';
+            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.authService.currentUser.local.active = true;
+            this.isUpdatingPassword = false;
         })
     }
 }

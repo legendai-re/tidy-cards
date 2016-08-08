@@ -38,7 +38,6 @@ export class IvSignupComponent {
         new Promise((resolve, reject) => {
             this.typingUsernameTimer = setTimeout(()=>{resolve(true);}, this.doneTypingUsernameInterval);
         }).then((e)=>{
-            if(IvUser.isValidUsername(this.signupData.username))
             this.checkUsername();
         })
     }
@@ -47,7 +46,9 @@ export class IvSignupComponent {
         clearTimeout(this.typingUsernameTimer);
     }
 
-    private checkUsername(){
+    public checkUsername(){
+        if(!IvUser.isValidUsername(this.signupData.username))
+            return;
         this.userService.getValidUsername(this.signupData.username).subscribe((isValid) => {
             this.usernameState = isValid ? 'FREE' : 'TAKEN';
             this.validatingUsername = false;

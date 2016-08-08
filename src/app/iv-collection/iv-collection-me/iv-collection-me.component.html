@@ -2,7 +2,7 @@
     <div class="container">
         <h2 class="section-title dark-bg">My collections</h2>
         <div class="row">
-            <div iv-sortable (itemMoved)="onCollectionMoved($event)">
+            <div iv-sortable [list]=collections (itemMoved)="onCollectionMoved($event)">
                 <div [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of collections">
                     <iv-collection-card [collection]=collection [sortable]=true></iv-collection-card>
                 </div>

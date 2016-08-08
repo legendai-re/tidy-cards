@@ -5,7 +5,7 @@
             <div class="ui-state-default ui-state-disabled col-xs-12 col-md-6 col-lg-4 col-xl-3">
                 <iv-collection-create></iv-collection-create>
             </div>
-            <div iv-sortable (itemMoved)="onCollectionMoved($event)">
+            <div iv-sortable [list]=myCollections (itemMoved)="onCollectionMoved($event)">
                 <div *ngFor="let collection of myCollections" [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-xs-12 col-md-6 col-lg-4 col-xl-3">
                     <iv-collection-card [collection]=collection [sortable]=true></iv-collection-card>
                 </div>

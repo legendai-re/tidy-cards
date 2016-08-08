@@ -1,5 +1,6 @@
 module.exports = function put (req, res) {
 
+    var bCrypt      = require('bcrypt-nodejs');
     var models      = require('../../models');
     var usernameValidator = require('../../helpers/user/usernameValidator');
 
@@ -8,15 +9,15 @@ module.exports = function put (req, res) {
         if(!user) {res.status(404).send({ error: 'cannot find user with id: '+req.params.user_id}); return;}
         if(user._id.equals(req.user._id)){
             if(req.body.username)
-                updateUsername(req, user)
+                updateUsername(user)
             else
-                updateProfile(req, user);
+                updateProfile(user);
         }else{
         	res.sendStatus(401);
         }
     });
 
-    function updateProfile(req, user){
+    function updateProfile(user){
         user.name = (req.body.name || user.name);
         user.bio = req.body.bio;
         if(req.body._avatar && req.body._avatar._id){
@@ -31,7 +32,7 @@ module.exports = function put (req, res) {
         }
     }
 
-    function updateUsername(req, user){
+    function updateUsername(user){
         if(!usernameValidator.isValid(req.body.username)){
             return res.status(422).send({ error: 'cannot update username: not valid'});
         }

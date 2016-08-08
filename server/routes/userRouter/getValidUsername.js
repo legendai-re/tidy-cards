@@ -12,7 +12,10 @@ module.exports = function getValidUsername (req, res) {
         if(!usernameValidator.isValid(rq.username)){
             return res.json({data: {isValid: false}});
         }
-        models.User.findOne({username: rq.username.toLowerCase()}, function(err, user){
+
+        var filterObj = req.user ? {username: rq.username.toLowerCase(),  _id: { $ne: req.user._id }} : {username: rq.username.toLowerCase()};
+
+        models.User.findOne(filterObj, function(err, user){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(user) return res.json({data: {isValid: false}});
             return res.json({data: {isValid: true}});

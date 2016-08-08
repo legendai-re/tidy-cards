@@ -2,9 +2,9 @@ var express    		= require('express');
 var passport		= require('passport');
 var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
+var router          = express.Router();
 var store           = new ExpressBrute.MemoryStore();
 var bruteforce      = new ExpressBrute(store);
-var router          = express.Router();
 
 router.route('/facebook')
     .get(passport.authenticate('facebook'));
@@ -47,6 +47,11 @@ router.route('/currentuser')
 router.route('/signup')
 	.post(function(req,res){
         require('./postSignup')(req, res);
+    });
+
+router.route('/password/update')
+    .put(bruteforce.prevent, isGranted('ROLE_USER'), function(req,res){
+        require('./putPasswordUpdate')(req, res);
     });
 
 router.route('/roles')

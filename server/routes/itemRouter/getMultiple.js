@@ -33,6 +33,7 @@ module.exports = function getMultiple (req, res) {
                 for(var i in items){
                     items[i].position = customSort.ids.indexOf(items[i]._id) + skip;
                 }
+                if(items.length < 1) { res.json({data: []}); return};
                 addItemsContent(0, items,  function(err, items){
                     res.json({data: items});
                 })
