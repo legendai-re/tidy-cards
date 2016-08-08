@@ -2,7 +2,6 @@ var express    		= require('express');
 var passport		= require('passport');
 var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
-var refererParser   = require('../../helpers/refererParser');
 var router          = express.Router();
 var store           = new ExpressBrute.MemoryStore();
 var bruteforce      = new ExpressBrute(store);
