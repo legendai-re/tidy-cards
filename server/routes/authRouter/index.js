@@ -2,27 +2,46 @@ var express    		= require('express');
 var passport		= require('passport');
 var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
+var refererParser   = require('../../helpers/refererParser');
 var router          = express.Router();
 var store           = new ExpressBrute.MemoryStore();
 var bruteforce      = new ExpressBrute(store);
 
 router.route('/facebook')
-    .get(passport.authenticate('facebook'));
+    .get(function(req, res, next){
+        var sess=req.session;
+        sess.next = (req.query.next || '/dashboard') ;
+        next();
+    },passport.authenticate('facebook'));
 
 router.route('/facebook/callback')
-    .get(passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+    .get(passport.authenticate('facebook', {failureRedirect: '/dashboard' }), function(req, res){
+        res.redirect(req.session.next);
+    });
 
 router.route('/twitter')
-    .get(passport.authenticate('twitter'));
+    .get(function(req, res, next){
+        var sess=req.session;
+        sess.next = (req.query.next || '/dashboard') ;
+        next();
+    },passport.authenticate('twitter'));
 
 router.route('/twitter/callback')
-    .get(passport.authenticate('twitter', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+    .get(passport.authenticate('twitter', {failureRedirect: '/dashboard'}), function(req, res){
+        res.redirect(req.session.next);
+    });
 
 router.route('/google')
-    .get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    .get(function(req, res, next){
+        var sess=req.session;
+        sess.next = (req.query.next || '/dashboard') ;
+        next();
+    }, passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 router.route('/google/callback')
-    .get(passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/dashboard' }));
+    .get(passport.authenticate('google', { failureRedirect: '/dashboard' }), function(req, res){
+        res.redirect(req.session.next);
+    });
 
 router.route('/unlink')
 	.put(isGranted('ROLE_USER'), function(req, res){

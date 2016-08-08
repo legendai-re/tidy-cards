@@ -27,13 +27,18 @@ export class IvUserPrivateComponent implements OnInit {
     public isUploadingAvatar: boolean;
 
     public usernameState: string;
-    public validatingUsername: boolean;
     public updateUsernameIntent: boolean;
     public isUpdatingUsername: boolean;
     public typingUsernameTimer;
     public doneTypingUsernameInterval: number;
 
+    public emailState: string;
     public updateEmailIntent: boolean;
+    public isUpdatingEmail: boolean;
+    public validatingEmail: boolean;
+    public typingEmailTimer;
+    public doneTypingEmailInterval: number;
+
     public uploader;
     public tmpAvatar: IvImage;
     public tmpUser: IvUser;
@@ -47,6 +52,7 @@ export class IvUserPrivateComponent implements OnInit {
     constructor(private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
         this.uploader = imgUploadService.uploader;
         this.doneTypingUsernameInterval = 1000;
+        this.doneTypingEmailInterval = 1000;
     }
 
     ngOnInit(){
@@ -54,7 +60,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.tmpUser._avatar = null;
 
         this.usernameState = 'PENDING';
-        this.validatingUsername = false;
+        this.emailState = 'PENDING';
     }
 
     public startUpdateGeneralInfo(){
@@ -96,8 +102,48 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public cancelUpdateEmail(){
+        if(this.isUpdatingEmail)
+            return;
         this.updateEmailIntent = false;
         this.tmpUser.email = JSON.parse(JSON.stringify(this.authService.currentUser.email));
+    }
+
+    public onEmailKeyUp(){
+        this.emailState = IvUser.isValidEmail(this.tmpUser.email) ? 'VALIDATING' : 'INVALID';
+        clearTimeout(this.typingEmailTimer);
+        new Promise((resolve, reject) => {
+            this.typingEmailTimer = setTimeout(()=>{resolve(true);}, this.doneTypingEmailInterval);
+        }).then((e)=>{
+            if(IvUser.isValidEmail(this.tmpUser.email))
+                this.checkEmail();
+        })
+    }
+
+    public onEmailKeyDown(){
+        clearTimeout(this.typingEmailTimer);
+    }
+
+    private checkEmail(){
+        this.userService.getValidEmail(this.tmpUser.email).subscribe((isValid) => {
+            this.emailState = isValid ? 'FREE' : 'TAKEN';
+        })
+    }
+
+    public updateEmail(){
+        this.isUpdatingEmail  = true;
+        this.userService.getValidEmail(this.tmpUser.email).subscribe((isValid) => {
+            if(!isValid)
+                return this.cancelUpdateEmail();
+            let user = IvUser.createFormJson({_id: this.tmpUser._id, email: this.tmpUser.email});
+            this.userService.putUser(user).subscribe((userResponse) => {
+                this.tmpUser.email = userResponse.email;
+                this.authService.currentUser.email = userResponse.email;
+                this.authService.currentUser.emailConfirmed = false;
+                this.updateEmailIntent = false;
+                this.emailState  = 'UPDATED';
+                this.isUpdatingEmail = false;
+            })
+        });
     }
 
     public onUsernameKeyUp(){
@@ -118,22 +164,21 @@ export class IvUserPrivateComponent implements OnInit {
     private checkUsername(){
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
             this.usernameState = isValid ? 'FREE' : 'TAKEN';
-            this.validatingUsername = false;
         })
     }
 
     public updateUsername(){
         this.isUpdatingUsername = true;
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
-            if(isValid){
-                let user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
-                this.userService.putUser(user).subscribe((userResponse) => {
-                    this.tmpUser.username = userResponse.username;
-                    this.authService.currentUser.username = userResponse.username;
-                    this.updateUsernameIntent = false;
-                    this.isUpdatingUsername = false;
-                })
-            }
+            if(!isValid)
+                return this.cancelUpdateUsername();
+            let user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
+            this.userService.putUser(user).subscribe((userResponse) => {
+                this.tmpUser.username = userResponse.username;
+                this.authService.currentUser.username = userResponse.username;
+                this.updateUsernameIntent = false;
+                this.isUpdatingUsername = false;
+            })
         });
     }
 
@@ -171,6 +216,10 @@ export class IvUserPrivateComponent implements OnInit {
             this.isUpdadingGeneralInfo = false;
             this.cancelUpdateGeneralInfo();
         })
+    }
+
+    public linkAccount(strategy: string){
+         window.location.href = 'auth/' + strategy + '?next=' + encodeURIComponent('/'+this.authService.currentUser.username);
     }
 
     public unlinkAccount(type: string){

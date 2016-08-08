@@ -19,7 +19,7 @@ export class GrantedUser implements CanActivate {
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if ( this.authService.isLoggedIn ) { return true; }
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/signin', {next: encodeURIComponent(state.url)}]);
         return false;
     }
 }
@@ -30,7 +30,10 @@ export class GrantedAdmin implements CanActivate {
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if ( this.authService.isLoggedIn && this.authService.currentUser.isGranted('ROLE_ADMIN') ) { return true; }
-        this.router.navigate(['/']);
+        if( !this.authService.isLoggedIn )
+            this.router.navigate(['/signin', {next: encodeURIComponent(state.url)}]);
+        else
+            this.router.navigate(['/']);
         return false;
     }
 }

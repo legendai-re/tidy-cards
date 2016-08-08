@@ -10,7 +10,7 @@ function isForbidden(username){
 }
 
 function isMongoId(username){
-    return new RegExp("^[0-9a-fA-F]{24}$").test(username);;
+    return new RegExp("^[0-9a-fA-F]{24}$").test(username);
 }
 
 function isValidFormat(username){

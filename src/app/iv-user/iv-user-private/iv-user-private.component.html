@@ -64,12 +64,29 @@
 
     <div class="list-item">
         <div class="list-item-infos">
-            <h3 class="list-item-title">My email</h3>
-            <input #emailInput [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" value="{{authService.currentUser.email}}"/>
+            <h3 class="list-item-title">
+                My email
+                <small *ngIf="authService.currentUser.emailConfirmed"> (confirmed)</small>
+                <small *ngIf="!authService.currentUser.emailConfirmed"> (not confirmed)</small>
+            </h3>
+            <input #emailInput [(ngModel)]="tmpUser.email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" />
+             <div *ngIf="!authService.currentUser.emailConfirmed && !updateEmailIntent" class="list-item-status">
+                <small class="text-muted">An email have been send to {{authService.currentUser.email}}. Please check your email to confirm the address. <a (click)="updateEmail()">Re send email.</a></small>
+            </div>
+            <div *ngIf="updateEmailIntent" class="list-item-status">
+                <small *ngIf="tmpUser.email === authService.currentUser.email" class="text-success">That’s your current email!</small>
+                <div *ngIf="tmpUser.email != authService.currentUser.email">
+                    <small class="text-muted" *ngIf="emailState == 'VALIDATING'">Validation in progress..</small>
+                    <small class="text-success" *ngIf="emailState == 'FREE'">This email is available</small>
+                    <small class="text-danger" *ngIf="emailState == 'INVALID'">This email is not valid</small>
+                    <small class="text-danger" *ngIf="emailState == 'TAKEN'">This email is not available</small>
+                </div>
+            </div>
         </div>
         <div class="list-item-actions">
+            <small *ngIf="updateEmailIntent && isUpdatingEmail">saving information...</small>
             <input *ngIf="!updateEmailIntent" (click)="startUpdateEmail()" class="btn btn-sm btn-secondary-outline" type="submit" value="Edit email">
-            <input *ngIf="updateEmailIntent" class="btn btn-sm btn-success" type="submit" disabled value="Save (WIP)"/>
+            <input *ngIf="updateEmailIntent"  (click)="updateEmail()" [disabled]="tmpUser.email.toLowerCase() === authService.currentUser.email.toLowerCase() || isUpdatingEmail || emailState!='FREE'" class="btn btn-sm btn-success" type="submit" value="Save (WIP)"/>
             <a *ngIf="updateEmailIntent" (click)="cancelUpdateEmail()" class="btn btn-sm btn-secondary">Cancel</a>
         </div>
     </div>
@@ -85,7 +102,7 @@
             <p class="list-item-description">Use my Facebook account to login. <strong>We will never post to Facebook or message your friends without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.facebook?.id">
-            <a class="btn btn-sm btn--facebook" href="auth/facebook">Link Facebook</a>
+            <a class="btn btn-sm btn--facebook" (click)="linkAccount('facebook')">Link Facebook</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.facebook?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.twitter?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('FACEBOOK')">Unlink Facebook</a>
@@ -97,7 +114,7 @@
             <p class="list-item-description">Use my Twitter account to login. <strong>We will never post to Twitter or message your followers without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.twitter?.id">
-            <a class="btn btn-sm btn--twitter" href="auth/twitter">Link Twitter</a>
+            <a class="btn btn-sm btn--twitter" (click)="linkAccount('twitter')">Link Twitter</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.facebook?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('TWITTER')">Unlink Twitter</a>
@@ -109,7 +126,7 @@
             <p class="list-item-description">Use my Google account to login. <strong>We will never post to Google or message your friends without your permission.</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.google?.id">
-            <a class="btn btn-sm btn--google" href="auth/google">Link Google</a>
+            <a class="btn btn-sm btn--google" (click)="linkAccount('google')">Link Google</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.google?.id && (authService.currentUser.local?.active || authService.currentUser.twitter?.id || authService.currentUser.facebook?.id)">
             <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('GOOGLE')">Unlink Google</a>

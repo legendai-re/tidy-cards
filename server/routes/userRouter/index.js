@@ -21,4 +21,14 @@ router.route('/helpers/valid-username')
        require('./getValidUsername')(req, res);
     });
 
+router.route('/helpers/valid-email')
+    .get(function(req, res){
+       require('./getValidEmail')(req, res);
+    });
+
+router.route('/helpers/confirm-email/:confirmation_token')
+    .put(isGranted('ROLE_USER'), function(req, res){
+       require('./putConfirmEmail')(req, res);
+    });
+
 module.exports = router;

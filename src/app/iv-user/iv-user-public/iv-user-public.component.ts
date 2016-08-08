@@ -22,7 +22,6 @@ export class IvUserPublicComponent implements OnInit, OnDestroy  {
     public user: IvUser;
     private sub: any;
 
-
     constructor(private collectionService: IvCollectionService, private userService: IvUserService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
     }
 

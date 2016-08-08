@@ -3,13 +3,16 @@ module.exports = function put (req, res) {
     var bCrypt      = require('bcrypt-nodejs');
     var models      = require('../../models');
     var usernameValidator = require('../../helpers/user/usernameValidator');
+    var confirmEmail = require('../../helpers/user/confirmEmail');
 
 	models.User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
         if(!user) {res.status(404).send({ error: 'cannot find user with id: '+req.params.user_id}); return;}
         if(user._id.equals(req.user._id)){
             if(req.body.username)
-                updateUsername(user)
+                updateUsername(user);
+            else if(req.body.email)
+                updateEmail(user);
             else
                 updateProfile(user);
         }else{
@@ -44,10 +47,25 @@ module.exports = function put (req, res) {
         })
     }
 
+    function updateEmail(user){
+        models.User.findOne({email: req.body.email.toLowerCase(),  _id: { $ne: user._id }}, function(err, alreadyExistUser){
+            if(err) {console.log(err); res.sendStatus(500); return;}
+            if(alreadyExistUser) return res.status(422).send({ error: 'cannot update email: already takken'});
+            confirmEmail.sendConfirmationEmail(user, req.body.email, function(err, user){
+                if (err) {console.log(err); res.sendStatus(500); return;}
+                sendResponse(user);
+            })
+        })
+    }
+
     function saveUser(user){
         user.save(function(err){
             if (err) {console.log(err); res.sendStatus(500); return;}
-            res.json({data: user});
+            sendResponse(user);
         })
+    }
+
+    function sendResponse(user){
+        res.json({data: user});
     }
 }

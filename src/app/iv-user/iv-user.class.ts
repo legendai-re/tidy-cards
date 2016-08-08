@@ -16,6 +16,7 @@ export class IvUser {
     public twitter: any;
     public google: any;
     public local: any;
+    public emailConfirmed: boolean;
 
     constructor(
         _id?: string,
@@ -31,7 +32,8 @@ export class IvUser {
         facebook?: any,
         twitter?: any,
         google?: any,
-        local?: any) {
+        local?: any,
+        emailConfirmed?: boolean) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -46,6 +48,7 @@ export class IvUser {
         this.twitter = twitter;
         this.google = google;
         this.local = local;
+        this.emailConfirmed = emailConfirmed;
     }
 
     public static createFormJson(obj) {
@@ -65,12 +68,17 @@ export class IvUser {
             obj.facebook,
             obj.twitter,
             obj.google,
-            obj.local
+            obj.local,
+            obj.emailConfirmed
             );
     }
 
     public static isValidUsername(username){
         return new RegExp('^([0-9a-zA-Z-_.]{2,20})+$').test(username);
+    }
+
+    public static isValidEmail(email){
+        return new RegExp('.+@.+').test(email);
     }
 
     isGranted(role: string) {

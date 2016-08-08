@@ -1,0 +1,7 @@
+<section class="section">
+    <div class="container">
+        <small *ngIf="confirmationInProgress" class="text-muted">Email confirmation in progress...</small>
+        <small *ngIf="!confirmationInProgress && emailConfirmed" class="text-success">Thanks! You have successfully confirmed your email.</small>
+        <small *ngIf="!confirmationInProgress && !emailConfirmed" class="text-danger">This confirmation link is not associated with the currently logged in account.</small>
+    </div>
+</section>

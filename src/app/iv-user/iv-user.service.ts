@@ -32,11 +32,27 @@ export class IvUserService {
             .catch(this.handleError);
     }
 
+    public putConfirmEmail(token: string): Observable<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(IvApiUrl.CONFIRM_EMAIL + '/' + token, {}, options)
+            .map((res) => {return res.json()})
+            .catch(this.handleError);
+    }
+
     public getValidUsername(username: string): Observable<boolean>{
         let params = new URLSearchParams();
         params.set('username', username);
         return this.http.get(IvApiUrl.VALID_USERNAME, { search: params })
-            .map(this.handleValidUsername)
+            .map(this.handleIsValid)
+            .catch(this.handleError);
+    }
+
+    public getValidEmail(email: string): Observable<boolean>{
+        let params = new URLSearchParams();
+        params.set('email', email);
+        return this.http.get(IvApiUrl.VALID_EMAIL, { search: params })
+            .map(this.handleIsValid)
             .catch(this.handleError);
     }
 
@@ -54,7 +70,7 @@ export class IvUserService {
         return IvUser.createFormJson(body.data) || {};
     }
 
-    private handleValidUsername(res: Response){
+    private handleIsValid(res: Response){
         let body = res.json();
         return body.data.isValid;
     }

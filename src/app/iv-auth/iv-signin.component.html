@@ -16,8 +16,8 @@
             <small *ngIf="errorStatusCode != 401 && errorStatusCode != 429" class="text-danger">Unknown error please try later</small>
         </div>
         <button [disabled]='!username || !password' class="btn btn-primary btn-block" type="submit">Sign in</button>
-        <a class="btn btn--facebook btn-block" href="auth/facebook">Sign in with Facebook</a>
-        <a class="btn btn--twitter btn-block" href="auth/twitter">Sign in with Twitter</a>
-        <a class="btn btn-secondary btn-block" href="auth/google">Sign in with Google</a>
+        <a class="btn btn--facebook btn-block" (click)="connectWith('facebook')">Sign in with Facebook</a>
+        <a class="btn btn--twitter btn-block" (click)="connectWith('twitter')">Sign in with Twitter</a>
+        <a class="btn btn-secondary btn-block" (click)="connectWith('google')">Sign in with Google</a>
     </form>
 </div>

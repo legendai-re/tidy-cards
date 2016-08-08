@@ -10,6 +10,8 @@ export class IvApiUrl {
 
     public static get USERS(): string { return 'api/users' ; }
     public static get VALID_USERNAME(): string { return 'api/users/helpers/valid-username' ; }
+    public static get VALID_EMAIL(): string { return 'api/users/helpers/valid-email' ; }
+    public static get CONFIRM_EMAIL(): string { return 'api/users/helpers/confirm-email' ; }
     public static get IMAGES(): string { return 'api/images' ; }
     public static get COLLECTIONS(): string { return 'api/collections' ; }
     public static get ITEMS(): string { return 'api/items' ; }

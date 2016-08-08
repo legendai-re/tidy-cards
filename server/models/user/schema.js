@@ -54,6 +54,14 @@ module.exports = function getUserSchema(Schema) {
 	        type: String,
 	        required: false
 	    },
+        emailConfirmed: {
+            type: Boolean,
+            default: false
+        },
+        emailConfirmationToken: {
+            type: String,
+            select: false
+        },
 	    roles: {
 	        type: Array
 	    },
