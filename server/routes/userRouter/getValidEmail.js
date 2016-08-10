@@ -11,7 +11,8 @@ module.exports = function getValidEmail (req, res) {
         if(!new RegExp(".+@.+").test(rq.email.toLowerCase()))
             return res.json({data: {isValid: false}});
 
-        var filterObj = req.user ? {email: rq.email.toLowerCase(),  _id: { $ne: req.user._id }} : {username: rq.email.toLowerCase()};
+
+        var filterObj = req.user ? {email: rq.email.toLowerCase(),  _id: { $ne: req.user._id }} : {email: rq.email.toLowerCase()};
 
         models.User.findOne(filterObj, function(err, user){
             if(err) {console.log(err); res.sendStatus(500); return;}

@@ -1,0 +1,24 @@
+<section class="section">
+    <div class="container">
+        <h2>Password reset initiate</h2>
+        <div *ngIf="!reseted">
+            <div *ngIf="!user" style="margin-top: 100px">
+                <small>Enter an email adress or a username</small>
+                <input [(ngModel)]='searchData' type="text" />
+                <input (click)="getUser()" [disabled]="!searchData" type="submit" value="Search" class="btn btn-sm btn-success"/>
+                <small *ngIf="isSearching">Loading...</small>
+                <small *ngIf="notFounded">Cannot find anny user with username or email: {{searchData}}</small>
+            </div>
+            <div *ngIf="user" style="margin-top: 100px">
+                <h4>{{user.name}}</h4>
+                <small>@{{user.username}}</small>
+                <input (click)="requestReset()" value="Reset password" type="submit" class="btn btn-sm btn-success" />
+                <a (click)="reSearch()">Not you?</a>
+                <small *ngIf="resetError" class="text-danger">Error while attempting to reset password</small>
+            </div>
+        </div>
+        <div *ngIf="reseted">
+            <small>A link to reset your password have been send to {{user.email}}. This link is only valid for 24hours. You cannot make a new password reset request before those 24hours.</small>
+        </div>
+    </div>
+</section>

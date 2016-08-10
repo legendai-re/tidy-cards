@@ -13,7 +13,8 @@ module.exports = function getValidUsername (req, res) {
             return res.json({data: {isValid: false}});
         }
 
-        var filterObj = req.user ? {username: rq.username.toLowerCase(),  _id: { $ne: req.user._id }} : {username: rq.username.toLowerCase()};
+        var regex = new RegExp(["^", rq.username, "$"].join(""), "i");
+        var filterObj = req.user ? {username: regex,  _id: { $ne: req.user._id }} : {username: regex};
 
         models.User.findOne(filterObj, function(err, user){
             if(err) {console.log(err); res.sendStatus(500); return;}

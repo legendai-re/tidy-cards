@@ -10,6 +10,7 @@ import { IvImgUploadService }   from './iv-image/iv-image-upload.service';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvHeaderComponent }    from './iv-header/iv-header.component';
 import { IvHeaderService }      from './iv-header/iv-header.service';
+import { IvResetService }       from './iv-reset/iv-reset.service';
 
 import 'bootstrap/dist/js/bootstrap.js';
 import '../style/app.scss';
@@ -19,7 +20,7 @@ import '../style/app.scss';
     templateUrl: './iv-app.component.html',
     styleUrls: ['./iv-app.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvHeaderComponent],
-    providers: [IvStarService, IvHeaderService, IvItemService, IvItemContentService, IvCollectionService, IvUserService, IvImgUploadService]
+    providers: [IvResetService, IvStarService, IvHeaderService, IvItemService, IvItemContentService, IvCollectionService, IvUserService, IvImgUploadService]
 })
 
 export class IvAppComponent {

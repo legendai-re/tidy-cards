@@ -70,7 +70,7 @@ function createItemImage(req, callback){
 
 function createItemTweet(req, callback){
     if(!req.body._content || !req.body._content.url || !req.body._content.html){
-        callback("itemUrl : some required parameters was not provided", null);
+        callback("itemTweet : some required parameters was not provided", null);
         return;
     }
     var itemTweet = new models.ItemTweet();

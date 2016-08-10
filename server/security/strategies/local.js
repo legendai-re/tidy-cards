@@ -10,8 +10,8 @@ module.exports = function getLocalStrategy(LocalStrategy){
             var isValidPassword = function(user, password){
                 return bCrypt.compareSync(password, user.local.password);
             }
-
-            models.User.findOne({ $or: [{username: username}, {email: username}] }).populate('_avatar').select('+local.password').exec(function (err, user) {
+            var regex = new RegExp(["^", username, "$"].join(""), "i");
+            models.User.findOne({ $or: [{username: regex}, {email: regex}] }).populate('_avatar').select('+local.password').exec(function (err, user) {
                 if (err) {
                     return done(err);
                 }

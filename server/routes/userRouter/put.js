@@ -3,7 +3,7 @@ module.exports = function put (req, res) {
     var bCrypt      = require('bcrypt-nodejs');
     var models      = require('../../models');
     var usernameValidator = require('../../helpers/user/usernameValidator');
-    var confirmEmail = require('../../helpers/user/confirmEmail');
+    var updateEmail = require('../../helpers/user/updateEmail');
 
 	models.User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
@@ -12,7 +12,7 @@ module.exports = function put (req, res) {
             if(req.body.username)
                 updateUsername(user);
             else if(req.body.email)
-                updateEmail(user);
+                preUpdateEmail(user);
             else
                 updateProfile(user);
         }else{
@@ -47,11 +47,11 @@ module.exports = function put (req, res) {
         })
     }
 
-    function updateEmail(user){
+    function preUpdateEmail(user){
         models.User.findOne({email: req.body.email.toLowerCase(),  _id: { $ne: user._id }}, function(err, alreadyExistUser){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(alreadyExistUser) return res.status(422).send({ error: 'cannot update email: already takken'});
-            confirmEmail.sendConfirmationEmail(user, req.body.email, function(err, user){
+            updateEmail.update(user, req.body.email, function(err, user){
                 if (err) {console.log(err); res.sendStatus(500); return;}
                 sendResponse(user);
             })

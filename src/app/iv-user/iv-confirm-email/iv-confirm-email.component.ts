@@ -9,11 +9,11 @@ import { IvUserService }                from '../iv-user.service';
 import { IvUser }                       from '../iv-user.class';
 
 @Component({
-    templateUrl: './iv-user-confirm-email.component.html',
+    templateUrl: './iv-confirm-email.component.html',
     directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
 })
 
-export class IvUserConfirmEmailComponent implements OnInit, OnDestroy  {
+export class IvConfirmEmailComponent implements OnInit, OnDestroy  {
 
     public user: IvUser;
     public confirmationInProgress: boolean;

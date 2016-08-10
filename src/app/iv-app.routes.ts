@@ -8,6 +8,7 @@ import { IvCollectionRoutes }              from './iv-collection/iv-collection.r
 import { IvAdminRoutes }                   from './iv-admin/iv-admin.routes';
 import { IvAuthRoutes, IV_AUTH_PROVIDERS } from './iv-auth/iv-auth.routes';
 import { IvUserRoutes }                    from './iv-user/iv-user.routes';
+import { IvResetRoutes }                   from './iv-reset/iv-reset.routes';
 
 export const routes: RouterConfig = [
     ...IvDiscoverRoutes,
@@ -16,6 +17,7 @@ export const routes: RouterConfig = [
     ...IvAdminRoutes,
     ...IvAuthRoutes,
     ...IvUserRoutes,
+    ...IvResetRoutes,
     { path: '', component: IvAppComponent, canActivate: [HomeGuard] },
     { path: '**', component: IvAppComponent, canActivate: [HomeGuard] }
 ];

@@ -5,7 +5,7 @@ module.exports = function postSignup(req, res) {
     var models          = require('../../models');
     var sortTypes       = require('../../models/customSort/sortTypes.json');
     var usernameValidator = require('../../helpers/user/usernameValidator');
-    var confirmEmail    = require('../../helpers/user/confirmEmail');
+    var updateEmail    = require('../../helpers/user/updateEmail');
 
 	if(!req.body.username || !req.body.email || !req.body.password){
         res.status(400).send({ error: 'some required parameters was not provided'});
@@ -32,7 +32,7 @@ module.exports = function postSignup(req, res) {
 
                 user.save(function(err){
                     if (err) {console.log(err); res.sendStatus(422); return;}
-                    confirmEmail.sendConfirmationEmail(user, user.email, function(err, user){
+                    updateEmail.update(user, user.email, function(err, user){
                         if(err) {console.log(err); res.sendStatus(500); return;}
                         req.login(user, function(err) {
                             if (err) {res.sendStatus(500); return;}

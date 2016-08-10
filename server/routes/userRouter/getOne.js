@@ -5,20 +5,18 @@ module.exports = function getOne (req, res) {
     var rq = req.query;
     var q = null;
 
+    var noCaseUsernameRegex = new RegExp(["^", req.params.user_id, "$"].join(""), "i");
+
     if(isMongoId(req.params.user_id))
         q = models.User.findById(req.params.user_id);
+    else if(isEmail(req.params.user_id))
+        q = models.User.findOne({email: noCaseUsernameRegex});
     else
-        q = models.User.findOne({username: req.params.user_id});
+        q = models.User.findOne({username: noCaseUsernameRegex});
 
     if(rq.populate){
         q.populate(rq.populate);
     }
-
-    if(rq.skip)
-        q.limit(parseInt(rq.skip));
-
-    if(rq.limit)
-        q.limit(parseInt(rq.limit));
 
     if(rq.sort_field && rq.sort_dir && (parseInt(rq.sort_dir)==1 || parseInt(rq.sort_dir)==-1)){
         var sortObj = {};
@@ -32,6 +30,10 @@ module.exports = function getOne (req, res) {
     })
 
     function isMongoId(username){
-        return new RegExp("^[0-9a-fA-F]{24}$").test(username);;
+        return new RegExp("^[0-9a-fA-F]{24}$").test(username);
+    }
+
+    function isEmail(username){
+        return new RegExp('.+@.+').test(username);;
     }
 }

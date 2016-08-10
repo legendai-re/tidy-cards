@@ -148,6 +148,7 @@
             <small *ngIf="isUpdatingPassword" class="text-muted">Update in progress..</small>
             <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'SUCCESS'" class="text-success">Password updated</small>
             <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'FAILED'" class="text-danger">The password entered do not match with the account password</small>
+            <a [routerLink]="['/reset/initiate', {user_id: authService.currentUser._id}]"><small>Recover my password</small></a>
         </div>
         <div *ngIf="!authService.currentUser.local.active" class="list-item-infos">
             <h3 class="list-item-title">Set a password</h3>

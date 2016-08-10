@@ -88,6 +88,14 @@ module.exports = function getMultiple (req, res) {
     }
 
     function addItemsContent(i, items, callback){
+        if(!items[i]){
+            i++;
+            if(i==items.length)
+                return callback(null, items);
+            else
+                return addItemsContent(i, items, callback);
+        }
+
         switch(items[i].type){
             case itemTypes.URL.id:
                 models.ItemUrl.findById(items[i]._content, function(err, itemUrl){

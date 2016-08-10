@@ -18,6 +18,13 @@ module.exports = function getUserSchema(Schema) {
             password: {
                 type: String,
                 select: false
+            },
+            resetToken: {
+                type: String,
+                select: false
+            },
+            resetRequestDate: {
+                type: Date
             }
         },
         facebook: {
