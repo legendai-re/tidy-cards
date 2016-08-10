@@ -21,7 +21,7 @@ module.exports = function put (req, res) {
 
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
-            collection.bio = req.body.bio;
+            collection.bio = typeof req.body.bio != 'undefined' ? req.body.bio : collection.bio;
 
             if(req.body.updatePosition && typeof req.body.position != 'undefined')
                 updatePosition(collection, req.body.position)

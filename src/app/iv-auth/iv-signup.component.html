@@ -30,6 +30,7 @@
             <input [(ngModel)]="signupData.passwordRepeat" type="password" id="inputPassword" class="form-control" placeholder="Repeat password" required="">
             <small class="text-danger" *ngIf="signupData.password && signupData.passwordRepeat && signupData.password != signupData.passwordRepeat">Passwords do not match</small>
         </div>
-        <button [disabled]='!isFormValid()' class="btn btn-primary btn-block" type="submit">Sign up</button>
+        <button [disabled]='!isFormValid() || signupInProgress' class="btn btn-primary btn-block" type="submit">Sign up</button>
+        <small *ngIf="signupInProgress">Signup in progress...</small>
     </form>
 </div>

@@ -72,12 +72,4 @@ router.route('/password/update')
         require('./putPasswordUpdate')(req, res);
     });
 
-router.route('/roles')
-    .put(isGranted('ROLE_ADMIN'), function(req, res){
-        require('./putRoles')(req, res);
-    })
-    .delete(isGranted('ROLE_ADMIN'), function(req, res){
-        require('./deleteRoles')(req, res);
-    });
-
 module.exports = router;

@@ -4,7 +4,6 @@ export class IvApiUrl {
     public static get LOGOUT(): string { return 'auth/logout'; }
     public static get SIGNUP(): string { return 'auth/signup'; }
     public static get CURRENT_USER(): string { return 'auth/currentuser'; }
-    public static get ROLES(): string { return 'auth/roles'; }
     public static get UNLINK(): string { return 'auth/unlink'; }
     public static get PASSWORD_UPDATE(): string { return 'auth/password/update'; }
 
@@ -12,6 +11,7 @@ export class IvApiUrl {
     public static get VALID_USERNAME(): string { return 'api/users/helpers/valid-username' ; }
     public static get VALID_EMAIL(): string { return 'api/users/helpers/valid-email' ; }
     public static get CONFIRM_EMAIL(): string { return 'api/users/helpers/confirm-email' ; }
+    public static get ROLES(): string { return 'api/roles'; }
     public static get IMAGES(): string { return 'api/images' ; }
     public static get COLLECTIONS(): string { return 'api/collections' ; }
     public static get ITEMS(): string { return 'api/items' ; }

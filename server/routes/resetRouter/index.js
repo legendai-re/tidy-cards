@@ -1,7 +1,9 @@
 var express         = require('express');
-var passport        = require('passport');
+var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
 var router          = express.Router();
+var store           = new ExpressBrute.MemoryStore();
+var bruteforce      = new ExpressBrute(store);
 
 router.route('/initiate')
     .put(function(req,res){
@@ -9,7 +11,7 @@ router.route('/initiate')
     });
 
 router.route('/complete')
-    .put(function(req,res){
+    .put(bruteforce.prevent, function(req,res){
         require('./putComplete')(req, res);
     });
 

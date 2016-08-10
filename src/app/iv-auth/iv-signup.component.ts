@@ -25,6 +25,8 @@ export class IvSignupComponent {
     public typingEmailTimer;
     public doneTypingEmailInterval: number;
 
+    public signupInProgress: boolean;
+
     signupData = new class SignupData{
         username: string;
         lastChekedUsername: string;
@@ -98,13 +100,14 @@ export class IvSignupComponent {
         return  this.usernameState == 'FREE' &&
                 this.emailState == 'FREE' &&
                 this.signupData.password &&
-                this.signupData.password.length > 3 &&
+                this.signupData.password.length > 2 &&
                 this.signupData.password === this.signupData.passwordRepeat;
     }
 
     onSignupSubmit() {
         if(!this.isFormValid())
             return;
+        this.signupInProgress = true;
         let user = new IvUser(
             undefined,
             undefined,
@@ -117,6 +120,9 @@ export class IvSignupComponent {
         this.authService.signup(user).then(success => {
             console.log(success);
             this.router.navigate(['/']);
+            this.signupInProgress = false;
+        }, (err) => {
+            this.signupInProgress = false;
         });
     }
 

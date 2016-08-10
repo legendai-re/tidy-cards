@@ -239,11 +239,11 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public isUpdatePasswordFormValid(){
-        return this.password && this.newPassword && this.newPasswordRepeat && this.newPassword.length > 3 && this.newPassword == this.newPasswordRepeat;
+        return this.password && this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword == this.newPasswordRepeat;
     }
 
     public isSetPasswordFormValid(){
-        return this.newPassword && this.newPasswordRepeat && this.newPassword.length > 3 && this.newPassword == this.newPasswordRepeat;
+        return this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword == this.newPasswordRepeat;
     }
 
     public updatePassword(){

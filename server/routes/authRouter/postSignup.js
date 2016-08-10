@@ -7,7 +7,7 @@ module.exports = function postSignup(req, res) {
     var usernameValidator = require('../../helpers/user/usernameValidator');
     var updateEmail    = require('../../helpers/user/updateEmail');
 
-	if(!req.body.username || !req.body.email || !req.body.password){
+	if(!req.body.username || !req.body.email || !req.body.password || req.body.password.length < 3){
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
