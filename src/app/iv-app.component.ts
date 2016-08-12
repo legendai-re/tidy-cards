@@ -11,6 +11,7 @@ import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvHeaderComponent }    from './iv-header/iv-header.component';
 import { IvHeaderService }      from './iv-header/iv-header.service';
 import { IvResetService }       from './iv-reset/iv-reset.service';
+import { IvLanguageService }    from './iv-language/iv-language.service';
 
 import 'bootstrap/dist/js/bootstrap.js';
 import '../style/app.scss';
@@ -25,16 +26,16 @@ import '../style/app.scss';
 
 export class IvAppComponent {
 
-    constructor(public authService: IvAuthService, public router: Router, private activeRoute: ActivatedRoute) {
+    constructor(public t: IvLanguageService, public authService: IvAuthService, public router: Router, private activeRoute: ActivatedRoute) {
         var url = null;
         this.router.events.subscribe((route) => {
             if(!url)
                 url=route.url;
         })
+
         authService.initCurrentUser().then(success => {
             if(url)
                 this.router.navigate([url]);
         });
     }
-
 }

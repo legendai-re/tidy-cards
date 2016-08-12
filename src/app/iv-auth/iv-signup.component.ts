@@ -3,6 +3,7 @@ import { ROUTER_DIRECTIVES, Router }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 import { IvUser }        from '../iv-user/iv-user.class';
 import { IvUserService } from '../iv-user/iv-user.service';
+import { IvLanguageService } from '../iv-language/iv-language.service';
 
 @Component({
     selector: 'iv-signup',
@@ -36,7 +37,7 @@ export class IvSignupComponent {
         passwordRepeat: string;
     };
 
-    constructor(private userService: IvUserService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: IvLanguageService, private userService: IvUserService, public authService: IvAuthService, public router: Router) {
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
     }

@@ -14,6 +14,7 @@ module.exports = function postSignup(req, res) {
         models.User.findOne({ $or: [{username: req.body.username.toLowerCase()}, {email: req.body.email.toLowerCase()}] }, function(err, user){
             if (err) {res.sendStatus(500); return;}
             if(!user || !usernameValidator.isValid(req.body.username)){
+                var sess = req.session;
                 var user =  new models.User();
                 user.email = req.body.email;
                 user.unsafeUsername = req.body.username;
@@ -22,6 +23,7 @@ module.exports = function postSignup(req, res) {
                 user.local.password = createHash(req.body.password);
                 user.local.active = true;
                 user.roles = (process.env.ADMIN_EMAILS.indexOf(req.body.email) > -1 ) ? ['ROLE_USER', 'ROLE_ADMIN'] : ['ROLE_USER'];
+                user.language = (sess.language || 'en');
 
                 var myCollectionSort = new models.CustomSort();
                 myCollectionSort.type = sortTypes.MY_COLLECTIONS.id;

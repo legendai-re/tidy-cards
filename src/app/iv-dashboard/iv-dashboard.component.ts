@@ -5,8 +5,10 @@ import { URLSearchParams  }   from '@angular/http';
 import { IvCollectionService }   from '../iv-collection/iv-collection.service';
 import { IvCollectionCreateComponent }   from '../iv-collection/iv-collection-create/iv-collection-create.component';
 import { IvCollectionCardComponent }   from '../iv-collection/iv-collection-card/iv-collection-card.component';
-import { IvCollection }   from '../iv-collection/iv-collection.class';
+import { IvCollection } from '../iv-collection/iv-collection.class';
+import { IvLanguageService } from '../iv-language/iv-language.service';
 import { IvSortableDirective } from'../iv-shared/iv-sortable.directive';
+
 declare var JQuery: any;
 
 @Component({
@@ -21,7 +23,7 @@ export class IvDashboardComponent implements OnInit {
     public myFavoriteCollections: IvCollection[];
     public isUpdatingPosition: boolean;
 
-    constructor(public authService: IvAuthService, private router: Router, private service: IvCollectionService) {
+    constructor(public t: IvLanguageService, public authService: IvAuthService, private router: Router, private service: IvCollectionService) {
     }
 
     ngOnInit() {

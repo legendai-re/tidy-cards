@@ -4,6 +4,7 @@ module.exports = function put (req, res) {
     var models      = require('../../models');
     var usernameValidator = require('../../helpers/user/usernameValidator');
     var updateEmail = require('../../helpers/user/updateEmail');
+    var availableLanguages = require('../../languages/availableLanguages.json');
 
 	models.User.findById(req.params.user_id, function(err, user) {
         if (err) {console.log(err); res.sendStatus(500); return;}
@@ -23,6 +24,8 @@ module.exports = function put (req, res) {
     function updateProfile(user){
         user.name = (req.body.name || user.name);
         user.bio = req.body.bio;
+        if(req.body.language && availableLanguages.indexOf(req.body.language) > -1)
+            user.language = req.body.language.toLowerCase();
         if(req.body._avatar && req.body._avatar._id){
             models.Image.checkIfOwner(req.body._avatar._id, user, function(err, isOwner){
                 if(err) {console.log(err); res.sendStatus(500); return;}

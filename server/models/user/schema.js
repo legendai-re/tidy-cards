@@ -72,6 +72,11 @@ module.exports = function getUserSchema(Schema) {
 	    roles: {
 	        type: Array
 	    },
+        language: {
+            type: String,
+            required: true,
+            default: 'en'
+        },
 	    name: {
 	        type: String,
 	        required: true,

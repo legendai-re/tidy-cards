@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Renderer, ElementRef }    from '@angular/
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
 import { IvAuthService }        from '../../iv-auth/iv-auth.service';
+import { IvLanguageService }    from '../../iv-language/iv-language.service';
 import { IvImage }              from '../../iv-image/iv-image.class';
 import { IvImgUploadService }   from '../../iv-image/iv-image-upload.service';
 import { IvUser }               from '../iv-user.class';
@@ -39,6 +40,8 @@ export class IvUserPrivateComponent implements OnInit {
     public typingEmailTimer;
     public doneTypingEmailInterval: number;
 
+    public isUpdatingLanguage: boolean;
+
     public uploader;
     public tmpAvatar: IvImage;
     public tmpUser: IvUser;
@@ -49,7 +52,7 @@ export class IvUserPrivateComponent implements OnInit {
     public isUpdatingPassword: boolean;
     public passwordUpdateState: string;
 
-    constructor(private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: IvLanguageService, private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
         this.uploader = imgUploadService.uploader;
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
@@ -180,6 +183,21 @@ export class IvUserPrivateComponent implements OnInit {
                 this.isUpdatingUsername = false;
             })
         });
+    }
+
+    public updateLanguage(){
+        this.isUpdatingLanguage = true;
+        var tmpThis = this;
+        setTimeout(function(){
+            let user = IvUser.createFormJson({_id: tmpThis.tmpUser._id, language: tmpThis.tmpUser.language});
+            tmpThis.userService.putUser(user).subscribe((userResponse) => {
+                tmpThis.tmpUser.language = userResponse.language;
+                tmpThis.authService.currentUser.language = userResponse.language;
+                tmpThis.t.loadLanguage(userResponse).then((res) => {
+                    tmpThis.isUpdatingLanguage = false;
+                });
+            })
+        },100)
     }
 
     public onAvatarFileChange(event) {

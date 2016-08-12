@@ -17,6 +17,7 @@ export class IvUser {
     public google: any;
     public local: any;
     public emailConfirmed: boolean;
+    public language: string;
 
     constructor(
         _id?: string,
@@ -33,7 +34,8 @@ export class IvUser {
         twitter?: any,
         google?: any,
         local?: any,
-        emailConfirmed?: boolean) {
+        emailConfirmed?: boolean,
+        language?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -49,6 +51,7 @@ export class IvUser {
         this.google = google;
         this.local = local;
         this.emailConfirmed = emailConfirmed;
+        this.language = language;
     }
 
     public static createFormJson(obj) {
@@ -69,7 +72,8 @@ export class IvUser {
             obj.twitter,
             obj.google,
             obj.local,
-            obj.emailConfirmed
+            obj.emailConfirmed,
+            obj.language
             );
     }
 

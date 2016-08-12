@@ -5,7 +5,8 @@ var sortTypes          = require('../../models/customSort/sortTypes.json');
 var forbiddenUsernames = require('../../helpers/user/forbiddenUsernames.json');
 var imageUpdloader     = require('../../helpers/image-uploader');
 
-var createUser = function(profile, accessToken, strategy, callback){
+var createUser = function(req, profile, accessToken, strategy, callback){
+    var sess = req.session;
     var newUser = new models.User();
 
     newUser[strategy].id = profile.id;
@@ -19,6 +20,7 @@ var createUser = function(profile, accessToken, strategy, callback){
     }
     newUser.name = (profile.displayName || 'anonyme');
     newUser.roles = ['ROLE_USER'];
+    newUser.language = (sess.language || 'en');
     var avatar = createAvatar(newUser, profile);
     newUser._avatar = avatar._id;
 

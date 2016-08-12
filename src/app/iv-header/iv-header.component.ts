@@ -4,6 +4,7 @@ import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-brows
 import { ROUTER_DIRECTIVES }    from '@angular/router';
 import { IvAuthService }          from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
+import { IvLanguageService }    from '../iv-language/iv-language.service';
 
 @Component({
     selector: 'iv-header',
@@ -21,7 +22,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     private sub: any;
     private defaultColor: string;
 
-    constructor(public sanitize: DomSanitizationService, public headerService: IvHeaderService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: IvLanguageService, public sanitize: DomSanitizationService, public headerService: IvHeaderService, public authService: IvAuthService, public router: Router) {
         this.defaultColor = '6B5DFF';
         this.router.events.subscribe((route) => {
             this.setDefault();

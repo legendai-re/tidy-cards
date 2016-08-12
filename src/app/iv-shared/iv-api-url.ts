@@ -7,6 +7,7 @@ export class IvApiUrl {
     public static get UNLINK(): string { return 'auth/unlink'; }
     public static get PASSWORD_UPDATE(): string { return 'auth/password/update'; }
 
+    public static get LANGUAGES(): string { return 'api/languages' ; }
     public static get USERS(): string { return 'api/users' ; }
     public static get VALID_USERNAME(): string { return 'api/users/helpers/valid-username' ; }
     public static get VALID_EMAIL(): string { return 'api/users/helpers/valid-email' ; }

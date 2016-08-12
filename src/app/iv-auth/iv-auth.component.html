@@ -6,19 +6,19 @@
             </h1>
         </a>
 
-        <h2 class="auth-heading" *ngIf="inLogin">Sign in</h2>
+        <h2 class="auth-heading" *ngIf="inLogin">{{t._.auth?.signin_title}}</h2>
         <div class="auth-wrapper" *ngIf="inLogin">
             <iv-signin></iv-signin>
             <div class="auth-footer">
-                Not member yet? <a (click)="inLogin = false">Sign up</a>
+                {{t._.auth?.not_member_title}} <a (click)="inLogin = false">{{t._.auth?.signup_title}}</a>
             </div>
         </div>
 
-        <h2 class="auth-heading" *ngIf="!inLogin">Sign up</h2>
+        <h2 class="auth-heading" *ngIf="!inLogin">{{t._.auth?.signup_title}}</h2>
         <div class="auth-wrapper" *ngIf="!inLogin">
             <iv-signup></iv-signup>
             <div class="auth-footer">
-                Already registered? <a (click)="inLogin = true">Sign in</a>
+                {{t._.auth?.already_member_title}} <a (click)="inLogin = true">{{t._.auth?.signin_title}}</a>
             </div>
         </div>
 

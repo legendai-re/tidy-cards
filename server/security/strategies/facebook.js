@@ -18,7 +18,7 @@ module.exports = function getLocalStrategy(FacebookStrategy){
             }else if(user && !req.user){
                 done(null, user);
             }else if(!user && !req.user){
-                strategiesHelper.createUser(profile, accessToken, 'facebook', function(err, newUser){
+                strategiesHelper.createUser(req, profile, accessToken, 'facebook', function(err, newUser){
                     done(err, newUser);
                 });
             }else if(!user && req.user){

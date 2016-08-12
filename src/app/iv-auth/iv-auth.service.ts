@@ -4,6 +4,7 @@ import { Http, Response, Headers, RequestOptions }   from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
 import { IvUser }           from '../iv-user/iv-user.class';
 import { IvApiUrl }           from '../iv-shared/iv-api-url';
+import { IvLanguageService }  from '../iv-language/iv-language.service';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -21,7 +22,7 @@ export class IvAuthService {
     isLoggedIn: boolean = false;
     currentUser: IvUser = null;
 
-    constructor (private http: Http, private router: Router) {
+    constructor (private languageService: IvLanguageService, private http: Http, private router: Router) {
         this.authInitializedEmitter = new EventEmitter();
     }
 
@@ -85,15 +86,16 @@ export class IvAuthService {
             .catch(this.handleError);
     }
 
-    getAuthInitializedEmitter() {
+    public getAuthInitializedEmitter() {
         return this.authInitializedEmitter;
     }
 
-    login (username: string, password: string): Promise<any> {
+    public login (username: string, password: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.postLogin(username, password).subscribe(user => {
                 this.currentUser = user;
                 this.isLoggedIn = true;
+                this.languageService.loadLanguage(user);
                 resolve({success: true});
             }, (err) => {
                 this.isLoggedIn = false;
@@ -102,7 +104,7 @@ export class IvAuthService {
         });
     }
 
-    signup (user: IvUser): Promise<Boolean> {
+    public signup (user: IvUser): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.postSignup(user).subscribe(user => {
                 this.currentUser = user;
@@ -115,7 +117,7 @@ export class IvAuthService {
         });
     }
 
-    initCurrentUser(): Promise<Boolean> {
+    public initCurrentUser(): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.getCurrentUser().subscribe(user => {
                 if(user._id){
@@ -128,15 +130,17 @@ export class IvAuthService {
                     this.authInitialized = true;
                     resolve(false);
                 }
+                this.languageService.loadLanguage(user);
                 this.authInitializedEmitter.emit({sucess: this.isLoggedIn});
             });
         });
     }
 
-    logout(): void {
+    public logout(): void {
         this.getLogout().subscribe(success => {
             this.isLoggedIn = false;
             this.currentUser = null;
+            this.languageService.loadLanguage(null);
             this.router.navigate(['/']);
         });
     }

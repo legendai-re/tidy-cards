@@ -9,29 +9,29 @@
                 <input
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.title"
-                    class="input-card-title card-title" type="text" placeholder="Create a collection..." required/>
+                    class="input-card-title card-title" type="text" placeholder="{{t._.collection_create?.title_placeholder}}" required/>
                 <textarea
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.bio"
-                    class="input-card-caption card-caption" name="" id="" placeholder="Enter a caption here to describe the collection...">
+                    class="input-card-caption card-caption" name="" id="" placeholder="{{t._.collection_create?.caption_placeholder}}">
                 </textarea>
                 <div class="btn-group">
-                    <button [class.collapse]="!actionIntent" type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">remove_red_eye</i> Visibility: {{collection.visibility.desc}}
+                    <button [class.collapse]="!actionIntent" *ngIf="t._.collection?.visibility" type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">remove_red_eye</i>  {{t._.collection?.visibility?.title}}: {{t._.collection?.visibility[collection.visibility.id]?.title}}
                     </button>
                     <div class="dropdown-menu">
-                        <h6 class="dropdown-header">Who should see this?</h6>
+                        <h6 class="dropdown-header">{{t._.collection_create?.visibility_dropdow_title}}</h6>
                         <a (click)="collection.visibility=visibilityList.PRIVATE" class="dropdown-item">
-                            <span>Only me</span>
-                            <small>Only me</small>
+                            <span>{{t._.collection?.visibility?.PRIVATE?.title}}</span>
+                            <small>{{t._.collection?.visibility?.PRIVATE?.subtitle}}</small>
                         </a>
                         <a (click)="collection.visibility=visibilityList.PUBLIC" class="dropdown-item">
-                            <span>Public</span>
-                            <small>Anyone can see this</small>
+                            <span>{{t._.collection?.visibility?.PUBLIC?.title}}</span>
+                            <small>{{t._.collection?.visibility?.PUBLIC?.subtitle}}</small>
                         </a>
                         <a (click)="collection.visibility=visibilityList.UNINDEXED" class="dropdown-item">
-                            <span>Unindexed</span>
-                            <small>People with the link</small>
+                            <span>{{t._.collection?.visibility?.UNINDEXED?.title}}</span>
+                            <small>{{t._.collection?.visibility?.UNINDEXED?.subtitle}}</small>
                         </a>
                     </div>
                 </div>
@@ -112,13 +112,13 @@
                 </label>
 
                 <button *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit">
-                    Create
+                    {{t._.action?.create}}
                 </button>
                 <button *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit">
-                    Update
+                    {{t._.action?.update}}
                 </button>
                 <a *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create pull-xs-right">
-                    Cancel
+                    {{t._.action?.cancel}}
                 </a>
             </div>
         </div>

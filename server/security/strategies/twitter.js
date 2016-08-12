@@ -17,7 +17,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
             }else if(user && !req.user){
                 done(null, user);
             }else if(!user && !req.user){
-                strategiesHelper.createUser(profile, accessToken, 'twitter', function(err, newUser){
+                strategiesHelper.createUser(req, profile, accessToken, 'twitter', function(err, newUser){
                     done(err, newUser);
                 });
             }else if(!user && req.user){

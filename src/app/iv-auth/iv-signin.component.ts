@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
+import { IvLanguageService } from '../iv-language/iv-language.service';
 
 @Component({
     selector: 'iv-signin',
@@ -20,7 +21,7 @@ export class IvSigninComponent implements OnInit, OnDestroy{
     public longinInProgress: boolean;
     public errorStatusCode: number;
 
-    constructor(private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(public t: IvLanguageService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
     }
 
     ngOnInit(){

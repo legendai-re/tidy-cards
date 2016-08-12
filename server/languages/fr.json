@@ -1,0 +1,98 @@
+{
+    "lang_id": "fr",
+    "app_name": "invow",
+    "header": {
+        "search_placeholder": "Rechercher sur Invow...",
+        "dashboard_title": "Tableau de bord",
+        "discover_title": "Découvrir",
+        "signin_title": "Se connecter/S'inscrire",
+        "profile_menu": "Profil/Paramètres",
+        "admin_menu": "Admin",
+        "logout_menu": "Se déconnecter"
+    },
+    "auth": {
+        "signin_title": "Se connecter",
+        "signup_title": "S'inscrire",
+        "signin_facebook_title": "Se connecter avec Facebook",
+        "signin_twitter_title": "Se connecter avec Twitter",
+        "signin_google_title": "Se connecter avec Google",
+        "username_placeholder": "Nom d'utilisateur",
+        "email_placeholder": "Adresse e-mail",
+        "password_placeholder": "Mot de passe",
+        "password_repeat_placeholder": "Répéter le mot de passe",
+        "not_member_title": "Pas encore inscrit ?",
+        "already_member_title": "Déjà inscrit ?"
+    },
+    "discover": {
+        "featured_title": "Sélection",
+        "popular_title": "Collections populaires",
+        "last_title": "Dernières collections"
+    },
+    "dashboard": {
+        "my_collections_title": "Mes collections",
+        "favorite_collections_title": "Mes collections favorites"
+    },
+    "profile_private": {
+        "bio_placeholder": "Ajouter un description ici...",
+        "account_title": "Compte",
+        "account_subtitle": "Modifier mes paramètres de compte.",
+        "username_row_title": "Mon nom d'utilisateur",
+        "username_edit_button": "Modifier mon nom d'utilisateur",
+        "email_row_title": "Mon email",
+        "email_edit_button": "Modifier mon email",
+        "email_confirmation_info": "Un email a été envoyé à {0}. Veuillez vérifier vos emails pour confirmer l'adresse.",
+        "email_confirmation_resend": "Renvoyer l'email.",
+        "connections_title": "Connections",
+        "connections_subtitle": "Gérer les applications liées à mon compte",
+        "facebook_row_title": "Connecter Facebook",
+        "facebook_row_subtitle": "Utiliser mon compte Facebook pour me connecter. ",
+        "facebook_row_subtitle_span": "Nous ne publierons jamais sur Facebook sans votre autorisation.",
+        "facebook_link_button": "Lier Facebook",
+        "facebook_unlink_button": "Révoquer Facebook",
+        "twitter_row_title": "Connecter Twitter",
+        "twitter_row_subtitle": "Utiliser mon compte Twitter pour me connecter. ",
+        "twitter_row_subtitle_span": "Nous ne publierons jamais sur Twitter sans votre autorisation.",
+        "twitter_link_button": "Lier Twitter",
+        "twitter_unlink_button": "Révoquer Twitter",
+        "google_row_title": "Connecter Google",
+        "google_row_subtitle": "Utiliser mon compte Google pour me connecter. ",
+        "google_row_subtitle_span": "Nous ne publierons jamais sur Google sans votre autorisation.",
+        "google_link_button": "Lier Google",
+        "google_unlink_button": "Révoquer Google",
+        "security_title": "Sécurité",
+        "security_subtitle": "Modifier mes paramètres de sécurité."
+    },
+    "collection": {
+        "visibility":{
+            "title": "Visibilité",
+            "PRIVATE":{
+                "title": "Moi uniquement",
+                "subtitle": "Moi uniquement"
+            },
+            "PUBLIC":{
+                "title": "Public",
+                "subtitle": "Visible par tout le monde"
+            },
+            "UNINDEXED":{
+                "title": "Non indexées",
+                "subtitle": "Seulement les personnes possédant le lien"
+            }
+        },
+        "item_sing": "objet",
+        "item_plur": "objets",
+        "by_title": "Une collection par"
+    },
+    "collection_create": {
+        "title_placeholder": "Créer une collection...",
+        "caption_placeholder": "Ajouter une légende pour décrire votre collection...",
+        "visibility_dropdow_title": "Qui peut la voir ?"
+    },
+    "action": {
+        "see_all": "Voir toutes",
+        "save": "Enregister",
+        "cancel": "Anuler",
+        "update": "Mettre à jour",
+        "create": "Créer",
+        "edit": "Modifier"
+    }
+}

@@ -4,7 +4,7 @@ import { IvAuthService } from './iv-auth.service';
 import { IvHeaderService } from '../iv-header/iv-header.service';
 import { IvSignupComponent } from './iv-signup.component';
 import { IvSigninComponent } from './iv-signin.component';
-
+import { IvLanguageService } from '../iv-language/iv-language.service';
 
 @Component({
     templateUrl: './iv-auth.component.html',
@@ -16,7 +16,7 @@ export class IvAuthComponent implements OnInit{
 
     public inLogin: boolean;
 
-    constructor(private headerService: IvHeaderService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: IvLanguageService, private headerService: IvHeaderService, public authService: IvAuthService, public router: Router) {
     }
 
     ngOnInit(){

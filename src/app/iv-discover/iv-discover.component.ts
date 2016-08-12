@@ -5,6 +5,7 @@ import { IvCollectionService }             from '../iv-collection/iv-collection.
 import { IvCollectionCardComponent }       from '../iv-collection/iv-collection-card/iv-collection-card.component';
 import { IvCollection }                    from '../iv-collection/iv-collection.class';
 import { IvDataLimit }                     from '../iv-shared/iv-data-limit.ts';
+import { IvLanguageService }               from '../iv-language/iv-language.service';
 
 @Component({
     templateUrl: './iv-discover.component.html',
@@ -17,7 +18,7 @@ export class IvDiscoverComponent implements OnInit {
     public popularCollections: IvCollection[];
     public lastCollections: IvCollection[];
 
-    constructor( private router: Router, private collectionService: IvCollectionService) {
+    constructor(public t: IvLanguageService, private router: Router, private collectionService: IvCollectionService) {
     }
 
     ngOnInit() {

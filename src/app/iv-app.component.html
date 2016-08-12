@@ -1,5 +1,5 @@
 <main>
-  <div [class.collapse]="!authService.authInitialized">
+  <div [class.collapse]="!authService.authInitialized || !t.langInitialized">
     <iv-header></iv-header>
     <router-outlet></router-outlet>
   </div>

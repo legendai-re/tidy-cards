@@ -10,6 +10,7 @@ module.exports = function(app) {
     var starRouter          = require('./starRouter');
     var resetRouter         = require('./resetRouter');
     var rolesRouter         = require('./rolesRouter');
+    var languageRouter      = require('./languageRouter');
     var devRouter           = require('./devRouter');
 
     app.use('/fonts', express.static(path.resolve(__dirname, '../../dist/fonts')));
@@ -25,7 +26,8 @@ module.exports = function(app) {
     app.use('/api/items', itemRouter);
     app.use('/api/stars', starRouter);
     app.use('/api/reset', resetRouter);
-    app.use('/api/roles', resetRouter);
+    app.use('/api/roles', rolesRouter);
+    app.use('/api/languages', languageRouter);
 
     app.use('/api/dev', devRouter);
 

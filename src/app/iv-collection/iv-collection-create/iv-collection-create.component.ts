@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, OnDestroy, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
+import { IvLanguageService }            from '../../iv-language/iv-language.service';
 import { IvCollectionService }          from '../iv-collection.service';
 import { IvCollection }                 from '../iv-collection.class';
 import {FILE_UPLOAD_DIRECTIVES }        from 'ng2-file-upload';
@@ -26,7 +27,7 @@ export class IvCollectionCreateComponent implements OnInit {
     @Output() newCollection = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
-    constructor(private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService, private router: Router) {
+    constructor(public t: IvLanguageService, private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService, private router: Router) {
         this.uploader = imgUploadService.uploader;
         this.visibilityList = IvCollection.VISIBILITY;
     }

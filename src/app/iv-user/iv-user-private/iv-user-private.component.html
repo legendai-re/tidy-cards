@@ -25,24 +25,24 @@
             </div>
             <div class="profile-infos-edit">
                 <small *ngIf="isUpdadingGeneralInfo">saving information...</small>
-                <input *ngIf="!updateGeneralInfoIntent" (click)="startUpdateGeneralInfo()" class="btn btn-sm btn--light-op" type="submit" value="Edit" />
-                <input *ngIf="updateGeneralInfoIntent" (click)="updateGeneralInfo()" [disabled]="isUpdadingGeneralInfo || isUploadingAvatar || !tmpUser.name" class="btn btn-sm btn-success" type="submit" value="Save" />
-                <a *ngIf="updateGeneralInfoIntent" (click)="cancelUpdateGeneralInfo()" class="btn btn-sm btn-secondary">Cancel</a>
+                <input *ngIf="!updateGeneralInfoIntent" (click)="startUpdateGeneralInfo()" class="btn btn-sm btn--light-op" type="submit" value="{{t._.action?.edit}}" />
+                <input *ngIf="updateGeneralInfoIntent" (click)="updateGeneralInfo()" [disabled]="isUpdadingGeneralInfo || isUploadingAvatar || !tmpUser.name" class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}" />
+                <a *ngIf="updateGeneralInfoIntent" (click)="cancelUpdateGeneralInfo()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
             </div>
         </div>
         <div class="profile-header-bottom">
-            <textarea [(ngModel)]="tmpUser.bio" [disabled]="!updateGeneralInfoIntent" class="profile-infos-bio" placeholder="Your description here...">{{tmpUser.bio}}</textarea>
+            <textarea [(ngModel)]="tmpUser.bio" [disabled]="!updateGeneralInfoIntent" class="profile-infos-bio" placeholder="{{t._.profile_private?.bio_placeholder}}">{{tmpUser.bio}}</textarea>
         </div>
     </div>
 </div>
 
 <div class="account-settings section">
-    <h2 class="section-title withDescription">Account</h2>
-    <p class="section-description">Change my basic account settings.</p>
+    <h2 class="section-title withDescription">{{t._.profile_private?.account_title}}</h2>
+    <p class="section-description">{{t._.profile_private?.account_subtitle}}</p>
 
     <div class="list-item">
         <div class="list-item-infos">
-            <h3 class="list-item-title">My username</h3>
+            <h3 class="list-item-title">{{t._.profile_private?.username_row_title}}</h3>
             <p class="list-item-description">http://invow.xyz/<input #usernameInput [(ngModel)]="tmpUser.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
             <div *ngIf="updateUsernameIntent" class="list-item-status">
                 <small *ngIf="tmpUser.username === authService.currentUser.username" class="text-success">That’s your current username!</small>
@@ -56,22 +56,26 @@
         </div>
         <div class="list-item-actions">
             <small *ngIf="updateUsernameIntent && isUpdatingUsername">saving information...</small>
-            <input *ngIf="!updateUsernameIntent" (click)="startUpdateUsername()" class="btn btn-sm btn-secondary-outline" type="submit" value="Edit username"/>
-            <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || usernameState!='FREE'" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="Save"/>
-            <a *ngIf="updateUsernameIntent" (click)="cancelUpdateUsername()" class="btn btn-sm btn-secondary">Cancel</a>
+            <input
+                *ngIf="!updateUsernameIntent"
+                (click)="startUpdateUsername()"
+                value="{{t._.profile_private?.username_edit_button}}"
+                class="btn btn-sm btn-secondary-outline" type="submit"/>
+            <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || usernameState!='FREE'" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}"/>
+            <a *ngIf="updateUsernameIntent" (click)="cancelUpdateUsername()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
         </div>
     </div>
 
     <div class="list-item">
         <div class="list-item-infos">
             <h3 class="list-item-title">
-                My email
+                {{t._.profile_private?.email_row_title}}
                 <small *ngIf="authService.currentUser.emailConfirmed"> (confirmed)</small>
                 <small *ngIf="!authService.currentUser.emailConfirmed"> (not confirmed)</small>
             </h3>
             <input #emailInput [(ngModel)]="tmpUser.email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" />
-             <div *ngIf="!authService.currentUser.emailConfirmed && !updateEmailIntent" class="list-item-status">
-                <small class="text-muted">An email have been send to {{authService.currentUser.email}}. Please check your email to confirm the address. <a (click)="updateEmail()">Re send email.</a></small>
+             <div *ngIf="authService.currentUser.email && !authService.currentUser.emailConfirmed && !updateEmailIntent" class="list-item-status">
+                <small class="text-muted">{{t.format(t._.profile_private?.email_confirmation_info, [authService.currentUser.email])}}<a (click)="updateEmail()"> {{t._.profile_private?.email_confirmation_resend}}</a></small>
             </div>
             <div *ngIf="updateEmailIntent" class="list-item-status">
                 <small *ngIf="tmpUser.email === authService.currentUser.email" class="text-success">That’s your current email!</small>
@@ -85,58 +89,77 @@
         </div>
         <div class="list-item-actions">
             <small *ngIf="updateEmailIntent && isUpdatingEmail">saving information...</small>
-            <input *ngIf="!updateEmailIntent" (click)="startUpdateEmail()" class="btn btn-sm btn-secondary-outline" type="submit" value="Edit email">
-            <input *ngIf="updateEmailIntent"  (click)="updateEmail()" [disabled]="tmpUser.email.toLowerCase() === authService.currentUser.email.toLowerCase() || isUpdatingEmail || emailState!='FREE'" class="btn btn-sm btn-success" type="submit" value="Save (WIP)"/>
-            <a *ngIf="updateEmailIntent" (click)="cancelUpdateEmail()" class="btn btn-sm btn-secondary">Cancel</a>
+            <input
+                *ngIf="!updateEmailIntent"
+                (click)="startUpdateEmail()"
+                value="{{t._.profile_private?.email_edit_button}}"
+                class="btn btn-sm btn-secondary-outline" type="submit">
+            <input *ngIf="updateEmailIntent"  (click)="updateEmail()" [disabled]="tmpUser.email.toLowerCase() === authService.currentUser.email.toLowerCase() || isUpdatingEmail || emailState!='FREE'" class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}"/>
+            <a *ngIf="updateEmailIntent" (click)="cancelUpdateEmail()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
+        </div>
+    </div>
+
+    <div class="list-item">
+        <div class="list-item-infos">
+            <h3 class="list-item-title">
+                Language
+            </h3>
+        </div>
+        <div class="list-item-actions">
+            <select (change)="updateLanguage()" [(ngModel)]="tmpUser.language" [disabled]="isUpdatingLanguage">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+            </select>
+            <small *ngIf="isUpdatingLanguage">Update in progress..</small>
         </div>
     </div>
 </div>
 
 <div class="connections-settings section">
-    <h2 class="section-title withDescription">Connections</h2>
-    <p class="section-description">Manage the apps connections.</p>
+    <h2 class="section-title withDescription">{{t._.profile_private?.connections_title}}</h2>
+    <p class="section-description">{{t._.profile_private?.connections_subtitle}}</p>
 
     <div class="list-item">
         <div class="list-item-infos">
-            <h3 class="list-item-title">Connect to Facebook</h3>
-            <p class="list-item-description">Use my Facebook account to login. <strong>We will never post to Facebook or message your friends without your permission.</strong></p>
+            <h3 class="list-item-title">{{t._.profile_private?.facebook_row_title}}</h3>
+            <p class="list-item-description">{{t._.profile_private?.facebook_row_subtitle}}<strong>{{t._.profile_private?.facebook_row_subtitle_span}}</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.facebook?.id">
-            <a class="btn btn-sm btn--facebook" (click)="linkAccount('facebook')">Link Facebook</a>
+            <a class="btn btn-sm btn--facebook" (click)="linkAccount('facebook')">{{t._.profile_private?.facebook_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.facebook?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.twitter?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('FACEBOOK')">Unlink Facebook</a>
+            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('FACEBOOK')">{{t._.profile_private?.facebook_unlink_button}}</a>
         </div>
     </div>
     <div class="list-item">
         <div class="list-item-infos">
-            <h3 class="list-item-title">Connect to Twitter</h3>
-            <p class="list-item-description">Use my Twitter account to login. <strong>We will never post to Twitter or message your followers without your permission.</strong></p>
+            <h3 class="list-item-title">{{t._.profile_private?.twitter_row_title}}</h3>
+            <p class="list-item-description">{{t._.profile_private?.twitter_row_subtitle}}<strong>{{t._.profile_private?.twitter_row_subtitle_span}}</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.twitter?.id">
-            <a class="btn btn-sm btn--twitter" (click)="linkAccount('twitter')">Link Twitter</a>
+            <a class="btn btn-sm btn--twitter" (click)="linkAccount('twitter')">{{t._.profile_private?.twitter_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.facebook?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('TWITTER')">Unlink Twitter</a>
+            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('TWITTER')">{{t._.profile_private?.twitter_unlink_button}}</a>
         </div>
     </div>
     <div class="list-item">
         <div class="list-item-infos">
-            <h3 class="list-item-title">Connect to Google</h3>
-            <p class="list-item-description">Use my Google account to login. <strong>We will never post to Google or message your friends without your permission.</strong></p>
+            <h3 class="list-item-title">{{t._.profile_private?.google_row_title}}</h3>
+            <p class="list-item-description">{{t._.profile_private?.google_row_subtitle}}<strong>{{t._.profile_private?.google_row_subtitle_span}}</strong></p>
         </div>
         <div class="list-item-actions" *ngIf="!authService.currentUser.google?.id">
-            <a class="btn btn-sm btn--google" (click)="linkAccount('google')">Link Google</a>
+            <a class="btn btn-sm btn--google" (click)="linkAccount('google')">{{t._.profile_private?.google_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.google?.id && (authService.currentUser.local?.active || authService.currentUser.twitter?.id || authService.currentUser.facebook?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('GOOGLE')">Unlink Google</a>
+            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('GOOGLE')">{{t._.profile_private?.google_unlink_button}}</a>
         </div>
     </div>
 </div>
 
 <div class="security-settings section">
-    <h2 class="section-title withDescription">Security</h2>
-    <p class="section-description">Change my security settings.</p>
+    <h2 class="section-title withDescription">{{t._.profile_private?.security_title}}</h2>
+    <p class="section-description">{{t._.profile_private?.security_subtitle}}</p>
 
     <div class="list-item">
         <div *ngIf="authService.currentUser.local.active" class="list-item-infos">
