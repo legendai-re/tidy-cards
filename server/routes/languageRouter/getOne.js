@@ -20,7 +20,7 @@ module.exports = function getMine (req, res) {
     }
 
     function getLanguage(langId){
-        return JSON.parse(fs.readFileSync(__dirname + '../../../languages/'+langId+'.json', 'utf8'));
+        return JSON.parse(fs.readFileSync('server/languages/'+langId+'.json', 'utf8'));
     }
 
 }
