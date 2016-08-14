@@ -62,7 +62,7 @@
     "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine-core": "^2.3.4",
     "jasmine-spec-reporter": "^2.4.0",
-    "jquery": "<3.0.0",
+    "jquery": "^2.2.4",
     "jsdom": "^9.4.1",
     "json-loader": "^0.5.3",
     "karma": "0.13.22",

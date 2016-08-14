@@ -4,6 +4,11 @@ import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
 import { IvItem }                 from './iv-item.class';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
+import { IvItemUrl }              from './iv-item-url/iv-item-url.class';
+import { IvItemYoutube }          from './iv-item-youtube/iv-item-youtube.class';
+import { IvItemImage }            from './iv-item-image/iv-item-image.class';
+import { IvItemTweet }            from './iv-item-tweet/iv-item-tweet.class';
+
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -42,6 +47,15 @@ export class IvItemService {
         .catch(this.handleError);
     }
 
+    public postItemContent (url: String): Observable<any> {
+        let body = JSON.stringify({url: url});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(IvApiUrl.ITEMS_CONTENT_CREATE, body, options)
+        .map(this.handleItemContent)
+        .catch(this.handleError);
+    }
+
     public deleteItem (_id: string): Observable<any> {
         return this.http.delete(IvApiUrl.ITEMS + '/' + _id);
     }
@@ -58,6 +72,27 @@ export class IvItemService {
     private handleItem(res: Response) {
         let body = res.json();
         return IvItem.createFormJson(body.data) || {};
+    }
+
+    private handleItemContent(res: Response) {
+        let body = res.json();
+        if(body.error)
+            return null;
+        let itemType = body.itemType;
+        if(!itemType)
+            return null;
+        switch (itemType.id) {
+            case IvItem.ITEM_TYPES.URL.id:
+                return {_content: IvItemUrl.createFormJson(body.data), type: IvItem.ITEM_TYPES.URL};
+            case IvItem.ITEM_TYPES.TWEET.id:
+                return {_content: IvItemTweet.createFormJson(body.data), type: IvItem.ITEM_TYPES.TWEET};
+            case IvItem.ITEM_TYPES.IMAGE.id:
+                return {_content: IvItemImage.createFormJson(body.data), type: IvItem.ITEM_TYPES.IMAGE};
+            case IvItem.ITEM_TYPES.YOUTUBE.id:
+                return {_content: IvItemYoutube.createFormJson(body.data), type: IvItem.ITEM_TYPES.YOUTUBE};
+            default:
+                return null
+        }
     }
 
     private handleError (error: any) {

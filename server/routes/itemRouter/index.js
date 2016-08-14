@@ -1,26 +1,12 @@
 var express         = require('express');
 var isGranted       = require('../../security/isGranted');
-
+var defineItemType  = require('../../helpers/item-content/defineItemType')
 var router = express.Router();
 
-router.route('/content/url')
-    .get(isGranted('ROLE_USER'), function(req, res){
-       require('./itemContent/getItemUrl')(req, res);
-    });
 
-router.route('/content/youtube')
-    .get(isGranted('ROLE_USER'), function(req, res){
-       require('./itemContent/getItemYoutube')(req, res);
-    });
-
-router.route('/content/tweet')
-    .get(isGranted('ROLE_USER'), function(req, res){
-       require('./itemContent/getItemTweet')(req, res);
-    });
-
-router.route('/content/image')
-    .get(isGranted('ROLE_USER'), function(req, res){
-       require('./itemContent/getItemImage')(req, res);
+router.route('/content/create')
+    .post(isGranted('ROLE_USER'), defineItemType(), function(req, res){
+       require('./itemContent/post')(req, res);
     });
 
 router.route('/')

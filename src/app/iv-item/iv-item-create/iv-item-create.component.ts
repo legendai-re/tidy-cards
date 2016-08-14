@@ -8,7 +8,6 @@ import { IvItemYoutubeComponent } from '../iv-item-youtube/iv-item-youtube.compo
 import { IvItemUrlComponent }     from '../iv-item-url/iv-item-url.component';
 import { IvItemTweetComponent }   from '../iv-item-tweet/iv-item-tweet.component';
 import { IvItemImageComponent }   from '../iv-item-image/iv-item-image.component';
-import { IvItemContentService }   from '../iv-item-content.service';
 
 @Component({
     selector: 'iv-item-create',
@@ -36,7 +35,7 @@ export class IvItemCreateComponent implements OnInit {
     @Output() newItem = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
-    constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService, private itemContentService: IvItemContentService) {
+    constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService) {
         this.doneTypingInterval = 1000;
         this.itemTypes = IvItem.ITEM_TYPES;
     }
@@ -106,9 +105,13 @@ export class IvItemCreateComponent implements OnInit {
     }
 
     private createContentFromUrl(){
+       if(!this.urlEntry || this.urlEntry == ''){
+           this.item._content = null;
+           return;
+       }
        this.lastCheckedUrlEntry = this.urlEntry;
        this.loadingContent = true;
-       this.itemContentService.getContentFromUrl(this.urlEntry).then((result) => {
+       this.itemService.postItemContent(this.urlEntry).subscribe((result) => {
            if(result){
                this.item.type = result.type;
                this.item._content = result._content;

@@ -32,5 +32,9 @@ function checkItemByType(modelName, req, callback){
 
 
 module.exports = {
-    checkItemContent: checkItemContent
+    checkItemContent: checkItemContent,
+    createItemImage: require('./createItemImage'),
+    createItemTweet: require('./createItemTweet'),
+    createItemYoutube: require('./createItemYoutube'),
+    createItemUrl: require('./createItemUrl'),
 }
