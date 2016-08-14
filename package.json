@@ -54,6 +54,7 @@
     "file-loader": "^0.8.4",
     "fontgen-loader": "^0.2.1",
     "gm": "^1.22.0",
+    "googleapis": "^12.2.0",
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.8.1",
     "htmlparser": "^1.7.7",

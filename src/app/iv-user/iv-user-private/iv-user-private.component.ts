@@ -132,6 +132,10 @@ export class IvUserPrivateComponent implements OnInit {
         })
     }
 
+    public compareEmail(email){
+        return (this.tmpUser.email && this.authService.currentUser.email) && this.tmpUser.email.toLowerCase().replace(/\s/g, '') === this.authService.currentUser.email.toLowerCase().replace(/\s/g, '')
+    }
+
     public updateEmail(){
         this.isUpdatingEmail  = true;
         this.userService.getValidEmail(this.tmpUser.email).subscribe((isValid) => {

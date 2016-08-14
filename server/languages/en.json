@@ -40,7 +40,7 @@
         "username_edit_button": "Edit username",
         "email_row_title": "My email",
         "email_edit_button": "Edit email",
-        "email_confirmation_info": "An email have been send to olivier28.coue@gmail.com. Please check your email to confirm the address.",
+        "email_confirmation_info": "An email have been send to {0}. Please check your email to confirm the address.",
         "email_confirmation_resend": "Resend email.",
         "connections_title": "Connections",
         "connections_subtitle": "Manage the apps connections.",
@@ -93,6 +93,7 @@
         "cancel": "Cancel",
         "update": "Update",
         "create": "Create",
-        "edit": "Edit"
+        "edit": "Edit",
+        "load_more": "Load more"
     }
 }

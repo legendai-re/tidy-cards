@@ -23,6 +23,7 @@ export class IvItemCreateComponent implements OnInit {
     public item: IvItem;
     public itemCreated: boolean;
     public urlEntry: string;
+    public lastCheckedUrlEntry: string;
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
@@ -68,6 +69,7 @@ export class IvItemCreateComponent implements OnInit {
         this.item = IvItem.createFormJson(this.inputItem);
         if(this.item._content!=null){
             this.urlEntry = this.item._content.url;
+            this.lastCheckedUrlEntry = this.urlEntry;
             this.validUrl = true;
         }
         if(this.item.description)this.addDescription = true;
@@ -83,18 +85,28 @@ export class IvItemCreateComponent implements OnInit {
         new Promise((resolve, reject) => {
             this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
         }).then((e)=>{
-            if((!this.item._content) || (this.urlEntry != this.item._content.url))
+            if((!this.item._content) || (this.urlEntry != this.lastCheckedUrlEntry))
                 this.createContentFromUrl();
         })
     }
 
-    public onUrlKeyDown(){
-        if((!this.item._content) || (this.urlEntry != this.item._content.url))
+    public onUrlKeyDown(event){
+        if (event.keyCode == 65 && event.ctrlKey) {
+            event.target.select()
+        }
+        if((!this.item._content) || (this.urlEntry != this.lastCheckedUrlEntry))
             this.loadingContent = true;
         clearTimeout(this.typingTimer);
     }
 
+    public onDescriptionKeyDown(event){
+        if (event.keyCode == 65 && event.ctrlKey) {
+            event.target.select()
+        }
+    }
+
     private createContentFromUrl(){
+       this.lastCheckedUrlEntry = this.urlEntry;
        this.loadingContent = true;
        this.itemContentService.getContentFromUrl(this.urlEntry).then((result) => {
            if(result){
@@ -126,7 +138,7 @@ export class IvItemCreateComponent implements OnInit {
 
     private isValidToSave(){
         if(!this.item._content)this.item.type = IvItem.ITEM_TYPES.TEXT;
-        return this.item._content && this.item._content.url==this.urlEntry || !this.item._content && this.item.description;
+        return !this.loadingContent && (this.item._content || !this.item._content && this.item.description);
     }
 
     private createItem() {

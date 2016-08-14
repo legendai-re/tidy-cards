@@ -40,7 +40,8 @@ module.exports = function getItemUrlSchema(Schema) {
         site_name: {
             type: String,
             required: false
-        }
+        },
+        _user: { type: String, ref: 'User' }
     });
 
 }

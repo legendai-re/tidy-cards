@@ -93,6 +93,7 @@
         "cancel": "Anuler",
         "update": "Mettre à jour",
         "create": "Créer",
-        "edit": "Modifier"
+        "edit": "Modifier",
+        "load_more": "Charger plus"
     }
 }

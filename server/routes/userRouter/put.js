@@ -51,7 +51,7 @@ module.exports = function put (req, res) {
     }
 
     function preUpdateEmail(user){
-        models.User.findOne({email: req.body.email.toLowerCase(),  _id: { $ne: user._id }}, function(err, alreadyExistUser){
+        models.User.findOne({email: req.body.email.toLowerCase().replace(/\s/g, ''),  _id: { $ne: user._id }}, function(err, alreadyExistUser){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(alreadyExistUser) return res.status(422).send({ error: 'cannot update email: already takken'});
             updateEmail.update(user, req.body.email, function(err, user){

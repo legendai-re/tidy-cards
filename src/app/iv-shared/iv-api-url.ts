@@ -16,7 +16,10 @@ export class IvApiUrl {
     public static get IMAGES(): string { return 'api/images' ; }
     public static get COLLECTIONS(): string { return 'api/collections' ; }
     public static get ITEMS(): string { return 'api/items' ; }
-    public static get ITEMS_URL(): string { return 'api/items/url' ; }
+    public static get ITEMS_URL(): string { return 'api/items/content/url' ; }
+    public static get ITEMS_YOUTUBE(): string { return 'api/items/content/youtube' ; }
+    public static get ITEMS_TWEET(): string { return 'api/items/content/tweet' ; }
+    public static get ITEMS_IMAGE(): string { return 'api/items/content/image' ; }
     public static get STAR(): string { return 'api/stars' ; }
     public static get RESET_INITIATE(): string { return 'api/reset/initiate'; }
     public static get RESET_COMPLETE(): string { return 'api/reset/complete'; }

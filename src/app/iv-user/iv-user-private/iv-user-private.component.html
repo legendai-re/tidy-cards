@@ -1,10 +1,10 @@
 <div class="profile-header">
     <div class="profile-avatar avatar avatar--140">
-        <img *ngIf="!tmpUser._avatar && authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('140x140')"  alt="{{authService.currentUser?.name}} avatar">
+        <img *ngIf="!tmpUser._avatar && authService.currentUser._avatar" [src]="authService.currentUser._avatar?.getPath('140x140')"  alt="{{authService.currentUser?.name}} avatar">
         {{authService.currentUser.name.charAt(0)}}
 
         <div *ngIf="updateGeneralInfoIntent && tmpUser._avatar" class="profile-avatar-tmp">
-            <img [src]="tmpUser._avatar.getPath('original')" />
+            <img [src]="tmpUser._avatar?.getPath('original')" />
         </div>
         <div *ngIf="updateGeneralInfoIntent" class="profile-avatar-uploader">
             <span class="profile-avatar-uploader-icon material-icons">cloud_upload</span>
@@ -78,8 +78,8 @@
                 <small class="text-muted">{{t.format(t._.profile_private?.email_confirmation_info, [authService.currentUser.email])}}<a (click)="updateEmail()"> {{t._.profile_private?.email_confirmation_resend}}</a></small>
             </div>
             <div *ngIf="updateEmailIntent" class="list-item-status">
-                <small *ngIf="tmpUser.email === authService.currentUser.email" class="text-success">That’s your current email!</small>
-                <div *ngIf="tmpUser.email != authService.currentUser.email">
+                <small *ngIf="compareEmail()" class="text-success">That’s your current email!</small>
+                <div *ngIf="!compareEmail()">
                     <small class="text-muted" *ngIf="emailState == 'VALIDATING'">Validation in progress..</small>
                     <small class="text-success" *ngIf="emailState == 'FREE'">This email is available</small>
                     <small class="text-danger" *ngIf="emailState == 'INVALID'">This email is not valid</small>
@@ -94,7 +94,11 @@
                 (click)="startUpdateEmail()"
                 value="{{t._.profile_private?.email_edit_button}}"
                 class="btn btn-sm btn-secondary-outline" type="submit">
-            <input *ngIf="updateEmailIntent"  (click)="updateEmail()" [disabled]="tmpUser.email.toLowerCase() === authService.currentUser.email.toLowerCase() || isUpdatingEmail || emailState!='FREE'" class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}"/>
+            <input
+                *ngIf="updateEmailIntent"
+                (click)="updateEmail()"
+                [disabled]="!tmpUser.email || (authService.currentUser.email && tmpUser.email.toLowerCase() === authService.currentUser.email.toLowerCase()) || isUpdatingEmail || emailState!='FREE'"
+                class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}"/>
             <a *ngIf="updateEmailIntent" (click)="cancelUpdateEmail()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
         </div>
     </div>

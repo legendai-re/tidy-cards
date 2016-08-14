@@ -13,7 +13,7 @@
                     <div class="collection-page-details-infos">
                         <div class="collection-page-metas">
                             <p class="collection-page-author">
-                                A collection by <strong>{{collection._author?.name}}</strong>
+                                {{t._.collection?.by_title}} <strong>{{collection._author?.name}}</strong>
                             </p>
                             <p class="collection-page-dates">
                                 <span>{{collection.createdAt | date }}</span> <span *ngIf="collection.modifiedAt">• last modifications: {{collection.modifiedAt | date }}</span>
@@ -26,7 +26,9 @@
                         <div class="collection-page-stats">
                             <ul class="stats-list">
                                 <li class="stat-item-list">
-                                    {{collection.itemsCount}} item
+                                    {{collection.itemsCount}}
+                                    <span *ngIf="collection.itemsCount < 2">{{t._.collection?.item_sing}}</span>
+                                    <span *ngIf="collection.itemsCount > 1">{{t._.collection?.item_plur}}</span>
                                 </li>
                                 <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
                                     <i class="material-icons stat-icon">mode_comment</i> 0
@@ -35,7 +37,7 @@
                                     <i class="material-icons stat-icon">star</i> {{collection.starsCount}}
                                 </li>
                                 <li *ngIf="collection.visibility.id == 'PRIVATE'" class="stat-item-list">
-                                    <i class="material-icons stat-icon">visibility_off</i> Visibility: {{collection.visibility.desc}}
+                                    <i class="material-icons stat-icon">visibility_off</i> {{t._.collection?.visibility?.title}}: {{ t._.collection?.visibility[collection.visibility.id].title}}
                                 </li>
                             </ul>
                         </div>
@@ -65,7 +67,7 @@
             </div>
 
             <div>
-                <a class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">Load more...</a>
+                <a class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">{{t._.action?.load_more}}...</a>
                 <p class="loading-more" *ngIf="loadingItems">Loading...</p>
                 <p class="no-more" *ngIf="!haveMoreItems">You’ve reached the end of the list</p>
             </div>

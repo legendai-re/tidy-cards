@@ -15,14 +15,14 @@
         </div>
         <input
             (keyup)="onUrlKeyUp()"
-            (keydown)="onUrlKeyDown()"
+            (keydown)="onUrlKeyDown($event)"
             (focus)="onUrlFocus()"
             [(ngModel)]="urlEntry"
             class="item-new-url" type="text" placeholder="Enter your url..."/>
         <!-- <button (click)="onUrlFocus(); addDescription = true" class="btn-icon" type="button">
             <i class="material-icons icon">comment</i>
         </button> -->
-        <textarea *ngIf="addDescription" class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description"></textarea>
+        <textarea *ngIf="addDescription" class="item-new-description" placeholder="Add a description here..." rows="1" [(ngModel)]="item.description" (keydown)="onDescriptionKeyDown($event)"></textarea>
 
         <div [class.collapse]="!actionIntent" class="item-create">
             <div class="btn-group form-action active" [class.active]="addDescription" (click)="addDescription = !addDescription">
@@ -38,12 +38,12 @@
 
             <input
                 *ngIf="mode == 'CREATE'"
-                [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"
+                [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
                 class="btn btn-create pull-xs-right" type="submit" value="Add"/>
 
             <input
                 *ngIf="mode == 'UPDATE'"
-                [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (item._content && item._content.url != urlEntry)"
+                [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
                 class="btn btn-create pull-xs-right" type="submit" value="Update"/>
 
             <a *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create pull-xs-right">Cancel</a>

@@ -1,6 +1,6 @@
 <div class="profile-header">
     <div *ngIf="user" class="profile-avatar avatar avatar--140">
-        <img *ngIf="user?._avatar" [src]="user?._avatar.getPath('140x140')"  alt="{{user?.name}} avatar">
+        <img *ngIf="user?._avatar" [src]="user?._avatar?.getPath('140x140')"  alt="{{user?.name}} avatar">
         {{user?.name.charAt(0)}}
     </div>
     <div class="profile-header-infos">

@@ -3,7 +3,7 @@ module.exports = function post (req, res) {
     var itemTypes       = require('../../models/item/itemTypes.json');
     var models          = require('../../models');
     var sortTypes       = require('../../models/customSort/sortTypes.json');
-    var itemContentGenerator = require('../../helpers/item-content-generator');
+    var itemContentValidator = require('../../helpers/item-content-validator');
 
     if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
         res.status(400).send({ error: 'some required parameters was not provided'});
@@ -19,7 +19,7 @@ module.exports = function post (req, res) {
             if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.body._collection }); return;}
             if(collection._author!=req.user._id) {res.status(401).send({ error: "only the author of the collection can add item" }); return;}
 
-            itemContentGenerator.createItemContent(item, req, function(err, content){
+            itemContentValidator.checkItemContent(item, req, function(err, content){
                 if (err){res.status(400).send({ error: "error while creating item content"}); return;}
                 if(!content && !item.description){res.status(400).send({ error: "you must add a description if there is no url"}); return;}
                 if(content)

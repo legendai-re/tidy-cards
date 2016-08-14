@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { IvLanguageService } from '../../iv-language/iv-language.service';
 import { IvAuthService } from '../../iv-auth/iv-auth.service';
 import { IvStarService } from '../../iv-star/iv-star.service';
 import { IvCollection } from '../iv-collection.class';
@@ -21,7 +22,7 @@ export class IvCollectionCardComponent implements OnInit{
     @Input('collection') collection: IvCollection;
     @Input('sortable') sortable: boolean;
 
-    constructor(private starService: IvStarService, private authService: IvAuthService, private http: Http) {
+    constructor(public t: IvLanguageService, private starService: IvStarService, private authService: IvAuthService, private http: Http) {
     }
 
     ngOnInit(){

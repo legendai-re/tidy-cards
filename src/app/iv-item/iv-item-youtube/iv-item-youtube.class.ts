@@ -8,6 +8,7 @@ export class IvItemYoutube {
     public url: string;
     public embedUrl: string;
     public videoId: string;
+    public snippet: any;
     public trustedEmbedUrl: SafeResourceUrl;
 
     constructor(
@@ -17,6 +18,7 @@ export class IvItemYoutube {
         url?: string,
         embedUrl?: string,
         videoId?: string,
+        snippet?: any,
         trustedEmbedUrl?: SafeResourceUrl) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
@@ -25,6 +27,7 @@ export class IvItemYoutube {
         this.url = url;
         this.embedUrl = embedUrl;
         this.videoId = videoId;
+        this.snippet = snippet;
     }
 
     public static createFormJson(obj) {
@@ -42,6 +45,7 @@ export class IvItemYoutube {
             obj.url,
             obj.embedUrl,
             obj.videoId,
+            obj.snippet,
             null
             );
     }

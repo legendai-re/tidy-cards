@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
 import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
+import { IvLanguageService }              from '../../iv-language/iv-language.service';
 import { IvAuthService }                  from '../../iv-auth/iv-auth.service';
 import { IvStarService }                  from '../../iv-star/iv-star.service';
 import { IvCollectionCreateComponent }    from '../iv-collection-create/iv-collection-create.component';
@@ -35,6 +36,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     private sub: any;
 
     constructor(
+        public t: IvLanguageService,
         private authService: IvAuthService,
         private headerService: IvHeaderService,
         private sanitizer: DomSanitizationService,

@@ -22,7 +22,7 @@ function generateToken(callback){
 }
 
 function updateUserEmailAndToken(user, email, token, callback){
-    user.email = email;
+    user.email = email.toLowerCase();
     user.emailConfirmed = false;
     user.emailConfirmationToken = token;
     user.save(function(err){

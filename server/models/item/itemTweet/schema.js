@@ -46,7 +46,8 @@ module.exports = function getItemTweetSchema(Schema) {
         version: {
             type: String,
             required: false
-        }
+        },
+        _user: { type: String, ref: 'User' }
     });
 
 }

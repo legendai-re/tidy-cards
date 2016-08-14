@@ -58,7 +58,12 @@ module.exports = function getItemUrl (req, res) {
                         itemUrl.site_name = $('meta[property="og:site_name"]').attr("content");
 
                         itemUrl.host = req.query.host;
-                        res.json({error: false, data: itemUrl});
+                        itemUrl.url = 'http://'+req.query.host+decodeURIComponent(path);
+                        itemUrl._user = req.user._id;
+                        itemUrl.save(function(err){
+                            if(err){console.log(err); return res.status(500)}
+                            res.json({error: false, data: itemUrl})
+                        })
                     }
                 }
             })

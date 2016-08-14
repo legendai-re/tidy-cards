@@ -12,7 +12,8 @@ module.exports = function getItemImageSchema(Schema) {
                 },
                 message: '{VALUE} is not a title'
             }
-        }
+        },
+        _user: { type: String, ref: 'User' }
     });
 
 }

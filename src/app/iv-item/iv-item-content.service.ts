@@ -21,34 +21,40 @@ export class IvItemContentService {
 
             this.getIsImage(entryUrl).subscribe((sucess)=>{
                 if(sucess){
-                    result = {
-                        type: IvItem.ITEM_TYPES.IMAGE,
-                        _content: this.createItemImage(entryUrl)
-                    };
-                    resolve(result);
+                    this.createItemImage(entryUrl).subscribe((itemImage) => {
+                        result = {
+                            type: IvItem.ITEM_TYPES.IMAGE,
+                            _content: itemImage
+                        };
+                        resolve(result);
+                    })
                 }
             });
 
             if(this.simpleGetIsImage(entryUrl)){
-                result = {
-                    type: IvItem.ITEM_TYPES.IMAGE,
-                    _content: this.createItemImage(entryUrl)
-                };
-                resolve(result);
+                this.createItemImage(entryUrl).subscribe((itemImage) => {
+                    result = {
+                        type: IvItem.ITEM_TYPES.IMAGE,
+                        _content: itemImage
+                    };
+                    resolve(result);
+                })
             }else if(this.getIsTweet(entryUrl)){
-                this.getEmbedTweet(entryUrl).subscribe((data)=>{
+                this.getEmbedTweet(entryUrl).subscribe((itemTweet)=>{
                     result = {
                         type: IvItem.ITEM_TYPES.TWEET,
-                        _content: IvItemTweet.createFormJson(data)
+                        _content: itemTweet
                     };
                     resolve(result);
                 });
             }else if(this.getYoutubeVideoId(entryUrl)){
-                result = {
-                    type: IvItem.ITEM_TYPES.YOUTUBE,
-                    _content: this.createItemYoutube(entryUrl, this.getYoutubeVideoId(entryUrl))
-                };
-                resolve(result);
+                this.createItemYoutube(this.getYoutubeVideoId(entryUrl)).subscribe((itemYoutube) => {
+                    result = {
+                        type: IvItem.ITEM_TYPES.YOUTUBE,
+                        _content: itemYoutube
+                    };
+                    resolve(result);
+                })
             }else{
                 let noHttpUrl = this.removeHttp(entryUrl);
                 let host = noHttpUrl.split('/')[0];
@@ -56,13 +62,10 @@ export class IvItemContentService {
                 if(host===''){
                     resolve(null);
                 }else{
-                    this.getFirstImage(host, path).subscribe((response: any) => {
-                        if(response.error){
+                    this.getItemUrl(host, path).subscribe((itemUrl) => {
+                        if(!itemUrl){
                             resolve(null);
                         }else{
-                            let itemUrl = IvItemUrl.createFormJson(response.data);
-                            itemUrl.url = entryUrl;
-                            itemUrl.noHttpUrl = this.removeHttp(entryUrl);
                             result = {
                                 type: IvItem.ITEM_TYPES.URL,
                                 _content: itemUrl
@@ -77,18 +80,25 @@ export class IvItemContentService {
         });
     }
 
-    private createItemYoutube(entryUrl, videoId){
-        let itemYoutube = new IvItemYoutube();
-        itemYoutube.url = entryUrl;
-        itemYoutube.videoId = videoId;
-        itemYoutube.embedUrl = 'https://www.youtube.com/embed/'+videoId;
-        return itemYoutube;
+    private createItemYoutube(videoId): Observable<IvItemYoutube>{
+        let params = new URLSearchParams();
+        params.set('video_id', videoId);
+        return this.http.get(IvApiUrl.ITEMS_YOUTUBE, { search: params })
+        .map(function(res: Response) {
+            let body = res.json();
+            let itemYoutube = IvItemYoutube.createFormJson(body.data);
+            return itemYoutube;
+        });
     }
 
-    private createItemImage(entryUrl){
-        let itemImage = new IvItemImage();
-        itemImage.url = entryUrl;
-        return itemImage;
+    private createItemImage(entryUrl): Observable<IvItemImage>{
+        let params = new URLSearchParams();
+        params.set('image_url', encodeURIComponent(entryUrl));
+        return this.http.get(IvApiUrl.ITEMS_IMAGE, { search: params })
+        .map(function(res: Response) {
+            let body = res.json();
+            return (!body.error) ? IvItemImage.createFormJson(body.data): null;
+        });
     }
 
     private getYoutubeVideoId(url) {
@@ -110,14 +120,14 @@ export class IvItemContentService {
         return url;
     }
 
-    private getFirstImage(host, path){
+    private getItemUrl(host, path): Observable<IvItemUrl>{
         let params = new URLSearchParams();
         params.set('host', host);
         params.set('path', encodeURIComponent(path));
         return this.http.get(IvApiUrl.ITEMS_URL, { search: params })
         .map(function(res: Response) {
             let body = res.json();
-            return body;
+            return (!body.error) ? IvItemUrl.createFormJson(body.data): null;
         });
     }
 
@@ -153,17 +163,18 @@ export class IvItemContentService {
         });
     }
 
-    private getEmbedTweet (url: string){
+    private getEmbedTweet (url: string): Observable<IvItemTweet>{
         if(url.charAt(url.length-1) === '/'){
             url = url.substring(0, url.length - 1);
         }
         let params = new URLSearchParams();
-        params.set('url', encodeURI(url));
-        params.set('format', 'json');
-        params.set('callback', 'JSONP_CALLBACK');
-        return this.jsonp
-        .get('https://publish.twitter.com/oembed', { search: params })
-        .map(this.handleEmbedTweet);
+        params.set('tweet_url', encodeURI(url));
+        return this.http.get(IvApiUrl.ITEMS_TWEET, { search: params })
+        .map(function(res: Response) {
+            let body = res.json();
+            let itemTweet = IvItemTweet.createFormJson(body.data);
+            return itemTweet;
+        });
     }
 
     private handleEmbedTweet(res: Response) {

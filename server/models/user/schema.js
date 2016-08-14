@@ -59,7 +59,8 @@ module.exports = function getUserSchema(Schema) {
         },
 	    email: {
 	        type: String,
-	        required: false
+	        required: false,
+            trim: true
 	    },
         emailConfirmed: {
             type: Boolean,

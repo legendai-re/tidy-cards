@@ -14,7 +14,12 @@ module.exports = function getItemYoutubeSchema(Schema) {
         videoId: {
             type: String,
             required: true
-        }
+        },
+        snippet: {
+            type: Object,
+            return: true
+        },
+        _user: { type: String, ref: 'User' }
     });
 
 }

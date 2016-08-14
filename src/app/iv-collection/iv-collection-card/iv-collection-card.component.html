@@ -36,7 +36,11 @@
                         <i class="material-icons stat-icon">visibility_off</i>
                     </div>
                 </div>
-                <div class="card-nb">{{collection.itemsCount}} item</div>
+                <div class="card-nb">
+                    {{collection.itemsCount}}
+                    <span *ngIf="collection.itemsCount < 2">{{t._.collection?.item_sing}}</span>
+                    <span *ngIf="collection.itemsCount > 1">{{t._.collection?.item_plur}}</span>
+                </div>
             </div>
         </div>
     </div>
