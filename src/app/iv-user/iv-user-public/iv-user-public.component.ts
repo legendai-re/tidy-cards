@@ -19,6 +19,8 @@ export class IvUserPublicComponent implements OnInit, OnDestroy  {
 
     public userCollections: IvCollection[];
     public userStarredCollections: IvCollection[];
+    public searchParams: string;
+    public isLoadingUser: boolean;
     public user: IvUser;
     private sub: any;
 
@@ -27,11 +29,13 @@ export class IvUserPublicComponent implements OnInit, OnDestroy  {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            let userId = params['user_id'];
+            this.searchParams = params['user_id'];
             let getParams = new URLSearchParams();
             getParams.set('populate', '_avatar');
-            this.userService.getUser(userId, getParams).subscribe((user) => {
+            this.isLoadingUser = true;
+            this.userService.getUser(this.searchParams, getParams).subscribe((user) => {
                 this.user = user;
+                this.isLoadingUser = false;
                 this.initUserCollections();
                 this.initUserStarredCollections();
             }, () => {});

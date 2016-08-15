@@ -16,7 +16,7 @@
                 <span class="input-group-addon" id="header-search">
                     <i class="material-icons">search</i>
                 </span>
-                <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (ngModelChange)="onSearchQueryChange()" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
+                <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (keydown)="onQueryKeyDown()" (keyup)="onQueryKeyUp()" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
                 <a *ngIf="headerState == 'search' "(click)="cancelSearch()" style="color: #fff">Cancel</a>
             </div>
         </form>

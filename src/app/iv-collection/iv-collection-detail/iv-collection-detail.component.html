@@ -1,4 +1,4 @@
-<section *ngIf="collection" class="section collection-page">
+<section *ngIf="!isLoadingCollection && collection && collection._id" class="section collection-page">
     <div class="container">
         <div class="page-wrapper">
             <div class="collection-page-header">
@@ -73,6 +73,13 @@
             </div>
         </div>
     </div>
+</section>
+<section *ngIf="!isLoadingCollection && (!collection || !collection._id)">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title dark-bg"><b style="font-size: 40px">😕  </b>Sorry cannot find collection with id: "{{searchParams}}"</h2>
+        </div>
+    </section>
 </section>
 
 

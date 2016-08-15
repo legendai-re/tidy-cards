@@ -25,6 +25,8 @@ import { IvSortableDirective }            from'../../iv-shared/iv-sortable.direc
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {
 
     public collection: IvCollection;
+    public searchParams: string;
+    public isLoadingCollection: boolean;
     public pageNb: number;
     public haveMoreItems: boolean;
     public loadingItems: boolean;
@@ -59,17 +61,19 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     private initCollection(params){
-        let id = params['collection_id'];
+        this.searchParams = params['collection_id'];
         let getParams = new URLSearchParams();
         getParams.set('populate', '_author+_thumbnail');
-        this.collectionService.getCollection(id, getParams).subscribe((collection) => {
+        this.isLoadingCollection = true;
+        this.collectionService.getCollection(this.searchParams, getParams).subscribe((collection) => {
             this.collection = collection;
             this.collection._items = [];
             if(this.authService.isLoggedIn && collection._author._id == this.authService.currentUser._id)
                 this.isAuthor = true;
+            this.isLoadingCollection = false;
             this.emitUpdateHeaderEvent();
             this.loadItems();
-        }, () => {});
+        }, () => {this.isLoadingCollection = false;});
     }
 
     private emitUpdateHeaderEvent(){

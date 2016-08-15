@@ -32,6 +32,7 @@ import { IvSearchService }      from '../iv-search/iv-search.service';
 export class IvHeaderComponent implements OnInit, OnDestroy{
 
     public searchQuery: string;
+    public lastSearchQuery: string;
     public type: string;
     public color: string;
     public image: any;
@@ -40,6 +41,8 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     public headerState: string;
     public defaultColor: string;
     public previousRoute: string;
+    public typingQueryTimer;
+    public doneTypingQueryInterval: number;
     private headerSub: any;
 
     constructor(
@@ -51,6 +54,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         public authService: IvAuthService,
         public router: Router,
         public route: ActivatedRoute) {
+        this.doneTypingQueryInterval = 250;
         this.defaultColor = '6B5DFF';
         this.headerState = 'default';
         this.router.events.subscribe((route) => {
@@ -129,8 +133,24 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         this.router.navigate([toGo]);
     }
 
-    public onSearchQueryChange(){
+    public onQueryKeyUp(){
         this.updateUrl();
+        clearTimeout(this.typingQueryTimer);
+        new Promise((resolve, reject) => {
+            this.typingQueryTimer = setTimeout(()=>{resolve(true);}, this.doneTypingQueryInterval);
+        }).then((e)=>{
+            this.onSearchQueryChange();
+        })
+    }
+
+    public onQueryKeyDown(){
+        clearTimeout(this.typingQueryTimer);
+    }
+
+    public onSearchQueryChange(){
+        if(this.lastSearchQuery == this.searchQuery)
+            return;
+        this.lastSearchQuery = this.searchQuery;
         this.searchService.emitUpdateSearchQueryEvent({searchQuery: this.searchQuery});
     }
 

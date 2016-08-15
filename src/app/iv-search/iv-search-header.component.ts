@@ -26,6 +26,7 @@ export class IvSearchHeaderComponent implements OnInit, OnDestroy {
     public collections: IvCollection[];
     public collectionsPageNb: number;
     public isLoadingCollections: boolean;
+    public requestTime: Date;
     private searchSub: any;
 
     constructor(
@@ -70,8 +71,12 @@ export class IvSearchHeaderComponent implements OnInit, OnDestroy {
         params.set('sort_dir', '-1');
         params.set('search', encodeURIComponent(this.searchQuery));
         this.collectionService.getCollections(params).subscribe(collections => {
-            for(let i in collections)
-                this.collections.push(collections[i]);
+            if(this.collectionsPageNb == 0)
+                this.collections = collections;
+            else{
+                for(let i in collections)
+                    this.collections.push(collections[i]);
+            }
             this.isLoadingCollections = false;
         }, () => {});
     }
@@ -86,8 +91,12 @@ export class IvSearchHeaderComponent implements OnInit, OnDestroy {
         params.set('sort_dir', '-1');
         params.set('search', encodeURIComponent(this.searchQuery));
         this.userService.getUsers(params).subscribe(users => {
-            for(let i in users)
-                this.users.push(users[i]);
+            if(this.usersPageNb == 0)
+                this.users = users;
+            else{
+                for(let i in users)
+                    this.users.push(users[i]);
+            }
             this.isLoadingUsers = false;
         }, () => {});
     }
