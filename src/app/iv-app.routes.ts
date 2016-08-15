@@ -9,11 +9,13 @@ import { IvAdminRoutes }                   from './iv-admin/iv-admin.routes';
 import { IvAuthRoutes, IV_AUTH_PROVIDERS } from './iv-auth/iv-auth.routes';
 import { IvUserRoutes }                    from './iv-user/iv-user.routes';
 import { IvResetRoutes }                   from './iv-reset/iv-reset.routes';
+import { IvSearchRoutes }                  from './iv-search/iv-search.routes';
 
 export const routes: RouterConfig = [
     ...IvDiscoverRoutes,
     ...IvDashboardRoutes,
     ...IvCollectionRoutes,
+    ...IvSearchRoutes,
     ...IvAdminRoutes,
     ...IvAuthRoutes,
     ...IvUserRoutes,

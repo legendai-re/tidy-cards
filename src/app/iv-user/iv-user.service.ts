@@ -23,6 +23,12 @@ export class IvUserService {
             .catch(this.handleError);
     }
 
+    public getUsers (params: URLSearchParams): Observable<IvUser[]> {
+        return this.http.get(IvApiUrl.USERS, { search: params })
+        .map(this.handleUsers)
+        .catch(this.handleError);
+    }
+
     public putUser(user: IvUser): Observable<IvUser> {
         let body = JSON.stringify(user);
         let headers = new Headers({ 'Content-Type': 'application/json' });

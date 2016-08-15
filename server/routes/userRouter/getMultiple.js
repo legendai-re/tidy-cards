@@ -4,7 +4,7 @@ module.exports = function getMultiple (req, res) {
 
     var rq = req.query;
 
-    getQueryFiler(rq, req function(filterObj){
+    getQueryFiler(rq, req, function(filterObj){
         var q = models.User.find(filterObj).sort({'createdAt': 1}).limit(20);
 
         if(rq.populate){
@@ -32,8 +32,9 @@ module.exports = function getMultiple (req, res) {
     function getQueryFiler(rq, req, callback){
         var filterObj = {};
 
-        if(rq.search)
-            filterObj.title = { $regex:  '.*'+rq.search+'.*', $options: 'i'};
+        if(rq.search){
+            filterObj.$or = [{username: { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'}}, {name: { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'}}]
+        }
 
         callback(filterObj);
     }

@@ -66,7 +66,7 @@ module.exports = function getMultiple (req, res) {
 		var filterObj = {};
 
 		if(rq.search)
-			filterObj.title = { $regex:  '.*'+rq.search+'.*', $options: 'i'};
+			filterObj.title = { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'};
         if(rq.isFeatured)
             filterObj.isFeatured = true;
         if(rq.isOnDiscover)

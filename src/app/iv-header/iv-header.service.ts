@@ -12,6 +12,7 @@ export class IvHeaderService {
   emitUpdateHeaderEvent(val) {
     this.updateHeader.emit(val);
   }
+
   getUpdateHeaderEmitter() {
     return this.updateHeader;
   }

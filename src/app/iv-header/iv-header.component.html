@@ -1,4 +1,4 @@
-<header class="header" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
+<header @headerState="headerState" class="header" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
     <div class="container">
         <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
@@ -16,7 +16,8 @@
                 <span class="input-group-addon" id="header-search">
                     <i class="material-icons">search</i>
                 </span>
-                <input class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
+                <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (ngModelChange)="onSearchQueryChange()" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
+                <a *ngIf="headerState == 'search' "(click)="cancelSearch()" style="color: #fff">Cancel</a>
             </div>
         </form>
 
@@ -63,4 +64,35 @@
         </div>
     </div>
     <div *ngIf="!image" class="container radial-cover"></div>
+
+    <section *ngIf="headerState == 'search'" class="section">
+        <div class="container">
+            <div *ngIf="!searchQuery">
+                <h2 class="section-title dark-bg">No ideas? You can visit the discover page…</h2>
+            </div>
+            <div *ngIf="searchQuery">
+                <div *ngIf="users.length < 1 && collections.length < 1">
+                    <h2 class="section-title dark-bg">Sorry no result for {{searchQuery}}</h2>
+                </div>
+                <div *ngIf="users.length > 0">
+                    <h2 class="section-title dark-bg">Users</h2>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let user of users">
+                            <img  *ngIf="user._avatar" [src]="user._avatar?.getPath('60x60')" />
+                            <b>{{user.name}}</b>
+                            <small>@{{user.username}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="collections.length > 0">
+                    <h2 class="section-title dark-bg">Collections</h2>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of collections">
+                            <iv-collection-card [collection]=collection></iv-collection-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </header>
