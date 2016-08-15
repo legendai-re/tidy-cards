@@ -9,6 +9,7 @@ import { IvImgUploadService }   from './iv-image/iv-image-upload.service';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvHeaderComponent }    from './iv-header/iv-header.component';
 import { IvHeaderService }      from './iv-header/iv-header.service';
+import { IvSearchService }      from './iv-search/iv-search.service';
 import { IvResetService }       from './iv-reset/iv-reset.service';
 import { IvLanguageService }    from './iv-language/iv-language.service';
 
@@ -20,7 +21,7 @@ import '../style/app.scss';
     templateUrl: './iv-app.component.html',
     styleUrls: ['./iv-app.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvHeaderComponent],
-    providers: [IvResetService, IvStarService, IvHeaderService, IvItemService, IvCollectionService, IvUserService, IvImgUploadService]
+    providers: [IvResetService, IvStarService, IvHeaderService, IvSearchService, IvItemService, IvCollectionService, IvUserService, IvImgUploadService]
 })
 
 export class IvAppComponent {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy,trigger, state, style, transition, animate }    from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
@@ -7,18 +7,15 @@ import { ROUTER_DIRECTIVES }    from '@angular/router';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';
-import { IvCollection }         from '../iv-collection/iv-collection.class';
-import { IvCollectionService }  from '../iv-collection/iv-collection.service';
-import { IvCollectionCardComponent } from '../iv-collection/iv-collection-card/iv-collection-card.component';
-import { IvUser }               from '../iv-user/iv-user.class';
-import { IvUserService }        from '../iv-user/iv-user.service';
 import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts'
+import { IvSearchHeaderComponent } from '../iv-search/iv-search-header.component';
+import { IvSearchService }      from '../iv-search/iv-search.service';
 
 @Component({
     selector: 'iv-header',
     templateUrl: './iv-header.component.html',
     styleUrls: ['./iv-header.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent],
+    directives: [ROUTER_DIRECTIVES, IvSearchHeaderComponent],
     animations: [
     trigger('headerState', [
         state('default', style({
@@ -42,30 +39,27 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     public noHeader: boolean;
     public headerState: string;
     public defaultColor: string;
-    public users: IvUser[];
-    public usersPageNb: number;
-    public collections: IvCollection[];
-    public collectionsPageNb: number;
+    public previousRoute: string;
     private headerSub: any;
 
     constructor(
-        private userService: IvUserService,
-        private collectionService: IvCollectionService,
         private _location: Location,
         public t: IvLanguageService,
         public sanitize: DomSanitizationService,
         public headerService: IvHeaderService,
+        public searchService: IvSearchService,
         public authService: IvAuthService,
         public router: Router,
         public route: ActivatedRoute) {
         this.defaultColor = '6B5DFF';
+        this.headerState = 'default';
         this.router.events.subscribe((route) => {
+            this.setPreviousRoute(route);
             if(!this.isSearchPage(route))
                 this.setDefault();
             else
                 this.setSearchPage();
         })
-        this.headerState = 'default';
     }
 
     ngOnInit() {
@@ -80,7 +74,10 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         }else if(event.value.type === 'SEARCH'){
             this.setSearchPage();
             this.searchQuery = event.value.searchQuery;
-            this.onSearchQueryChange();
+            let tmpThis = this;
+            setTimeout(() => {
+                tmpThis.searchService.emitUpdateSearchQueryEvent({searchQuery: this.searchQuery});
+            }, 200)
         }else if(event.value.type === 'NO_HEADER'){
             this.noHeader = true;
         }else{
@@ -97,6 +94,11 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
+    }
+
+    private setPreviousRoute(routeEvent){
+        if(!this.isSearchPage(routeEvent))
+            this.previousRoute = routeEvent.url;
     }
 
     private isSearchPage(routeEvent){
@@ -116,52 +118,27 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             return;
         this.headerState = 'search';
         if(this.searchQuery && this.searchQuery != '')
-            this.router.navigate(['/search', {q: this.searchQuery}]);
+            this.router.navigate(['/search', {q: encodeURIComponent(this.searchQuery)}]);
         else
             this.router.navigate(['/search']);
     }
 
     public cancelSearch(){
         this.headerState = 'default';
-        this._location.back();
+        var toGo = typeof this.previousRoute == 'string' ? this.previousRoute :'/';
+        this.router.navigate([toGo]);
     }
 
     public onSearchQueryChange(){
-        this.collectionsPageNb = 0;
-        this.collections = [];
-        this.usersPageNb = 0;
-        this.users = [];
-        if(!this.searchQuery || this.searchQuery == '')
-            return;
-        this.searchCollections();
-        this.searchUsers();
+        this.updateUrl();
+        this.searchService.emitUpdateSearchQueryEvent({searchQuery: this.searchQuery});
     }
 
-    public searchCollections(){
-        let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.collectionsPageNb).toString());
-        params.set('sort_field', 'createdAt');
-        params.set('sort_dir', '-1');
-        params.set('search', encodeURIComponent(this.searchQuery));
-        this.collectionService.getCollections(params).subscribe(collections => {
-            for(let i in collections)
-                this.collections.push(collections[i]);
-        }, () => {});
-    }
-
-    public searchUsers(){
-        let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.usersPageNb).toString());
-        params.set('populate', '_avatar');
-        params.set('sort_field', 'createdAt');
-        params.set('sort_dir', '-1');
-        params.set('search', encodeURIComponent(this.searchQuery));
-        this.userService.getUsers(params).subscribe(users => {
-            for(let i in users)
-                this.users.push(users[i]);
-        }, () => {});
+    private updateUrl(){
+        if(this.searchQuery && this.searchQuery != '')
+            this._location.go('/search;q='+this.searchQuery);
+        else
+            this._location.go('/search');
     }
 
     ngOnDestroy() {
