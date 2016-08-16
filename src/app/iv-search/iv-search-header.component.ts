@@ -13,6 +13,7 @@ import { IvSearchService }      from './iv-search.service';
 @Component({
     selector: 'iv-search-header',
     templateUrl: './iv-search-header.component.html',
+    styleUrls: ['./iv-search-header.component.scss'],
     directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
 })
 

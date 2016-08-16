@@ -15,19 +15,7 @@ import { IvSearchService }      from '../iv-search/iv-search.service';
     selector: 'iv-header',
     templateUrl: './iv-header.component.html',
     styleUrls: ['./iv-header.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvSearchHeaderComponent],
-    animations: [
-    trigger('headerState', [
-        state('default', style({
-            minHeight: '260px'
-        })),
-        state('search',   style({
-            minHeight: '2000px'
-        })),
-        transition('default => search', animate('300ms ease-in')),
-        transition('search => default', animate('300ms ease-out'))
-        ])
-    ]
+    directives: [ROUTER_DIRECTIVES, IvSearchHeaderComponent]
 })
 export class IvHeaderComponent implements OnInit, OnDestroy{
 
