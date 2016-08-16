@@ -14,6 +14,7 @@
     min-height: 260px;
     padding: 30px 0;
     position: relative;
+    @include vendor-property(transition, "background .2s ease, min-height .3s ease");
 
     & > * {
         position: relative;
@@ -26,7 +27,20 @@
     background-color: $black-op-2-3;
 }
 
+.header.searching {
+    min-height: 100%;
+
+    .radial-cover {
+        opacity: 0;
+    }
+}
+
+.header-container {
+    margin-bottom: 60px;
+}
+
 .header .radial-cover {
+    opacity: 1;
     z-index: 0;
     position: absolute;
     height: 260px;
@@ -34,6 +48,7 @@
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
+    @include vendor-property(transition, "opacity 1.5s ease-in-out");
 
     &:after {
         content: "";
@@ -81,6 +96,16 @@
     input {
         @include color-placeholder($placeholder-whiter);
     }
+}
+
+.search-cancel {
+    color: $white;
+    height: 40px;
+    z-index: 3;
+    position: relative;
+    padding: 0 15px;
+    line-height: 2.375rem;
+    @include vendor(transform, "translateX(-100%)");
 }
 
 .nav-pills .nav-item + .nav-item {

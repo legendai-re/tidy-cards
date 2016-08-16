@@ -9,12 +9,12 @@
     z-index: 2;
 }
 
-.create-collection .card-thumbnail {
+.create-collection .card-collection-thumbnail {
     height: 300px;
     border-radius: 3px;
 }
 
-.input-card-title, .input-card-caption {
+.input-card-collection-title, .input-card-collection-caption {
     background: transparent;
     width: 100%;
     padding: 0;
@@ -24,15 +24,15 @@
 }
 
 .has-thumbnail {
-    .card-create {
+    .card-collection-create {
         background: $hover-light-color;
     }
 
-    .card-visibily, .form-action {
+    .card-collection-visibily, .form-action {
         color: $white-op-3-4;
     }
 
-    .input-card-title, .input-card-caption {
+    .input-card-collection-title, .input-card-collection-caption {
         color: $white;
 
         @include color-placeholder($placeholder-whiter);
@@ -51,12 +51,12 @@
     }
 }
 
-.input-card-caption {
+.input-card-collection-caption {
     height: 150px;
     resize: none;
 }
 
-.card-visibily {
+.card-collection-visibily {
     background: transparent;
     border: none;
     padding: 0;
@@ -64,13 +64,13 @@
     color: $text-blacker;
 }
 
-.card-visibily .material-icons {
+.card-collection-visibily .material-icons {
     font-size: 1.125rem;
     vertical-align: sub;
     line-height: 1;
 }
 
-.card-create {
+.card-collection-create {
     position: relative;
     background: $box-shadow-color;
     width: 100%;

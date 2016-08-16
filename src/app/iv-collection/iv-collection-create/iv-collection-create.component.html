@@ -1,26 +1,26 @@
-<article [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color" class="card create-collection">
+<article [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color" class="card card-collection create-collection">
     <form (ngSubmit)="onCollectionSubmit()">
-        <div *ngIf="collection._thumbnail" class="card-thumbnail thumbnail">
+        <div *ngIf="collection._thumbnail" class="card-collection-thumbnail thumbnail">
             <img [src]="collection._thumbnail?.getPath('original')" />
         </div>
         <!-- <div class="card-color"></div> -->
-        <div class="card-container">
-            <div class="card-content">
+        <div class="card-collection-container">
+            <div class="card-collection-content">
                 <input
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.title"
                     [ngModelOptions]="{standalone: true}"
                     name="title"
-                    class="input-card-title card-title" type="text" placeholder="{{t._.collection_create?.title_placeholder}}" required/>
+                    class="input-card-collection-title card-collection-title" type="text" placeholder="{{t._.collection_create?.title_placeholder}}" required/>
                 <textarea
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.bio"
                     [ngModelOptions]="{standalone: true}"
                     name="bio"
-                    class="input-card-caption card-caption" name="" id="" placeholder="{{t._.collection_create?.caption_placeholder}}">
+                    class="input-card-collection-caption card-collection-caption" name="" id="" placeholder="{{t._.collection_create?.caption_placeholder}}">
                 </textarea>
                 <div class="btn-group">
-                    <button [class.collapse]="!actionIntent" *ngIf="t._.collection?.visibility" type="button" class="card-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button [class.collapse]="!actionIntent" *ngIf="t._.collection?.visibility" type="button" class="card-collection-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">remove_red_eye</i>  {{t._.collection?.visibility?.title}}: {{t._.collection?.visibility[collection.visibility.id]?.title}}
                     </button>
                     <div class="dropdown-menu">
@@ -41,8 +41,8 @@
                 </div>
             </div>
         </div>
-        <div [class.collapse]="!actionIntent" class="card-create">
-            <div class="card-actions form-inline">
+        <div [class.collapse]="!actionIntent" class="card-collection-create">
+            <div class="card-collection-actions form-inline">
                 <div class="btn-group form-action dropup">
                     <button type="button" class="btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons icon">palette</i>

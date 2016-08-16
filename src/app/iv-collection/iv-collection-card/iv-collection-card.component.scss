@@ -5,34 +5,11 @@
 @import '../../../style/tools/_vars.scss';
 @import '../../../style/tools/_mixins.scss';
 
-.card {
-    background: $white;
-    width: 100%;
+.card-collection {
     height: 300px;
-    border: none;
-    box-shadow: 0 1px 4px $box-shadow-color;
-    color: $black;
-    border-radius: 3px;
-    margin-bottom: 20px;
-
-    &:before {
-        content: "";
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: 1px solid $border-color;
-        border-radius: 3px;
-    }
-
-    a, a:hover, a:focus, a:active {
-        text-decoration: none;
-    }
 }
 
-.card-thumbnail, .card-color {
+.card-collection-thumbnail, .card-collection-color {
     background: $collection-default-color;
     width: 100%;
     height: 250px;
@@ -56,7 +33,7 @@
     }
 }
 
-.card-thumbnail {
+.card-collection-thumbnail {
     &:after {
         content: "";
         position: absolute;
@@ -68,19 +45,19 @@
     }
 }
 
-.card-color {}
+.card-collection-color {}
 
-.card-container, .card-details {
+.card-collection-container, .card-collection-details {
     position: relative;
     z-index: 1;
 }
 
-.card-container {
+.card-collection-container {
     width: 100%;
     height: 100%;
 }
 
-.card-content {
+.card-collection-content {
     width: 100%;
     height: 250px;
     color: $black;
@@ -91,39 +68,34 @@
     }
 }
 
-.card-title {
+.card-collection-title {
     font-weight: normal;
     font-size: 1.5rem;
     line-height: 1.125;
     margin-bottom: 10px;
 }
 
-.card-caption {
+.card-collection-caption {
     font-size: 1rem;
 }
 
-.card-details {
+.card-collection-details {
     height: 80px;
     margin-top: -30px;
     padding: 0 20px 20px;
 }
 
-.card-avatar {
-    display: block;
-    float: left;
-}
-
-.card-details-infos {
+.card-collection-details-infos {
     display: block;
     float: right;
 }
 
-.card-visibility {
+.card-collection-visibility {
     float: right;
     cursor: help;
 }
 
-.card-stats {
+.card-collection-stats {
     height: 18px;
     margin-bottom: 12px;
     font-size: .875rem;
@@ -134,7 +106,7 @@
     }
 }
 
-.card-nb {
+.card-collection-nb {
     padding-top: 17px;
     line-height: 1;
     font-size: .875rem;

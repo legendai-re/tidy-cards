@@ -20,7 +20,7 @@ export class IvSearchComponent implements OnInit, OnDestroy {
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
             if(params['q']){
-                this.headerService.emitUpdateHeaderEvent({value: {type: 'SEARCH', searchQuery: decodeURIComponent(params['q'])}})
+                this.headerService.emitUpdateHeaderEvent({value: {type: 'SEARCH', searchQuery: params['q']}})
             }
         });
     }
