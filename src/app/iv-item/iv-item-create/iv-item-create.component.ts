@@ -4,19 +4,20 @@ import { Observable }             from 'rxjs/Observable';
 import { IvCollection }           from '../../iv-collection/iv-collection.class';
 import { IvItem }                 from '../iv-item.class';
 import { IvItemService }          from '../iv-item.service'
-import { IvItemYoutubeComponent } from '../iv-item-youtube/iv-item-youtube.component';
-import { IvItemUrlComponent }     from '../iv-item-url/iv-item-url.component';
-import { IvItemTweetComponent }   from '../iv-item-tweet/iv-item-tweet.component';
-import { IvItemImageComponent }   from '../iv-item-image/iv-item-image.component';
 
 @Component({
     selector: 'iv-item-create',
     styleUrls: ['iv-item-create.component.scss'],
-    templateUrl: './iv-item-create.component.html',
-    directives: [IvItemTweetComponent, IvItemUrlComponent, IvItemYoutubeComponent, IvItemImageComponent]
+    templateUrl: './iv-item-create.component.html'
 })
 
 export class IvItemCreateComponent implements OnInit {
+
+    @Input() item: IvItem;
+    @Input() collection: IvCollection;
+    @Output() newItem = new EventEmitter();
+    @Output() updateCanceled = new EventEmitter();
+
     public mode: string;
     public actionIntent: boolean;
     public itemCreated: boolean;
@@ -28,11 +29,6 @@ export class IvItemCreateComponent implements OnInit {
     public addDescription: boolean;
     private typingTimer;
     private doneTypingInterval: number;
-
-    @Input() item: IvItem;
-    @Input() collection: IvCollection;
-    @Output() newItem = new EventEmitter();
-    @Output() updateCanceled = new EventEmitter();
 
     constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService) {
         this.doneTypingInterval = 1000;

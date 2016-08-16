@@ -12,12 +12,10 @@ import { IvCollection }                   from '../iv-collection.class';
 import { IvHeaderService }                from '../../iv-header/iv-header.service';
 import { IvItemComponent }                from '../../iv-item/iv-item.component';
 import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
-import { IvSortableDirective }            from'../../iv-shared/iv-sortable.directive';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',
-    styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [IvSortableDirective]
+    styleUrls: ['iv-collection-detail.component.scss']
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {

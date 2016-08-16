@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, ActivatedRoute }       from '@angular/router';
+import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
 import { IvAuthService }                from '../../iv-auth/iv-auth.service';
 import { IvCollection }                 from '../../iv-collection/iv-collection.class';

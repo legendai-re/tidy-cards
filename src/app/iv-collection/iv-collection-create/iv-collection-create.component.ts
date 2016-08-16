@@ -4,7 +4,6 @@ import { URLSearchParams  }             from '@angular/http';
 import { IvLanguageService }            from '../../iv-language/iv-language.service';
 import { IvCollectionService }          from '../iv-collection.service';
 import { IvCollection }                 from '../iv-collection.class';
-import {FILE_UPLOAD_DIRECTIVES }        from 'ng2-file-upload';
 import { IvImage }                      from '../../iv-image/iv-image.class';
 import { IvImgUploadService }           from '../../iv-image/iv-image-upload.service';
 
@@ -12,7 +11,6 @@ import { IvImgUploadService }           from '../../iv-image/iv-image-upload.ser
     selector: 'iv-collection-create',
     templateUrl: './iv-collection-create.component.html',
     styleUrls: ['../iv-collection-card/iv-collection-card.component.scss', 'iv-collection-create.component.scss'],
-    directives: [FILE_UPLOAD_DIRECTIVES]
 })
 
 export class IvCollectionCreateComponent implements OnInit {

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Renderer, ElementRef }    from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-import { FILE_UPLOAD_DIRECTIVES } from 'ng2-file-upload';
+import { Router } from '@angular/router';
 import { IvAuthService }        from '../../iv-auth/iv-auth.service';
 import { IvLanguageService }    from '../../iv-language/iv-language.service';
 import { IvImage }              from '../../iv-image/iv-image.class';
@@ -11,8 +10,7 @@ import { IvUserService }        from '../iv-user.service';
 @Component({
     selector: 'iv-private-profile',
     styleUrls: ['../iv-user.component.scss'],
-    templateUrl: './iv-user-private.component.html',
-    directives: [FILE_UPLOAD_DIRECTIVES, ROUTER_DIRECTIVES]
+    templateUrl: './iv-user-private.component.html'
 })
 
 export class IvUserPrivateComponent implements OnInit {

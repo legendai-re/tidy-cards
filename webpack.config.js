@@ -94,8 +94,6 @@ module.exports = function makeWebpackConfig() {
       // copy those assets to output
       {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=fonts/[name].[hash].[ext]?'},
 
-      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?importLoaders=1&limit=100000' },
-
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
 
@@ -116,14 +114,10 @@ module.exports = function makeWebpackConfig() {
       {
         test: /\.scss$/,
         exclude: root('src', 'app'),
-        loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!resolve-url-loader!postcss!sass')
+        loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass')
       },
       // all css required in src/app files will be merged in js files
-      {
-        test: /\.scss$/,
-        exclude: root('src', 'style'),
-        loader: 'raw!postcss!sass'
-      },
+      {test: /\.scss$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass'},
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
@@ -165,16 +159,7 @@ module.exports = function makeWebpackConfig() {
       'process.env': {
         ENV: JSON.stringify(ENV)
       }
-    }),
-
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-      "Tether": 'tether',
-      "window.Tether": "tether"
     })
-
   ];
 
   if (!isTest) {
@@ -213,7 +198,7 @@ module.exports = function makeWebpackConfig() {
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.UglifyJsPlugin({mangle: { keep_fnames: true }}),
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin

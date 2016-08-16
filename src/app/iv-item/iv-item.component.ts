@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IvItem } from './iv-item.class';
 import { IvItemService } from './iv-item.service';
 

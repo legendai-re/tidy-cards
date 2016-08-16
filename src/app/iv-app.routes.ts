@@ -18,8 +18,8 @@ const appRoutes: Routes = [
     ...IvSearchRoutes,
     ...IvAdminRoutes,
     ...IvAuthRoutes,
-    ...IvUserRoutes,
     ...IvResetRoutes,
+    ...IvUserRoutes,
     { path: '', component: IvAppComponent, canActivate: [HomeGuard] },
     { path: '**', component: IvAppComponent, canActivate: [HomeGuard] }
 ];

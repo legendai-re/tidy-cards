@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvLanguageService }    from './iv-language/iv-language.service';
 
-import 'bootstrap/dist/js/bootstrap.js';
 import '../style/app.scss';
 
 @Component({

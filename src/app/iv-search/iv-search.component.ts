@@ -4,8 +4,7 @@ import { URLSearchParams  }     from '@angular/http';
 import { IvHeaderService }      from '../iv-header/iv-header.service';
 
 @Component({
-    templateUrl: './iv-search.component.html',
-    directives: []
+    templateUrl: './iv-search.component.html'
 })
 
 export class IvSearchComponent implements OnInit, OnDestroy {
