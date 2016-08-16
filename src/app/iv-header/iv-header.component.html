@@ -1,4 +1,4 @@
-<header @headerState="headerState" class="header" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
+<header class="header" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
     <div class="container">
         <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
@@ -16,7 +16,7 @@
                 <span class="input-group-addon" id="header-search">
                     <i class="material-icons">search</i>
                 </span>
-                <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (keydown)="onQueryKeyDown()" (keyup)="onQueryKeyUp()" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
+                <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (keydown)="onQueryKeyDown()" (keyup)="onQueryKeyUp()" name="searchQuery" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
                 <a *ngIf="headerState == 'search' "(click)="cancelSearch()" style="color: #fff">Cancel</a>
             </div>
         </form>

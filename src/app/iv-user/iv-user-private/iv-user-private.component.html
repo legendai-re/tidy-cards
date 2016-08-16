@@ -19,7 +19,7 @@
         <div class="profile-header-top">
             <div class="profile-infos-name">
                 <h2 class="profile-name">
-                    <input #nameInput [disabled]="!updateGeneralInfoIntent" [(ngModel)]="tmpUser.name" type="text" />
+                    <input #nameInput [disabled]="!updateGeneralInfoIntent" [(ngModel)]="tmpUser.name" name="name" type="text" />
                 </h2>
                 <h3 class="profile-username">@{{authService.currentUser.username}}</h3>
             </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="profile-header-bottom">
-            <textarea [(ngModel)]="tmpUser.bio" [disabled]="!updateGeneralInfoIntent" class="profile-infos-bio" placeholder="{{t._.profile_private?.bio_placeholder}}">{{tmpUser.bio}}</textarea>
+            <textarea [(ngModel)]="tmpUser.bio" name="bio" [disabled]="!updateGeneralInfoIntent" class="profile-infos-bio" placeholder="{{t._.profile_private?.bio_placeholder}}">{{tmpUser.bio}}</textarea>
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
     <div class="list-item">
         <div class="list-item-infos">
             <h3 class="list-item-title">{{t._.profile_private?.username_row_title}}</h3>
-            <p class="list-item-description">http://invow.xyz/<input #usernameInput [(ngModel)]="tmpUser.username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
+            <p class="list-item-description">http://invow.xyz/<input #usernameInput [(ngModel)]="tmpUser.username" name="username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
             <div *ngIf="updateUsernameIntent" class="list-item-status">
                 <small *ngIf="tmpUser.username === authService.currentUser.username" class="text-success">That’s your current username!</small>
                 <div *ngIf="tmpUser.username != authService.currentUser.username">
@@ -73,7 +73,7 @@
                 <small *ngIf="authService.currentUser.emailConfirmed"> (confirmed)</small>
                 <small *ngIf="!authService.currentUser.emailConfirmed"> (not confirmed)</small>
             </h3>
-            <input #emailInput [(ngModel)]="tmpUser.email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" />
+            <input #emailInput [(ngModel)]="tmpUser.email" name="email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" />
              <div *ngIf="authService.currentUser.email && !authService.currentUser.emailConfirmed && !updateEmailIntent" class="list-item-status">
                 <small class="text-muted">{{t.format(t._.profile_private?.email_confirmation_info, [authService.currentUser.email])}}<a (click)="updateEmail()"> {{t._.profile_private?.email_confirmation_resend}}</a></small>
             </div>
@@ -110,7 +110,7 @@
             </h3>
         </div>
         <div class="list-item-actions">
-            <select (change)="updateLanguage()" [(ngModel)]="tmpUser.language" [disabled]="isUpdatingLanguage">
+            <select (change)="updateLanguage()" [(ngModel)]="tmpUser.language" name="language" [disabled]="isUpdatingLanguage">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
             </select>
@@ -168,9 +168,9 @@
     <div class="list-item">
         <div *ngIf="authService.currentUser.local.active" class="list-item-infos">
             <h3 class="list-item-title">Change my password</h3>
-            <div><input [(ngModel)]="password" class="list-item-description-darker" type="password" value="" placeholder="Current password" /></div>
-            <div><input [(ngModel)]="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
-            <div><input [(ngModel)]="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
+            <div><input [(ngModel)]="password" name="password" class="list-item-description-darker" type="password" value="" placeholder="Current password" /></div>
+            <div><input [(ngModel)]="newPassword" name="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
+            <div><input [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
             <input (click)="updatePassword()" [disabled]="!isUpdatingPassword && !isUpdatePasswordFormValid()" class="btn btn-sm btn-success" type="submit" value="Update"/>
             <small *ngIf="isUpdatingPassword" class="text-muted">Update in progress..</small>
             <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'SUCCESS'" class="text-success">Password updated</small>
@@ -179,8 +179,8 @@
         </div>
         <div *ngIf="!authService.currentUser.local.active" class="list-item-infos">
             <h3 class="list-item-title">Set a password</h3>
-            <div><input [(ngModel)]="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
-            <div><input [(ngModel)]="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
+            <div><input [(ngModel)]="newPassword" name="newPassword" class="list-item-description-darker" type="password" value="" placeholder="New password" /></div>
+            <div><input [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" class="list-item-description-darker" type="password" value="" placeholder="Repeat new password" /></div>
             <input (click)="setPassword()" [disabled]="!isUpdatingPassword && !isSetPasswordFormValid()" class="btn btn-sm btn-success" type="submit" value="Set"/>
         </div>
     </div>

@@ -7,12 +7,12 @@
             <a (click)="deleteAllButUsers()">Delete all <small>(except admins)</small></a>
             <div>
                 Generate
-                <input type="number" name="collectionNb"  [(ngModel)]="collectionNb"/>
+                <input type="number" name="collectionNb"  name="collectionNb" [(ngModel)]="collectionNb"/>
                 collections
             </div>
             <div>
                 Generate
-                <input type="number" name="userNb"  [(ngModel)]="userNb"/>
+                <input type="number" name="userNb"  name="userNb" [(ngModel)]="userNb"/>
                 users
                 <small>(delete all and set this to 0 to create colletions made by you only).</small>
             </div>

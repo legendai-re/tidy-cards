@@ -1,4 +1,4 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeGuard }                       from './iv-auth/iv-auth.guard';
 import { IvAppComponent }                  from './iv-app.component';
@@ -6,12 +6,12 @@ import { IvDiscoverRoutes }                from './iv-discover/iv-discover.route
 import { IvDashboardRoutes }               from './iv-dashboard/iv-dashboard.routes';
 import { IvCollectionRoutes }              from './iv-collection/iv-collection.routes';
 import { IvAdminRoutes }                   from './iv-admin/iv-admin.routes';
-import { IvAuthRoutes, IV_AUTH_PROVIDERS } from './iv-auth/iv-auth.routes';
+import { IvAuthRoutes, authProviders }     from './iv-auth/iv-auth.routes';
 import { IvUserRoutes }                    from './iv-user/iv-user.routes';
 import { IvResetRoutes }                   from './iv-reset/iv-reset.routes';
 import { IvSearchRoutes }                  from './iv-search/iv-search.routes';
 
-export const routes: RouterConfig = [
+const appRoutes: Routes = [
     ...IvDiscoverRoutes,
     ...IvDashboardRoutes,
     ...IvCollectionRoutes,
@@ -24,7 +24,8 @@ export const routes: RouterConfig = [
     { path: '**', component: IvAppComponent, canActivate: [HomeGuard] }
 ];
 
-export const IV_APP_ROUTER_PROVIDERS = [
-provideRouter(routes),
-IV_AUTH_PROVIDERS
+export const appRoutingProviders: any[] = [
+    authProviders
 ];
+
+export const routing = RouterModule.forRoot(appRoutes);

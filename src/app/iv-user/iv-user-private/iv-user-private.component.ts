@@ -119,7 +119,7 @@ export class IvUserPrivateComponent implements OnInit {
         }).then((e)=>{
             if(IvUser.isValidEmail(this.tmpUser.email))
                 this.checkEmail();
-        })
+        });
     }
 
     public onEmailKeyDown(){
@@ -129,11 +129,11 @@ export class IvUserPrivateComponent implements OnInit {
     private checkEmail(){
         this.userService.getValidEmail(this.tmpUser.email).subscribe((isValid) => {
             this.emailState = isValid ? 'FREE' : 'TAKEN';
-        })
+        });
     }
 
     public compareEmail(email){
-        return (this.tmpUser.email && this.authService.currentUser.email) && this.tmpUser.email.toLowerCase().replace(/\s/g, '') === this.authService.currentUser.email.toLowerCase().replace(/\s/g, '')
+        return (this.tmpUser.email && this.authService.currentUser.email) && this.tmpUser.email.toLowerCase().replace(/\s/g, '') === this.authService.currentUser.email.toLowerCase().replace(/\s/g, '');
     }
 
     public updateEmail(){
@@ -149,7 +149,7 @@ export class IvUserPrivateComponent implements OnInit {
                 this.updateEmailIntent = false;
                 this.emailState  = 'UPDATED';
                 this.isUpdatingEmail = false;
-            })
+            });
         });
     }
 
@@ -161,7 +161,7 @@ export class IvUserPrivateComponent implements OnInit {
         }).then((e)=>{
             if(IvUser.isValidUsername(this.tmpUser.username))
                 this.checkUsername();
-        })
+        });
     }
 
     public onUsernameKeyDown(){
@@ -171,7 +171,7 @@ export class IvUserPrivateComponent implements OnInit {
     private checkUsername(){
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
             this.usernameState = isValid ? 'FREE' : 'TAKEN';
-        })
+        });
     }
 
     public updateUsername(){
@@ -185,7 +185,7 @@ export class IvUserPrivateComponent implements OnInit {
                 this.authService.currentUser.username = userResponse.username;
                 this.updateUsernameIntent = false;
                 this.isUpdatingUsername = false;
-            })
+            });
         });
     }
 
@@ -200,8 +200,8 @@ export class IvUserPrivateComponent implements OnInit {
                 tmpThis.t.loadLanguage(userResponse).then((res) => {
                     tmpThis.isUpdatingLanguage = false;
                 });
-            })
-        },100)
+            });
+        },100);
     }
 
     public onAvatarFileChange(event) {
@@ -237,7 +237,7 @@ export class IvUserPrivateComponent implements OnInit {
             console.log('sry something went wrong while updating your general info');
             this.isUpdadingGeneralInfo = false;
             this.cancelUpdateGeneralInfo();
-        })
+        });
     }
 
     public linkAccount(strategy: string){
@@ -257,15 +257,15 @@ export class IvUserPrivateComponent implements OnInit {
                     this.authService.currentUser.google = null;
                     break;
             }
-        })
+        });
     }
 
     public isUpdatePasswordFormValid(){
-        return this.password && this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword == this.newPasswordRepeat;
+        return this.password && this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword === this.newPasswordRepeat;
     }
 
     public isSetPasswordFormValid(){
-        return this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword == this.newPasswordRepeat;
+        return this.newPassword && this.newPasswordRepeat && this.newPassword.length > 2 && this.newPassword === this.newPasswordRepeat;
     }
 
     public updatePassword(){
@@ -278,7 +278,7 @@ export class IvUserPrivateComponent implements OnInit {
             this.newPasswordRepeat = '';
             this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
             this.isUpdatingPassword = false;
-        })
+        });
     }
 
     public setPassword(){
@@ -292,6 +292,6 @@ export class IvUserPrivateComponent implements OnInit {
             this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
             this.authService.currentUser.local.active = true;
             this.isUpdatingPassword = false;
-        })
+        });
     }
 }

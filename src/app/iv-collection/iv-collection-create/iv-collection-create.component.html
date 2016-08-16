@@ -9,10 +9,14 @@
                 <input
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.title"
+                    [ngModelOptions]="{standalone: true}"
+                    name="title"
                     class="input-card-title card-title" type="text" placeholder="{{t._.collection_create?.title_placeholder}}" required/>
                 <textarea
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.bio"
+                    [ngModelOptions]="{standalone: true}"
+                    name="bio"
                     class="input-card-caption card-caption" name="" id="" placeholder="{{t._.collection_create?.caption_placeholder}}">
                 </textarea>
                 <div class="btn-group">

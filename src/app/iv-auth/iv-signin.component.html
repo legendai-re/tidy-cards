@@ -3,11 +3,11 @@
         <p class="auth-top-content">Invow is a community to share your passions and interests with the world.</p>
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Username</label>
-            <input [(ngModel)]="username" type="text" id="inputUsername" class="form-control" placeholder="{{t._.auth?.username_placeholder}}" required="" autofocus="" />
+            <input [(ngModel)]="username" name="username" type="text" id="inputUsername" class="form-control" placeholder="{{t._.auth?.username_placeholder}}" required="" autofocus="" />
         </div>
         <div class="form-group">
             <label for="inputPassword" class="sr-only">Password</label>
-            <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="{{t._.auth?.password_placeholder}}" required="" />
+            <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="{{t._.auth?.password_placeholder}}" required="" />
         </div>
         <small *ngIf="longinInProgress" class="text-muted">Attempting to connect...</small>
         <div *ngIf="!longinInProgress && loginFailed">

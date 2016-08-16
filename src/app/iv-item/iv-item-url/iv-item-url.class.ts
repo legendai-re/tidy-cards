@@ -64,9 +64,9 @@ export class IvItemUrl {
 
     public removeHttp(url){
         if(!url) return '';
-        if(url.substring(0, 7) == 'http://'){
+        if(url.substring(0, 7) === 'http://'){
             url = url.substr(7);
-        }else if(url.substring(0, 8) == 'https://'){
+        }else if(url.substring(0, 8) === 'https://'){
             url = url.substr(8);
         }
         return url;

@@ -53,7 +53,7 @@ export class IvLanguageService {
         if(!str)
             return;
         return str.replace(/{(\d+)}/g, function(match, number) {
-            return typeof args[number] != 'undefined'
+            return typeof args[number] !== 'undefined'
             ? args[number]
             : match
             ;

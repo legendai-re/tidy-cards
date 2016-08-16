@@ -11,4 +11,11 @@ export const IvAuthRoutes = [
 { path: 'logout', component: IvLogoutComponent, canActivate: [GrantedUser] }
 ];
 
-export const IV_AUTH_PROVIDERS = [GrantedUser, GrantedAdmin, GrantedAnonymous, IvAuthService, HomeGuard];
+export const authProviders = [
+  GrantedUser,
+  GrantedAdmin,
+  GrantedAnonymous,
+  IvAuthService,
+  HomeGuard
+];
+
