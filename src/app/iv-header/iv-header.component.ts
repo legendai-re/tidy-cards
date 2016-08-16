@@ -8,6 +8,7 @@ import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';
 import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts'
 import { IvSearchService }      from '../iv-search/iv-search.service';
+import { IvBase64 }             from '../iv-shared/iv-base64.service';
 
 @Component({
     selector: 'iv-header',
@@ -31,6 +32,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     private headerSub: any;
 
     constructor(
+        private Base64: IvBase64,
         private _location: Location,
         public t: IvLanguageService,
         public sanitize: DomSanitizationService,
@@ -62,14 +64,17 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             this.setDefault();
         }else if(event.value.type === 'SEARCH'){
             this.setSearchPage();
-            console.log(event)
             let tmpThis = this;
             setTimeout(() => {
-                this.searchQuery = event.value.searchQuery;
+                this.searchQuery = this.Base64.decode(event.value.searchQuery);
                 tmpThis.searchService.emitUpdateSearchQueryEvent({searchQuery: this.searchQuery});
             }, 200)
         }else if(event.value.type === 'NO_HEADER'){
-            this.noHeader = true;
+            this.headerState = 'no_header';
+            let tmpThis = this;
+            setTimeout(() => {
+                this.noHeader = true;
+            }, 200)
         }else{
             this.type = event.value.type;
             this.color = event.value.color;
@@ -108,7 +113,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             return;
         this.headerState = 'search';
         if(this.searchQuery && this.searchQuery != '')
-            this.router.navigate(['/search', this.searchQuery]);
+            this.router.navigate(['/search', this.Base64.encode(this.searchQuery).replace("=", " ").replace("=", "")]);
         else
             this.router.navigate(['/search']);
     }
@@ -142,7 +147,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
 
     private updateUrl(){
         if(this.searchQuery && this.searchQuery != '')
-            this._location.go('/search/'+encodeURIComponent(this.searchQuery));
+            this._location.go('/search/'+this.Base64.encode(this.searchQuery).replace("=", "").replace("=", ""));
         else
             this._location.go('/search');
     }

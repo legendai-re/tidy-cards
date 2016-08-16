@@ -5,23 +5,20 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { IvAppComponent }               from './iv-app.component';
-import { routing, appRoutingProviders } from './iv-app.routes';
+import { routing, appRoutingProviders } from './iv-app.routing';
+
+//Modules
+import { IvAuthModule }           from './iv-auth/iv-auth.module';
+import { IvCollectionModule }     from './iv-collection/iv-collection.module';
+import { IvHeaderModule }         from './iv-header/iv-header.module';
+import { IvItemModule }           from './iv-item/iv-item.module';
+import { IvSearchModule }         from './iv-search/iv-search.module';
+import { IvSharedModule }         from './iv-shared/iv-shared.module';
+import { IvUserModule }           from './iv-user/iv-user.module';
 
 //Components
 import { IvAdminFeaturedComponent } from './iv-admin/iv-admin-featured.component';
 import { IvAdminHomeComponent }     from './iv-admin/iv-admin-home.component';
-
-import { IvAuthComponent }   from './iv-auth/iv-auth.component';
-import { IvSigninComponent } from './iv-auth/iv-signin.component';
-import { IvSignupComponent } from './iv-auth/iv-signup.component';
-import { IvLogoutComponent } from './iv-auth/iv-logout.component';
-
-import { IvCollectionModule }     from './iv-collection/iv-collection.module';
-import { IvItemModule }           from './iv-item/iv-item.module';
-import { IvSharedModule }         from './iv-shared/iv-shared.module';
-import { IvUserModule }           from './iv-user/iv-user.module';
-import { IvHeaderModule }         from './iv-header/iv-header.module';
-import { IvSearchModule }         from './iv-search/iv-search.module';
 
 import { IvDashboardComponent }      from './iv-dashboard/iv-dashboard.component';
 
@@ -41,35 +38,28 @@ import { IvLanguageService }   from './iv-language/iv-language.service';
 import { IvCollectionService } from './iv-collection/iv-collection.service';
 import { IvStarService }       from './iv-star/iv-star.service';
 import { IvItemService }       from './iv-item/iv-item.service';
+import { IvBase64 }            from './iv-shared/iv-base64.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        IvSharedModule,
-        IvItemModule,
+        IvAuthModule,
         IvCollectionModule,
-        IvUserModule,
         IvHeaderModule,
+        IvItemModule,
         IvSearchModule,
+        IvSharedModule,
+        IvUserModule,
         routing,
     ],
     declarations: [
         IvAppComponent,
-
         IvAdminFeaturedComponent,
         IvAdminHomeComponent,
-
-        IvAuthComponent,
-        IvSigninComponent,
-        IvSignupComponent,
-        IvLogoutComponent,
-
         IvDashboardComponent,
-
         IvDiscoverComponent,
-
         IvResetCompleteComponent,
         IvResetInitiateComponent,
     ],
@@ -84,7 +74,8 @@ import { IvItemService }       from './iv-item/iv-item.service';
         IvHeaderService,
         IvSearchService,
         IvResetService,
-        IvLanguageService
+        IvLanguageService,
+        IvBase64
     ],
     bootstrap: [IvAppComponent]
 })

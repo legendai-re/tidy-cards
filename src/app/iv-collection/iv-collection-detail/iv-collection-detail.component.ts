@@ -64,7 +64,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         this.collectionService.getCollection(this.searchParams, getParams).subscribe((collection) => {
             this.collection = collection;
             this.collection._items = [];
-            if(this.authService.isLoggedIn && collection._author._id == this.authService.currentUser._id)
+            if(this.authService.isLoggedIn && collection._author._id === this.authService.currentUser._id)
                 this.isAuthor = true;
             this.isLoadingCollection = false;
             this.emitUpdateHeaderEvent();
@@ -103,7 +103,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         });
         for(let i in items)
             this.collection._items.push(items[i]);
-        this.haveMoreItems = (items.length==IvDataLimit.ITEM);
+        this.haveMoreItems = (items.length===IvDataLimit.ITEM);
         this.loadingItems = false;
         this.itemLoaded = true;
     }
@@ -124,7 +124,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     public onStarCliked(){
-        if(this.isAuthor || this.isUpdatingStar)
+        if(!this.authService.isLoggedIn || this.isAuthor || this.isUpdatingStar)
             return;
         if(!this.collection._star){
             this.addStarredCollection();
@@ -195,7 +195,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public onDeletedItem(event){
         if(event.value && event.value._id){
             for(let i in this.collection._items){
-                if(this.collection._items[i]._id == event.value._id){
+                if(this.collection._items[i]._id === event.value._id){
                     this.collection._items.splice(parseInt(i), 1);
                     for(let x in this.collection._items){
                         this.collection._items[x].position = parseInt(x);

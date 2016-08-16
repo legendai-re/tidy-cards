@@ -23,12 +23,12 @@
 
         <nav class="nav nav-pills pull-xs-right collapse navbar-toggleable-md">
             <li class="nav-item" *ngIf="authService.isLoggedIn">
-                <a class="nav-link" [class.active]="router.url == '/dashboard'" [routerLink]="['/dashboard']">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">
                     {{t._?.header?.dashboard_title}}
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [class.active]="router.url == '/discover'" [routerLink]="['/discover']">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/discover']">
                     {{t._?.header?.discover_title}}
                 </a>
             </li>
@@ -48,13 +48,13 @@
                        {{t._?.header?.admin_menu}}
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" [class.active]="router.url == '/logout'" [routerLink]="['/logout']">
+                    <a class="dropdown-item" routerLinkActive="active" [routerLink]="['/logout']">
                         {{t._?.header?.logout_menu}}
                     </a>
                 </div>
             </li>
             <li class="nav-item" *ngIf="!authService.isLoggedIn" >
-                <a class="nav-link" [class.active]="router.url == '/signin'" [routerLink]="['/signin']">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/signin']">
                     {{t._?.header?.signin_title}}
                 </a>
             </li>

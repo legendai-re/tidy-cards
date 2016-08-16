@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router }               from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvLanguageService }    from './iv-language/iv-language.service';
 
@@ -14,16 +13,15 @@ import '../style/app.scss';
 
 export class IvAppComponent {
 
-    constructor(public t: IvLanguageService, public authService: IvAuthService, public router: Router, private activeRoute: ActivatedRoute) {
+    constructor(public t: IvLanguageService, public authService: IvAuthService, public router: Router) {
         var url = null;
         this.router.events.subscribe((route) => {
-            if(!url)
+            if(!url){
                 url=route.url;
+                authService.initCurrentUser().then(success => {
+                    this.router.navigate([url]);
+                });
+            }
         })
-
-        authService.initCurrentUser().then(success => {
-            if(url)
-                this.router.navigate([url]);
-        });
     }
 }

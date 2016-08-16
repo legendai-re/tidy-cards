@@ -7,7 +7,7 @@ export class GrantedAnonymous implements CanActivate {
     constructor(private authService: IvAuthService, private router: Router) {}
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.authService.isLoggedIn) { return true; }
+        if (this.authService.authInitialized && !this.authService.isLoggedIn) { return true; }
         this.router.navigate(['/']);
         return false;
     }
