@@ -3,14 +3,11 @@ import { ROUTER_DIRECTIVES, Router, ActivatedRoute }       from '@angular/router
 import { URLSearchParams  }             from '@angular/http';
 import { IvAuthService }                from '../../iv-auth/iv-auth.service';
 import { IvCollection }                 from '../../iv-collection/iv-collection.class';
-import { IvCollectionCardComponent }    from '../../iv-collection/iv-collection-card/iv-collection-card.component';
-import { IvCollectionService }          from '../../iv-collection/iv-collection.service';
 import { IvUserService }                from '../iv-user.service';
 import { IvUser }                       from '../iv-user.class';
 
 @Component({
-    templateUrl: './iv-confirm-email.component.html',
-    directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
+    templateUrl: './iv-confirm-email.component.html'
 })
 
 export class IvConfirmEmailComponent implements OnInit, OnDestroy  {
