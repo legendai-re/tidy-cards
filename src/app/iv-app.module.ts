@@ -69,13 +69,6 @@ import { IvItemService }       from './iv-item/iv-item.service';
     ],
     declarations: [
         IvAppComponent,
-        IvAdminFeaturedComponent,
-        IvAdminHomeComponent,
-
-        IvAuthComponent,
-        IvSigninComponent,
-        IvSignupComponent,
-        IvLogoutComponent,
 
         IvCollectionCardComponent,
         IvCollectionCreateComponent,
@@ -84,6 +77,14 @@ import { IvItemService }       from './iv-item/iv-item.service';
         IvCollectionFeaturedComponent,
         IvCollectionLastComponent,
         IvCollectionPopularComponent,
+
+        IvAdminFeaturedComponent,
+        IvAdminHomeComponent,
+
+        IvAuthComponent,
+        IvSigninComponent,
+        IvSignupComponent,
+        IvLogoutComponent,
 
         IvDashboardComponent,
 

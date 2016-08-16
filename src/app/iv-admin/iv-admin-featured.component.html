@@ -7,7 +7,7 @@
                 <input type="submit" value="Search" (click)="searchColletion()" />
             </div>
             <div *ngIf="collection"  class="col-xs-12 col-md-6 col-lg-4 col-xl-3">
-                <iv-collection-card [collection]="collection"></iv-collection-card>
+                <iv-collection-card [collection]="collection" [sortable]="false"></iv-collection-card>
                 <input type="checkbox" [(ngModel)]="collection.isFeatured" />isFeatured
                 <input type="checkbox" [(ngModel)]="collection.isOnDiscover" />isOnDiscover
                 <input type="submit" value="Update" (click)="updateCollection()" />
