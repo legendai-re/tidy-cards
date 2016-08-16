@@ -3,7 +3,7 @@
         <h2 class="section-title dark-bg">Last public collections</h2>
         <div class="row">
             <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of collections">
-                <iv-collection-card [collection]=collection></iv-collection-card>
+                <iv-collection-card [collection]="collection"></iv-collection-card>
             </div>
             <div class="col-xs-12">
                 <a class="load-more" *ngIf="haveMoreCollections && !loadingCollections"(click)="loadNextPage()">Load more...</a>

@@ -4,7 +4,7 @@
         <div class="row">
             <div iv-sortable [list]=collections (itemMoved)="onCollectionMoved($event)">
                 <div [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of collections">
-                    <iv-collection-card [collection]=collection [sortable]=true></iv-collection-card>
+                    <iv-collection-card [collection]="collection" [sortable]=true></iv-collection-card>
                 </div>
             </div>
             <div class="col-xs-12">

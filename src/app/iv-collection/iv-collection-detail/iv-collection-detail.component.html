@@ -47,13 +47,13 @@
 
             <iv-collection-create
                 *ngIf="updateCollectionIntent"
-                [collection]=collection
+                [collection]="collection"
                 (newCollection)="onCollectionUpdated($event)"
                 (updateCanceled)="onUpdateCollectionCanceled()">
             </iv-collection-create>
             <iv-item-create
                 *ngIf="isAuthor"
-                [collection]=collection
+                [collection]="collection"
                 (newItem)="onNewItem($event)">
             </iv-item-create>
 
