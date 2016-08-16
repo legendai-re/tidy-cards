@@ -19,7 +19,6 @@ import { IvItemImageComponent }   from '../iv-item-image/iv-item-image.component
 export class IvItemCreateComponent implements OnInit {
     public mode: string;
     public actionIntent: boolean;
-    public item: IvItem;
     public itemCreated: boolean;
     public urlEntry: string;
     public lastCheckedUrlEntry: string;
@@ -30,8 +29,8 @@ export class IvItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
-    @Input('item') inputItem: IvItem;
-    @Input('collection') collection: IvCollection;
+    @Input() item: IvItem;
+    @Input() collection: IvCollection;
     @Output() newItem = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
@@ -48,7 +47,7 @@ export class IvItemCreateComponent implements OnInit {
         this.itemCreated = false;
         this.loadingContent = false;
         this.addDescription = false;
-        if(this.inputItem!=null){
+        if(this.item!=null){
             this.initUpdateMode();
         }else{
             this.initCreateMode();
@@ -61,11 +60,12 @@ export class IvItemCreateComponent implements OnInit {
         this.item._collection = this.collection._id;
         this.urlEntry = '';
         this.validUrl = false;
+        this.addDescription = false;
     }
 
     private initUpdateMode(){
         this.mode = 'UPDATE';
-        this.item = IvItem.createFormJson(this.inputItem);
+        this.item = IvItem.createFormJson(this.item);
         if(this.item._content!=null){
             this.urlEntry = this.item._content.url;
             this.lastCheckedUrlEntry = this.urlEntry;
@@ -154,7 +154,7 @@ export class IvItemCreateComponent implements OnInit {
             this.newItem.emit({
                 value: this.item
             });
-            this.init();
+            this.initCreateMode();
         });
     }
 

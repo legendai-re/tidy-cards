@@ -11,7 +11,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 export class IvItemTweetComponent implements AfterViewInit {
 
-    @Input('itemTweet') itemTweet: IvItemTweet;
+    @Input() itemTweet: IvItemTweet;
 
     constructor() {
     }

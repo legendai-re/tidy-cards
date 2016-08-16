@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 
-import { HttpModule, XHRBackend } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { IvAppComponent }               from './iv-app.component';
 import { routing, appRoutingProviders } from './iv-app.routes';
@@ -47,6 +47,8 @@ import { IvUserComponent }         from './iv-user/iv-user.component';
 import { IvConfirmEmailComponent } from './iv-user/iv-confirm-email/iv-confirm-email.component';
 import { IvUserPrivateComponent }  from './iv-user/iv-user-private/iv-user-private.component';
 import { IvUserPublicComponent }   from './iv-user/iv-user-public/iv-user-public.component';
+
+import { IvSortableDirective }     from'./iv-shared/iv-sortable.directive';
 
 //Services
 import { IvUserService }       from './iv-user/iv-user.service';
@@ -108,7 +110,9 @@ import { IvItemService }       from './iv-item/iv-item.service';
         IvUserComponent,
         IvConfirmEmailComponent,
         IvUserPrivateComponent,
-        IvUserPublicComponent
+        IvUserPublicComponent,
+
+        IvSortableDirective
     ],
     providers: [
         appRoutingProviders,
@@ -123,7 +127,7 @@ import { IvItemService }       from './iv-item/iv-item.service';
         IvResetService,
         IvLanguageService
     ],
-    bootstrap: [ IvAppComponent ]
+    bootstrap: [IvAppComponent]
 })
 export class AppModule {
 }

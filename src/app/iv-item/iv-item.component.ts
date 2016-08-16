@@ -14,8 +14,8 @@ export class IvItemComponent implements OnInit{
     public itemTypes: any;
     public intentToUpdate: boolean;
 
-    @Input('item') item: IvItem;
-    @Input('isAuthor') isAuthor: boolean;
+    @Input() item: IvItem;
+    @Input() isAuthor: boolean;
     @Output() deletedItem = new EventEmitter();
 
     constructor(private itemService: IvItemService) {

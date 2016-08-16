@@ -18,8 +18,8 @@ export class IvCollectionCardComponent implements OnInit{
     public isAuthor: boolean;
     private isWorking: boolean;
 
-    @Input('collection') collection: IvCollection;
-    @Input('sortable') sortable: boolean;
+    @Input() collection: IvCollection;
+    @Input() sortable: boolean;
 
     constructor(public t: IvLanguageService, private starService: IvStarService, private authService: IvAuthService, private http: Http) {
     }

@@ -14,7 +14,7 @@ export class IvItemYoutubeComponent implements OnInit {
 
     public displayVideo: boolean;
 
-    @Input('itemYoutube') itemYoutube: IvItemYoutube;
+    @Input() itemYoutube: IvItemYoutube;
 
     constructor(private sanitizer: DomSanitizationService) {
     }

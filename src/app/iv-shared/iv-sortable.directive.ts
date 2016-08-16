@@ -7,7 +7,7 @@ declare var $: any;
 @Directive({ selector: '[iv-sortable]' })
 export class IvSortableDirective {
 
-    @Input('list') list: any[];
+    @Input() list: any[];
     @Output() itemMoved = new EventEmitter();
 
     private el: HTMLElement;

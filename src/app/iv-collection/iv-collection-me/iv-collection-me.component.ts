@@ -5,11 +5,9 @@ import { IvCollectionService }             from '../iv-collection.service';
 import { IvCollection }                    from '../iv-collection.class';
 import { IvDataLimit }                     from '../../iv-shared/iv-data-limit.ts';
 import { IvAuthService }                   from '../../iv-auth/iv-auth.service';
-import { IvSortableDirective }             from'../../iv-shared/iv-sortable.directive';
 
 @Component({
-    templateUrl: './iv-collection-me.component.html',
-    directives: [IvSortableDirective]
+    templateUrl: './iv-collection-me.component.html'
 })
 
 export class IvCollectionMeComponent implements OnInit {

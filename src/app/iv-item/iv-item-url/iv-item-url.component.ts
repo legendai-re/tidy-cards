@@ -11,7 +11,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 export class IvItemUrlComponent {
 
-    @Input('itemUrl') itemUrl: IvItemUrl;
+    @Input() itemUrl: IvItemUrl;
 
     constructor() {
     }

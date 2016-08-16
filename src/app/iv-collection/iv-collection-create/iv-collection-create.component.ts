@@ -23,7 +23,7 @@ export class IvCollectionCreateComponent implements OnInit {
     public collectionCreated: boolean;
     public visibilityList: any;
 
-    @Input('collection') inputCollection: IvCollection;
+    @Input() inputCollection: IvCollection;
     @Output() newCollection = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
