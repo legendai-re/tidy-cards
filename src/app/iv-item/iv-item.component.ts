@@ -2,18 +2,12 @@ import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitte
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { IvItem } from './iv-item.class';
 import { IvItemService } from './iv-item.service';
-import { IvItemCreateComponent } from './iv-item-create/iv-item-create.component';
-import { IvItemYoutubeComponent } from './iv-item-youtube/iv-item-youtube.component';
-import { IvItemUrlComponent } from './iv-item-url/iv-item-url.component';
-import { IvItemTweetComponent } from './iv-item-tweet/iv-item-tweet.component';
-import { IvItemImageComponent } from './iv-item-image/iv-item-image.component';
 
 @Component({
     selector: 'iv-item',
     templateUrl: 'iv-item.component.html',
-    styleUrls: ['iv-item.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvItemCreateComponent, IvItemTweetComponent, IvItemUrlComponent, IvItemYoutubeComponent, IvItemImageComponent]
-})
+    styleUrls: ['iv-item.component.scss']
+ })
 
 export class IvItemComponent implements OnInit{
 

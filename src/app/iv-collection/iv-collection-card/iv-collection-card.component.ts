@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IvLanguageService } from '../../iv-language/iv-language.service';
 import { IvAuthService } from '../../iv-auth/iv-auth.service';
 import { IvStarService } from '../../iv-star/iv-star.service';
@@ -11,7 +11,6 @@ import { IvApiUrl } from '../../iv-shared/iv-api-url';
     selector: 'iv-collection-card',
     templateUrl: 'iv-collection-card.component.html',
     styleUrls: ['iv-collection-card.component.scss'],
-    directives: [ROUTER_DIRECTIVES]
 })
 
 export class IvCollectionCardComponent implements OnInit{

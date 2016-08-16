@@ -2,7 +2,6 @@ import { Component, OnInit }               from '@angular/core';
 import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { IvCollectionService }             from '../iv-collection.service';
-import { IvCollectionCardComponent }       from '../iv-collection-card/iv-collection-card.component';
 import { IvCollection }                    from '../iv-collection.class';
 import { IvDataLimit }                     from '../../iv-shared/iv-data-limit.ts';
 import { IvAuthService }                   from '../../iv-auth/iv-auth.service';
@@ -10,7 +9,7 @@ import { IvSortableDirective }             from'../../iv-shared/iv-sortable.dire
 
 @Component({
     templateUrl: './iv-collection-me.component.html',
-    directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent, IvSortableDirective]
+    directives: [IvSortableDirective]
 })
 
 export class IvCollectionMeComponent implements OnInit {

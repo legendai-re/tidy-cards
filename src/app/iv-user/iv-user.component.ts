@@ -3,13 +3,10 @@ import { Router, ActivatedRoute }       from '@angular/router';
 import { Observable }                   from 'rxjs/Observable';
 import { IvAuthService }                from '../iv-auth/iv-auth.service';
 import { IvUser }                       from './iv-user.class';
-import { IvUserPublicComponent }        from './iv-user-public/iv-user-public.component';
-import { IvUserPrivateComponent }       from './iv-user-private/iv-user-private.component';
 
 @Component({
     templateUrl: './iv-user.component.html',
-    styleUrls: ['iv-user.component.scss'],
-    directives: [IvUserPublicComponent, IvUserPrivateComponent]
+    styleUrls: ['iv-user.component.scss']
 })
 
 export class IvUserComponent implements OnInit, OnDestroy  {

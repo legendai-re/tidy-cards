@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, ActivatedRoute }       from '@angular/router';
+import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
 import { IvResetService }               from '../iv-reset.service';
 import { IvAuthService }                from '../../iv-auth/iv-auth.service';
@@ -7,8 +7,7 @@ import { IvUserService }                from '../../iv-user/iv-user.service';
 import { IvUser }                       from '../../iv-user/iv-user.class';
 
 @Component({
-    templateUrl: './iv-reset-initiate.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: './iv-reset-initiate.component.html'
 })
 
 export class IvResetInitiateComponent implements OnInit, OnDestroy  {

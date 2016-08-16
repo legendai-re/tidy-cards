@@ -3,19 +3,16 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
-import { ROUTER_DIRECTIVES }    from '@angular/router';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';
 import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts'
-import { IvSearchHeaderComponent } from '../iv-search/iv-search-header.component';
 import { IvSearchService }      from '../iv-search/iv-search.service';
 
 @Component({
     selector: 'iv-header',
     templateUrl: './iv-header.component.html',
-    styleUrls: ['./iv-header.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvSearchHeaderComponent]
+    styleUrls: ['./iv-header.component.scss']
 })
 export class IvHeaderComponent implements OnInit, OnDestroy{
 

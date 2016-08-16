@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
 import { IvHeaderService }      from '../iv-header/iv-header.service';
 import { IvCollection }         from '../iv-collection/iv-collection.class';
 import { IvCollectionService }  from '../iv-collection/iv-collection.service';
-import { IvCollectionCardComponent } from '../iv-collection/iv-collection-card/iv-collection-card.component';
 import { IvUser }               from '../iv-user/iv-user.class';
 import { IvUserService }        from '../iv-user/iv-user.service';
 import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts';
@@ -13,8 +12,7 @@ import { IvSearchService }      from './iv-search.service';
 @Component({
     selector: 'iv-search-header',
     templateUrl: './iv-search-header.component.html',
-    styleUrls: ['./iv-search-header.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
+    styleUrls: ['./iv-search-header.component.scss']
 })
 
 export class IvSearchHeaderComponent implements OnInit, OnDestroy {

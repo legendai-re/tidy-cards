@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, ActivatedRoute }      from '@angular/router';
+import { Router, ActivatedRoute }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 import { IvLanguageService } from '../iv-language/iv-language.service';
 
 @Component({
     selector: 'iv-signin',
     templateUrl: './iv-signin.component.html',
-    styleUrls: ['./iv-auth.component.scss'],
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['./iv-auth.component.scss']
 })
 
 export class IvSigninComponent implements OnInit, OnDestroy{

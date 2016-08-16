@@ -1,15 +1,12 @@
 import { Component, OnInit }   from '@angular/core';
-import { ROUTER_DIRECTIVES, Router }      from '@angular/router';
+import { Router }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 import { IvHeaderService } from '../iv-header/iv-header.service';
-import { IvSignupComponent } from './iv-signup.component';
-import { IvSigninComponent } from './iv-signin.component';
 import { IvLanguageService } from '../iv-language/iv-language.service';
 
 @Component({
     templateUrl: './iv-auth.component.html',
-    styleUrls: ['./iv-auth.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvSignupComponent, IvSigninComponent]
+    styleUrls: ['./iv-auth.component.scss']
 })
 
 export class IvAuthComponent implements OnInit{

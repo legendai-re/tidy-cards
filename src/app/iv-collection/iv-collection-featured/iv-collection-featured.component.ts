@@ -1,14 +1,12 @@
 import { Component, OnInit }               from '@angular/core';
-import { ROUTER_DIRECTIVES, Router }       from '@angular/router';
+import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { IvCollectionService }             from '../iv-collection.service';
-import { IvCollectionCardComponent }       from '../iv-collection-card/iv-collection-card.component';
 import { IvCollection }                    from '../iv-collection.class';
 import { IvDataLimit }                     from '../../iv-shared/iv-data-limit.ts';
 
 @Component({
-    templateUrl: './iv-collection-featured.component.html',
-    directives: [ROUTER_DIRECTIVES, IvCollectionCardComponent]
+    templateUrl: './iv-collection-featured.component.html'
 })
 
 export class IvCollectionFeaturedComponent implements OnInit {

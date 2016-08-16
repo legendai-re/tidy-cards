@@ -1,16 +1,14 @@
 import { Component, OnInit, EventEmitter, OnDestroy }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
-import { ROUTER_DIRECTIVES, Router, ActivatedRoute }         from '@angular/router';
+import { Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
 import { IvLanguageService }              from '../../iv-language/iv-language.service';
 import { IvAuthService }                  from '../../iv-auth/iv-auth.service';
 import { IvStarService }                  from '../../iv-star/iv-star.service';
-import { IvCollectionCreateComponent }    from '../iv-collection-create/iv-collection-create.component';
 import { IvCollectionService }            from '../iv-collection.service';
 import { IvItemService }                  from '../../iv-item/iv-item.service';
 import { IvCollection }                   from '../iv-collection.class';
-import { IvItemCreateComponent }          from '../../iv-item/iv-item-create/iv-item-create.component';
 import { IvHeaderService }                from '../../iv-header/iv-header.service';
 import { IvItemComponent }                from '../../iv-item/iv-item.component';
 import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
@@ -19,7 +17,7 @@ import { IvSortableDirective }            from'../../iv-shared/iv-sortable.direc
 @Component({
     templateUrl: './iv-collection-detail.component.html',
     styleUrls: ['iv-collection-detail.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvCollectionCreateComponent, IvItemCreateComponent, IvItemComponent, IvSortableDirective]
+    directives: [IvSortableDirective]
 })
 
 export class IvCollectionDetailComponent implements OnInit, OnDestroy {

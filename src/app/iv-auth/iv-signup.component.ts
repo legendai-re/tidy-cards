@@ -1,5 +1,5 @@
 import { Component }   from '@angular/core';
-import { ROUTER_DIRECTIVES, Router }      from '@angular/router';
+import { Router }      from '@angular/router';
 import { IvAuthService } from './iv-auth.service';
 import { IvUser }        from '../iv-user/iv-user.class';
 import { IvUserService } from '../iv-user/iv-user.service';
@@ -8,8 +8,7 @@ import { IvLanguageService } from '../iv-language/iv-language.service';
 @Component({
     selector: 'iv-signup',
     templateUrl: './iv-signup.component.html',
-    styleUrls: ['./iv-auth.component.scss'],
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['./iv-auth.component.scss']
 })
 
 export class IvSignupComponent {

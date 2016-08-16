@@ -9,7 +9,6 @@
                 <input
                     (focus)="onCollectionFocus()"
                     [(ngModel)]="collection.title"
-                    [ngModelOptions]="{standalone: true}"
                     name="title"
                     class="input-card-collection-title card-collection-title" type="text" placeholder="{{t._.collection_create?.title_placeholder}}" required/>
                 <textarea
@@ -109,10 +108,10 @@
                 </div>
 
                 <label class="file form-action">
-                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" ng2FileSelect type="file">
-                    <span class="btn-icon material-icons icon">
+                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" class="file-input-card" id="avatar_file" name="file" ng2FileSelect type="file">
+                    <label for="avatar_file" class="btn-icon material-icons icon">
                         photo
-                    </span>
+                    </label>
                 </label>
 
                 <button *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit">

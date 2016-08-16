@@ -6,8 +6,7 @@ import { IvResetService }               from '../iv-reset.service';
 import { IvUser }                       from '../../iv-user/iv-user.class';
 
 @Component({
-    templateUrl: './iv-reset-complete.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: './iv-reset-complete.component.html'
 })
 
 export class IvResetCompleteComponent implements OnInit, OnDestroy  {

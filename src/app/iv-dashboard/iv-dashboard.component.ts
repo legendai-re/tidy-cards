@@ -1,10 +1,8 @@
 import { Component, OnInit }   from '@angular/core';
 import { IvAuthService }          from '../iv-auth/iv-auth.service';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
 import { IvCollectionService }   from '../iv-collection/iv-collection.service';
-import { IvCollectionCreateComponent }   from '../iv-collection/iv-collection-create/iv-collection-create.component';
-import { IvCollectionCardComponent }   from '../iv-collection/iv-collection-card/iv-collection-card.component';
 import { IvCollection } from '../iv-collection/iv-collection.class';
 import { IvLanguageService } from '../iv-language/iv-language.service';
 import { IvSortableDirective } from'../iv-shared/iv-sortable.directive';
@@ -14,7 +12,7 @@ declare var JQuery: any;
 @Component({
     templateUrl: './iv-dashboard.component.html',
     styleUrls: ['./iv-dashboard.component.scss'],
-    directives: [ROUTER_DIRECTIVES, IvCollectionCreateComponent, IvCollectionCardComponent, IvSortableDirective]
+    directives: [IvSortableDirective]
 })
 
 export class IvDashboardComponent implements OnInit {
