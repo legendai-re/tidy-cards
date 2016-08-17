@@ -97,7 +97,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     }
 
     private isSearchPage(routeEvent){
-        return routeEvent.url.split('/')[1] == 'search';
+        return routeEvent.url.split(';')[0] == '/search';
     }
 
     private setSearchPage(){
@@ -113,7 +113,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             return;
         this.headerState = 'search';
         if(this.searchQuery && this.searchQuery != '')
-            this.router.navigate(['/search', this.searchQuery]);
+            this.router.navigate(['/search', {q: this.searchQuery}]);
         else
             this.router.navigate(['/search']);
     }
@@ -147,7 +147,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
 
     private updateUrl(){
         if(this.searchQuery && this.searchQuery != '')
-            this._location.go('/search/'+ encodeURIComponent(this.searchQuery));
+            this._location.go('/search;q='+ encodeURIComponent(this.searchQuery));
         else
             this._location.go('/search');
     }
