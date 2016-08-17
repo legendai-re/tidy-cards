@@ -17,9 +17,15 @@ export class IvAppComponent {
         var url = null;
         this.router.events.subscribe((route) => {
             if(!url){
-                url=route.url;
+                url=route.url.split(';')[0];
+                let params = [];
+                for(let i=1; i<route.url.split(';').length; i++){
+                    var keyValue=route.url.split(';')[i].split('=');
+                    if(keyValue.length == 2)
+                        params[keyValue[0]] = decodeURIComponent(keyValue[1]);
+                }
                 authService.initCurrentUser().then(success => {
-                    this.router.navigate([url]);
+                    this.router.navigate([url, params]);
                 });
             }
         })

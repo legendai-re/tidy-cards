@@ -66,7 +66,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             this.setSearchPage();
             let tmpThis = this;
             setTimeout(() => {
-                this.searchQuery = this.Base64.decode(event.value.searchQuery);
+                this.searchQuery = decodeURIComponent(event.value.searchQuery);
                 tmpThis.searchService.emitUpdateSearchQueryEvent({searchQuery: this.searchQuery});
             }, 200)
         }else if(event.value.type === 'NO_HEADER'){
@@ -113,7 +113,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             return;
         this.headerState = 'search';
         if(this.searchQuery && this.searchQuery != '')
-            this.router.navigate(['/search', this.Base64.encode(this.searchQuery).replace("=", " ").replace("=", "")]);
+            this.router.navigate(['/search', this.searchQuery]);
         else
             this.router.navigate(['/search']);
     }
@@ -147,7 +147,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
 
     private updateUrl(){
         if(this.searchQuery && this.searchQuery != '')
-            this._location.go('/search/'+this.Base64.encode(this.searchQuery).replace("=", "").replace("=", ""));
+            this._location.go('/search/'+ encodeURIComponent(this.searchQuery));
         else
             this._location.go('/search');
     }
