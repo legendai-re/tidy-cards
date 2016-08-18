@@ -2,6 +2,7 @@ import { IvItemUrl }     from './iv-item-url/iv-item-url.class';
 import { IvItemYoutube } from './iv-item-youtube/iv-item-youtube.class';
 import { IvItemImage }   from './iv-item-image/iv-item-image.class';
 import { IvItemTweet }   from './iv-item-tweet/iv-item-tweet.class';
+import { IvCollection }  from '../iv-collection/iv-collection.class';
 
 export class IvItem {
 
@@ -21,7 +22,7 @@ export class IvItem {
         updatedAt?: Date | string,
         description?: string,
         type?: any,
-        _content?: IvItemUrl | IvItemYoutube | IvItemImage | IvItemTweet,
+        _content?: IvItemUrl | IvItemYoutube | IvItemImage | IvItemTweet | IvCollection,
         _collection?: string,
         position?: number) {
         this._id = _id;
@@ -51,7 +52,7 @@ export class IvItem {
             );
     }
 
-    public static getContent(obj){
+    public static getContent(obj): any{
         var type = typeof obj.type === 'string' ? IvItem.ITEM_TYPES[obj.type] : obj.type;
         switch (type.id) {
             case IvItem.ITEM_TYPES.URL.id:
@@ -62,6 +63,8 @@ export class IvItem {
                 return IvItemImage.createFormJson(obj._content);
             case IvItem.ITEM_TYPES.TWEET.id:
                 return IvItemTweet.createFormJson(obj._content);
+            case IvItem.ITEM_TYPES.COLLECTION.id:
+                return IvCollection.createFormJson(obj._content);
             default:
                 return null;
         }

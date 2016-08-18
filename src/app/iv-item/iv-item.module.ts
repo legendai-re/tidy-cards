@@ -8,6 +8,7 @@ import { IvItemUrlComponent }     from './iv-item-url/iv-item-url.component';
 import { IvItemImageComponent }   from './iv-item-image/iv-item-image.component';
 import { IvItemTweetComponent }   from './iv-item-tweet/iv-item-tweet.component';
 import { IvItemYoutubeComponent } from './iv-item-youtube/iv-item-youtube.component';
+import { IvItemCollectionComponent } from './iv-item-collection/iv-item-collection.component';
 import { IvItemComponent }        from './iv-item.component';
 import { IvItemCreateComponent }  from './iv-item-create/iv-item-create.component';
 
@@ -18,6 +19,7 @@ import { IvItemCreateComponent }  from './iv-item-create/iv-item-create.componen
     IvItemImageComponent,
     IvItemTweetComponent,
     IvItemYoutubeComponent,
+    IvItemCollectionComponent,
     IvItemComponent,
     IvItemCreateComponent
   ],

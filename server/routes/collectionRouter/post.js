@@ -18,6 +18,7 @@ module.exports = function post (req, res) {
                 //if parent.deph == 0, the parent is the rootCollection
                 collection._rootCollection = (parent.depth == 0) ? parent._id : parent._rootCollection;
                 collection.visibility = parent.visibility;
+                collection.lifeState = 'PENDING_FOR_ITEM_RELATION';
                 saveSubCollection(collection);
             })
         }else{
