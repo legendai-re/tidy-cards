@@ -65,6 +65,8 @@ module.exports = function getMultiple (req, res) {
 	function getQueryFiler(rq, req, callback){
 		var filterObj = {};
 
+        if(!rq.search)
+            filterObj.depth = 0;
 		if(rq.search)
 			filterObj.title = { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'};
         if(rq.isFeatured)

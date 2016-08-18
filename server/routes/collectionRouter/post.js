@@ -8,6 +8,40 @@ module.exports = function post (req, res) {
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
+        var collection = createCollection();
+
+        if(req.body._parent){
+            getParent(function(err, parent){
+                if (err) {console.log(err); return res.sendStatus(500);}
+                collection._parent = parent._id;
+                collection.depth = parent.depth+1;
+                //if parent.deph == 0, the parent is the rootCollection
+                collection._rootCollection = (parent.depth == 0) ? parent._id : parent._rootCollection;
+                collection.visibility = parent.visibility;
+                saveSubCollection(collection);
+            })
+        }else{
+            collection.depth = 0;
+            saveRootCollection(collection);
+        }
+    }
+
+    function getParent(callback){
+        models.Collection.findById(req.body._parent, function(err, collection){
+            if(err) return callback(err);
+            if(!collection) return callback('cannot find parent collection with id: '+req.body._parent);
+            if(collection._author!=req.user._id) return callback('you\'re not the owner of the parent collection');
+            callback(null, collection);
+        })
+    }
+
+    function visibilityOk(reqVisibility){
+        if(visibility[reqVisibility.id] != null)
+            return true;
+        return false;
+    }
+
+    function createCollection(){
         var collection =  new models.Collection();
         collection.title = req.body.title;
         collection.color = req.body.color;
@@ -18,19 +52,21 @@ module.exports = function post (req, res) {
         if(req.body.bio){
             collection.bio = req.body.bio;
         }
-        saveCollection(collection);
+        return collection;
     }
 
-    function visibilityOk(reqVisibility){
-        if(visibility[reqVisibility.id] != null)
-            return true;
-        return false;
-    }
-
-    function saveCollection(collection){
+    function saveRootCollection(collection){
         req.user.addCollection(collection, function(err, collection){
             if (err) {console.log(err); res.sendStatus(500); return;}
             addToMyCollectionCustomSort(collection);
+        });
+    }
+
+    function saveSubCollection(collection){
+        collection._author = req.user._id;
+        collection.save(function(err){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            createItemCustomSort(collection);
         });
     }
 

@@ -13,5 +13,8 @@
     },
     "TEXT":  {
         "id": "TEXT"
+    },
+    "COLLECTION":  {
+        "id": "COLLECTION"
     }
 }

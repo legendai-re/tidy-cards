@@ -11,6 +11,8 @@ function checkItemContent(item, req, callback){
             return checkItemByType('ItemYoutube', req, callback);
         case itemTypes.TWEET.id:
             return checkItemByType('ItemTweet', req, callback);
+        case itemTypes.COLLECTION.id:
+            return checkItemByType('Collection', req, callback);
         case itemTypes.TEXT.id:
             return callback(null, null);
         default:
@@ -23,11 +25,19 @@ function checkItemByType(modelName, req, callback){
         callback("some required parameters was not provided", null);
         return;
     }
-    models[modelName].findById(req.body._content._id, function(err, itemContent){
-        if(err) return callback(err);
-        if(itemContent._user != req.user._id) return callback("itemContent : this item do not belong to the current account");
-        return callback(null, itemContent)
-    })
+    if('Collection'){
+        models.Collection.findById(req.body._content._id, function(err, collection){
+            if(err) return callback(err);
+            if(collection._author != req.user._id) return callback("itemContent : this collection do not belong to the current account");
+            return callback(null, collection)
+        })
+    }else{
+        models[modelName].findById(req.body._content._id, function(err, itemContent){
+            if(err) return callback(err);
+            if(itemContent._user != req.user._id) return callback("itemContent : this item do not belong to the current account");
+            return callback(null, itemContent)
+        })
+    }
 }
 
 

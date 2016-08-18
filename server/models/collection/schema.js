@@ -41,6 +41,10 @@ module.exports = function getCollectionSchema(Schema) {
 	            message: '{VALUE} is not a valid color'
 	        }
 	    },
+        depth:{
+            type: Number,
+            required: true
+        },
 	    visibility: {
 	    	type: String,
 	    	default: visibility.PRIVATE.id
@@ -66,8 +70,11 @@ module.exports = function getCollectionSchema(Schema) {
         //Values never saved, only used for frondend, defined after find()
         position: {type: Number},
         _star: { type: String, ref: 'Star' },
+        _parents: [{ type: String, ref: 'Collection' }],
 
         //Relations
+        _rootCollection : { type: String, ref: 'Collection' },
+        _parent : { type: String, ref: 'Collection' },
 	    _author : { type: String, ref: 'User' },
 	    _thumbnail : { type: String, ref: 'Image' },
 	},{

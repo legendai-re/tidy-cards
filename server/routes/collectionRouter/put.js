@@ -16,8 +16,10 @@ module.exports = function put (req, res) {
                 collection.isOnDiscover = req.body.isOnDiscover;
             }
 
-            if(req.body.visibility && visibilityOk(req.body.visibility))
+            if(req.body.visibility && visibilityOk(req.body.visibility) && collection.depth == 0){
                 collection.visibility = req.body.visibility.id;
+                updateChildsVisibility(collection, req.body.visibility.id);
+            }
 
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
@@ -63,6 +65,12 @@ module.exports = function put (req, res) {
                 );
             })
         })
+    }
+
+    function updateChildsVisibility(collection, visibility){
+        models.Collection.update({_rootCollection: collection._id}, {visibility: visibility}, {multi: true}, function(err) {
+            if(err)console.log(err)
+        });
     }
 
     function saveCollectionAndSendRes(collection){
