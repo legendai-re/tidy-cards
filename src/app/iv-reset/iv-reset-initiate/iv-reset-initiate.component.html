@@ -13,7 +13,7 @@
                 <h4>{{user.name}}</h4>
                 <small>@{{user.username}}</small>
                 <input (click)="requestReset()" value="Reset password" type="submit" class="btn btn-sm btn-success" />
-                <a (click)="reSearch()">Not you?</a>
+                <a href="javascript:void(0)" (click)="reSearch()">Not you?</a>
                 <small *ngIf="resetError" class="text-danger">Error while attempting to reset password</small>
             </div>
         </div>

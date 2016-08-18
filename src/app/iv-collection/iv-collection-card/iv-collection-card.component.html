@@ -1,19 +1,19 @@
 <article class="card card-collection" *ngIf="collection">
-    <a [routerLink]="['/c', collection._id]" >
+    <a href="javascript:void(0)" [routerLink]="['/c', collection._id]" >
         <div *ngIf="collection._thumbnail" class="thumbnail card-collection-thumbnail">
             <img [src]="collection._thumbnail?.getPath('300x250')" />
         </div>
         <div *ngIf="!collection._thumbnail" [style.background-color]="'#'+collection.color" class="card-collection-color"></div>
     </a>
     <div class="card-collection-container">
-        <a [routerLink]="['/c', collection._id]" >
+        <a href="javascript:void(0)" [routerLink]="['/c', collection._id]" >
             <div class="card-collection-content" [class.has-thumbnail]="collection._thumbnail">
                 <h3 class="card-collection-title">{{collection.title}}</h3>
                 <p class="card-collection-caption">{{collection.bio}}</p>
             </div>
         </a>
         <div class="card-collection-details">
-            <a [routerLink]="['/', collection._author?.username]" title="{{collection._author?.name}}">
+            <a href="javascript:void(0)" [routerLink]="['/', collection._author?.username]" title="{{collection._author?.name}}">
                 <div class="card-avatar avatar avatar--60">
                     <img *ngIf="collection._author?._avatar" [src]="collection._author?._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
                     {{collection._author?.name?.charAt(0)}}

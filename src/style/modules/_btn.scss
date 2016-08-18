@@ -20,7 +20,7 @@
     font-size: .875rem;
 }
 
-.btn-secondary-outline {
+.btn-outline-secondary {
     color: $black-light;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .btn--facebook, .btn--twitter, .btn--google {
-    color: $white;
+    color: $white!important;
 
     &:hover {
         color: $white;

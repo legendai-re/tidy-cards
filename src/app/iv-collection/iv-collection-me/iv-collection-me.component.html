@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="col-xs-12">
-                <a class="load-more" *ngIf="haveMoreCollections && !loadingCollections"(click)="loadNextPage()">Load more...</a>
+                <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreCollections && !loadingCollections"(click)="loadNextPage()">Load more...</a>
                 <p class="loading-more" *ngIf="loadingCollections">Loading...</p>
                 <p class="no-more" *ngIf="!haveMoreCollections">You’ve reached the end of the list</p>
             </div>

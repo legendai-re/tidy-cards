@@ -3,7 +3,7 @@
         <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
         </button>
-        <a [routerLink]="['/']">
+        <a href="javascript:void(0)" [routerLink]="['/']">
             <div class="logo collapse navbar-toggleable-md">
                 <h1>
                     Invow
@@ -17,7 +17,7 @@
                     <i class="material-icons">search</i>
                 </span>
                 <input [(ngModel)]="searchQuery" (focus)="searchIntent()" (keyup)="onQueryKeyUp()" (keydown)="onQueryKeyDown()" name="searchQuery" class="form-control" type="text" placeholder="{{t._?.header?.search_placeholder}}" aria-describedby="header-search">
-                <a class="btn btn-link search-cancel" *ngIf="headerState == 'search' "(click)="cancelSearch()">Cancel</a>
+                <a href="javascript:void(0)" class="btn btn-link search-cancel" *ngIf="headerState == 'search' "(click)="cancelSearch()">Cancel</a>
             </div>
         </form>
 
