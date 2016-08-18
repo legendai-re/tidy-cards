@@ -60,7 +60,7 @@
                 *ngIf="!updateUsernameIntent"
                 (click)="startUpdateUsername()"
                 value="{{t._.profile_private?.username_edit_button}}"
-                class="btn btn-sm btn-secondary-outline" type="submit"/>
+                class="btn btn-sm btn-outline-secondary" type="submit"/>
             <input *ngIf="updateUsernameIntent" [disabled]="isUpdatingUsername || usernameState!='FREE'" (click)="updateUsername()" class="btn btn-sm btn-success" type="submit" value="{{t._.action?.save}}"/>
             <a *ngIf="updateUsernameIntent" (click)="cancelUpdateUsername()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
         </div>
@@ -93,7 +93,7 @@
                 *ngIf="!updateEmailIntent"
                 (click)="startUpdateEmail()"
                 value="{{t._.profile_private?.email_edit_button}}"
-                class="btn btn-sm btn-secondary-outline" type="submit">
+                class="btn btn-sm btn-outline-secondary" type="submit">
             <input
                 *ngIf="updateEmailIntent"
                 (click)="updateEmail()"
@@ -110,7 +110,7 @@
             </h3>
         </div>
         <div class="list-item-actions">
-            <select (change)="updateLanguage()" [(ngModel)]="tmpUser.language" name="language" [disabled]="isUpdatingLanguage">
+            <select class="custom-select select-sm" (change)="updateLanguage()" [(ngModel)]="tmpUser.language" name="language" [disabled]="isUpdatingLanguage">
                 <option value="en">English</option>
                 <option value="fr">Français</option>
             </select>
@@ -132,7 +132,7 @@
             <a class="btn btn-sm btn--facebook" (click)="linkAccount('facebook')">{{t._.profile_private?.facebook_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.facebook?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.twitter?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('FACEBOOK')">{{t._.profile_private?.facebook_unlink_button}}</a>
+            <a class="btn btn-sm btn-outline-secondary" (click)="unlinkAccount('FACEBOOK')">{{t._.profile_private?.facebook_unlink_button}}</a>
         </div>
     </div>
     <div class="list-item">
@@ -144,7 +144,7 @@
             <a class="btn btn-sm btn--twitter" (click)="linkAccount('twitter')">{{t._.profile_private?.twitter_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.twitter?.id && (authService.currentUser.local?.active || authService.currentUser.google?.id || authService.currentUser.facebook?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('TWITTER')">{{t._.profile_private?.twitter_unlink_button}}</a>
+            <a class="btn btn-sm btn-outline-secondary" (click)="unlinkAccount('TWITTER')">{{t._.profile_private?.twitter_unlink_button}}</a>
         </div>
     </div>
     <div class="list-item">
@@ -156,7 +156,7 @@
             <a class="btn btn-sm btn--google" (click)="linkAccount('google')">{{t._.profile_private?.google_link_button}}</a>
         </div>
         <div class="list-item-actions" *ngIf="authService.currentUser.google?.id && (authService.currentUser.local?.active || authService.currentUser.twitter?.id || authService.currentUser.facebook?.id)">
-            <a class="btn btn-sm btn-secondary-outline" (click)="unlinkAccount('GOOGLE')">{{t._.profile_private?.google_unlink_button}}</a>
+            <a class="btn btn-sm btn-outline-secondary" (click)="unlinkAccount('GOOGLE')">{{t._.profile_private?.google_unlink_button}}</a>
         </div>
     </div>
 </div>
@@ -175,7 +175,7 @@
             <small *ngIf="isUpdatingPassword" class="text-muted">Update in progress..</small>
             <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'SUCCESS'" class="text-success">Password updated</small>
             <small *ngIf="!isUpdatingPassword && passwordUpdateState == 'FAILED'" class="text-danger">The password entered do not match with the account password</small>
-            <a [routerLink]="['/reset/initiate', {user_id: authService.currentUser._id}]"><small>Recover my password</small></a>
+            <a href="javascript:void(0)" [routerLink]="['/reset/initiate', {user_id: authService.currentUser._id}]"><small>Recover my password</small></a>
         </div>
         <div *ngIf="!authService.currentUser.local.active" class="list-item-infos">
             <h3 class="list-item-title">Set a password</h3>

@@ -24,15 +24,15 @@
                     </button>
                     <div class="dropdown-menu">
                         <h6 class="dropdown-header">{{t._.collection_create?.visibility_dropdow_title}}</h6>
-                        <a (click)="collection.visibility=visibilityList.PRIVATE" class="dropdown-item">
+                        <a href="javascript:void(0)" (click)="collection.visibility=visibilityList.PRIVATE" class="dropdown-item">
                             <span>{{t._.collection?.visibility?.PRIVATE?.title}}</span>
                             <small>{{t._.collection?.visibility?.PRIVATE?.subtitle}}</small>
                         </a>
-                        <a (click)="collection.visibility=visibilityList.PUBLIC" class="dropdown-item">
+                        <a href="javascript:void(0)" (click)="collection.visibility=visibilityList.PUBLIC" class="dropdown-item">
                             <span>{{t._.collection?.visibility?.PUBLIC?.title}}</span>
                             <small>{{t._.collection?.visibility?.PUBLIC?.subtitle}}</small>
                         </a>
-                        <a (click)="collection.visibility=visibilityList.UNINDEXED" class="dropdown-item">
+                        <a href="javascript:void(0)" (click)="collection.visibility=visibilityList.UNINDEXED" class="dropdown-item">
                             <span>{{t._.collection?.visibility?.UNINDEXED?.title}}</span>
                             <small>{{t._.collection?.visibility?.UNINDEXED?.subtitle}}</small>
                         </a>
@@ -49,6 +49,7 @@
                     <div class="dropdown-menu dropdown-menu-color">
                         <!-- <h6 class="dropdown-header">Edit the color</h6> -->
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('CFD8DC')"
                             [class.selected]="collection.color=='CFD8DC'"
                             class="dropdown-item-color collection-color-grey"
@@ -56,6 +57,7 @@
                             Grey
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('FF887A')"
                             [class.selected]="collection.color=='FF887A'"
                             class="dropdown-item-color collection-color-red"
@@ -63,6 +65,7 @@
                             Red
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('FFD373')"
                             [class.selected]="collection.color=='FFD373'"
                             class="dropdown-item-color collection-color-orange"
@@ -70,6 +73,7 @@
                             Orange
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('FFFF7C')"
                             [class.selected]="collection.color=='FFFF7C'"
                             class="dropdown-item-color collection-color-yellow"
@@ -77,6 +81,7 @@
                             Yellow
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('A4ABFF')"
                             [class.selected]="collection.color=='A4ABFF'"
                             class="dropdown-item-color collection-color-purple"
@@ -84,6 +89,7 @@
                             Purple
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('78D6FF')"
                             [class.selected]="collection.color=='78D6FF'"
                             class="dropdown-item-color collection-color-blue"
@@ -91,6 +97,7 @@
                             Blue
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('A4FFEB')"
                             [class.selected]="collection.color=='A4FFEB'"
                             class="dropdown-item-color collection-color-cyan"
@@ -98,6 +105,7 @@
                             Cyan
                         </a>
                         <a
+                            href="javascript:void(0)"
                             (click)="clickColor('CBFF8A')"
                             [class.selected]="collection.color=='CBFF8A'"
                             class="dropdown-item-color collection-color-green"
@@ -107,8 +115,8 @@
                     </div>
                 </div>
 
-                <label class="file form-action">
-                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" class="file-input-card" id="avatar_file" name="file" ng2FileSelect type="file">
+                <label class="custom-file file form-action">
+                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" class="custom-file-input" id="avatar_file" name="file" ng2FileSelect type="file">
                     <label for="avatar_file" class="btn-icon material-icons icon">
                         photo
                     </label>
@@ -120,7 +128,7 @@
                 <button *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit">
                     {{t._.action?.update}}
                 </button>
-                <a *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create pull-xs-right">
+                <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create pull-xs-right">
                     {{t._.action?.cancel}}
                 </a>
             </div>

@@ -1,6 +1,6 @@
 <section class="auth-section">
     <div class="auth-container">
-        <a [routerLink]="['/']">
+        <a href="javascript:void(0)" [routerLink]="['/']">
             <h1 class="logo auth-logo">
                 Invow
             </h1>
@@ -10,7 +10,7 @@
         <div class="auth-wrapper" *ngIf="inLogin">
             <iv-signin></iv-signin>
             <div class="auth-footer">
-                {{t._.auth?.not_member_title}} <a (click)="inLogin = false">{{t._.auth?.signup_title}}</a>
+                {{t._.auth?.not_member_title}} <a href="javascript:void(0)" (click)="inLogin = false">{{t._.auth?.signup_title}}</a>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
         <div class="auth-wrapper" *ngIf="!inLogin">
             <iv-signup></iv-signup>
             <div class="auth-footer">
-                {{t._.auth?.already_member_title}} <a (click)="inLogin = true">{{t._.auth?.signin_title}}</a>
+                {{t._.auth?.already_member_title}} <a href="javascript:void(0)" (click)="inLogin = true">{{t._.auth?.signin_title}}</a>
             </div>
         </div>
 

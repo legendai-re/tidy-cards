@@ -47,7 +47,7 @@
                 [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
                 class="btn btn-create pull-xs-right" type="submit" value="Update"/>
 
-            <a *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create pull-xs-right">Cancel</a>
+            <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create pull-xs-right">Cancel</a>
         </div>
     </form>
 </div>
