@@ -4,6 +4,7 @@ import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
 import { IvSharedModule }     from '../iv-shared/iv-shared.module';
 import { IvCollectionModule } from '../iv-collection/iv-collection.module';
+import { IvCollectionCardModule } from '../iv-collection/iv-collection-card/iv-collection-card.module';
 
 import { IvUserComponent }         from './iv-user.component';
 import { IvConfirmEmailComponent } from './iv-confirm-email/iv-confirm-email.component';
@@ -11,7 +12,7 @@ import { IvUserPrivateComponent }  from './iv-user-private/iv-user-private.compo
 import { IvUserPublicComponent }   from './iv-user-public/iv-user-public.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvCollectionModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvCollectionModule, IvCollectionCardModule ],
   declarations: [
     IvUserComponent,
     IvConfirmEmailComponent,
