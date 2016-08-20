@@ -10,6 +10,7 @@ import { routing, appRoutingProviders } from './iv-app.routing';
 //Modules
 import { IvAuthModule }           from './iv-auth/iv-auth.module';
 import { IvCollectionModule }     from './iv-collection/iv-collection.module';
+import { IvCollectionCardModule } from './iv-collection/iv-collection-card/iv-collection-card.module';
 import { IvHeaderModule }         from './iv-header/iv-header.module';
 import { IvItemModule }           from './iv-item/iv-item.module';
 import { IvSearchModule }         from './iv-search/iv-search.module';
@@ -47,6 +48,7 @@ import { IvBase64 }            from './iv-shared/iv-base64.service';
         HttpModule,
         IvAuthModule,
         IvCollectionModule,
+        IvCollectionCardModule,
         IvHeaderModule,
         IvItemModule,
         IvSearchModule,
