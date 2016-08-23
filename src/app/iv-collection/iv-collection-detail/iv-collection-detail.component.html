@@ -45,6 +45,11 @@
                 </div>
             </div>
 
+            <div *ngIf="collection.depth > 0">
+                <span *ngFor="let collection of collection._parents"><a [routerLink]="['/c', collection._id]" href="javascript:void(0)">{{collection.title}}</a> -> </span>
+                <span>{{collection.title}}</span>
+            </div>
+
             <iv-collection-create
                 *ngIf="updateCollectionIntent"
                 [inputCollection]="collection"
@@ -56,6 +61,10 @@
                 [collection]="collection"
                 (newItem)="onNewItem($event)">
             </iv-item-create>
+            <iv-collection-create
+                [parentCollection]="collection"
+                (newCollection)="onSubCollectionCreated($event)">
+            </iv-collection-create>
 
             <div iv-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" class="items-list" *ngIf="itemLoaded">
                 <article *ngIf="collection._items.length == 0">

@@ -18,7 +18,7 @@
                     name="bio"
                     class="input-card-collection-caption card-collection-caption" name="" id="" placeholder="{{t._.collection_create?.caption_placeholder}}">
                 </textarea>
-                <div class="btn-group">
+                <div class="btn-group" *ngIf="mode != 'CREATE_SUB_COLLECTION'">
                     <button [class.collapse]="!actionIntent" *ngIf="t._.collection?.visibility" type="button" class="card-collection-visibily dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">remove_red_eye</i>  {{t._.collection?.visibility?.title}}: {{t._.collection?.visibility[collection.visibility.id]?.title}}
                     </button>
@@ -116,14 +116,17 @@
                 </div>
 
                 <label class="custom-file file form-action">
-                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" class="custom-file-input" id="avatar_file" name="file" ng2FileSelect type="file">
-                    <label for="avatar_file" class="btn-icon material-icons icon">
+                    <input (change)="onThumbnailFileChange($event)" [uploader]="uploader" class="custom-file-input" [attr.id]="'avatar_file_'+collection._id" name="file" ng2FileSelect type="file">
+                    <label [attr.for]="'avatar_file_'+collection._id" class="btn-icon material-icons icon">
                         photo
                     </label>
                 </label>
 
                 <button *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit">
                     {{t._.action?.create}}
+                </button>
+                <button *ngIf="mode == 'CREATE_SUB_COLLECTION'" class="btn btn-create pull-xs-right" type="submit">
+                    Create sub collection
                 </button>
                 <button *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit">
                     {{t._.action?.update}}

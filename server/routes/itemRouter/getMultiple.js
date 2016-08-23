@@ -142,7 +142,13 @@ module.exports = function getMultiple (req, res) {
                 });
                 break;
             case itemTypes.COLLECTION.id:
-                models.Collection.findById(items[i]._content).populate('_author _thumbnail').exec(function(err, collection){
+                var q = models.Collection.findById(items[i]._content);
+                q.populate('_thumbnail');
+                q.populate({
+                    path: '_author',
+                    populate: { path: '_avatar' }
+                });
+                q.exec(function(err, collection){
                     items[i]._content = collection;
                     i++;
                     if(i==items.length){

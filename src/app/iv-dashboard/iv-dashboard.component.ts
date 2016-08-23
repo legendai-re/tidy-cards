@@ -55,6 +55,12 @@ export class IvDashboardComponent implements OnInit {
         }, () => {});
     }
 
+    onbCollectionCreated(event){
+        if(event.value){
+            this.router.navigate(['/c', event.value._id]);
+        }
+    }
+
     onCollectionMoved(event){
         this.isUpdatingPosition = true;
         this.service.putCollection(event.value.modifiedItem).subscribe(collection => {

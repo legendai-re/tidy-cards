@@ -48,4 +48,11 @@ export class IvItemComponent implements OnInit{
             this.intentToUpdate = false;
         }
     }
+
+    public onSubCollectionUpdated(event){
+        if(event.value){
+            this.item._content = event.value;
+            this.intentToUpdate = false;
+        }
+    }
 }

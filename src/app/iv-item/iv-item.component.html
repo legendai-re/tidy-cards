@@ -12,11 +12,14 @@
     <iv-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></iv-item-tweet>
     <iv-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></iv-item-youtube>
     <iv-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></iv-item-image>
-    <iv-item-collection *ngIf="item.type == itemTypes.COLLECTION" [collection]="item._content"></iv-item-collection>
+    <iv-collection-card *ngIf="item.type == itemTypes.COLLECTION" [collection]="item._content"></iv-collection-card>
     <div class="item-content" *ngIf="item.description">
         <p>{{item.description}}</p>
     </div>
 </div>
-<div *ngIf="intentToUpdate">
+<div *ngIf="intentToUpdate && item.type != itemTypes.COLLECTION">
     <iv-item-create [item]=item (newItem)="onItemUpdated($event);" (updateCanceled)="onItemUpdatedCanceled($event)"></iv-item-create>
+</div>
+<div *ngIf="intentToUpdate && item.type == itemTypes.COLLECTION">
+    <iv-collection-create [inputCollection]="item._content" (newCollection)="onSubCollectionUpdated($event);" (updateCanceled)="onItemUpdatedCanceled($event)"></iv-collection-create>
 </div>

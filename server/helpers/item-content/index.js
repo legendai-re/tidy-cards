@@ -63,7 +63,11 @@ function checkItemByType(type, req, callback){
                 if(err) return callback(err);
                 if(!collection) return callback("itemContent : cannot find itemContent");
                 if(collection._author != req.user._id) return callback("itemContent : this collection do not belong to the current account");
-                return callback(null, collection)
+                collection.lifeState = 'ACTIVE';
+                collection.save(function(err){
+                    if(err) return callback(err);
+                    return callback(null, collection)
+                });
             });
     }
 }

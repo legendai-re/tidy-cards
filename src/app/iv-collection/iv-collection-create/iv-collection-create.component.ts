@@ -21,6 +21,7 @@ export class IvCollectionCreateComponent implements OnInit {
     public collectionCreated: boolean;
     public visibilityList: any;
 
+    @Input() parentCollection: IvCollection;
     @Input() inputCollection: IvCollection;
     @Output() newCollection = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
@@ -34,6 +35,8 @@ export class IvCollectionCreateComponent implements OnInit {
         this.collectionCreated = false;
         if(this.inputCollection!=null){
             this.initUpdateMode();
+        }else if(this.parentCollection!=null){
+            this.initCreateSubCollectionMode();
         }else{
             this.initCreateMode();
         }
@@ -50,6 +53,13 @@ export class IvCollectionCreateComponent implements OnInit {
         this.mode = 'UPDATE';
         this.collection = IvCollection.createFormJson(this.inputCollection);
         this.actionIntent = true;
+    }
+
+    private initCreateSubCollectionMode(){
+        this.mode = 'CREATE_SUB_COLLECTION';
+        this.collection = new IvCollection();
+        this.collection.visibility = this.parentCollection.visibility;
+        this.collection._parent = this.parentCollection._id;
     }
 
     public onThumbnailFileChange(event) {
@@ -75,20 +85,22 @@ export class IvCollectionCreateComponent implements OnInit {
     }
 
     public onCollectionSubmit(){
-        if(this.mode == 'CREATE')
+        if(this.mode == 'CREATE' || this.mode == 'CREATE_SUB_COLLECTION')
             this.createCollection();
         else
             this.updateCollection();
     }
 
     private createCollection() {
-        if(this.collection.color == 'FFFFFF' ){
+        if(!this.collection.color || this.collection.color == 'FFFFFF' ){
             this.collection.color = 'CFD8DC';
         }
         this.collectionService.postCollection(this.collection).subscribe(collection => {
             this.collection._id = collection._id;
             this.collectionCreated = true;
-            this.router.navigate(['/c', this.collection._id]);
+            this.newCollection.emit({
+                value: this.collection
+            });
         });
     }
 

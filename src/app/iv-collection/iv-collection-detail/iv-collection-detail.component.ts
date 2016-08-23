@@ -11,6 +11,7 @@ import { IvItemService }                  from '../../iv-item/iv-item.service';
 import { IvCollection }                   from '../iv-collection.class';
 import { IvHeaderService }                from '../../iv-header/iv-header.service';
 import { IvItemComponent }                from '../../iv-item/iv-item.component';
+import { IvItem }                         from '../../iv-item/iv-item.class';
 import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
 
 @Component({
@@ -31,6 +32,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public isUpdatingStar: boolean;
     public updateCollectionIntent: boolean;
     public isUpdatingPosition: boolean;
+    public subCollectionTemplate: IvCollection;
     private sub: any;
 
     constructor(
@@ -50,6 +52,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         this.loadingItems = false;
         this.haveMoreItems = true;
         this.isAuthor = false;
+        this.subCollectionTemplate = new IvCollection();
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
             this.initCollection(params);
@@ -190,6 +193,16 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
             }
             this.collection.itemsCount++;
         }
+    }
+
+    public onSubCollectionCreated(event){
+        let itemCollection = new IvItem();
+        itemCollection._content = event.value;
+        itemCollection.type = IvItem.ITEM_TYPES.COLLECTION;
+        itemCollection._collection = this.collection._id;
+        this.itemService.postItem(itemCollection).subscribe((response) => {
+            this.router.navigate(['/c', event.value._id]);
+        })
     }
 
     public onDeletedItem(event){
