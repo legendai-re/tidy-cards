@@ -1,4 +1,6 @@
 <main class="app_viewport" [class.collapse]="!authService.authInitialized || !t.langInitialized">
     <iv-header></iv-header>
-    <router-outlet></router-outlet>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
 </main>

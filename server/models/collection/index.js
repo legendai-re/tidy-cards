@@ -1,5 +1,6 @@
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
+var lifeStates  = require('../lifeStates.json');
 
 var CollectionSchema = require('./schema')(Schema);
 
