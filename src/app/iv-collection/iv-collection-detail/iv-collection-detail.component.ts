@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, OnDestroy }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
 import { IvLanguageService }              from '../../iv-language/iv-language.service';
@@ -39,7 +39,6 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         public t: IvLanguageService,
         private authService: IvAuthService,
         private headerService: IvHeaderService,
-        private sanitizer: DomSanitizationService,
         private route: ActivatedRoute,
         private router: Router,
         private collectionService: IvCollectionService,

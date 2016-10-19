@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router }               from '@angular/router';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvLanguageService }    from './iv-language/iv-language.service';
 
-import '../style/app.scss';
-
 @Component({
     selector: 'iv-app',
     templateUrl: './iv-app.component.html',
-    styleUrls: ['./iv-app.component.scss']
+    styleUrls: ['./iv-app.component.scss', '../style/app.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class IvAppComponent {

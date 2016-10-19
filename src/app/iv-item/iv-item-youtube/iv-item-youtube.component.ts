@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer   } from '@angular/platform-browser';
 import { IvItemYoutube } from './iv-item-youtube.class';
 
 @Component({
@@ -14,7 +14,7 @@ export class IvItemYoutubeComponent implements OnInit {
 
     public displayVideo: boolean;
 
-    constructor(private sanitizer: DomSanitizationService) {
+    constructor(private sanitizer: DomSanitizer  ) {
     }
 
     ngOnInit() {

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy }    from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
-import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';
@@ -35,7 +35,6 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         private Base64: IvBase64,
         private _location: Location,
         public t: IvLanguageService,
-        public sanitize: DomSanitizationService,
         public headerService: IvHeaderService,
         public searchService: IvSearchService,
         public authService: IvAuthService,

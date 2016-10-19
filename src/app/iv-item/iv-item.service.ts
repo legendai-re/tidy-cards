@@ -1,5 +1,5 @@
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { SafeResourceUrl, DomSanitizationService } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
 import { IvItem }                 from './iv-item.class';

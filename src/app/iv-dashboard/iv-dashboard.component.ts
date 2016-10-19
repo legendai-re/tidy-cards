@@ -5,7 +5,6 @@ import { URLSearchParams  }   from '@angular/http';
 import { IvCollectionService }   from '../iv-collection/iv-collection.service';
 import { IvCollection } from '../iv-collection/iv-collection.class';
 import { IvLanguageService } from '../iv-language/iv-language.service';
-declare var JQuery: any;
 
 @Component({
     templateUrl: './iv-dashboard.component.html',

@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable }             from 'rxjs/Observable';
 import { IvCollection }           from '../../iv-collection/iv-collection.class';
 import { IvItem }                 from '../iv-item.class';
@@ -30,7 +29,7 @@ export class IvItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
-    constructor(public sanitizer: DomSanitizationService, private itemService: IvItemService) {
+    constructor(private itemService: IvItemService) {
         this.doneTypingInterval = 1000;
         this.itemTypes = IvItem.ITEM_TYPES;
     }
