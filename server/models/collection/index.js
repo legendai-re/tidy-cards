@@ -1,3 +1,8 @@
+/**
+ * @module Item
+ * @author Olivier Coué
+ */
+
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 var lifeStates  = require('../lifeStates.json');
@@ -11,6 +16,12 @@ CollectionSchema.pre('save', function(next) {
     next();
 });
 
+/**
+ * Add an item to a collection.
+ * @function addItem
+ * @param {Item} item - An object Item.
+ * @param {requestCallback} callback - The callback that return the item.
+ */
 CollectionSchema.methods.addItem = function addItem(item, callback) {
     item._collection = this._id;
     item.save(function(err){

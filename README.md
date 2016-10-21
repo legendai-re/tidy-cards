@@ -46,3 +46,7 @@ Run `node server/server.js` to start the server
 Run `maildev` to catch emails on port 1025. If maildev is not installed on your computer run `npm install maildev -g`
 
 You can now visit the website on `localhost:8080` and open `localhost:1080` to see the emails send by the app.
+
+### Generate API documentation
+
+Install `apidoc` globally: `npm install apidoc -g`. Then run `apidoc -i server -o dist/api/doc`. You can now visit the api documentation on `localhost:8080/api/doc`.

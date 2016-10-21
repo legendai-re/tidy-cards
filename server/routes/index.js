@@ -1,3 +1,8 @@
+/**
+ * @module routes
+ * @description List of all routes
+ * @author Olivier Coué
+ */
 module.exports = function(app) {
 
     var express             = require('express');

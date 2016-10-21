@@ -7,7 +7,7 @@ module.exports = function (req, res) {
     models.Collection.findById(req.params.collection_id).exec(function(err, collection){
         if(err) {console.log(err); res.sendStatus(500); return;}
         if(!collection) {res.status(400).send({ error: "cannot find collection with id: "+req.params.collection_id }); return;}
-        if(collection._author!=req.user._id) {res.status(401).send({ error: "only the author of the collection can it" }); return;}
+        if(collection._author!=req.user._id) {res.status(401).send({ error: "only the author of the collection can delete it" }); return;}
 
         collection.lifeState = lifeStates.ARCHIVED.id;
         collection.save(function(err){
