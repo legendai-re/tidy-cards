@@ -36,7 +36,12 @@ router.route('/:user_id')
     /**
      * @api {put} /api/users/:user_id Update a user
      * @apiParam {Number} user_id User unique ID.
-     * @apiParam {User} user A user that contain only the attributes that you want to update.
+     * @apiParam {String} [username] A valid username.
+     * @apiParam {String} [email] A valid email.
+     * @apiParam {String} [name] A valid name.
+     * @apiParam {String} [bio] A short description about the user.
+     * @apiParam {String} [language] A language ID.
+     * @apiParam {Image} [_avatar] An image object to use as avatar.
      * @apiPermission ROLE_USER
      * @apiName PutUser
      * @apiGroup User

@@ -8,8 +8,8 @@
         "name": "Invow",
         "version": "0.1.0",
         "description": "Find all information about the api of invow.",
-        "title": "Custom apiDoc browser title",
-        "url" : "https://invow.xyz/api/doc"
+        "title": "Invow api documentation",
+        "url" : "http://invow.xyz"
     },
     "scripts": {
         "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
