@@ -24,6 +24,7 @@ export class IvAppComponent {
                         params[keyValue[0]] = decodeURIComponent(keyValue[1]);
                 }
                 authService.initCurrentUser().then(success => {
+                    url = url.replace("#_=_", "");
                     this.router.navigate([url, params]);
                 });
             }

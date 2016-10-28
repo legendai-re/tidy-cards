@@ -29,6 +29,7 @@ router.route('/facebook/callback')
      * @apiDescription Passport facebook authentication callback.
      */
     .get(passport.authenticate('facebook', {failureRedirect: '/dashboard' }), function(req, res){
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
     });
 
@@ -55,6 +56,7 @@ router.route('/twitter/callback')
      * @apiDescription Passport twitter authentication callback.
      */
     .get(passport.authenticate('twitter', {failureRedirect: '/dashboard'}), function(req, res){
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
     });
 
@@ -81,6 +83,7 @@ router.route('/google/callback')
      * @apiDescription Passport google authentication callback.
      */
     .get(passport.authenticate('google', { failureRedirect: '/dashboard' }), function(req, res){
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
     });
 

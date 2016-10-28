@@ -45,7 +45,7 @@ export class IvSigninComponent implements OnInit, OnDestroy{
     }
 
     public connectWith(strategy){
-        var params = this.nextUrl != 'undefined' ? '?next='+this.encodedNextUrl : '';
+        var params = this.nextUrl != 'undefined' ? '?next='+this.encodedNextUrl : '?next=';
         window.location.href = 'auth/' + strategy + params;
     }
 
