@@ -1,6 +1,6 @@
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { FileUploader }           from 'ng2-file-upload';
+import { FileUploader }           from 'ng2-file-upload/ng2-file-upload';
 import { IvImage }                from './iv-image.class';
 import { IvApiUrl }               from '../iv-shared/iv-api-url';
 

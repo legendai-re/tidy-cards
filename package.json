@@ -124,7 +124,7 @@
         "mongoose-url-slugs": "^0.2.1",
         "multer": "^1.1.0",
         "multer-s3": "^2.3.2",
-        "ng2-file-upload": "^1.0.3",
+        "ng2-file-upload": "^1.1.2",
         "node-sass": "^3.10.1",
         "nodemailer": "^2.5.0",
         "npm": "^3.10.5",
