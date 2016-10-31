@@ -1,8 +1,3 @@
-/**
- * @module routes
- * @description List of all routes
- * @author Olivier Coué
- */
 module.exports = function(app) {
 
     var express             = require('express');
@@ -19,10 +14,6 @@ module.exports = function(app) {
     var devRouter           = require('./devRouter');
 
     app.use('/', express.static(path.resolve(__dirname, '../../dist')));
-    app.use('/fonts', express.static(path.resolve(__dirname, '../../dist/fonts')));
-    app.use('/css', express.static(path.resolve(__dirname, '../../dist/css')));
-    app.use('/img', express.static(path.resolve(__dirname, '../../dist/img')));
-    app.use('/js', express.static(path.resolve(__dirname, '../../dist/js')));
 
     app.use('/auth', authRouter);
 
@@ -39,6 +30,6 @@ module.exports = function(app) {
 
     app.get('/*', function(req, res) {
         res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
-    });
+    })
 
 }

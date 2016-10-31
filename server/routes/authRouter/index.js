@@ -16,9 +16,9 @@ router.route('/facebook')
      */
     .get(function(req, res, next){
         var sess=req.session;
-        sess.next = (req.query.next || '/dashboard') ;
+        sess.next = (req.query.next || '/dashboard');
         next();
-    },passport.authenticate('facebook'));
+    },passport.authenticate('facebook'))
 
 router.route('/facebook/callback')
     /**
@@ -31,7 +31,7 @@ router.route('/facebook/callback')
     .get(passport.authenticate('facebook', {failureRedirect: '/dashboard' }), function(req, res){
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
-    });
+    })
 
 router.route('/twitter')
     /**
@@ -43,9 +43,9 @@ router.route('/twitter')
      */
     .get(function(req, res, next){
         var sess=req.session;
-        sess.next = (req.query.next || '/dashboard') ;
+        sess.next = (req.query.next || '/dashboard');
         next();
-    },passport.authenticate('twitter'));
+    },passport.authenticate('twitter'))
 
 router.route('/twitter/callback')
     /**
@@ -58,7 +58,7 @@ router.route('/twitter/callback')
     .get(passport.authenticate('twitter', {failureRedirect: '/dashboard'}), function(req, res){
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
-    });
+    })
 
 router.route('/google')
     /**
@@ -70,9 +70,9 @@ router.route('/google')
      */
     .get(function(req, res, next){
         var sess=req.session;
-        sess.next = (req.query.next || '/dashboard') ;
+        sess.next = (req.query.next || '/dashboard');
         next();
-    }, passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    }, passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }))
 
 router.route('/google/callback')
     /**
@@ -85,7 +85,7 @@ router.route('/google/callback')
     .get(passport.authenticate('google', { failureRedirect: '/dashboard' }), function(req, res){
         req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         res.redirect(req.session.next);
-    });
+    })
 
 router.route('/unlink')
     /**
@@ -98,7 +98,7 @@ router.route('/unlink')
      */
 	.put(isGranted('ROLE_USER'), function(req, res){
         require('./putUnlinkAccount')(req, res);
-    });
+    })
 
 router.route('/login')
     /**
@@ -113,7 +113,7 @@ router.route('/login')
      */
     .post(bruteforce.prevent, passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);
-    });
+    })
 
 router.route('/logout')
     /**
@@ -124,8 +124,8 @@ router.route('/logout')
      * @apiSuccess {boolean} success True if logout succeed, else false.
      */
     .get( function(req, res){
-        require('./getLogout')(req, res);
-    });
+        require('./getLogout')(req, res)
+    })
 
 router.route('/currentuser')
     /**
@@ -137,7 +137,7 @@ router.route('/currentuser')
      */
 	.get(function(req,res){
         require('./getCurrentuser')(req, res);
-    });
+    })
 
 router.route('/signup')
     /**
@@ -154,7 +154,7 @@ router.route('/signup')
      */
 	.post(function(req,res){
         require('./postSignup')(req, res);
-    });
+    })
 
 router.route('/password/update')
     /**
@@ -170,6 +170,6 @@ router.route('/password/update')
      */
     .put(bruteforce.prevent, isGranted('ROLE_USER'), function(req,res){
         require('./putPasswordUpdate')(req, res);
-    });
+    })
 
-module.exports = router;
+module.exports = router

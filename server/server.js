@@ -7,6 +7,7 @@ var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 var session 			= require('express-session');
 var db 					= require('./mongoose');
+var controllers         = require('./controllers');
 
 var app = express();
 app.set('port', (process.env.PORT || 2016));
@@ -26,4 +27,4 @@ require('./routes')(app);
 
 app.listen(app.get('port'), function() {
   console.log('Invow is running on port', app.get('port'));
-});
+})
