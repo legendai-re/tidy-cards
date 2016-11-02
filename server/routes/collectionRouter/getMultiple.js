@@ -7,7 +7,6 @@ module.exports = function getMultiple (req, res) {
     var models      = require('../../models');
 
 	var rq = req.query;
-    var customSort = false;
 
     if(rq._author && rq.custom_sort){
         var skip = rq.skip ? parseInt(rq.skip) : 0;

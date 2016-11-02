@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy }    from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl }      from '@angular/platform-browser';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';

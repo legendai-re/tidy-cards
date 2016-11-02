@@ -64,7 +64,11 @@ function getMimeFromFile(file){
 
 var tmpPath = 'server/helpers/image-uploader/tmp-uploads/';
 
-var afterUpload = function(image){
+/**
+ * Get the original image from AWS, then asynchronously crop the image and upload them to
+ * AWS with the function awsUpload(). When all images are uploaded, call the callback
+ */
+function afterUpload(image, callback){
     var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/s' + 'original' + '/' + image._id + '.' + image.mime)
                 .pipe(fs.createWriteStream(tmpPath +'original/'+ image._id + '.' + image.mime ))
                 .on('error', (e) => {console.log("pipe error");console.log(e);})
@@ -77,18 +81,23 @@ var afterUpload = function(image){
                 async.times(sizes.length, function(n, next) {
                     gm(tmpPath +'original/'+ image._id + '.' + image.mime)
                     .thumb(sizes[n].x,sizes[n].y, tmpPath +sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){
-                        awsUpload(image, sizes[n].x+'x'+sizes[n].y);
-                        next(null);
+                        awsUpload(image, sizes[n].x+'x'+sizes[n].y, function(err){
+                            next(null);
+                        });
                     })
                 }, function(err, results) {
                     if(err)
                         console.log(err);
                     fs.unlink(tmpPath + 'original/'+ image._id + '.' + image.mime);
+                    callback(null);
                 });
             });
     });
 }
 
+/**
+ * Upoad an image to AWS, when upload is finished, call the callback
+ */
 function awsUpload(image, size, callback){
     var imageLocalPath = tmpPath+size+'/'+ image._id + '.' +image.mime;
     fs.readFile(imageLocalPath, function(err, data) {
@@ -106,13 +115,15 @@ function awsUpload(image, size, callback){
     });
 }
 
-function getSocialNetworkAvatar(image, url){
+function getSocialNetworkAvatar(image, url, callback){
     var r = request(url)
                 .pipe(fs.createWriteStream(tmpPath + 'original/'+ image._id + '.' + image.mime ))
                 .on('error', (e) => {console.log("pipe error");console.log(e);})
     r.on('finish', () => {
         awsUpload(image, 'original', function(){
-            afterUpload(image);
+            afterUpload(image,function(err){
+                callback(err);
+            });
         })
     })
 }

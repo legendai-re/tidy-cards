@@ -16,7 +16,11 @@ export class IvResetCompleteComponent implements OnInit, OnDestroy  {
     public resetToken: string;
     private sub: any;
 
-    constructor(private resetService: IvResetService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(
+        private resetService: IvResetService,
+        private route: ActivatedRoute,
+        public authService: IvAuthService,
+        public router: Router) {
     }
 
     ngOnInit() {

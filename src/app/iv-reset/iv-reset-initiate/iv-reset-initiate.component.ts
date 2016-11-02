@@ -14,14 +14,18 @@ export class IvResetInitiateComponent implements OnInit, OnDestroy  {
 
     public user: IvUser;
     public searchData: string;
-    public userId: string;
     public isSearching: boolean;
     public notFounded: boolean;
     public reseted: boolean;
     public resetError: boolean;
     private sub: any;
 
-    constructor(private resetService: IvResetService, private userService: IvUserService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(
+        private resetService: IvResetService,
+        private userService: IvUserService,
+        private route: ActivatedRoute,
+        public authService: IvAuthService,
+        public router: Router) {
     }
 
     ngOnInit() {
