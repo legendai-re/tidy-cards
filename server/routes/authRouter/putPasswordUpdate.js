@@ -7,6 +7,8 @@ module.exports = function putPasswordUpdate(req, res) {
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
+        if(req.user._id != req.body.user_id)
+            return sendResponse(false);
         if(req.body.newPassword.length < 3)
             return sendResponse(false);
 

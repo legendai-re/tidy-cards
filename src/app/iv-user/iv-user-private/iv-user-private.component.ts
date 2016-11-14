@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Renderer, ElementRef }    from '@angular/core';
 import { Router } from '@angular/router';
+import { Title }                from '@angular/platform-browser';
 import { IvAuthService }        from '../../iv-auth/iv-auth.service';
 import { IvLanguageService }    from '../../iv-language/iv-language.service';
 import { IvImage }              from '../../iv-image/iv-image.class';

@@ -115,6 +115,9 @@ function awsUpload(image, size, callback){
     });
 }
 
+/**
+ * Get the image from a social network then call afterUpload()
+ */
 function getSocialNetworkAvatar(image, url, callback){
     var r = request(url)
                 .pipe(fs.createWriteStream(tmpPath + 'original/'+ image._id + '.' + image.mime ))
