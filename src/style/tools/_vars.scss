@@ -31,7 +31,11 @@ $collection-default-color:  $collection-grey;
 
 $color-facebook:            #3B5998;
 $color-twitter:             #55ACEE;
-$color-google:             #DD4B39;
+$color-google:              #DD4B39;
+
+// color palette
+
+$palette-yellow:            #FFE847;
 
 // components
 
@@ -60,12 +64,12 @@ $placeholder-whiter:        $white-op-3-4;
 
 $screen-xs:                 0;
 $screen-sm:                 425px; // 380px
-$screen-md:                 700px; // 700px
-$screen-lg:                 1020px; // 1020px
-$screen-xl:                 1320px; // 1320px
+$screen-md:                 610px; // 700px
+$screen-lg:                 885px; // 1020px
+$screen-xl:                 1140px; // 1320px
 
 $container-sm:              100%; // 320px
-$container-md:              640px; // 640px
-$container-lg:              960px; // 960px
-$container-xl:              1280px; // 1280px
+$container-md:              550px; // 640px
+$container-lg:              825px; // 960px
+$container-xl:              1100px; // 1280px
 

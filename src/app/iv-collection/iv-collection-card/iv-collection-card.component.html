@@ -1,29 +1,21 @@
-<article class="card card-collection" *ngIf="collection">
-    <a href="javascript:void(0)" [routerLink]="['/c', collection._id]" >
-        <div *ngIf="collection._thumbnail" class="thumbnail card-collection-thumbnail">
+<article *ngIf="collection" class="card card-collection">
+    <div *ngIf="sortable" class="card-collection-drag-handle">
+        <i class="material-icons move-item-button">drag_handle</i>
+    </div>
+    <a [routerLink]="['/c', collection._id]" class="card-collection-container">
+        <div *ngIf="collection._thumbnail" class="card-collection-background thumbnail">
             <img [src]="collection._thumbnail?.getPath('300x250')" />
         </div>
-        <div *ngIf="!collection._thumbnail" [style.background-color]="'#'+collection.color" class="card-collection-color"></div>
-    </a>
-    <div class="card-collection-container">
-        <a href="javascript:void(0)" [routerLink]="['/c', collection._id]" >
-            <div class="card-collection-content" [class.has-thumbnail]="collection._thumbnail">
-                <h3 class="card-collection-title">{{collection.title}}</h3>
-                <p class="card-collection-caption">{{collection.bio}}</p>
-            </div>
-        </a>
-        <div class="card-collection-details">
-            <a href="javascript:void(0)" [routerLink]="['/', collection._author?.username]" title="{{collection._author?.name}}">
-                <div class="card-avatar avatar avatar--60">
+        <div *ngIf="!collection._thumbnail" [style.background-color]="'#'+collection.color" class="card-collection-background"></div>
+        <div class="card-collection-content" [class.has-thumbnail]="collection._thumbnail">
+            <h3 class="card-collection-title">{{collection.title}}</h3>
+            <p class="card-collection-caption">{{collection.bio}}</p>
+            <div class="card-collection-details">
+                <div class="card-avatar avatar avatar--32">
                     <img *ngIf="collection._author?._avatar" [src]="collection._author?._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
                     {{collection._author?.name?.charAt(0)}}
                 </div>
-            </a>
-            <div class="card-collection-details-infos">
                 <div class="card-collection-stats" [class.has-thumbnail]="collection._thumbnail">
-                    <div *ngIf="sortable" class="stat-item-list">
-                        <span class="move-item-button">Drag me</span>
-                    </div>
                     <ul *ngIf="collection.visibility.id != 'PRIVATE'" class="stats-list">
                         <li class="stat-item-list">
                             <i class="material-icons stat-icon">mode_comment</i> 0
@@ -36,12 +28,15 @@
                         <i class="material-icons stat-icon">visibility_off</i>
                     </div>
                 </div>
-                <div class="card-collection-nb">
-                    {{collection.itemsCount}}
-                    <span *ngIf="collection.itemsCount < 2">{{t._.collection?.item_sing}}</span>
-                    <span *ngIf="collection.itemsCount > 1">{{t._.collection?.item_plur}}</span>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="card-collection-bottom">
+            <div class="card-collection-reason"></div>
+            <div class="card-collection-count">
+                {{collection.itemsCount}}
+                <span *ngIf="collection.itemsCount < 2">{{t._.collection?.item_sing}}</span>
+                <span *ngIf="collection.itemsCount > 1">{{t._.collection?.item_plur}}</span>
+            </div>
+        </div>
+    </a>
 </article>
