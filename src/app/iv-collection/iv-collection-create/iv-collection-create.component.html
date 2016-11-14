@@ -1,9 +1,9 @@
 <article [class.has-thumbnail]="collection._thumbnail != empty" [style.background-color]="'#'+collection.color" class="card card-collection create-collection">
     <form (ngSubmit)="onCollectionSubmit()">
-        <div *ngIf="collection._thumbnail" class="card-collection-thumbnail thumbnail">
-            <img [src]="collection._thumbnail?.getPath('original')" />
+        <div *ngIf="collection._thumbnail" class="card-collection-background thumbnail">
+            <img [src]="collection._thumbnail?.getPath('300x250')" />
         </div>
-        <!-- <div class="card-color"></div> -->
+
         <div class="card-collection-container">
             <div class="card-collection-content">
                 <input
@@ -122,16 +122,16 @@
                     </label>
                 </label>
 
-                <button *ngIf="mode == 'CREATE'" class="btn btn-create pull-xs-right" type="submit">
+                <button *ngIf="mode == 'CREATE'" class="btn btn-create float-xs-right" type="submit">
                     {{t._.action?.create}}
                 </button>
-                <button *ngIf="mode == 'CREATE_SUB_COLLECTION'" class="btn btn-create pull-xs-right" type="submit">
+                <button *ngIf="mode == 'CREATE_SUB_COLLECTION'" class="btn btn-create float-xs-right" type="submit">
                     Create sub collection
                 </button>
-                <button *ngIf="mode == 'UPDATE'" class="btn btn-create pull-xs-right" type="submit">
+                <button *ngIf="mode == 'UPDATE'" class="btn btn-create float-xs-right" type="submit">
                     {{t._.action?.update}}
                 </button>
-                <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create pull-xs-right">
+                <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelCollectionUpdate()" class="btn btn-create float-xs-right">
                     {{t._.action?.cancel}}
                 </a>
             </div>

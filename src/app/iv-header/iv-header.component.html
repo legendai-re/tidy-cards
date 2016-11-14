@@ -1,6 +1,6 @@
 <header class="header" [class.searching]="headerState == 'search'" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
     <div class="container header-container">
-        <button class="pull-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
+        <button class="float-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
             &#9776;
         </button>
         <a href="javascript:void(0)" [routerLink]="['/']">
@@ -21,7 +21,7 @@
             </div>
         </form>
 
-        <nav class="nav nav-pills pull-xs-right collapse navbar-toggleable-md">
+        <nav class="nav nav-pills float-xs-right collapse navbar-toggleable-md">
             <li class="nav-item" *ngIf="authService.isLoggedIn">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">
                     {{t._?.header?.dashboard_title}}
@@ -37,7 +37,7 @@
                     {{authService.currentUser.name}}
                     <div class="menu-avatar avatar avatar--40">
                         <img *ngIf="authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('40x40')"  alt="{{authService.currentUser?.name}} avatar">
-                        {{authService.currentUser.name.charAt(0)}}
+                        <span class="avatar-char">{{authService.currentUser.name.charAt(0)}}</span>
                     </div>
                 </a>
                 <div class="dropdown-menu">

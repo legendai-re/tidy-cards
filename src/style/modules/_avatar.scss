@@ -1,11 +1,11 @@
 .avatar {
-    background: $whitesmoke;
+    background: $collection-purple;
     overflow: hidden;
     border-radius: 50%;
     text-align: center;
-    color: $black-op-1-2;
+    color: $white-op-3-4;
     position: relative;
-    font-weight: normal;
+    font-weight: 500;
 
     img {
         width: 100%;
@@ -19,27 +19,27 @@
 .avatar--32 {
     width: 32px;
     height: 32px;
-    line-height: 34px;
+    line-height: 32px;
     font-size: 1rem;
 }
 
 .avatar--40 {
     width: 40px;
     height: 40px;
-    line-height: 34px;
-    font-size: 1rem;
+    line-height: 40px;
+    font-size: 1.25rem;
 }
 
 .avatar--60 {
     width: 60px;
     height: 60px;
-    line-height: 53px;
-    font-size: 1.5rem;
+    line-height: 60px;
+    font-size: 1.875rem;
 }
 
 .avatar--140 {
     width: 140px;
     height: 140px;
-    line-height: 130px;
-    font-size: 3.5rem;
+    line-height: 140px;
+    font-size: 4.375rem;
 }

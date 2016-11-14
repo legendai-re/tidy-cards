@@ -40,14 +40,14 @@
             <input
                 *ngIf="mode == 'CREATE'"
                 [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-                class="btn btn-create pull-xs-right" type="submit" value="Add"/>
+                class="btn btn-create float-xs-right" type="submit" value="Add"/>
 
             <input
                 *ngIf="mode == 'UPDATE'"
                 [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-                class="btn btn-create pull-xs-right" type="submit" value="Update"/>
+                class="btn btn-create float-xs-right" type="submit" value="Update"/>
 
-            <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create pull-xs-right">Cancel</a>
+            <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create float-xs-right">Cancel</a>
         </div>
     </form>
 </div>

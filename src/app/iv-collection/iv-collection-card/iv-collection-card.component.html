@@ -13,7 +13,7 @@
             <div class="card-collection-details">
                 <div class="card-avatar avatar avatar--32">
                     <img *ngIf="collection._author?._avatar" [src]="collection._author?._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
-                    {{collection._author?.name?.charAt(0)}}
+                    <span class="avatar-char">{{collection._author?.name?.charAt(0)}}</span>
                 </div>
                 <div class="card-collection-stats" [class.has-thumbnail]="collection._thumbnail">
                     <ul *ngIf="collection.visibility.id != 'PRIVATE'" class="stats-list">
