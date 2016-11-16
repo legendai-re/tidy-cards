@@ -57,7 +57,8 @@
         "webdriver:start": "npm run webdriver-manager start",
         "webdriver:update": "npm run webdriver-manager update",
         "webpack-dev-server": "webpack-dev-server",
-        "webpack": "webpack"
+        "webpack": "webpack",
+        "postinstall": "typings install && npm run build"
     },
     "dependencies": {
         "@angular/common": "2.1.0",
