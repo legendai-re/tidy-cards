@@ -159,11 +159,8 @@
     "typescript": "^1.8.0",
     "typings": "^1.0.4",
     "url-loader": "^0.5.7",
-    "webpack-merge": "^0.14.1",
     "yui": "^3.18.1",
-    "zone.js": "~0.6.23"
-  },
-  "devDependencies": {
+    "zone.js": "~0.6.23",
     "@types/hammerjs": "^2.0.33",
     "@types/jasmine": "^2.2.34",
     "@types/jquery": "^2.0.33",
