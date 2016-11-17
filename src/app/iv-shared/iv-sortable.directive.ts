@@ -14,6 +14,7 @@ export class IvSortableDirective {
         this.el = el.nativeElement;
         let newIndex;
         let oldIndex;
+        //
         /*$(this.el).sortable({
             handle: '.move-item-button',
             cancel: '.cancel-sort',
