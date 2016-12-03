@@ -1,6 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 import { IvCollectionService }   from '../iv-collection/iv-collection.service';
 import { IvCollection }   from '../iv-collection/iv-collection.class';
+declare var $: any;
 
 @Directive({ selector: '[iv-sortable]' })
 export class IvSortableDirective {
@@ -14,8 +15,7 @@ export class IvSortableDirective {
         this.el = el.nativeElement;
         let newIndex;
         let oldIndex;
-        //
-        /*$(this.el).sortable({
+        $(this.el).sortable({
             handle: '.move-item-button',
             cancel: '.cancel-sort',
             start: (event, ui) => {
@@ -45,6 +45,6 @@ export class IvSortableDirective {
                     this.list[i].position = i;
                 }
             }
-        }).disableSelection();*/
+        }).disableSelection();
     }
 }
