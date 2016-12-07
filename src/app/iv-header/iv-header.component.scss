@@ -28,7 +28,7 @@
 }
 
 .header.has-jumbotron {
-    background-image: url(assets/patern-map.png)!important;
+    background-image: url(assets/img/patern-map.png)!important;
     background-blend-mode: soft-light;
     background-size: 50%;
     background-repeat: repeat;
@@ -68,13 +68,23 @@
 }
 
 .logo {
-    background: $white;
     width: 40px;
     height: 40px;
     float: left;
     overflow: hidden;
-    text-indent: -9999px;
     margin-right: 30px;
+    color: $white;
+    font-size: 30px;
+    line-height: 48px;
+    text-indent: 0;
+
+    &:before {
+
+    }
+
+    .logo-name {
+        text-indent: -9999px;
+    }
 }
 
 .header-search-form {
