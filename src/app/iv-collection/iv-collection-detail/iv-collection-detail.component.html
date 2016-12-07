@@ -62,6 +62,7 @@
                 (newItem)="onNewItem($event)">
             </iv-item-create>
             <iv-collection-create
+                *ngIf="isAuthor"
                 [parentCollection]="collection"
                 (newCollection)="onSubCollectionCreated($event)">
             </iv-collection-create>
