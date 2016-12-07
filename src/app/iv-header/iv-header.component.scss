@@ -27,6 +27,13 @@
     background-color: $black-op-2-3;
 }
 
+.header.has-jumbotron {
+    background-image: url(assets/patern-map.png)!important;
+    background-blend-mode: soft-light;
+    background-size: 50%;
+    background-repeat: repeat;
+}
+
 .header.searching {
     min-height: 100%;
 
@@ -150,7 +157,24 @@
     border: none;
 }
 
-.collection-page-title {
+.header-jumbotron {
+    padding: 12rem 0 10rem;
+    text-align: center;
+    color: $white;
+}
+
+.jumbotron-title {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.jumbotron-lead {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+}
+
+.page-title {
     font-size: 3rem;
     line-height: 4rem;
     margin: 50px 0 32px;

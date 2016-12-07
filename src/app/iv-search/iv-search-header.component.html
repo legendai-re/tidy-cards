@@ -1,8 +1,8 @@
 <div class="container">
-    <div *ngIf="!searchQuery">
+    <div class="col-xs-12" *ngIf="!searchQuery">
         <h2 class="section-title dark-bg">No ideas? You can visit the <a [routerLink]="['/discover']">discover page</a>...</h2>
     </div>
-    <div *ngIf="searchQuery">
+    <div class="col-xs-12" *ngIf="searchQuery">
         <div class="search-loading" *ngIf="isLoadingUsers || isLoadingCollections">
             <h2 class="section-title dark-bg">Loading...</h2>
         </div>
