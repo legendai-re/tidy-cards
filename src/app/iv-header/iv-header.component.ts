@@ -47,10 +47,12 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         this.headerState = 'default';
         this.router.events.subscribe((route) => {
             this.setPreviousRoute(route);
-            if(!this.isSearchPage(route))
-                this.setDefault();
-            else
+            if(this.isDiscoverPage(route))
+                this.setDiscoverPage();
+            else if(this.isSearchPage(route))
                 this.setSearchPage();
+            else
+                this.setDefault();
         })
     }
 
@@ -99,6 +101,18 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
 
     private isSearchPage(routeEvent){
         return routeEvent.url.split(';')[0] == '/search';
+    }
+
+    private isDiscoverPage(routeEvent){
+        return routeEvent.url.split(';')[0] == '/discover';
+    }
+
+    private setDiscoverPage(){
+        this.headerState = 'discover';
+        this.noHeader = false;
+        this.color = this.defaultColor;
+        this.image = null;
+        this.title = '';
     }
 
     private setSearchPage(){

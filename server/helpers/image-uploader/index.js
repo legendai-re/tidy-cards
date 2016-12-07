@@ -26,7 +26,7 @@ var upload = multer({
         image.type = type.name;
         image.mime = getMimeFromFile(file);
         image._user = req.user._id;
-        if(!image.type || !image.mime){
+        if(!image.type || !image.mime || image.mime=='false'){
             callback(true, null)
             return;
         }
@@ -57,7 +57,6 @@ function getMimeFromFile(file){
         case 'image/gif':
             return 'gif';
         default :
-            console.log("Bad mime");
             return false;
     }
 }
