@@ -1,4 +1,4 @@
-<header class="header" [class.has-jumbotron]="!authService.isLoggedIn && !title && headerState != 'search'" [class.searching]="headerState == 'search'" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
+<header class="header" [class.has-jumbotron]="!authService.isLoggedIn && headerState == 'discover'" [class.searching]="headerState == 'search'" [class.collapse]="noHeader" [class.has-thumbnail]="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}">
     <div class="container header-container">
         <div class="header-top col-xs-12 clearfix">
             <button class="float-xs-left navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#header-menu">
@@ -63,11 +63,11 @@
         </div>
 
         <div class="header-bottom col-xs-12">
-            <div class="header-jumbotron" *ngIf="!authService.isLoggedIn && !title && headerState != 'search'">
+            <div class="header-jumbotron" *ngIf="!authService.isLoggedIn && headerState == 'discover'">
                 <h1 class="jumbotron-title">Invow, the new way to bookmark</h1>
                 <p class="jumbotron-lead">Discover what's happening right now.<br>
                 Find collections and inspiration about the things you love.</p>
-                <a class="btn btn-primary" routerLinkActive="active" [routerLink]="['/signup']">Sign up today</a>
+                <a class="btn btn-primary" routerLinkActive="active" [routerLink]="['/signin', {mode: 'signup'}]">Sign up today</a>
                 <a href="" class="btn btn-secondary">Learn more</a>
             </div>
 
