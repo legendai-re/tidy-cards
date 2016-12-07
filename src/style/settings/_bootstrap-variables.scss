@@ -32,7 +32,7 @@ $gray-light:                #818a91 !default;
 $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
-$brand-primary:             #6B5DFF !default;
+$brand-primary:             #3E39FB !default;
 $brand-success:             #4EC36E !default;
 $brand-info:                #47CAFF !default;
 $brand-warning:             #FFAE47 !default;
@@ -136,7 +136,7 @@ $container-max-widths: (
 // Set the number of columns and specify the width of the gutters.
 
 $grid-columns:               12 !default;
-$grid-gutter-width:          1.25rem !default; // 20px
+$grid-gutter-width:          20px !default;
 
 
 // Typography
