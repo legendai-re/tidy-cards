@@ -18,6 +18,7 @@
             (keydown)="onUrlKeyDown($event)"
             (focus)="onUrlFocus()"
             [(ngModel)]="urlEntry"
+            [class.active]="!actionIntent"
             name="urlEntry"
             class="item-new-url" type="text" placeholder="Enter your url..."/>
         <button *ngIf="!actionIntent" (click)="onUrlFocus(); addDescription = true" class="btn-icon" type="button">

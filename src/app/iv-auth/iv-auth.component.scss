@@ -43,13 +43,20 @@
     @include rwd-sm {
         max-width: 350px;
     }
+
+    a {
+        text-decoration: none;
+    }
 }
 
 .auth-logo {
     width: 60px;
     height: 60px;
-    background: $black;
+    color: $purple;
     margin: 0 auto;
+    font-size: 45px;
+    line-height: 70px;
+    text-indent: 0;
 }
 
 .auth-heading {
