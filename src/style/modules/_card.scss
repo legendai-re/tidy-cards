@@ -47,3 +47,25 @@
     color: $black-light;
 
 }
+
+.card-ghost {
+    height: 255px;
+    position: relative;
+
+    &:before {
+        background: rgba(0,0,0,.1);
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+        bottom: 0;
+        border-radius: 3px;
+    }
+}
+
+.card-moving {
+    transform: rotate(3deg);
+    transform-origin: center center;
+    @include vendor-property(transition, "transform .2s ease");
+}
