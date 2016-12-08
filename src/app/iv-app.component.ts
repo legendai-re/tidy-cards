@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router }               from '@angular/router';
 import { IvAuthService }        from './iv-auth/iv-auth.service';
 import { IvLanguageService }    from './iv-language/iv-language.service';
+import { IvHeaderService }      from './iv-header/iv-header.service';
 
 @Component({
     selector: 'iv-app',
@@ -12,7 +13,7 @@ import { IvLanguageService }    from './iv-language/iv-language.service';
 
 export class IvAppComponent {
 
-    constructor(public t: IvLanguageService, public authService: IvAuthService, public router: Router) {
+    constructor(public headerService: IvHeaderService, public t: IvLanguageService, public authService: IvAuthService, public router: Router) {
         var url = null;
         this.router.events.subscribe((route) => {
             if(!url){

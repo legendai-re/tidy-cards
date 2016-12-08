@@ -77,6 +77,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
             let tmpThis = this;
             setTimeout(() => {
                 this.noHeader = true;
+                this.headerService.noHeader = true;
             }, 200)
         }else{
             this.type = event.value.type;
@@ -89,6 +90,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     private setDefault(){
         this.headerState = 'default';
         this.noHeader = false;
+        this.headerService.noHeader = false;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
@@ -110,6 +112,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     private setDiscoverPage(){
         this.headerState = 'discover';
         this.noHeader = false;
+        this.headerService.noHeader = false;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
@@ -118,6 +121,7 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     private setSearchPage(){
         this.headerState = 'search';
         this.noHeader = false;
+        this.headerService.noHeader = false;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';

@@ -3,7 +3,7 @@
     <div class="container">
         <router-outlet></router-outlet>
     </div>
-    <footer class="footer">
+    <footer class="footer" *ngIf="!headerService.noHeader">
         <div class="container">
             <div class="col-xs-12">
                 <div class="float-xs-left">
