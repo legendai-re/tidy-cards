@@ -68,4 +68,5 @@
     transform: rotate(3deg);
     transform-origin: center center;
     @include vendor-property(transition, "transform .2s ease");
+    -webkit-backface-visibility: hidden;
 }
