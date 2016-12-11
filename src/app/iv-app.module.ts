@@ -14,6 +14,7 @@ import { IvCollectionCardModule } from './iv-collection/iv-collection-card/iv-co
 import { IvCollectionCreateModule } from './iv-collection/iv-collection-create/iv-collection-create.module';
 import { IvHeaderModule }         from './iv-header/iv-header.module';
 import { IvItemModule }           from './iv-item/iv-item.module';
+import { IvPageModule }           from './iv-page/iv-page.module';
 import { IvSearchModule }         from './iv-search/iv-search.module';
 import { IvSharedModule }         from './iv-shared/iv-shared.module';
 import { IvUserModule }           from './iv-user/iv-user.module';
@@ -53,6 +54,7 @@ import { IvBase64 }            from './iv-shared/iv-base64.service';
         IvCollectionCreateModule,
         IvHeaderModule,
         IvItemModule,
+        IvPageModule,
         IvSearchModule,
         IvSharedModule,
         IvUserModule,

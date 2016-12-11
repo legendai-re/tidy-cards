@@ -10,12 +10,14 @@ import { IvAuthRoutes, authProviders } from './iv-auth/iv-auth.routing';
 import { IvUserRoutes }                from './iv-user/iv-user.routing';
 import { IvResetRoutes }               from './iv-reset/iv-reset.routing';
 import { IvSearchRoutes }              from './iv-search/iv-search.routing';
+import { IvPageRoutes }                from './iv-page/iv-page.routing';
 
 const appRoutes: Routes = [
     ...IvDiscoverRoutes,
     ...IvDashboardRoutes,
     ...IvCollectionRoutes,
     ...IvSearchRoutes,
+    ...IvPageRoutes,
     ...IvAdminRoutes,
     ...IvAuthRoutes,
     ...IvResetRoutes,
