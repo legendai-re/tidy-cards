@@ -8,6 +8,7 @@ import { IvCollectionCardModule } from './iv-collection-card/iv-collection-card.
 import { IvCollectionCreateModule } from './iv-collection-create/iv-collection-create.module';
 
 import { IvCollectionMeComponent }       from './iv-collection-me/iv-collection-me.component';
+import { IvCollectionStarredComponent }  from './iv-collection-starred/iv-collection-starred.component';
 import { IvCollectionDetailComponent }   from './iv-collection-detail/iv-collection-detail.component';
 import { IvCollectionFeaturedComponent } from './iv-collection-featured/iv-collection-featured.component';
 import { IvCollectionLastComponent }     from './iv-collection-last/iv-collection-last.component';
@@ -17,6 +18,7 @@ import { IvCollectionPopularComponent }  from './iv-collection-popular/iv-collec
   imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvItemModule, IvCollectionCardModule, IvCollectionCreateModule ],
   declarations: [
     IvCollectionMeComponent,
+    IvCollectionStarredComponent,
     IvCollectionDetailComponent,
     IvCollectionFeaturedComponent,
     IvCollectionLastComponent,
@@ -24,6 +26,7 @@ import { IvCollectionPopularComponent }  from './iv-collection-popular/iv-collec
   ],
   exports: [
     IvCollectionMeComponent,
+    IvCollectionStarredComponent,
     IvCollectionDetailComponent,
     IvCollectionFeaturedComponent,
     IvCollectionLastComponent,

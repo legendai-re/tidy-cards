@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title }                from '@angular/platform-browser';
@@ -7,7 +7,7 @@ import { SafeResourceUrl }      from '@angular/platform-browser';
 import { IvAuthService }        from '../iv-auth/iv-auth.service';
 import { IvHeaderService }      from './iv-header.service';
 import { IvLanguageService }    from '../iv-language/iv-language.service';
-import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts'
+import { IvDataLimit }          from '../iv-shared/iv-data-limit'
 import { IvSearchService }      from '../iv-search/iv-search.service';
 import { IvBase64 }             from '../iv-shared/iv-base64.service';
 
@@ -31,6 +31,13 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     public typingQueryTimer;
     public doneTypingQueryInterval: number;
     private headerSub: any;
+
+    @HostListener('document:keyup', ['$event'])
+    keypress(e: KeyboardEvent) {
+        /* if Escape pressed */
+        if(e.keyCode==27)
+            this.cancelSearch();
+    }
 
     constructor(
         private titleService: Title,
@@ -144,6 +151,8 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
     }
 
     public onQueryKeyUp(){
+        if(this.headerState!='search')
+            this.searchIntent();
         this.updateUrl();
         clearTimeout(this.typingQueryTimer);
         new Promise((resolve, reject) => {

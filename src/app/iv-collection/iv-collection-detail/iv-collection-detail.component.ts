@@ -126,7 +126,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     public onStarCliked(){
-        if(!this.authService.isLoggedIn || this.isAuthor || this.isUpdatingStar)
+        if(!this.authService.isLoggedIn || this.isUpdatingStar)
             return;
         if(!this.collection._star){
             this.addStarredCollection();

@@ -30,7 +30,7 @@ export class IvCollectionCardComponent implements OnInit{
     }
 
     public onStarCliked(){
-        if(!this.authService.isLoggedIn || this.isAuthor || this.isWorking)
+        if(!this.authService.isLoggedIn || this.isWorking)
             return;
         if(!this.collection._star){
             this.addStarredCollection();
