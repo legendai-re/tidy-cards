@@ -20,15 +20,15 @@
 /* ==========================================================================
    1. TOOLS
    ========================================================================== */
-    @import "tools/vars";
-    @import "tools/mixins";
+    @import "settings/variables";
+    @import "settings/mixins";
 
 
 /* ==========================================================================
    2. SETTINGS
    ========================================================================== */
-    //@import "settings/bootstrap-variables";
-    @import "../../node_modules/bootstrap/scss/bootstrap";
+    @import "settings/bootstrap-variables";
+    @import "~bootstrap/scss/bootstrap";
 
 /* ==========================================================================
    3. ASSETS

@@ -1,7 +1,7 @@
 .btn-create {
     background: transparent;
     font-weight: 500;
-    color: $black-op-3-4;
+    color: rgba($black, .75);
     outline: none;
     text-transform: uppercase;
 
@@ -11,8 +11,6 @@
 }
 
 .btn {
-    border-radius: 3px;
-    border: none;
 }
 
 .btn-sm {

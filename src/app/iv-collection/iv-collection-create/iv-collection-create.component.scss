@@ -2,8 +2,8 @@
    CREATE COLLECTION CARD COMPONENT
    ========================================================================== */
 
-@import '../../../style/tools/_vars.scss';
-@import '../../../style/tools/_mixins.scss';
+@import '../../../style/settings/_variables.scss';
+@import '../../../style/settings/_mixins.scss';
 
 .create-collection {
     z-index: 2;
