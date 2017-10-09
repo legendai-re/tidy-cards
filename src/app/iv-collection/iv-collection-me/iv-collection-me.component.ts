@@ -3,7 +3,7 @@ import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { IvCollectionService }             from '../iv-collection.service';
 import { IvCollection }                    from '../iv-collection.class';
-import { IvDataLimit }                     from '../../iv-shared/iv-data-limit.ts';
+import { IvDataLimit }                     from '../../iv-shared/iv-data-limit';
 import { IvAuthService }                   from '../../iv-auth/iv-auth.service';
 
 @Component({

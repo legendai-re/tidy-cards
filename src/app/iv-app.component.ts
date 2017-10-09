@@ -15,12 +15,15 @@ export class IvAppComponent {
 
     constructor(public headerService: IvHeaderService, public t: IvLanguageService, public authService: IvAuthService, public router: Router) {
         var url = null;
+        
         this.router.events.subscribe((route) => {
             if(!url){
-                url=route.url.split(';')[0];
+                var routeAny:any;
+                routeAny = route;
+                url=routeAny.url.split(';')[0];
                 let params = [];
-                for(let i=1; i<route.url.split(';').length; i++){
-                    var keyValue=route.url.split(';')[i].split('=');
+                for(let i=1; i<routeAny.url.split(';').length; i++){
+                    var keyValue=routeAny.url.split(';')[i].split('=');
                     if(keyValue.length == 2)
                         params[keyValue[0]] = decodeURIComponent(keyValue[1]);
                 }

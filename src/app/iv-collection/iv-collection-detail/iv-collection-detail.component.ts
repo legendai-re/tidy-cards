@@ -12,7 +12,7 @@ import { IvCollection }                   from '../iv-collection.class';
 import { IvHeaderService }                from '../../iv-header/iv-header.service';
 import { IvItemComponent }                from '../../iv-item/iv-item.component';
 import { IvItem }                         from '../../iv-item/iv-item.class';
-import { IvDataLimit }                    from '../../iv-shared/iv-data-limit.ts';
+import { IvDataLimit }                    from '../../iv-shared/iv-data-limit';
 
 @Component({
     templateUrl: './iv-collection-detail.component.html',

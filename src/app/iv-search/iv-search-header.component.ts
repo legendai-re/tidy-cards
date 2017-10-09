@@ -6,7 +6,7 @@ import { IvCollection }         from '../iv-collection/iv-collection.class';
 import { IvCollectionService }  from '../iv-collection/iv-collection.service';
 import { IvUser }               from '../iv-user/iv-user.class';
 import { IvUserService }        from '../iv-user/iv-user.service';
-import { IvDataLimit }          from '../iv-shared/iv-data-limit.ts';
+import { IvDataLimit }          from '../iv-shared/iv-data-limit';
 import { IvSearchService }      from './iv-search.service';
 
 @Component({

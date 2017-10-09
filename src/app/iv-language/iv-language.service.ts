@@ -61,7 +61,8 @@ export class IvLanguageService {
     }
 
     private getBrowserLanguage(){
-        var userLang = navigator.language || navigator.userLanguage;
+        console.log(navigator);
+        var userLang = navigator.language;
         return (userLang) ? userLang.split('-')[0] : 'en';
     }
 
