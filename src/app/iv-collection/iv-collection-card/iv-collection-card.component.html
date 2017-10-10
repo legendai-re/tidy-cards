@@ -31,6 +31,7 @@
             </div>
         </div>
         <div class="card-collection-bottom">
+            <div *ngIf="collection.isFeatured">featured</div>
             <div class="card-collection-reason"></div>
             <div class="card-collection-count">
                 {{collection.itemsCount}}

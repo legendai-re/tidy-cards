@@ -25,7 +25,7 @@ export class IvImgUploadService {
     }
 
     private setUploadUrl(type) {
-        this.uploader.options.url = IvApiUrl.IMAGES + '?type=' + type._id;
+        this.uploader.setOptions({url: IvApiUrl.IMAGES + '?type=' + type._id});
     }
 
     private onfileChange(event): Observable<IvImage> {

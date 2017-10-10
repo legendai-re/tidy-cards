@@ -40,6 +40,7 @@ var upload = multer({
 
 function getTypeFromReq(req){
     var typeId = req.query.type;
+    console.log(req.query);
     for(var key in imagesTypes){
         if(imagesTypes[key]._id == typeId)
             return imagesTypes[key];

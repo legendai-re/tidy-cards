@@ -158,14 +158,14 @@ router.route('/signup')
 
 router.route('/password/update')
     /**
-     * @api {put} /api/auth/signup Update a password
+     * @api {put} /api/auth/password/update Update a password
      * @apiParam {String} user_id User unique ID.
      * @apiParam {String} password User old password.
      * @apiParam {String} newPassword User new password.
      * @apiPermission ROLE_USER
      * @apiName UpdatePassword
      * @apiGroup Auth
-     * @apiSuccess {boolean} success True if logout succeed, else false.
+     * @apiSuccess {boolean} success True if the password has been successfully updated, else false.
      * @apiError (Error 400) Bad-Request Some required parameters was not provided.
      */
     .put(bruteforce.prevent, isGranted('ROLE_USER'), function(req,res){

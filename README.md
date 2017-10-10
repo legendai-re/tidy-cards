@@ -37,7 +37,7 @@ MAILER_PORT=1025
 
 Install dependencies `npm install`
 
-Install typings dependencies `typings install`. If typings is not installed on your computer run `npm install typings -g`
+Install typings `npm install typings -g`
 
 Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder
 
