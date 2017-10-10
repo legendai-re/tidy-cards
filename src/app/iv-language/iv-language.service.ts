@@ -60,8 +60,7 @@ export class IvLanguageService {
         });
     }
 
-    private getBrowserLanguage(){
-        console.log(navigator);
+    private getBrowserLanguage(){ 
         var userLang = navigator.language;
         return (userLang) ? userLang.split('-')[0] : 'en';
     }

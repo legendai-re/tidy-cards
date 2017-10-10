@@ -12,6 +12,7 @@
     "strictNullChecks": false,
     "baseUrl": "./src",
     "paths": {
+      "./node_modules/@types/*"
     },
     "lib": [
       "dom",

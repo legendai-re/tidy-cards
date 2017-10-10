@@ -32,6 +32,5 @@ if ('production' === ENV) {
 
 import 'jquery';
 import 'jquery-ui-bundle';
-import 'popper.js';
-import 'bootstrap/dist/js/bootstrap.js';
-import 'bootstrap';
+
+

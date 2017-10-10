@@ -63,11 +63,8 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
-
       'polyfills': './src/polyfills.browser.ts',
-      'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
-
+      'main': AOT ? './src/main.browser.aot.ts' : './src/main.browser.ts'
     },
 
     /**
@@ -169,6 +166,12 @@ module.exports = function (options) {
           exclude: [helpers.root('src', 'styles')]
         },
 
+        // Bootstrap 4
+        {
+          test: /bootstrap\/dist\/js\/umd\//,
+          loader: 'imports?jQuery=jquery'
+        },
+
         /**
          * Raw loader support for *.html
          * Returns file content as string
@@ -206,18 +209,11 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#plugins
      */
     plugins: [
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default']
-      }),
-
       new AssetsPlugin({
         path: helpers.root('dist'),
         filename: 'webpack-assets.json',
         prettyPrint: true
-      }),
+      }), 
       // Remove all locale files in moment with the IgnorePlugin if you don't need them
       // new IgnorePlugin(/^\.\/locale$/, /moment$/),
 
@@ -385,6 +381,12 @@ module.exports = function (options) {
        * See: https://gist.github.com/sokra/27b24881210b56bbaff7
        */
       new LoaderOptionsPlugin({}),
+
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      }),
 
       new ngcWebpack.NgcWebpackPlugin({
         /**
