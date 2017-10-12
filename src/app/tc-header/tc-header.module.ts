@@ -2,20 +2,20 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../tc-shared/tc-shared.module';
-import { IvCollectionModule } from '../tc-collection/tc-collection.module';
-import { IvSearchModule }     from '../tc-search/tc-search.module';
+import { TcSharedModule }     from '../tc-shared/tc-shared.module';
+import { TcCollectionModule } from '../tc-collection/tc-collection.module';
+import { TcSearchModule }     from '../tc-search/tc-search.module';
 
-import { IvHeaderComponent }  from './tc-header.component';
+import { TcHeaderComponent }  from './tc-header.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvCollectionModule, IvSearchModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcCollectionModule, TcSearchModule ],
   declarations: [
-    IvHeaderComponent
+    TcHeaderComponent
   ],
   exports: [
-    IvHeaderComponent
+    TcHeaderComponent
   ],
   providers: []
 })
-export class IvHeaderModule { }
+export class TcHeaderModule { }

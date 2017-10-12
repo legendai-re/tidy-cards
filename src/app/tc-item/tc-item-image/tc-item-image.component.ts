@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IvItemImage } from './tc-item-image.class';
+import { TcItemImage } from './tc-item-image.class';
 
 @Component({
     selector: 'tc-item-image',
@@ -7,9 +7,9 @@ import { IvItemImage } from './tc-item-image.class';
     styleUrls: ['../tc-item.component.scss', 'tc-item-image.component.scss']
 })
 
-export class IvItemImageComponent {
+export class TcItemImageComponent {
 
-    @Input() itemImage: IvItemImage;
+    @Input() itemImage: TcItemImage;
 
     constructor() {
     }

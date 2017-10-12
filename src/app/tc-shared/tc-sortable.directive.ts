@@ -1,17 +1,17 @@
 import { Directive, ElementRef, EventEmitter, Output, Input } from '@angular/core';
-import { IvCollectionService }   from '../tc-collection/tc-collection.service';
-import { IvCollection }   from '../tc-collection/tc-collection.class';
+import { TcCollectionService }   from '../tc-collection/tc-collection.service';
+import { TcCollection }   from '../tc-collection/tc-collection.class';
 declare var $: any;
 
 @Directive({ selector: '[tc-sortable]' })
-export class IvSortableDirective {
+export class TcSortableDirective {
 
     @Input() list: any[];
     @Output() itemMoved = new EventEmitter();
 
     private el: HTMLElement;
 
-    constructor(el: ElementRef, private collectionService: IvCollectionService) {
+    constructor(el: ElementRef, private collectionService: TcCollectionService) {
         this.el = el.nativeElement;
         var elCopy = this.el;
         let newIndex;

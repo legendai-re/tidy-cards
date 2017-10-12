@@ -1,24 +1,24 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
-import { IvCollectionService }             from '../tc-collection.service';
-import { IvCollection }                    from '../tc-collection.class';
-import { IvDataLimit }                     from '../../tc-shared/tc-data-limit';
-import { IvAuthService }                   from '../../tc-auth/tc-auth.service';
+import { TcCollectionService }             from '../tc-collection.service';
+import { TcCollection }                    from '../tc-collection.class';
+import { TcDataLimit }                     from '../../tc-shared/tc-data-limit';
+import { TcAuthService }                   from '../../tc-auth/tc-auth.service';
 
 @Component({
     templateUrl: './tc-collection-me.component.html'
 })
 
-export class IvCollectionMeComponent implements OnInit {
+export class TcCollectionMeComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
     public isUpdatingPosition: boolean;
-    public collections: IvCollection[];
+    public collections: TcCollection[];
 
-    constructor(public authService: IvAuthService, private router: Router, private collectionService: IvCollectionService) {
+    constructor(public authService: TcAuthService, private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {
@@ -41,8 +41,8 @@ export class IvCollectionMeComponent implements OnInit {
     private loadCollections(){
         this.loadingCollections = true;
         let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
+        params.set('limit', TcDataLimit.COLLECTION.toString());
+        params.set('skip', (TcDataLimit.COLLECTION * this.pageNb).toString());
         params.set('_author', this.authService.currentUser._id);
         params.set('custom_sort', 'true');
         this.collectionService.getCollections(params).subscribe(collections => {
@@ -58,7 +58,7 @@ export class IvCollectionMeComponent implements OnInit {
         });
         for(let i in collections)
             this.collections.push(collections[i]);
-        this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
+        this.haveMoreCollections = (collections.length==TcDataLimit.COLLECTION);
         this.loadingCollections = false;
     }
 

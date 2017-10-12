@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer   } from '@angular/platform-browser';
-import { IvItemYoutube } from './tc-item-youtube.class';
+import { TcItemYoutube } from './tc-item-youtube.class';
 
 @Component({
     selector: 'tc-item-youtube',
@@ -8,9 +8,9 @@ import { IvItemYoutube } from './tc-item-youtube.class';
     styleUrls: ['../tc-item.component.scss', 'tc-item-youtube.component.scss']
 })
 
-export class IvItemYoutubeComponent implements OnInit {
+export class TcItemYoutubeComponent implements OnInit {
 
-    @Input() itemYoutube: IvItemYoutube;
+    @Input() itemYoutube: TcItemYoutube;
 
     public displayVideo: boolean;
 

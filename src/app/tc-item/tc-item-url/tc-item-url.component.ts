@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IvItemUrl } from './tc-item-url.class';
+import { TcItemUrl } from './tc-item-url.class';
 
 @Component({
     selector: 'tc-item-url',
@@ -7,9 +7,9 @@ import { IvItemUrl } from './tc-item-url.class';
     styleUrls: ['../tc-item.component.scss', 'tc-item-url.component.scss']
 })
 
-export class IvItemUrlComponent {
+export class TcItemUrlComponent {
 
-    @Input() itemUrl: IvItemUrl;
+    @Input() itemUrl: TcItemUrl;
 
     constructor() {
     }

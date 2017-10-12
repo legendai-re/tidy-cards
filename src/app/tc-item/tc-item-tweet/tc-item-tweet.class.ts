@@ -1,4 +1,4 @@
-export class IvItemTweet {
+export class TcItemTweet {
 
     public _id: string;
     public createdAt: Date;
@@ -50,11 +50,11 @@ export class IvItemTweet {
         if(!obj)
             return null;
         if(typeof obj === 'string'){
-            var itemTweet = new IvItemTweet();
+            var itemTweet = new TcItemTweet();
             itemTweet._id = obj;
             return itemTweet;
         }
-        return new IvItemTweet(
+        return new TcItemTweet(
             obj._id,
             obj.createdAt,
             obj.updatedAt,

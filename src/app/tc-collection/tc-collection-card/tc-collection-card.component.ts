@@ -1,11 +1,11 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
-import { IvLanguageService } from '../../tc-language/tc-language.service';
-import { IvAuthService } from '../../tc-auth/tc-auth.service';
-import { IvStarService } from '../../tc-star/tc-star.service';
-import { IvCollection } from '../tc-collection.class';
-import { IvApiUrl } from '../../tc-shared/tc-api-url';
+import { TcLanguageService } from '../../tc-language/tc-language.service';
+import { TcAuthService } from '../../tc-auth/tc-auth.service';
+import { TcStarService } from '../../tc-star/tc-star.service';
+import { TcCollection } from '../tc-collection.class';
+import { TcApiUrl } from '../../tc-shared/tc-api-url';
 
 @Component({
     selector: 'tc-collection-card',
@@ -13,15 +13,15 @@ import { IvApiUrl } from '../../tc-shared/tc-api-url';
     styleUrls: ['tc-collection-card.component.scss'],
 })
 
-export class IvCollectionCardComponent implements OnInit{
+export class TcCollectionCardComponent implements OnInit{
 
     public isAuthor: boolean;
     private isWorking: boolean;
 
-    @Input() collection: IvCollection;
+    @Input() collection: TcCollection;
     @Input() sortable: boolean;
 
-    constructor(public t: IvLanguageService, private starService: IvStarService, private authService: IvAuthService, private http: Http) {
+    constructor(public t: TcLanguageService, private starService: TcStarService, private authService: TcAuthService, private http: Http) {
     }
 
     ngOnInit(){

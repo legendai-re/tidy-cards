@@ -2,27 +2,27 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../tc-shared/tc-shared.module';
-import { IvCollectionModule } from '../tc-collection/tc-collection.module';
-import { IvCollectionCardModule } from '../tc-collection/tc-collection-card/tc-collection-card.module';
+import { TcSharedModule }     from '../tc-shared/tc-shared.module';
+import { TcCollectionModule } from '../tc-collection/tc-collection.module';
+import { TcCollectionCardModule } from '../tc-collection/tc-collection-card/tc-collection-card.module';
 
-import { IvUserComponent }         from './tc-user.component';
-import { IvConfirmEmailComponent } from './tc-confirm-email/tc-confirm-email.component';
-import { IvUserPrivateComponent }  from './tc-user-private/tc-user-private.component';
-import { IvUserPublicComponent }   from './tc-user-public/tc-user-public.component';
+import { TcUserComponent }         from './tc-user.component';
+import { TcConfirmEmailComponent } from './tc-confirm-email/tc-confirm-email.component';
+import { TcUserPrivateComponent }  from './tc-user-private/tc-user-private.component';
+import { TcUserPublicComponent }   from './tc-user-public/tc-user-public.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvCollectionModule, IvCollectionCardModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcCollectionModule, TcCollectionCardModule ],
   declarations: [
-    IvUserComponent,
-    IvConfirmEmailComponent,
-    IvUserPrivateComponent,
-    IvUserPublicComponent,
+    TcUserComponent,
+    TcConfirmEmailComponent,
+    TcUserPrivateComponent,
+    TcUserPublicComponent,
   ],
   exports: [
-    IvUserComponent,
-    IvConfirmEmailComponent
+    TcUserComponent,
+    TcConfirmEmailComponent
   ],
   providers: []
 })
-export class IvUserModule { }
+export class TcUserModule { }

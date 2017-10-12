@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { Router, ActivatedRoute }      from '@angular/router';
-import { IvAuthService } from './tc-auth.service';
-import { IvLanguageService } from '../tc-language/tc-language.service';
+import { TcAuthService } from './tc-auth.service';
+import { TcLanguageService } from '../tc-language/tc-language.service';
 
 @Component({
     selector: 'tc-signin',
@@ -9,7 +9,7 @@ import { IvLanguageService } from '../tc-language/tc-language.service';
     styleUrls: ['./tc-auth.component.scss']
 })
 
-export class IvSigninComponent implements OnInit, OnDestroy{
+export class TcSigninComponent implements OnInit, OnDestroy{
 
     public sub: any;
     public encodedNextUrl: string;
@@ -20,7 +20,7 @@ export class IvSigninComponent implements OnInit, OnDestroy{
     public longinInProgress: boolean;
     public errorStatusCode: number;
 
-    constructor(public t: IvLanguageService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(public t: TcLanguageService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
     }
 
     ngOnInit(){

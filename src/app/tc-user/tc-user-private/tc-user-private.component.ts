@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, Renderer, ElementRef }    from '@angular/core';
 import { Router } from '@angular/router';
 import { Title }                from '@angular/platform-browser';
-import { IvAuthService }        from '../../tc-auth/tc-auth.service';
-import { IvLanguageService }    from '../../tc-language/tc-language.service';
-import { IvImage }              from '../../tc-image/tc-image.class';
-import { IvImgUploadService }   from '../../tc-image/tc-image-upload.service';
-import { IvUser }               from '../tc-user.class';
-import { IvUserService }        from '../tc-user.service';
+import { TcAuthService }        from '../../tc-auth/tc-auth.service';
+import { TcLanguageService }    from '../../tc-language/tc-language.service';
+import { TcImage }              from '../../tc-image/tc-image.class';
+import { TcImgUploadService }   from '../../tc-image/tc-image-upload.service';
+import { TcUser }               from '../tc-user.class';
+import { TcUserService }        from '../tc-user.service';
 
 @Component({
     selector: 'tc-private-profile',
@@ -14,7 +14,7 @@ import { IvUserService }        from '../tc-user.service';
     templateUrl: './tc-user-private.component.html'
 })
 
-export class IvUserPrivateComponent implements OnInit {
+export class TcUserPrivateComponent implements OnInit {
 
     @ViewChild('nameInput') nameInput: ElementRef;
     @ViewChild('usernameInput') usernameInput: ElementRef;
@@ -42,8 +42,8 @@ export class IvUserPrivateComponent implements OnInit {
     public isUpdatingLanguage: boolean;
 
     public uploader;
-    public tmpAvatar: IvImage;
-    public tmpUser: IvUser;
+    public tmpAvatar: TcImage;
+    public tmpUser: TcUser;
 
     public password: string;
     public newPassword: string;
@@ -51,14 +51,14 @@ export class IvUserPrivateComponent implements OnInit {
     public isUpdatingPassword: boolean;
     public passwordUpdateState: string;
 
-    constructor(public t: IvLanguageService, private _renderer: Renderer, private userService: IvUserService, private imgUploadService: IvImgUploadService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: TcLanguageService, private _renderer: Renderer, private userService: TcUserService, private imgUploadService: TcImgUploadService, public authService: TcAuthService, public router: Router) {
         this.uploader = imgUploadService.uploader;
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
     }
 
     ngOnInit(){
-        this.tmpUser = IvUser.createFormJson(this.authService.currentUser);
+        this.tmpUser = TcUser.createFormJson(this.authService.currentUser);
         this.tmpUser._avatar = null;
 
         this.usernameState = 'PENDING';
@@ -111,12 +111,12 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public onEmailKeyUp(){
-        this.emailState = IvUser.isValidEmail(this.tmpUser.email) ? 'VALIDATING' : 'INVALID';
+        this.emailState = TcUser.isValidEmail(this.tmpUser.email) ? 'VALIDATING' : 'INVALID';
         clearTimeout(this.typingEmailTimer);
         new Promise((resolve, reject) => {
             this.typingEmailTimer = setTimeout(()=>{resolve(true);}, this.doneTypingEmailInterval);
         }).then((e)=>{
-            if(IvUser.isValidEmail(this.tmpUser.email))
+            if(TcUser.isValidEmail(this.tmpUser.email))
                 this.checkEmail();
         });
     }
@@ -140,7 +140,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.userService.getValidEmail(this.tmpUser.email).subscribe((isValid) => {
             if(!isValid)
                 return this.cancelUpdateEmail();
-            let user = IvUser.createFormJson({_id: this.tmpUser._id, email: this.tmpUser.email});
+            let user = TcUser.createFormJson({_id: this.tmpUser._id, email: this.tmpUser.email});
             this.userService.putUser(user).subscribe((userResponse) => {
                 this.tmpUser.email = userResponse.email;
                 this.authService.currentUser.email = userResponse.email;
@@ -153,12 +153,12 @@ export class IvUserPrivateComponent implements OnInit {
     }
 
     public onUsernameKeyUp(){
-        this.usernameState = IvUser.isValidUsername(this.tmpUser.username) ? 'VALIDATING' : 'INVALID';
+        this.usernameState = TcUser.isValidUsername(this.tmpUser.username) ? 'VALIDATING' : 'INVALID';
         clearTimeout(this.typingUsernameTimer);
         new Promise((resolve, reject) => {
             this.typingUsernameTimer = setTimeout(()=>{resolve(true);}, this.doneTypingUsernameInterval);
         }).then((e)=>{
-            if(IvUser.isValidUsername(this.tmpUser.username))
+            if(TcUser.isValidUsername(this.tmpUser.username))
                 this.checkUsername();
         });
     }
@@ -178,7 +178,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.userService.getValidUsername(this.tmpUser.username).subscribe((isValid) => {
             if(!isValid)
                 return this.cancelUpdateUsername();
-            let user = IvUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
+            let user = TcUser.createFormJson({_id: this.tmpUser._id, username: this.tmpUser.username});
             this.userService.putUser(user).subscribe((userResponse) => {
                 this.tmpUser.username = userResponse.username;
                 this.authService.currentUser.username = userResponse.username;
@@ -192,7 +192,7 @@ export class IvUserPrivateComponent implements OnInit {
         this.isUpdatingLanguage = true;
         var tmpThis = this;
         setTimeout(function(){
-            let user = IvUser.createFormJson({_id: tmpThis.tmpUser._id, language: tmpThis.tmpUser.language});
+            let user = TcUser.createFormJson({_id: tmpThis.tmpUser._id, language: tmpThis.tmpUser.language});
             tmpThis.userService.putUser(user).subscribe((userResponse) => {
                 tmpThis.tmpUser.language = userResponse.language;
                 tmpThis.authService.currentUser.language = userResponse.language;
@@ -205,7 +205,7 @@ export class IvUserPrivateComponent implements OnInit {
 
     public onAvatarFileChange(event) {
         this.isUploadingAvatar = true;
-        this.imgUploadService.tryUploadAndGetImage(event, IvImage.getTypes().AVATAR).subscribe(image => {
+        this.imgUploadService.tryUploadAndGetImage(event, TcImage.getTypes().AVATAR).subscribe(image => {
             if(image && this.updateGeneralInfoIntent)
                 this.tmpUser._avatar = image;
             this.isUploadingAvatar = false;
@@ -216,7 +216,7 @@ export class IvUserPrivateComponent implements OnInit {
         if(this.isUploadingAvatar)
             return;
         this.isUpdadingGeneralInfo = true;
-        let user = new IvUser();
+        let user = new TcUser();
         user._id = this.tmpUser._id;
         user.name = this.tmpUser.name;
         user.bio = this.tmpUser.bio;

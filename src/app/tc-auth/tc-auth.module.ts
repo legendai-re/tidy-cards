@@ -2,27 +2,27 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../tc-shared/tc-shared.module';
+import { TcSharedModule }     from '../tc-shared/tc-shared.module';
 
-import { IvAuthComponent }   from './tc-auth.component';
-import { IvSigninComponent } from './tc-signin.component';
-import { IvSignupComponent } from './tc-signup.component';
-import { IvLogoutComponent } from './tc-logout.component';
+import { TcAuthComponent }   from './tc-auth.component';
+import { TcSigninComponent } from './tc-signin.component';
+import { TcSignupComponent } from './tc-signup.component';
+import { TcLogoutComponent } from './tc-logout.component';
 
 @NgModule({
-    imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule ],
+    imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule ],
     declarations: [
-        IvAuthComponent,
-        IvSigninComponent,
-        IvSignupComponent,
-        IvLogoutComponent
+        TcAuthComponent,
+        TcSigninComponent,
+        TcSignupComponent,
+        TcLogoutComponent
     ],
     exports: [
-        IvAuthComponent,
-        IvSigninComponent,
-        IvSignupComponent,
-        IvLogoutComponent
+        TcAuthComponent,
+        TcSigninComponent,
+        TcSignupComponent,
+        TcLogoutComponent
     ],
     providers: []
 })
-export class IvAuthModule { }
+export class TcAuthModule { }

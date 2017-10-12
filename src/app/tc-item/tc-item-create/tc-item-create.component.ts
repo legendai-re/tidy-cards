@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { IvCollection }           from '../../tc-collection/tc-collection.class';
-import { IvItem }                 from '../tc-item.class';
-import { IvItemService }          from '../tc-item.service'
+import { TcCollection }           from '../../tc-collection/tc-collection.class';
+import { TcItem }                 from '../tc-item.class';
+import { TcItemService }          from '../tc-item.service'
 
 @Component({
     selector: 'tc-item-create',
@@ -10,10 +10,10 @@ import { IvItemService }          from '../tc-item.service'
     templateUrl: './tc-item-create.component.html'
 })
 
-export class IvItemCreateComponent implements OnInit {
+export class TcItemCreateComponent implements OnInit {
 
-    @Input() item: IvItem;
-    @Input() collection: IvCollection;
+    @Input() item: TcItem;
+    @Input() collection: TcCollection;
     @Output() newItem = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
@@ -29,9 +29,9 @@ export class IvItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
-    constructor(private itemService: IvItemService) {
+    constructor(private itemService: TcItemService) {
         this.doneTypingInterval = 1000;
-        this.itemTypes = IvItem.ITEM_TYPES;
+        this.itemTypes = TcItem.ITEM_TYPES;
     }
 
     ngOnInit() {
@@ -51,7 +51,7 @@ export class IvItemCreateComponent implements OnInit {
 
     private initCreateMode(){
         this.mode = 'CREATE';
-        this.item = new IvItem();
+        this.item = new TcItem();
         this.item._collection = this.collection._id;
         this.urlEntry = '';
         this.validUrl = false;
@@ -60,7 +60,7 @@ export class IvItemCreateComponent implements OnInit {
 
     private initUpdateMode(){
         this.mode = 'UPDATE';
-        this.item = IvItem.createFormJson(this.item);
+        this.item = TcItem.createFormJson(this.item);
         if(this.item._content!=null){
             this.urlEntry = this.item._content.url;
             this.lastCheckedUrlEntry = this.urlEntry;
@@ -135,7 +135,7 @@ export class IvItemCreateComponent implements OnInit {
     }
 
     private isValidToSave(){
-        if(!this.item._content)this.item.type = IvItem.ITEM_TYPES.TEXT;
+        if(!this.item._content)this.item.type = TcItem.ITEM_TYPES.TEXT;
         return !this.loadingContent && (this.item._content || !this.item._content && this.item.description);
     }
 

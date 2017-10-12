@@ -1,22 +1,22 @@
 import { Component, OnInit }         from '@angular/core';
 import { Router } from '@angular/router';
 import { URLSearchParams  }          from '@angular/http';
-import { IvCollectionService }       from '../tc-collection.service';
-import { IvCollection }              from '../tc-collection.class';
-import { IvDataLimit }               from '../../tc-shared/tc-data-limit';
+import { TcCollectionService }       from '../tc-collection.service';
+import { TcCollection }              from '../tc-collection.class';
+import { TcDataLimit }               from '../../tc-shared/tc-data-limit';
 
 @Component({
     templateUrl: './tc-collection-last.component.html'
 })
 
-export class IvCollectionLastComponent implements OnInit {
+export class TcCollectionLastComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
-    public collections: IvCollection[];
+    public collections: TcCollection[];
 
-    constructor( private router: Router, private collectionService: IvCollectionService) {
+    constructor( private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {
@@ -39,8 +39,8 @@ export class IvCollectionLastComponent implements OnInit {
     private loadCollections(){
         this.loadingCollections = true;
         let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
+        params.set('limit', TcDataLimit.COLLECTION.toString());
+        params.set('skip', (TcDataLimit.COLLECTION * this.pageNb).toString());
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
         this.collectionService.getCollections(params).subscribe(collections => {
@@ -51,7 +51,7 @@ export class IvCollectionLastComponent implements OnInit {
     private onCollectionsReceived(collections){
         for(let i in collections)
             this.collections.push(collections[i]);
-        this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
+        this.haveMoreCollections = (collections.length==TcDataLimit.COLLECTION);
         this.loadingCollections = false;
     }
 }

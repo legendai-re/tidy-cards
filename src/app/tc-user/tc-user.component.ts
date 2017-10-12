@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { Observable }                   from 'rxjs/Observable';
-import { IvAuthService }                from '../tc-auth/tc-auth.service';
-import { IvUser }                       from './tc-user.class';
+import { TcAuthService }                from '../tc-auth/tc-auth.service';
+import { TcUser }                       from './tc-user.class';
 
 @Component({
     templateUrl: './tc-user.component.html',
     styleUrls: ['tc-user.component.scss']
 })
 
-export class IvUserComponent implements OnInit, OnDestroy  {
+export class TcUserComponent implements OnInit, OnDestroy  {
 
     private userId: string;
     private sub: any;
     private authSub: any
     private displayPublic: boolean;
 
-    constructor(private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
         this.displayPublic = true;
         this.authSub = this.authService.getAuthInitializedEmitter()
         .subscribe((value) => {

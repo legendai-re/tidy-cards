@@ -2,18 +2,18 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../../tc-shared/tc-shared.module';
+import { TcSharedModule }     from '../../tc-shared/tc-shared.module';
 
-import { IvCollectionCardComponent }     from './tc-collection-card.component';
+import { TcCollectionCardComponent }     from './tc-collection-card.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule ],
   declarations: [
-    IvCollectionCardComponent
+    TcCollectionCardComponent
   ],
   exports: [
-    IvCollectionCardComponent
+    TcCollectionCardComponent
   ],
   providers: []
 })
-export class IvCollectionCardModule { }
+export class TcCollectionCardModule { }

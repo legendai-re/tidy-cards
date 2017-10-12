@@ -4,19 +4,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Title }                from '@angular/platform-browser';
 import { URLSearchParams  }     from '@angular/http';
 import { SafeResourceUrl }      from '@angular/platform-browser';
-import { IvAuthService }        from '../tc-auth/tc-auth.service';
-import { IvHeaderService }      from './tc-header.service';
-import { IvLanguageService }    from '../tc-language/tc-language.service';
-import { IvDataLimit }          from '../tc-shared/tc-data-limit'
-import { IvSearchService }      from '../tc-search/tc-search.service';
-import { IvBase64 }             from '../tc-shared/tc-base64.service';
+import { TcAuthService }        from '../tc-auth/tc-auth.service';
+import { TcHeaderService }      from './tc-header.service';
+import { TcLanguageService }    from '../tc-language/tc-language.service';
+import { TcDataLimit }          from '../tc-shared/tc-data-limit'
+import { TcSearchService }      from '../tc-search/tc-search.service';
+import { TcBase64 }             from '../tc-shared/tc-base64.service';
 
 @Component({
     selector: 'tc-header',
     templateUrl: './tc-header.component.html',
     styleUrls: ['./tc-header.component.scss']
 })
-export class IvHeaderComponent implements OnInit, OnDestroy{
+export class TcHeaderComponent implements OnInit, OnDestroy{
 
     public searchQuery: string;
     public lastSearchQuery: string;
@@ -41,12 +41,12 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
 
     constructor(
         private titleService: Title,
-        private Base64: IvBase64,
+        private Base64: TcBase64,
         private _location: Location,
-        public t: IvLanguageService,
-        public headerService: IvHeaderService,
-        public searchService: IvSearchService,
-        public authService: IvAuthService,
+        public t: TcLanguageService,
+        public headerService: TcHeaderService,
+        public searchService: TcSearchService,
+        public authService: TcAuthService,
         public router: Router,
         public route: ActivatedRoute) {
         this.doneTypingQueryInterval = 250;

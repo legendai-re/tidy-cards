@@ -1,7 +1,7 @@
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from '@angular/http';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { IvApiUrl }               from '../tc-shared/tc-api-url';
+import { TcApiUrl }               from '../tc-shared/tc-api-url';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class IvResetService {
+export class TcResetService {
 
     constructor (private http: Http) {}
 
@@ -20,7 +20,7 @@ export class IvResetService {
         let body = JSON.stringify({user_id: userId});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(IvApiUrl.RESET_INITIATE, body, options)
+        return this.http.put(TcApiUrl.RESET_INITIATE, body, options)
             .map((res) => {return res.json()})
             .catch(this.handleError);
     }
@@ -29,7 +29,7 @@ export class IvResetService {
         let body = JSON.stringify({reset_token: resetToken, password: password});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(IvApiUrl.RESET_COMPLETE, body, options)
+        return this.http.put(TcApiUrl.RESET_COMPLETE, body, options)
             .map((res) => {return res.json()})
             .catch(this.handleError);
     }

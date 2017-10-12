@@ -1,4 +1,4 @@
-export class IvItemUrl {
+export class TcItemUrl {
 
     public _id: string;
     public createdAt: Date;
@@ -43,11 +43,11 @@ export class IvItemUrl {
         if(!obj)
             return null;
         if(typeof obj === 'string'){
-            var itemUrl = new IvItemUrl();
+            var itemUrl = new TcItemUrl();
             itemUrl._id = obj;
             return itemUrl;
         }
-        return new IvItemUrl(
+        return new TcItemUrl(
             obj._id,
             obj.createdAt,
             obj.updatedAt,

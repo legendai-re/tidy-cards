@@ -1,4 +1,4 @@
-export class IvImage {
+export class TcImage {
 
     public _id: string;
     public type;
@@ -6,7 +6,7 @@ export class IvImage {
     public baseUrl: string;
 
     constructor(_id?: string, type?: Object | string, mime?: string, baseUrl?: string) {
-        let types = IvImage.getTypes();
+        let types = TcImage.getTypes();
         this._id = _id;
         this.type = typeof type === 'string' ? types[type] : type;
         this.mime = mime;
@@ -18,7 +18,7 @@ export class IvImage {
             return null;
         }
 
-        return new IvImage(
+        return new TcImage(
             obj._id,
             obj.type,
             obj.mime,

@@ -1,23 +1,23 @@
 import { Component, OnInit }   from '@angular/core';
-import { IvAuthService }          from '../tc-auth/tc-auth.service';
+import { TcAuthService }          from '../tc-auth/tc-auth.service';
 import { Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
-import { IvCollectionService }   from '../tc-collection/tc-collection.service';
-import { IvCollection } from '../tc-collection/tc-collection.class';
-import { IvLanguageService } from '../tc-language/tc-language.service';
+import { TcCollectionService }   from '../tc-collection/tc-collection.service';
+import { TcCollection } from '../tc-collection/tc-collection.class';
+import { TcLanguageService } from '../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-dashboard.component.html',
     styleUrls: ['./tc-dashboard.component.scss']
 })
 
-export class IvDashboardComponent implements OnInit {
+export class TcDashboardComponent implements OnInit {
 
-    public myCollections: IvCollection[];
-    public myFavoriteCollections: IvCollection[];
+    public myCollections: TcCollection[];
+    public myFavoriteCollections: TcCollection[];
     public isUpdatingPosition: boolean;
 
-    constructor(public t: IvLanguageService, public authService: IvAuthService, private router: Router, private service: IvCollectionService) {
+    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private service: TcCollectionService) {
     }
 
     ngOnInit() {

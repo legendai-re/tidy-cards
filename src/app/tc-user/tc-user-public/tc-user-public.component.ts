@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
-import { IvAuthService }                from '../../tc-auth/tc-auth.service';
-import { IvCollection }                 from '../../tc-collection/tc-collection.class';
-import { IvCollectionService }          from '../../tc-collection/tc-collection.service';
-import { IvUserService }                from '../tc-user.service';
-import { IvUser }                       from '../tc-user.class';
+import { TcAuthService }                from '../../tc-auth/tc-auth.service';
+import { TcCollection }                 from '../../tc-collection/tc-collection.class';
+import { TcCollectionService }          from '../../tc-collection/tc-collection.service';
+import { TcUserService }                from '../tc-user.service';
+import { TcUser }                       from '../tc-user.class';
 
 @Component({
     selector: 'tc-public-profile',
@@ -13,16 +13,16 @@ import { IvUser }                       from '../tc-user.class';
     templateUrl: './tc-user-public.component.html'
 })
 
-export class IvUserPublicComponent implements OnInit, OnDestroy  {
+export class TcUserPublicComponent implements OnInit, OnDestroy  {
 
-    public userCollections: IvCollection[];
-    public userStarredCollections: IvCollection[];
+    public userCollections: TcCollection[];
+    public userStarredCollections: TcCollection[];
     public searchParams: string;
     public isLoadingUser: boolean;
-    public user: IvUser;
+    public user: TcUser;
     private sub: any;
 
-    constructor(private collectionService: IvCollectionService, private userService: IvUserService, private route: ActivatedRoute, public authService: IvAuthService, public router: Router) {
+    constructor(private collectionService: TcCollectionService, private userService: TcUserService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
     }
 
     ngOnInit() {

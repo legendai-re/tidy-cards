@@ -1,6 +1,6 @@
-import { IvSearchComponent } from './tc-search.component';
+import { TcSearchComponent } from './tc-search.component';
 import { GrantedUser } from '../tc-auth/tc-auth.guard';
 
-export const IvSearchRoutes = [
-{ path: 'search', component: IvSearchComponent },
+export const TcSearchRoutes = [
+{ path: 'search', component: TcSearchComponent },
 ];

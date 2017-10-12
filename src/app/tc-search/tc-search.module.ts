@@ -2,23 +2,23 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../tc-shared/tc-shared.module';
-import { IvCollectionModule } from '../tc-collection/tc-collection.module';
-import { IvCollectionCardModule } from '../tc-collection/tc-collection-card/tc-collection-card.module';
+import { TcSharedModule }     from '../tc-shared/tc-shared.module';
+import { TcCollectionModule } from '../tc-collection/tc-collection.module';
+import { TcCollectionCardModule } from '../tc-collection/tc-collection-card/tc-collection-card.module';
 
-import { IvSearchComponent }       from './tc-search.component';
-import { IvSearchHeaderComponent } from './tc-search-header.component';
+import { TcSearchComponent }       from './tc-search.component';
+import { TcSearchHeaderComponent } from './tc-search-header.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule, IvCollectionModule, IvCollectionCardModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcCollectionModule, TcCollectionCardModule ],
   declarations: [
-    IvSearchComponent,
-    IvSearchHeaderComponent
+    TcSearchComponent,
+    TcSearchHeaderComponent
   ],
   exports: [
-    IvSearchComponent,
-    IvSearchHeaderComponent
+    TcSearchComponent,
+    TcSearchHeaderComponent
   ],
   providers: []
 })
-export class IvSearchModule { }
+export class TcSearchModule { }

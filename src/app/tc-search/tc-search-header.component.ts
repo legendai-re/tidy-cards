@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
-import { IvHeaderService }      from '../tc-header/tc-header.service';
-import { IvCollection }         from '../tc-collection/tc-collection.class';
-import { IvCollectionService }  from '../tc-collection/tc-collection.service';
-import { IvUser }               from '../tc-user/tc-user.class';
-import { IvUserService }        from '../tc-user/tc-user.service';
-import { IvDataLimit }          from '../tc-shared/tc-data-limit';
-import { IvSearchService }      from './tc-search.service';
+import { TcHeaderService }      from '../tc-header/tc-header.service';
+import { TcCollection }         from '../tc-collection/tc-collection.class';
+import { TcCollectionService }  from '../tc-collection/tc-collection.service';
+import { TcUser }               from '../tc-user/tc-user.class';
+import { TcUserService }        from '../tc-user/tc-user.service';
+import { TcDataLimit }          from '../tc-shared/tc-data-limit';
+import { TcSearchService }      from './tc-search.service';
 
 @Component({
     selector: 'tc-search-header',
@@ -15,25 +15,25 @@ import { IvSearchService }      from './tc-search.service';
     styleUrls: ['./tc-search-header.component.scss']
 })
 
-export class IvSearchHeaderComponent implements OnInit, OnDestroy {
+export class TcSearchHeaderComponent implements OnInit, OnDestroy {
 
     public emittedSearchQuery: string;
     public searchQuery: string;
-    public users: IvUser[];
+    public users: TcUser[];
     public usersPageNb: number;
     public isLoadingUsers: boolean;
-    public collections: IvCollection[];
+    public collections: TcCollection[];
     public collectionsPageNb: number;
     public isLoadingCollections: boolean;
     public requestTime: Date;
     private searchSub: any;
 
     constructor(
-        private searchService: IvSearchService,
-        private userService: IvUserService,
-        private collectionService: IvCollectionService,
+        private searchService: TcSearchService,
+        private userService: TcUserService,
+        private collectionService: TcCollectionService,
         public route: ActivatedRoute,
-        public headerService: IvHeaderService,
+        public headerService: TcHeaderService,
         public router: Router) {
 
     }
@@ -64,8 +64,8 @@ export class IvSearchHeaderComponent implements OnInit, OnDestroy {
     public searchCollections(){
         this.isLoadingCollections = true;
         let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.collectionsPageNb).toString());
+        params.set('limit', TcDataLimit.COLLECTION.toString());
+        params.set('skip', (TcDataLimit.COLLECTION * this.collectionsPageNb).toString());
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
         params.set('search', encodeURIComponent(this.searchQuery));
@@ -83,8 +83,8 @@ export class IvSearchHeaderComponent implements OnInit, OnDestroy {
     public searchUsers(){
         this.isLoadingUsers = true;
         let params = new URLSearchParams();
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.usersPageNb).toString());
+        params.set('limit', TcDataLimit.COLLECTION.toString());
+        params.set('skip', (TcDataLimit.COLLECTION * this.usersPageNb).toString());
         params.set('populate', '_avatar');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');

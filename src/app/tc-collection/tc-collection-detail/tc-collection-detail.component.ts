@@ -3,25 +3,25 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
-import { IvLanguageService }              from '../../tc-language/tc-language.service';
-import { IvAuthService }                  from '../../tc-auth/tc-auth.service';
-import { IvStarService }                  from '../../tc-star/tc-star.service';
-import { IvCollectionService }            from '../tc-collection.service';
-import { IvItemService }                  from '../../tc-item/tc-item.service';
-import { IvCollection }                   from '../tc-collection.class';
-import { IvHeaderService }                from '../../tc-header/tc-header.service';
-import { IvItemComponent }                from '../../tc-item/tc-item.component';
-import { IvItem }                         from '../../tc-item/tc-item.class';
-import { IvDataLimit }                    from '../../tc-shared/tc-data-limit';
+import { TcLanguageService }              from '../../tc-language/tc-language.service';
+import { TcAuthService }                  from '../../tc-auth/tc-auth.service';
+import { TcStarService }                  from '../../tc-star/tc-star.service';
+import { TcCollectionService }            from '../tc-collection.service';
+import { TcItemService }                  from '../../tc-item/tc-item.service';
+import { TcCollection }                   from '../tc-collection.class';
+import { TcHeaderService }                from '../../tc-header/tc-header.service';
+import { TcItemComponent }                from '../../tc-item/tc-item.component';
+import { TcItem }                         from '../../tc-item/tc-item.class';
+import { TcDataLimit }                    from '../../tc-shared/tc-data-limit';
 
 @Component({
     templateUrl: './tc-collection-detail.component.html',
     styleUrls: ['tc-collection-detail.component.scss']
 })
 
-export class IvCollectionDetailComponent implements OnInit, OnDestroy {
+export class TcCollectionDetailComponent implements OnInit, OnDestroy {
 
-    public collection: IvCollection;
+    public collection: TcCollection;
     public searchParams: string;
     public isLoadingCollection: boolean;
     public pageNb: number;
@@ -32,18 +32,18 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     public isUpdatingStar: boolean;
     public updateCollectionIntent: boolean;
     public isUpdatingPosition: boolean;
-    public subCollectionTemplate: IvCollection;
+    public subCollectionTemplate: TcCollection;
     private sub: any;
 
     constructor(
-        public t: IvLanguageService,
-        private authService: IvAuthService,
-        private headerService: IvHeaderService,
+        public t: TcLanguageService,
+        private authService: TcAuthService,
+        private headerService: TcHeaderService,
         private route: ActivatedRoute,
         private router: Router,
-        private collectionService: IvCollectionService,
-        private itemService: IvItemService,
-        private starService: IvStarService) {
+        private collectionService: TcCollectionService,
+        private itemService: TcItemService,
+        private starService: TcStarService) {
     }
 
     ngOnInit() {
@@ -51,7 +51,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         this.loadingItems = false;
         this.haveMoreItems = true;
         this.isAuthor = false;
-        this.subCollectionTemplate = new IvCollection();
+        this.subCollectionTemplate = new TcCollection();
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
             this.initCollection(params);
@@ -89,8 +89,8 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         this.loadingItems = true;
         let params = new URLSearchParams();
         params.set('_collection', this.collection._id);
-        params.set('limit', IvDataLimit.ITEM.toString());
-        params.set('skip', (IvDataLimit.ITEM * this.pageNb).toString());
+        params.set('limit', TcDataLimit.ITEM.toString());
+        params.set('skip', (TcDataLimit.ITEM * this.pageNb).toString());
         params.set('custom_sort', 'true');
         this.itemService.getItems(params).subscribe((items) => {
             this.onItemsReceived(items);
@@ -105,7 +105,7 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
         });
         for(let i in items)
             this.collection._items.push(items[i]);
-        this.haveMoreItems = (items.length===IvDataLimit.ITEM);
+        this.haveMoreItems = (items.length===TcDataLimit.ITEM);
         this.loadingItems = false;
         this.itemLoaded = true;
     }
@@ -195,9 +195,9 @@ export class IvCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     public onSubCollectionCreated(event){
-        let itemCollection = new IvItem();
+        let itemCollection = new TcItem();
         itemCollection._content = event.value;
-        itemCollection.type = IvItem.ITEM_TYPES.COLLECTION;
+        itemCollection.type = TcItem.ITEM_TYPES.COLLECTION;
         itemCollection._collection = this.collection._id;
         this.itemService.postItem(itemCollection).subscribe((response) => {
             this.router.navigate(['/c', event.value._id]);

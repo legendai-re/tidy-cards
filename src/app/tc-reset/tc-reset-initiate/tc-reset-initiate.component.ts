@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
-import { IvResetService }               from '../tc-reset.service';
-import { IvAuthService }                from '../../tc-auth/tc-auth.service';
-import { IvUserService }                from '../../tc-user/tc-user.service';
-import { IvUser }                       from '../../tc-user/tc-user.class';
+import { TcResetService }               from '../tc-reset.service';
+import { TcAuthService }                from '../../tc-auth/tc-auth.service';
+import { TcUserService }                from '../../tc-user/tc-user.service';
+import { TcUser }                       from '../../tc-user/tc-user.class';
 
 @Component({
     templateUrl: './tc-reset-initiate.component.html'
 })
 
-export class IvResetInitiateComponent implements OnInit, OnDestroy  {
+export class TcResetInitiateComponent implements OnInit, OnDestroy  {
 
-    public user: IvUser;
+    public user: TcUser;
     public searchData: string;
     public isSearching: boolean;
     public notFounded: boolean;
@@ -21,10 +21,10 @@ export class IvResetInitiateComponent implements OnInit, OnDestroy  {
     private sub: any;
 
     constructor(
-        private resetService: IvResetService,
-        private userService: IvUserService,
+        private resetService: TcResetService,
+        private userService: TcUserService,
         private route: ActivatedRoute,
-        public authService: IvAuthService,
+        public authService: TcAuthService,
         public router: Router) {
     }
 

@@ -1,6 +1,6 @@
-import { IvImage }    from '../tc-image/tc-image.class';
+import { TcImage }    from '../tc-image/tc-image.class';
 
-export class IvUser {
+export class TcUser {
 
     public _id: string;
     public createdAt: Date;
@@ -11,7 +11,7 @@ export class IvUser {
     public password: string;
     public roles: string[];
     public bio: string;
-    public _avatar: IvImage;
+    public _avatar: TcImage;
     public facebook: any;
     public twitter: any;
     public google: any;
@@ -29,7 +29,7 @@ export class IvUser {
         password?: string,
         roles?: string[],
         bio?: string,
-        _avatar?: IvImage,
+        _avatar?: TcImage,
         facebook?: any,
         twitter?: any,
         google?: any,
@@ -57,7 +57,7 @@ export class IvUser {
     public static createFormJson(obj) {
         if(!obj)
             return null;
-        return new IvUser(
+        return new TcUser(
             obj._id,
             obj.createdAt,
             obj.updatedAt,
@@ -67,7 +67,7 @@ export class IvUser {
             obj.password,
             obj.roles,
             obj.bio,
-            IvImage.createFormJson(obj._avatar),
+            TcImage.createFormJson(obj._avatar),
             obj.facebook,
             obj.twitter,
             obj.google,

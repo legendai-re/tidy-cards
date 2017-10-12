@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from '@angular/http';
 import { Observable }             from 'rxjs/Observable';
-import { IvApiUrl }                 from '../tc-shared/tc-api-url';
+import { TcApiUrl }                 from '../tc-shared/tc-api-url';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { IvApiUrl }                 from '../tc-shared/tc-api-url';
     styleUrls: ['./tc-admin-home.component.scss']
 })
 
-export class IvAdminHomeComponent {
+export class TcAdminHomeComponent {
 
     public collectionNb: number;
     public userNb: number;

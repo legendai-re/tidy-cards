@@ -1,31 +1,31 @@
-import { IvUser }     from '../tc-user/tc-user.class';
-import { IvImage }    from '../tc-image/tc-image.class';
-import { IvItem }     from '../tc-item/tc-item.class';
-import { IvStar }     from '../tc-star/tc-star.class';
+import { TcUser }     from '../tc-user/tc-user.class';
+import { TcImage }    from '../tc-image/tc-image.class';
+import { TcItem }     from '../tc-item/tc-item.class';
+import { TcStar }     from '../tc-star/tc-star.class';
 
-export class IvCollection {
+export class TcCollection {
 
     public _id: string;
     public createdAt: Date;
     public updatedAt: Date;
     public title: string;
     public color: string;
-    public _author: IvUser;
-    public _thumbnail: IvImage;
+    public _author: TcUser;
+    public _thumbnail: TcImage;
     public visibility;
     public itemsCount: number;
     public bio: string;
-    public _star: IvStar;
+    public _star: TcStar;
     public starsCount: number;
     public isFeatured: boolean;
     public isOnDiscover: boolean;
     public position: number;
     public _parent: string;
     public depth: number;
-    public _parents: IvCollection[];
+    public _parents: TcCollection[];
 
     public updatePosition: boolean;
-    public _items: IvItem[];
+    public _items: TcItem[];
 
     constructor(
         _id?: string,
@@ -33,19 +33,19 @@ export class IvCollection {
         updatedAt?: Date | string,
         title?: string,
         color?: string,
-        _author?: IvUser,
-        _thumbnail?: IvImage,
+        _author?: TcUser,
+        _thumbnail?: TcImage,
         visibility?: any,
         itemsCount?: number,
         bio?: string,
-        _star?: IvStar,
+        _star?: TcStar,
         starsCount?: number,
         isFeatured?: boolean,
         isOnDiscover?: boolean,
         position?: number,
         _parent?: string,
         depth?: number,
-        _parents?: IvCollection[]) {
+        _parents?: TcCollection[]) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -53,7 +53,7 @@ export class IvCollection {
         this.color = color;
         this._author = _author;
         this._thumbnail = _thumbnail;
-        this.visibility = typeof visibility === 'string' ? IvCollection.VISIBILITY[visibility] : visibility;
+        this.visibility = typeof visibility === 'string' ? TcCollection.VISIBILITY[visibility] : visibility;
         this.itemsCount = itemsCount;
         this.bio = bio;
         this._star = _star;
@@ -71,32 +71,32 @@ export class IvCollection {
     public static createFormJson(obj) {
         if(!obj)
             return null;
-        return new IvCollection(
+        return new TcCollection(
             obj._id,
             obj.createdAt,
             obj.updatedAt,
             obj.title,
             obj.color,
-            IvUser.createFormJson(obj._author),
-            IvImage.createFormJson(obj._thumbnail),
+            TcUser.createFormJson(obj._author),
+            TcImage.createFormJson(obj._thumbnail),
             obj.visibility,
             obj.itemsCount,
             obj.bio,
-            IvStar.createFormJson(obj._star),
+            TcStar.createFormJson(obj._star),
             obj.starsCount,
             obj.isFeatured,
             obj.isOnDiscover,
             obj.position,
             obj._parent,
             obj.depth,
-            IvCollection.createParentsFromJson(obj)
+            TcCollection.createParentsFromJson(obj)
             );
     }
 
-    public static createParentsFromJson(obj): IvCollection[]{
+    public static createParentsFromJson(obj): TcCollection[]{
         let parents = [];
         for(let i in obj._parents)
-            parents.push(IvCollection.createFormJson(obj._parents[i]));
+            parents.push(TcCollection.createFormJson(obj._parents[i]));
         parents.sort(function(a, b){
             if(a.depth < b.depth) return -1;
             if(a.depth > b.depth) return 1;

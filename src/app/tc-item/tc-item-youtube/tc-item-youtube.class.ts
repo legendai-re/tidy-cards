@@ -1,6 +1,6 @@
 import { SafeResourceUrl } from '@angular/platform-browser';
 
-export class IvItemYoutube {
+export class TcItemYoutube {
 
     public _id: string;
     public createdAt: Date;
@@ -34,11 +34,11 @@ export class IvItemYoutube {
         if(!obj)
             return null;
         if(typeof obj === 'string'){
-            var itemYoutube = new IvItemYoutube();
+            var itemYoutube = new TcItemYoutube();
             itemYoutube._id = obj;
             return itemYoutube;
         }
-        return new IvItemYoutube(
+        return new TcItemYoutube(
             obj._id,
             obj.createdAt,
             obj.updatedAt,

@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { IvItem } from './tc-item.class';
-import { IvItemService } from './tc-item.service';
+import { TcItem } from './tc-item.class';
+import { TcItemService } from './tc-item.service';
 
 @Component({
     selector: 'tc-item',
@@ -9,17 +9,17 @@ import { IvItemService } from './tc-item.service';
     styleUrls: ['tc-item.component.scss']
  })
 
-export class IvItemComponent implements OnInit{
+export class TcItemComponent implements OnInit{
 
     public itemTypes: any;
     public intentToUpdate: boolean;
 
-    @Input() item: IvItem;
+    @Input() item: TcItem;
     @Input() isAuthor: boolean;
     @Output() deletedItem = new EventEmitter();
 
-    constructor(private itemService: IvItemService) {
-        this.itemTypes = IvItem.ITEM_TYPES;
+    constructor(private itemService: TcItemService) {
+        this.itemTypes = TcItem.ITEM_TYPES;
     }
 
     ngOnInit(){

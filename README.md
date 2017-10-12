@@ -41,6 +41,8 @@ Install typings `npm install typings -g`
 
 Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder
 
+Start mongodb server: `mongod --port=2000`
+
 Run `node server/server.js` to start the server
 
 Run `maildev` to catch emails on port 1025. If maildev is not installed on your computer run `npm install maildev -g`

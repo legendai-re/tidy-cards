@@ -1,7 +1,7 @@
-import { IvResetInitiateComponent } from './tc-reset-initiate/tc-reset-initiate.component';
-import { IvResetCompleteComponent } from './tc-reset-complete/tc-reset-complete.component';
+import { TcResetInitiateComponent } from './tc-reset-initiate/tc-reset-initiate.component';
+import { TcResetCompleteComponent } from './tc-reset-complete/tc-reset-complete.component';
 
-export const IvResetRoutes = [
-{ path: 'reset/initiate', component: IvResetInitiateComponent },
-{ path: 'reset/complete/:reset_token', component: IvResetCompleteComponent }
+export const TcResetRoutes = [
+{ path: 'reset/initiate', component: TcResetInitiateComponent },
+{ path: 'reset/complete/:reset_token', component: TcResetCompleteComponent }
 ];

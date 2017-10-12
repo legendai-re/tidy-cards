@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter} from '@angular/core';
 
 @Injectable()
-export class IvHeaderService {
+export class TcHeaderService {
 
     public noHeader: boolean;
     updateHeader: any;

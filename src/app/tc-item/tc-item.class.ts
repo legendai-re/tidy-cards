@@ -1,10 +1,10 @@
-import { IvItemUrl }     from './tc-item-url/tc-item-url.class';
-import { IvItemYoutube } from './tc-item-youtube/tc-item-youtube.class';
-import { IvItemImage }   from './tc-item-image/tc-item-image.class';
-import { IvItemTweet }   from './tc-item-tweet/tc-item-tweet.class';
-import { IvCollection }  from '../tc-collection/tc-collection.class';
+import { TcItemUrl }     from './tc-item-url/tc-item-url.class';
+import { TcItemYoutube } from './tc-item-youtube/tc-item-youtube.class';
+import { TcItemImage }   from './tc-item-image/tc-item-image.class';
+import { TcItemTweet }   from './tc-item-tweet/tc-item-tweet.class';
+import { TcCollection }  from '../tc-collection/tc-collection.class';
 
-export class IvItem {
+export class TcItem {
 
     public _id: string;
     public createdAt: Date;
@@ -22,14 +22,14 @@ export class IvItem {
         updatedAt?: Date | string,
         description?: string,
         type?: any,
-        _content?: IvItemUrl | IvItemYoutube | IvItemImage | IvItemTweet | IvCollection,
+        _content?: TcItemUrl | TcItemYoutube | TcItemImage | TcItemTweet | TcCollection,
         _collection?: string,
         position?: number) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
         this.description = description;
-        this.type = typeof type === 'string' ? IvItem.ITEM_TYPES[type] : type;
+        this.type = typeof type === 'string' ? TcItem.ITEM_TYPES[type] : type;
         this._content = _content;
         this._collection = _collection;
         this.position = position;
@@ -40,31 +40,31 @@ export class IvItem {
     public static createFormJson(obj) {
         if(!obj)
             return null;
-        return new IvItem(
+        return new TcItem(
             obj._id,
             obj.createdAt,
             obj.updatedAt,
             obj.description,
             obj.type,
-            IvItem.getContent(obj),
+            TcItem.getContent(obj),
             obj._collection,
             obj.position
             );
     }
 
     public static getContent(obj): any{
-        var type = typeof obj.type === 'string' ? IvItem.ITEM_TYPES[obj.type] : obj.type;
+        var type = typeof obj.type === 'string' ? TcItem.ITEM_TYPES[obj.type] : obj.type;
         switch (type.id) {
-            case IvItem.ITEM_TYPES.URL.id:
-                return IvItemUrl.createFormJson(obj._content);
-            case IvItem.ITEM_TYPES.YOUTUBE.id:
-                return IvItemYoutube.createFormJson(obj._content);
-            case IvItem.ITEM_TYPES.IMAGE.id:
-                return IvItemImage.createFormJson(obj._content);
-            case IvItem.ITEM_TYPES.TWEET.id:
-                return IvItemTweet.createFormJson(obj._content);
-            case IvItem.ITEM_TYPES.COLLECTION.id:
-                return IvCollection.createFormJson(obj._content);
+            case TcItem.ITEM_TYPES.URL.id:
+                return TcItemUrl.createFormJson(obj._content);
+            case TcItem.ITEM_TYPES.YOUTUBE.id:
+                return TcItemYoutube.createFormJson(obj._content);
+            case TcItem.ITEM_TYPES.IMAGE.id:
+                return TcItemImage.createFormJson(obj._content);
+            case TcItem.ITEM_TYPES.TWEET.id:
+                return TcItemTweet.createFormJson(obj._content);
+            case TcItem.ITEM_TYPES.COLLECTION.id:
+                return TcCollection.createFormJson(obj._content);
             default:
                 return null;
         }

@@ -1,10 +1,10 @@
 import { Injectable }             from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot }    from '@angular/router';
-import { IvAuthService }        from './tc-auth.service';
+import { TcAuthService }        from './tc-auth.service';
 
 @Injectable()
 export class GrantedAnonymous implements CanActivate {
-    constructor(private authService: IvAuthService, private router: Router) {}
+    constructor(private authService: TcAuthService, private router: Router) {}
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.authService.authInitialized && !this.authService.isLoggedIn) { return true; }
@@ -15,7 +15,7 @@ export class GrantedAnonymous implements CanActivate {
 
 @Injectable()
 export class GrantedUser implements CanActivate {
-    constructor(private authService: IvAuthService, private router: Router) {}
+    constructor(private authService: TcAuthService, private router: Router) {}
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if ( this.authService.isLoggedIn ) { return true; }
@@ -26,7 +26,7 @@ export class GrantedUser implements CanActivate {
 
 @Injectable()
 export class GrantedAdmin implements CanActivate {
-    constructor(private authService: IvAuthService, private router: Router) {}
+    constructor(private authService: TcAuthService, private router: Router) {}
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if ( this.authService.isLoggedIn && this.authService.currentUser.isGranted('ROLE_ADMIN') ) { return true; }
@@ -40,7 +40,7 @@ export class GrantedAdmin implements CanActivate {
 
 @Injectable()
 export class HomeGuard implements CanActivate {
-    constructor(private authService: IvAuthService, private router: Router) {}
+    constructor(private authService: TcAuthService, private router: Router) {}
 
     canActivate(next:  ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if ( this.authService.isLoggedIn ) {

@@ -1,9 +1,9 @@
 import { Component }   from '@angular/core';
 import { Router }      from '@angular/router';
-import { IvAuthService } from './tc-auth.service';
-import { IvUser }        from '../tc-user/tc-user.class';
-import { IvUserService } from '../tc-user/tc-user.service';
-import { IvLanguageService } from '../tc-language/tc-language.service';
+import { TcAuthService } from './tc-auth.service';
+import { TcUser }        from '../tc-user/tc-user.class';
+import { TcUserService } from '../tc-user/tc-user.service';
+import { TcLanguageService } from '../tc-language/tc-language.service';
 
 @Component({
     selector: 'tc-signup',
@@ -11,7 +11,7 @@ import { IvLanguageService } from '../tc-language/tc-language.service';
     styleUrls: ['./tc-auth.component.scss']
 })
 
-export class IvSignupComponent {
+export class TcSignupComponent {
 
     public passWordValid: boolean;
 
@@ -36,7 +36,7 @@ export class IvSignupComponent {
         passwordRepeat: string;
     };
 
-    constructor(public t: IvLanguageService, private userService: IvUserService, public authService: IvAuthService, public router: Router) {
+    constructor(public t: TcLanguageService, private userService: TcUserService, public authService: TcAuthService, public router: Router) {
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
     }
@@ -45,7 +45,7 @@ export class IvSignupComponent {
         if(this.signupData.lastChekedUsername == this.signupData.username)
             return;
         this.signupData.lastChekedUsername = this.signupData.username;
-        this.usernameState = IvUser.isValidUsername(this.signupData.username) ? 'VALIDATING' : 'INVALID';
+        this.usernameState = TcUser.isValidUsername(this.signupData.username) ? 'VALIDATING' : 'INVALID';
         clearTimeout(this.typingUsernameTimer);
         new Promise((resolve, reject) => {
             this.typingUsernameTimer = setTimeout(()=>{resolve(true);}, this.doneTypingUsernameInterval);
@@ -59,7 +59,7 @@ export class IvSignupComponent {
     }
 
     public checkUsername(){
-        if(!IvUser.isValidUsername(this.signupData.username)){
+        if(!TcUser.isValidUsername(this.signupData.username)){
             this.usernameState = 'INVALID';
             return;
         }
@@ -73,7 +73,7 @@ export class IvSignupComponent {
         if(this.signupData.lastChekedEmail == this.signupData.email)
             return;
         this.signupData.lastChekedEmail = this.signupData.email;
-        this.emailState = IvUser.isValidEmail(this.signupData.email) ? 'VALIDATING' : 'INVALID';
+        this.emailState = TcUser.isValidEmail(this.signupData.email) ? 'VALIDATING' : 'INVALID';
         clearTimeout(this.typingEmailTimer);
         new Promise((resolve, reject) => {
             this.typingEmailTimer = setTimeout(()=>{resolve(true);}, this.doneTypingEmailInterval);
@@ -87,7 +87,7 @@ export class IvSignupComponent {
     }
 
     private checkEmail(){
-        if(!IvUser.isValidEmail(this.signupData.email)){
+        if(!TcUser.isValidEmail(this.signupData.email)){
             this.emailState = 'INVALID';
             return;
         }
@@ -108,7 +108,7 @@ export class IvSignupComponent {
         if(!this.isFormValid())
             return;
         this.signupInProgress = true;
-        let user = new IvUser(
+        let user = new TcUser(
             undefined,
             undefined,
             undefined,

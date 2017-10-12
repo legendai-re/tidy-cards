@@ -1,22 +1,22 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
-import { IvCollectionService }             from '../tc-collection/tc-collection.service';
-import { IvCollection }                    from '../tc-collection/tc-collection.class';
-import { IvDataLimit }                     from '../tc-shared/tc-data-limit';
-import { IvLanguageService }               from '../tc-language/tc-language.service';
+import { TcCollectionService }             from '../tc-collection/tc-collection.service';
+import { TcCollection }                    from '../tc-collection/tc-collection.class';
+import { TcDataLimit }                     from '../tc-shared/tc-data-limit';
+import { TcLanguageService }               from '../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-discover.component.html',
     styleUrls: ['./tc-discover.component.scss']
 })
-export class IvDiscoverComponent implements OnInit {
+export class TcDiscoverComponent implements OnInit {
 
-    public featuredCollections: IvCollection[];
-    public popularCollections: IvCollection[];
-    public lastCollections: IvCollection[];
+    public featuredCollections: TcCollection[];
+    public popularCollections: TcCollection[];
+    public lastCollections: TcCollection[];
 
-    constructor(public t: IvLanguageService, private router: Router, private collectionService: IvCollectionService) {
+    constructor(public t: TcLanguageService, private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {

@@ -1,24 +1,24 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
-import { IvCollectionService }             from '../tc-collection.service';
-import { IvCollection }                    from '../tc-collection.class';
-import { IvDataLimit }                     from '../../tc-shared/tc-data-limit';
-import { IvAuthService }                   from '../../tc-auth/tc-auth.service';
+import { TcCollectionService }             from '../tc-collection.service';
+import { TcCollection }                    from '../tc-collection.class';
+import { TcDataLimit }                     from '../../tc-shared/tc-data-limit';
+import { TcAuthService }                   from '../../tc-auth/tc-auth.service';
 
 @Component({
     templateUrl: './tc-collection-starred.component.html'
 })
 
-export class IvCollectionStarredComponent implements OnInit {
+export class TcCollectionStarredComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
     public isUpdatingPosition: boolean;
-    public collections: IvCollection[];
+    public collections: TcCollection[];
 
-    constructor(public authService: IvAuthService, private router: Router, private collectionService: IvCollectionService) {
+    constructor(public authService: TcAuthService, private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {
@@ -44,8 +44,8 @@ export class IvCollectionStarredComponent implements OnInit {
         params.set('populate', '_author+_thumbnail');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
-        params.set('limit', IvDataLimit.COLLECTION.toString());
-        params.set('skip', (IvDataLimit.COLLECTION * this.pageNb).toString());
+        params.set('limit', TcDataLimit.COLLECTION.toString());
+        params.set('skip', (TcDataLimit.COLLECTION * this.pageNb).toString());
         params.set('_starredBy', this.authService.currentUser._id);
         this.collectionService.getCollections(params).subscribe(collections => {
             this.onCollectionsReceived(collections);
@@ -60,7 +60,7 @@ export class IvCollectionStarredComponent implements OnInit {
         });
         for(let i in collections)
             this.collections.push(collections[i]);
-        this.haveMoreCollections = (collections.length==IvDataLimit.COLLECTION);
+        this.haveMoreCollections = (collections.length==TcDataLimit.COLLECTION);
         this.loadingCollections = false;
     }
 

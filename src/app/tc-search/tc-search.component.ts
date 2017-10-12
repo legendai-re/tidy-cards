@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
-import { IvHeaderService }      from '../tc-header/tc-header.service';
+import { TcHeaderService }      from '../tc-header/tc-header.service';
 
 @Component({
     templateUrl: './tc-search.component.html'
 })
 
-export class IvSearchComponent implements OnInit, OnDestroy {
+export class TcSearchComponent implements OnInit, OnDestroy {
 
     private sub: any;
 
     constructor(
         public route: ActivatedRoute,
-        public headerService: IvHeaderService) {
+        public headerService: TcHeaderService) {
     }
 
     ngOnInit(){

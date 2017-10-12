@@ -1,4 +1,4 @@
-export class IvApiUrl {
+export class TcApiUrl {
 
     public static get LOGIN(): string { return 'auth/login'; }
     public static get LOGOUT(): string { return 'auth/logout'; }

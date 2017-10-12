@@ -1,20 +1,20 @@
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
 import { FileUploader }           from 'ng2-file-upload/ng2-file-upload';
-import { IvImage }                from './tc-image.class';
-import { IvApiUrl }               from '../tc-shared/tc-api-url';
+import { TcImage }                from './tc-image.class';
+import { TcApiUrl }               from '../tc-shared/tc-api-url';
 
 
 @Injectable()
-export class IvImgUploadService {
+export class TcImgUploadService {
 
     public uploader: FileUploader;
 
     constructor() {
-        this.uploader = new FileUploader({url: IvApiUrl.IMAGES});
+        this.uploader = new FileUploader({url: TcApiUrl.IMAGES});
     }
 
-    public tryUploadAndGetImage(event, type): Observable<IvImage> {
+    public tryUploadAndGetImage(event, type): Observable<TcImage> {
         this.setUploadUrl(type);
         return Observable.create(observer => {
             this.onfileChange(event).subscribe(observable => {
@@ -25,10 +25,10 @@ export class IvImgUploadService {
     }
 
     private setUploadUrl(type) {
-        this.uploader.setOptions({url: IvApiUrl.IMAGES + '?type=' + type._id});
+        this.uploader.setOptions({url: TcApiUrl.IMAGES + '?type=' + type._id});
     }
 
-    private onfileChange(event): Observable<IvImage> {
+    private onfileChange(event): Observable<TcImage> {
         return Observable.create(observer => {
             if ( event.currentTarget.files.length > 0 ) {
                 setTimeout(() => {
@@ -50,13 +50,13 @@ export class IvImgUploadService {
         });
     }
 
-    private uploadAndGetImage(item): Observable<IvImage> {
+    private uploadAndGetImage(item): Observable<TcImage> {
         return Observable.create(observer => {
             if(item){
                 item.upload();
                 let interval = setInterval(() => {
                     if ( item._xhr != null && item._xhr.response && item._xhr.response != null && item._xhr.response !== '' ) {
-                        observer.next(IvImage.createFormJson(JSON.parse(item._xhr.response).data));
+                        observer.next(TcImage.createFormJson(JSON.parse(item._xhr.response).data));
                         item.remove();
                         clearInterval(interval);
                         observer.complete();

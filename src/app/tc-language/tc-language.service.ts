@@ -1,8 +1,8 @@
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from '@angular/http';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { IvApiUrl }               from '../tc-shared/tc-api-url';
-import { IvUser }                 from '../tc-user/tc-user.class';
+import { TcApiUrl }               from '../tc-shared/tc-api-url';
+import { TcUser }                 from '../tc-user/tc-user.class';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class IvLanguageService {
+export class TcLanguageService {
 
     public langInitialized: boolean = false;
     public currentLanguage: string;
@@ -24,7 +24,7 @@ export class IvLanguageService {
     }
 
     private getMyLanguage(langId: string): Observable<any> {
-        return this.http.get(IvApiUrl.LANGUAGES + '/' + langId)
+        return this.http.get(TcApiUrl.LANGUAGES + '/' + langId)
             .map((res) => {return res.json()})
             .catch(this.handleError);
     }
@@ -40,7 +40,7 @@ export class IvLanguageService {
         })
     }
 
-    public loadLanguage(user: IvUser): Promise<boolean>{
+    public loadLanguage(user: TcUser): Promise<boolean>{
         return new Promise<any>((resolve, reject) => {
             if(user && user.language)
                 this.updateLanguage(user.language).then((res) => {resolve(true)});

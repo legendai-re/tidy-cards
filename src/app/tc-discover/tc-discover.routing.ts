@@ -1,6 +1,6 @@
-import { IvDiscoverComponent }    from './tc-discover.component';
+import { TcDiscoverComponent }    from './tc-discover.component';
 import { GrantedUser }        from '../tc-auth/tc-auth.guard';
 
-export const IvDiscoverRoutes = [
-{ path: 'discover', component: IvDiscoverComponent }
+export const TcDiscoverRoutes = [
+{ path: 'discover', component: TcDiscoverComponent }
 ];

@@ -2,22 +2,22 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 
-import { IvSortableDirective } from './tc-sortable.directive';
+import { TcSortableDirective } from './tc-sortable.directive';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
   imports: [ CommonModule, FormsModule ],
   declarations: [
-    IvSortableDirective,
+    TcSortableDirective,
     FileSelectDirective,
     FileDropDirective
   ],
   exports: [
-    IvSortableDirective,
+    TcSortableDirective,
     FileSelectDirective,
     FileDropDirective
   ],
   providers: []
 })
 
-export class IvSharedModule { }
+export class TcSharedModule { }

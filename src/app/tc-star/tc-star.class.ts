@@ -1,4 +1,4 @@
-export class IvStar {
+export class TcStar {
 
     public _id: string;
     public createdAt: Date;
@@ -16,7 +16,7 @@ export class IvStar {
     public static createFormJson(obj) {
         if(!obj)
             return null;
-        return new IvStar(
+        return new TcStar(
             obj._id,
             obj.createdAt,
             obj.updatedAt

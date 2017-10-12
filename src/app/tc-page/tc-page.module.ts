@@ -2,27 +2,27 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
-import { IvSharedModule }     from '../tc-shared/tc-shared.module';
+import { TcSharedModule }     from '../tc-shared/tc-shared.module';
 
-import { IvAboutComponent }   from './tc-about/tc-about.component';
-import { IvContactComponent } from './tc-contact/tc-contact.component';
-import { IvTeamComponent }    from './tc-team/tc-team.component';
-import { IvTermsComponent }   from './tc-terms/tc-terms.component';
+import { TcAboutComponent }   from './tc-about/tc-about.component';
+import { TcContactComponent } from './tc-contact/tc-contact.component';
+import { TcTeamComponent }    from './tc-team/tc-team.component';
+import { TcTermsComponent }   from './tc-terms/tc-terms.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, IvSharedModule],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule],
   declarations: [
-    IvAboutComponent,
-    IvContactComponent,
-    IvTeamComponent,
-    IvTermsComponent
+    TcAboutComponent,
+    TcContactComponent,
+    TcTeamComponent,
+    TcTermsComponent
   ],
   exports: [
-    IvAboutComponent,
-    IvContactComponent,
-    IvTeamComponent,
-    IvTermsComponent
+    TcAboutComponent,
+    TcContactComponent,
+    TcTeamComponent,
+    TcTermsComponent
   ],
   providers: []
 })
-export class IvPageModule { }
+export class TcPageModule { }

@@ -4,87 +4,87 @@ import { FormsModule }   from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
 
-import { IvAppComponent }               from './tc-app.component';
+import { TcAppComponent }               from './tc-app.component';
 import { routing, appRoutingProviders } from './tc-app.routing';
 
 //Modules
-import { IvAuthModule }           from './tc-auth/tc-auth.module';
-import { IvCollectionModule }     from './tc-collection/tc-collection.module';
-import { IvCollectionCardModule } from './tc-collection/tc-collection-card/tc-collection-card.module';
-import { IvCollectionCreateModule } from './tc-collection/tc-collection-create/tc-collection-create.module';
-import { IvHeaderModule }         from './tc-header/tc-header.module';
-import { IvItemModule }           from './tc-item/tc-item.module';
-import { IvPageModule }           from './tc-page/tc-page.module';
-import { IvSearchModule }         from './tc-search/tc-search.module';
-import { IvSharedModule }         from './tc-shared/tc-shared.module';
-import { IvUserModule }           from './tc-user/tc-user.module';
+import { TcAuthModule }           from './tc-auth/tc-auth.module';
+import { TcCollectionModule }     from './tc-collection/tc-collection.module';
+import { TcCollectionCardModule } from './tc-collection/tc-collection-card/tc-collection-card.module';
+import { TcCollectionCreateModule } from './tc-collection/tc-collection-create/tc-collection-create.module';
+import { TcHeaderModule }         from './tc-header/tc-header.module';
+import { TcItemModule }           from './tc-item/tc-item.module';
+import { TcPageModule }           from './tc-page/tc-page.module';
+import { TcSearchModule }         from './tc-search/tc-search.module';
+import { TcSharedModule }         from './tc-shared/tc-shared.module';
+import { TcUserModule }           from './tc-user/tc-user.module';
 
 //Components
-import { IvAdminFeaturedComponent } from './tc-admin/tc-admin-featured.component';
-import { IvAdminHomeComponent }     from './tc-admin/tc-admin-home.component';
+import { TcAdminFeaturedComponent } from './tc-admin/tc-admin-featured.component';
+import { TcAdminHomeComponent }     from './tc-admin/tc-admin-home.component';
 
-import { IvDashboardComponent }      from './tc-dashboard/tc-dashboard.component';
+import { TcDashboardComponent }      from './tc-dashboard/tc-dashboard.component';
 
-import { IvDiscoverComponent }       from './tc-discover/tc-discover.component';
+import { TcDiscoverComponent }       from './tc-discover/tc-discover.component';
 
-import { IvResetCompleteComponent } from './tc-reset/tc-reset-complete/tc-reset-complete.component';
-import { IvResetInitiateComponent } from './tc-reset/tc-reset-initiate/tc-reset-initiate.component';
+import { TcResetCompleteComponent } from './tc-reset/tc-reset-complete/tc-reset-complete.component';
+import { TcResetInitiateComponent } from './tc-reset/tc-reset-initiate/tc-reset-initiate.component';
 
 //Services
-import { IvUserService }       from './tc-user/tc-user.service';
-import { IvImgUploadService }  from './tc-image/tc-image-upload.service';
-import { IvAuthService }       from './tc-auth/tc-auth.service';
-import { IvHeaderService }     from './tc-header/tc-header.service';
-import { IvSearchService }     from './tc-search/tc-search.service';
-import { IvResetService }      from './tc-reset/tc-reset.service';
-import { IvLanguageService }   from './tc-language/tc-language.service';
-import { IvCollectionService } from './tc-collection/tc-collection.service';
-import { IvStarService }       from './tc-star/tc-star.service';
-import { IvItemService }       from './tc-item/tc-item.service';
-import { IvBase64 }            from './tc-shared/tc-base64.service';
+import { TcUserService }       from './tc-user/tc-user.service';
+import { TcImgUploadService }  from './tc-image/tc-image-upload.service';
+import { TcAuthService }       from './tc-auth/tc-auth.service';
+import { TcHeaderService }     from './tc-header/tc-header.service';
+import { TcSearchService }     from './tc-search/tc-search.service';
+import { TcResetService }      from './tc-reset/tc-reset.service';
+import { TcLanguageService }   from './tc-language/tc-language.service';
+import { TcCollectionService } from './tc-collection/tc-collection.service';
+import { TcStarService }       from './tc-star/tc-star.service';
+import { TcItemService }       from './tc-item/tc-item.service';
+import { TcBase64 }            from './tc-shared/tc-base64.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        IvAuthModule,
-        IvCollectionModule,
-        IvCollectionCardModule,
-        IvCollectionCreateModule,
-        IvHeaderModule,
-        IvItemModule,
-        IvPageModule,
-        IvSearchModule,
-        IvSharedModule,
-        IvUserModule,
+        TcAuthModule,
+        TcCollectionModule,
+        TcCollectionCardModule,
+        TcCollectionCreateModule,
+        TcHeaderModule,
+        TcItemModule,
+        TcPageModule,
+        TcSearchModule,
+        TcSharedModule,
+        TcUserModule,
         routing,
     ],
     declarations: [
-        IvAppComponent,
-        IvAdminFeaturedComponent,
-        IvAdminHomeComponent,
-        IvDashboardComponent,
-        IvDiscoverComponent,
-        IvResetCompleteComponent,
-        IvResetInitiateComponent,
+        TcAppComponent,
+        TcAdminFeaturedComponent,
+        TcAdminHomeComponent,
+        TcDashboardComponent,
+        TcDiscoverComponent,
+        TcResetCompleteComponent,
+        TcResetInitiateComponent,
     ],
     providers: [
         Title,
         appRoutingProviders,
-        IvCollectionService,
-        IvStarService,
-        IvItemService,
-        IvUserService,
-        IvImgUploadService,
-        IvAuthService,
-        IvHeaderService,
-        IvSearchService,
-        IvResetService,
-        IvLanguageService,
-        IvBase64
+        TcCollectionService,
+        TcStarService,
+        TcItemService,
+        TcUserService,
+        TcImgUploadService,
+        TcAuthService,
+        TcHeaderService,
+        TcSearchService,
+        TcResetService,
+        TcLanguageService,
+        TcBase64
     ],
-    bootstrap: [IvAppComponent]
+    bootstrap: [TcAppComponent]
 })
 export class AppModule {
 }

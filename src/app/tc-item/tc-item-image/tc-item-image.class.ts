@@ -1,4 +1,4 @@
-export class IvItemImage {
+export class TcItemImage {
 
     public _id: string;
     public createdAt: Date;
@@ -20,11 +20,11 @@ export class IvItemImage {
         if(!obj)
             return null;
         if(typeof obj === 'string'){
-            var itemImage = new IvItemImage();
+            var itemImage = new TcItemImage();
             itemImage._id = obj;
             return itemImage;
         }
-        return new IvItemImage(
+        return new TcItemImage(
             obj._id,
             obj.createdAt,
             obj.updatedAt,

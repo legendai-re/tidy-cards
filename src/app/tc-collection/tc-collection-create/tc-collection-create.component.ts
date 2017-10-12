@@ -1,11 +1,11 @@
 import { Component, OnInit, EventEmitter, OnDestroy, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
-import { IvLanguageService }            from '../../tc-language/tc-language.service';
-import { IvCollectionService }          from '../tc-collection.service';
-import { IvCollection }                 from '../tc-collection.class';
-import { IvImage }                      from '../../tc-image/tc-image.class';
-import { IvImgUploadService }           from '../../tc-image/tc-image-upload.service';
+import { TcLanguageService }            from '../../tc-language/tc-language.service';
+import { TcCollectionService }          from '../tc-collection.service';
+import { TcCollection }                 from '../tc-collection.class';
+import { TcImage }                      from '../../tc-image/tc-image.class';
+import { TcImgUploadService }           from '../../tc-image/tc-image-upload.service';
 
 @Component({
     selector: 'tc-collection-create',
@@ -13,22 +13,22 @@ import { IvImgUploadService }           from '../../tc-image/tc-image-upload.ser
     styleUrls: ['../tc-collection-card/tc-collection-card.component.scss', 'tc-collection-create.component.scss'],
 })
 
-export class IvCollectionCreateComponent implements OnInit {
+export class TcCollectionCreateComponent implements OnInit {
     public mode: string;
     public actionIntent: boolean;
-    public collection: IvCollection;
+    public collection: TcCollection;
     public uploader;
     public collectionCreated: boolean;
     public visibilityList: any;
 
-    @Input() parentCollection: IvCollection;
-    @Input() inputCollection: IvCollection;
+    @Input() parentCollection: TcCollection;
+    @Input() inputCollection: TcCollection;
     @Output() newCollection = new EventEmitter();
     @Output() updateCanceled = new EventEmitter();
 
-    constructor(public t: IvLanguageService, private collectionService: IvCollectionService, private imgUploadService: IvImgUploadService, private router: Router) {
+    constructor(public t: TcLanguageService, private collectionService: TcCollectionService, private imgUploadService: TcImgUploadService, private router: Router) {
         this.uploader = imgUploadService.uploader;
-        this.visibilityList = IvCollection.VISIBILITY;
+        this.visibilityList = TcCollection.VISIBILITY;
     }
 
     ngOnInit() {
@@ -44,26 +44,26 @@ export class IvCollectionCreateComponent implements OnInit {
 
     private initCreateMode(){
         this.mode = 'CREATE';
-        this.collection = new IvCollection();
-        this.collection.visibility = IvCollection.VISIBILITY.PRIVATE;
+        this.collection = new TcCollection();
+        this.collection.visibility = TcCollection.VISIBILITY.PRIVATE;
         this.collection.color = 'FFFFFF';
     }
 
     private initUpdateMode(){
         this.mode = 'UPDATE';
-        this.collection = IvCollection.createFormJson(this.inputCollection);
+        this.collection = TcCollection.createFormJson(this.inputCollection);
         this.actionIntent = true;
     }
 
     private initCreateSubCollectionMode(){
         this.mode = 'CREATE_SUB_COLLECTION';
-        this.collection = new IvCollection();
+        this.collection = new TcCollection();
         this.collection.visibility = this.parentCollection.visibility;
         this.collection._parent = this.parentCollection._id;
     }
 
     public onThumbnailFileChange(event) {
-        this.imgUploadService.tryUploadAndGetImage(event, IvImage.getTypes().COLLECTION_THUMBNAIL).subscribe(image => {
+        this.imgUploadService.tryUploadAndGetImage(event, TcImage.getTypes().COLLECTION_THUMBNAIL).subscribe(image => {
             this.collection._thumbnail = image;
         });
     }

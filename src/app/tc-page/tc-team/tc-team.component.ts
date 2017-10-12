@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IvLanguageService } from '../../tc-language/tc-language.service';
+import { TcLanguageService } from '../../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-team.component.html',
     styleUrls: ['../tc-page.component.scss','./tc-team.component.scss']
 })
-export class IvTeamComponent{
+export class TcTeamComponent{
 
-    constructor(public t: IvLanguageService) {
+    constructor(public t: TcLanguageService) {
     }
 }

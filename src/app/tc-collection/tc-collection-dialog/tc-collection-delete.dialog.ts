@@ -6,6 +6,6 @@ import {MdDialog, MdDialogRef} from '@angular/material';
   selector: 'tc-collection-delete-dialog',
   templateUrl: './tc-collection-delete.dialog.html',
 })
-export class IvCollectionDeleteDialog {
-  constructor(public dialogRef: MdDialogRef<IvCollectionDeleteDialog>) {}
+export class TcCollectionDeleteDialog {
+  constructor(public dialogRef: MdDialogRef<TcCollectionDeleteDialog>) {}
 }*/

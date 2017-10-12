@@ -1,23 +1,23 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IvAuthService } from './tc-auth.service';
-import { IvHeaderService } from '../tc-header/tc-header.service';
-import { IvLanguageService } from '../tc-language/tc-language.service';
+import { TcAuthService } from './tc-auth.service';
+import { TcHeaderService } from '../tc-header/tc-header.service';
+import { TcLanguageService } from '../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-auth.component.html',
     styleUrls: ['./tc-auth.component.scss']
 })
 
-export class IvAuthComponent implements OnInit{
+export class TcAuthComponent implements OnInit{
 
     public inLogin: boolean;
     private sub: any;
 
     constructor(
-        public t: IvLanguageService,
-        private headerService: IvHeaderService,
-        public authService: IvAuthService,
+        public t: TcLanguageService,
+        private headerService: TcHeaderService,
+        public authService: TcAuthService,
         public router: Router,
         private route: ActivatedRoute) {
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router }               from '@angular/router';
-import { IvAuthService }        from './tc-auth/tc-auth.service';
-import { IvLanguageService }    from './tc-language/tc-language.service';
-import { IvHeaderService }      from './tc-header/tc-header.service';
+import { TcAuthService }        from './tc-auth/tc-auth.service';
+import { TcLanguageService }    from './tc-language/tc-language.service';
+import { TcHeaderService }      from './tc-header/tc-header.service';
 
 @Component({
     selector: 'tc-app',
@@ -11,9 +11,9 @@ import { IvHeaderService }      from './tc-header/tc-header.service';
     encapsulation: ViewEncapsulation.None
 })
 
-export class IvAppComponent {
+export class TcAppComponent {
 
-    constructor(public headerService: IvHeaderService, public t: IvLanguageService, public authService: IvAuthService, public router: Router) {
+    constructor(public headerService: TcHeaderService, public t: TcLanguageService, public authService: TcAuthService, public router: Router) {
         var url = null;
         
         this.router.events.subscribe((route) => {

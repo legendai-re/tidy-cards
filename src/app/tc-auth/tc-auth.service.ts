@@ -2,9 +2,9 @@ import { Injectable, EventEmitter }       from '@angular/core';
 import { Router }           from '@angular/router';
 import { Http, Response, Headers, RequestOptions }   from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
-import { IvUser }           from '../tc-user/tc-user.class';
-import { IvApiUrl }           from '../tc-shared/tc-api-url';
-import { IvLanguageService }  from '../tc-language/tc-language.service';
+import { TcUser }           from '../tc-user/tc-user.class';
+import { TcApiUrl }           from '../tc-shared/tc-api-url';
+import { TcLanguageService }  from '../tc-language/tc-language.service';
 
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -15,31 +15,31 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class IvAuthService {
+export class TcAuthService {
 
     authInitializedEmitter: any;
     authInitialized: boolean = false;
     isLoggedIn: boolean = false;
-    currentUser: IvUser = null;
+    currentUser: TcUser = null;
 
-    constructor (private languageService: IvLanguageService, private http: Http, private router: Router) {
+    constructor (private languageService: TcLanguageService, private http: Http, private router: Router) {
         this.authInitializedEmitter = new EventEmitter();
     }
 
-    private postLogin (username: string, password: string): Observable<IvUser> {
+    private postLogin (username: string, password: string): Observable<TcUser> {
         let body = JSON.stringify({ username: username, password: password });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(IvApiUrl.LOGIN, body, options)
+        return this.http.post(TcApiUrl.LOGIN, body, options)
         .map(this.handleUser)
         .catch(this.handleError);
     }
 
-    private postSignup (user: IvUser): Observable<IvUser> {
+    private postSignup (user: TcUser): Observable<TcUser> {
         let body = JSON.stringify(user);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(IvApiUrl.SIGNUP, body, options)
+        return this.http.post(TcApiUrl.SIGNUP, body, options)
         .map(this.handleUser)
         .catch(this.handleError);
     }
@@ -48,26 +48,26 @@ export class IvAuthService {
         let body = JSON.stringify({user_id: userId, password: password, newPassword: newPassword});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(IvApiUrl.PASSWORD_UPDATE, body, options)
+        return this.http.put(TcApiUrl.PASSWORD_UPDATE, body, options)
         .map((res) => {return res.json()})
         .catch(this.handleError);
     }
 
-    private getCurrentUser (): Observable<IvUser> {
-        return this.http.get(IvApiUrl.CURRENT_USER)
+    private getCurrentUser (): Observable<TcUser> {
+        return this.http.get(TcApiUrl.CURRENT_USER)
         .map(this.handleUser)
         .catch(this.handleError);
     }
 
     private getLogout (): Observable<Boolean> {
-        return this.http.get(IvApiUrl.LOGOUT)
+        return this.http.get(TcApiUrl.LOGOUT)
         .map(this.handleUser)
         .catch(this.handleError);
     }
 
     private handleUser(res: Response) {
         let body = res.json();
-        return body.data ? IvUser.createFormJson(body.data) : { };
+        return body.data ? TcUser.createFormJson(body.data) : { };
     }
 
     private handleError (error: any) {
@@ -81,7 +81,7 @@ export class IvAuthService {
         let body = JSON.stringify({type: type});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(IvApiUrl.UNLINK, body, options)
+        return this.http.put(TcApiUrl.UNLINK, body, options)
             .map((res) => {return true})
             .catch(this.handleError);
     }
@@ -104,7 +104,7 @@ export class IvAuthService {
         });
     }
 
-    public signup (user: IvUser): Promise<Boolean> {
+    public signup (user: TcUser): Promise<Boolean> {
         return new Promise<Boolean>((resolve, reject) => {
             this.postSignup(user).subscribe(user => {
                 this.currentUser = user;

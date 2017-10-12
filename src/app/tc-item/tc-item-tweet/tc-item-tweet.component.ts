@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-import { IvItemTweet } from './tc-item-tweet.class';
+import { TcItemTweet } from './tc-item-tweet.class';
 
 @Component({
     selector: 'tc-item-tweet',
@@ -7,9 +7,9 @@ import { IvItemTweet } from './tc-item-tweet.class';
     styleUrls: ['../tc-item.component.scss', 'tc-item-tweet.component.scss']
 })
 
-export class IvItemTweetComponent implements AfterViewInit {
+export class TcItemTweetComponent implements AfterViewInit {
 
-    @Input() itemTweet: IvItemTweet;
+    @Input() itemTweet: TcItemTweet;
 
     constructor() {
     }

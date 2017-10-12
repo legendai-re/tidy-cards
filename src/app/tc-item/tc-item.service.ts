@@ -2,12 +2,12 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Injectable }             from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
-import { IvItem }                 from './tc-item.class';
-import { IvApiUrl }               from '../tc-shared/tc-api-url';
-import { IvItemUrl }              from './tc-item-url/tc-item-url.class';
-import { IvItemYoutube }          from './tc-item-youtube/tc-item-youtube.class';
-import { IvItemImage }            from './tc-item-image/tc-item-image.class';
-import { IvItemTweet }            from './tc-item-tweet/tc-item-tweet.class';
+import { TcItem }                 from './tc-item.class';
+import { TcApiUrl }               from '../tc-shared/tc-api-url';
+import { TcItemUrl }              from './tc-item-url/tc-item-url.class';
+import { TcItemYoutube }          from './tc-item-youtube/tc-item-youtube.class';
+import { TcItemImage }            from './tc-item-image/tc-item-image.class';
+import { TcItemTweet }            from './tc-item-tweet/tc-item-tweet.class';
 
 
 import 'rxjs/add/observable/throw';
@@ -19,30 +19,30 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class IvItemService {
+export class TcItemService {
 
     constructor (private http: Http) {}
 
-    public getItems (params: URLSearchParams): Observable<IvItem[]> {
-        return this.http.get(IvApiUrl.ITEMS, { search: params })
+    public getItems (params: URLSearchParams): Observable<TcItem[]> {
+        return this.http.get(TcApiUrl.ITEMS, { search: params })
         .map(this.handleItems)
         .catch(this.handleError);
     }
 
-    public postItem (item: IvItem): Observable<IvItem> {
+    public postItem (item: TcItem): Observable<TcItem> {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(IvApiUrl.ITEMS, body, options)
+        return this.http.post(TcApiUrl.ITEMS, body, options)
         .map(this.handleItem)
         .catch(this.handleError);
     }
 
-    public putItem (item: IvItem): Observable<IvItem> {
+    public putItem (item: TcItem): Observable<TcItem> {
         let body = JSON.stringify(item);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(IvApiUrl.ITEMS + '/' + item._id, body, options)
+        return this.http.put(TcApiUrl.ITEMS + '/' + item._id, body, options)
         .map(this.handleItem)
         .catch(this.handleError);
     }
@@ -51,27 +51,27 @@ export class IvItemService {
         let body = JSON.stringify({url: url});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(IvApiUrl.ITEMS_CONTENT_CREATE, body, options)
+        return this.http.post(TcApiUrl.ITEMS_CONTENT_CREATE, body, options)
         .map(this.handleItemContent)
         .catch(this.handleError);
     }
 
     public deleteItem (_id: string): Observable<any> {
-        return this.http.delete(IvApiUrl.ITEMS + '/' + _id);
+        return this.http.delete(TcApiUrl.ITEMS + '/' + _id);
     }
 
     private handleItems(res: Response) {
         let body = res.json();
         let cs = [];
         for (let key in body.data) {
-            cs.push(IvItem.createFormJson(body.data[key]));
+            cs.push(TcItem.createFormJson(body.data[key]));
         };
         return cs;
     }
 
     private handleItem(res: Response) {
         let body = res.json();
-        return IvItem.createFormJson(body.data) || {};
+        return TcItem.createFormJson(body.data) || {};
     }
 
     private handleItemContent(res: Response) {
@@ -82,14 +82,14 @@ export class IvItemService {
         if(!itemType)
             return null;
         switch (itemType.id) {
-            case IvItem.ITEM_TYPES.URL.id:
-                return {_content: IvItemUrl.createFormJson(body.data), type: IvItem.ITEM_TYPES.URL};
-            case IvItem.ITEM_TYPES.TWEET.id:
-                return {_content: IvItemTweet.createFormJson(body.data), type: IvItem.ITEM_TYPES.TWEET};
-            case IvItem.ITEM_TYPES.IMAGE.id:
-                return {_content: IvItemImage.createFormJson(body.data), type: IvItem.ITEM_TYPES.IMAGE};
-            case IvItem.ITEM_TYPES.YOUTUBE.id:
-                return {_content: IvItemYoutube.createFormJson(body.data), type: IvItem.ITEM_TYPES.YOUTUBE};
+            case TcItem.ITEM_TYPES.URL.id:
+                return {_content: TcItemUrl.createFormJson(body.data), type: TcItem.ITEM_TYPES.URL};
+            case TcItem.ITEM_TYPES.TWEET.id:
+                return {_content: TcItemTweet.createFormJson(body.data), type: TcItem.ITEM_TYPES.TWEET};
+            case TcItem.ITEM_TYPES.IMAGE.id:
+                return {_content: TcItemImage.createFormJson(body.data), type: TcItem.ITEM_TYPES.IMAGE};
+            case TcItem.ITEM_TYPES.YOUTUBE.id:
+                return {_content: TcItemYoutube.createFormJson(body.data), type: TcItem.ITEM_TYPES.YOUTUBE};
             default:
                 return null
         }
