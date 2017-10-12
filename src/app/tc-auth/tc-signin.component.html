@@ -1,0 +1,23 @@
+<div class="auth-content">
+    <form class="form-signin" *ngIf="!authService.isLoggedIn" (ngSubmit)="onLoginSubmit()">
+        <p class="auth-top-content">TidyCards is a community to share your passions and interests with the world.</p>
+        <div class="form-group">
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input [(ngModel)]="username" name="username" type="text" id="inputUsername" class="form-control" placeholder="{{t._.auth?.username_placeholder}}" required="" autofocus="" />
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input [(ngModel)]="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="{{t._.auth?.password_placeholder}}" required="" />
+        </div>
+        <small *ngIf="longinInProgress" class="text-muted">Attempting to connect...</small>
+        <div *ngIf="!longinInProgress && loginFailed">
+            <small *ngIf="errorStatusCode == 401" class="text-danger">Wrong password or username/email</small>
+            <small *ngIf="errorStatusCode == 429" class="text-danger">Too many connection attempt, please wait</small>
+            <small *ngIf="errorStatusCode != 401 && errorStatusCode != 429" class="text-danger">Unknown error please try later</small>
+        </div>
+        <button [disabled]='!username || !password' class="btn btn-primary btn-block" type="submit">{{t._.auth?.signin_title}}</button>
+        <a href="javascript:void(0)" class="btn btn--facebook btn-block" (click)="connectWith('facebook')">{{t._.auth?.signin_facebook_title}}</a>
+        <a href="javascript:void(0)" class="btn btn--twitter btn-block" (click)="connectWith('twitter')">{{t._.auth?.signin_twitter_title}}</a>
+        <a href="javascript:void(0)" class="btn btn-secondary btn-block" (click)="connectWith('google')">{{t._.auth?.signin_google_title}}</a>
+    </form>
+</div>

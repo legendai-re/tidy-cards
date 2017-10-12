@@ -1,0 +1,16 @@
+<section class="section">
+    <div class="container">
+        <h2 class="section-title dark-bg">My collections</h2>
+          <div class="row" tc-sortable [list]=collections (itemMoved)="onCollectionMoved($event)">
+              <div [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of collections">
+                  <tc-collection-card [collection]="collection" [sortable]=true></tc-collection-card>
+              </div>
+
+              <div class="col-xs-12">
+                  <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreCollections && !loadingCollections"(click)="loadNextPage()">Load more...</a>
+                  <p class="loading-more" *ngIf="loadingCollections">Loading...</p>
+                  <p class="no-more" *ngIf="!haveMoreCollections">You’ve reached the end of the list</p>
+              </div>
+          </div>
+    </div>
+</section>

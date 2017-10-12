@@ -1,0 +1,36 @@
+<section class="section">
+    <div class="container">
+        <h2 class="section-title dark-bg">
+            {{t._.dashboard?.my_collections_title}}
+            <a class="section-title-more" href="javascript:void(0)" [routerLink]="['/c/me']">
+                {{t._.action?.see_all}}
+            </a>
+        </h2>
+        <div class="row" tc-sortable [list]=myCollections (itemMoved)="onCollectionMoved($event)">
+
+          <div class="ui-state-default ui-state-disabled col-xs-12 col-md-6 col-lg-4 col-xl-3">
+              <tc-collection-create (newCollection)="onbCollectionCreated($event)"></tc-collection-create>
+          </div>
+
+          <div *ngFor="let collection of myCollections" [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-xs-12 col-md-6 col-lg-4 col-xl-3">
+              <tc-collection-card [collection]="collection" [sortable]=true></tc-collection-card>
+          </div>
+
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">
+            {{t._.dashboard?.favorite_collections_title}}
+            <a class="section-title-more" href="javascript:void(0)" [routerLink]="['/c/starred']">
+                {{t._.action?.see_all}}
+            </a>
+        </h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let collection of myFavoriteCollections">
+                <tc-collection-card [collection]="collection" [sortable]="false"></tc-collection-card>
+            </div>
+        </div>
+    </div>
+</section>
