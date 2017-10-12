@@ -18,7 +18,7 @@ module.exports = function getItemSchema(Schema) {
                 validator: function(v) {
                     return (v.length < 10000);
                 },
-                message: '{VALUE} is not a title'
+                message: '{VALUE} is not a description'
             }
         },
         type: {

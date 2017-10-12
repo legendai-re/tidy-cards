@@ -1,8 +1,8 @@
 {
     "lang_id": "fr",
-    "app_name": "invow",
+    "app_name": "tidycards",
     "header": {
-        "search_placeholder": "Rechercher sur Invow...",
+        "search_placeholder": "Rechercher sur TidyCards...",
         "dashboard_title": "Tableau de bord",
         "discover_title": "Découvrir",
         "signin_title": "Se connecter/S'inscrire",

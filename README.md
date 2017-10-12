@@ -1,10 +1,10 @@
-#Invow
+#TidyCards
 
-Visit the website: [invow.xyz](http://invow.xyz)
+Visit the website: [tidy.cards](http://www.tidy.cards)
 
 ## To do for local development:
 
-Clone the repo: `git clone https://github.com/OlivierCoue/invow.git`
+Clone the repo: `git clone https://github.com/legendai-re/tidy-cards.git`
 
 Create a `.env` file in the root directory of the project. Add
 variables:

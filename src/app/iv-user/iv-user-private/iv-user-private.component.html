@@ -43,7 +43,7 @@
     <div class="list-item">
         <div class="list-item-infos">
             <h3 class="list-item-title">{{t._.profile_private?.username_row_title}}</h3>
-            <p class="list-item-description">http://invow.xyz/<input #usernameInput [(ngModel)]="tmpUser.username" name="username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
+            <p class="list-item-description">http://www.tidy.cards/<input #usernameInput [(ngModel)]="tmpUser.username" name="username" (keyup)="onUsernameKeyUp()" (keydown)="onUsernameKeyDown()" [disabled]="!updateUsernameIntent" class="list-item-description-darker" type="input"/></p>
             <div *ngIf="updateUsernameIntent" class="list-item-status">
                 <small *ngIf="tmpUser.username === authService.currentUser.username" class="text-success">That’s your current username!</small>
                 <div *ngIf="tmpUser.username != authService.currentUser.username">
