@@ -37,7 +37,7 @@
             </a>
           </li>
 
-          <li class="header-navbar--nav-item nav-item">
+          <li class="header-navbar--nav-item nav-item" *ngIf="authService.isLoggedIn">
             <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/discover']">
               {{t._?.header?.discover_title}}
             </a>
@@ -75,9 +75,12 @@
           </li>
 
           <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn" >
-            <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
-              {{t._?.header?.signin_title}}
-            </a>
+            <div class="header-navbar--nav-item-content">
+              <span class="header-navbar--nav-link-text">Already have an account?</span>
+              <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
+                {{t._?.header?.signin_title}}
+              </a>
+            </div>
           </li>
 
         </ul>
