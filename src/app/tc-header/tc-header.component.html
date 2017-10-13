@@ -76,7 +76,9 @@
 
           <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn" >
             <div class="header-navbar--nav-item-content">
-              <span class="header-navbar--nav-link-text">Already have an account?</span>
+              <span class="header-navbar--nav-link-text">
+                {{t._?.auth?.already_member_title}}
+              </span>
               <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
                 {{t._?.header?.signin_title}}
               </a>
