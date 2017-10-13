@@ -2,6 +2,22 @@
   margin-left: .5rem;
 }
 
+.btn-icon {
+  .icon {
+    font-family: $font-mi;
+    font-weight: normal;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: 1.25rem;
+    margin: 0 .25rem 0 -.5rem;
+    text-decoration: none;
+
+    &:only-child {
+      margin: 0;
+    }
+  }
+}
+
 // TODO : clean
 
 .btn-create {
