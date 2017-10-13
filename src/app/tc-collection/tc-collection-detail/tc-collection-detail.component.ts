@@ -76,8 +76,8 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
 
     private emitUpdateHeaderEvent(){
         this.headerService.emitUpdateHeaderEvent({
-            value:{
-                type: this.collection._thumbnail ? 'IMAGE' : 'COLOR',
+            value:{                
+                type: 'collection',
                 color: this.collection.color,
                 image:  this.collection._thumbnail ? this.collection._thumbnail.getPath('1000x400') : '',
                 title: this.collection.title

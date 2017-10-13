@@ -1,7 +1,7 @@
 <div class="header"
     [class.is-searching]="headerState == 'search'"
     [class.is-hidden]="noHeader"
-    [class.has-thumbnail]="image"
+    [class.is-page]="headerState == 'collection'"
     [class.has-jumbotron]="!authService.isLoggedIn && (headerState == 'discover' || headerState == 'search')"
     *ngIf="!headerService.noHeader">
 

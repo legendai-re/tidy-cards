@@ -3,7 +3,7 @@
 
     <div class="page-headings">
 
-      <span class="page-headings--page-pre-title">Featured</span>
+      <span class="page-headings--page-pre-title" *ngIf="collection.isFeatured">Featured</span>
       <h2 class="page-headings--page-title">{{collection.title}}</h2>
 
     </div>
@@ -36,7 +36,7 @@
               {{collection.itemsCount}} {{t._.collection?.item_plur}}
             </li>
             <li class="collection-container--stats-item" *ngIf="collection.visibility.id != 'PRIVATE'" (click)="onStarCliked()">
-              <span class="collection-container--stats-icon">star</span>
+              <span class="collection-container--stats-icon" [class.is-highlighted]="collection._star">star</span>
               <span>{{collection.starsCount}}</span>
             </li>
 
