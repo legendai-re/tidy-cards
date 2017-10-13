@@ -184,5 +184,3 @@ export class IvHeaderComponent implements OnInit, OnDestroy{
         this.headerSub.unsubscribe();
     }
 }
-
-

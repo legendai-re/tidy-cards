@@ -5,20 +5,26 @@
 @import '../../style/settings/_variables.scss';
 @import '../../style/settings/_mixins.scss';
 
-.search-results-summary {
-    margin: 0 0 50px;
+.search-results {}
+
+.search-results--section {
+  margin: 0 0 2rem
+}
+
+.search-results--summary {
+  margin: 0 0 3rem;
 }
 
 .search-results-before-title, .search-results-title {
-    color: $white;
-    margin: 0;
+  color: $white;
+  margin: 0;
 }
 
 .search-results-before-title {
-    font-size: 1rem;
-    font-weight: normal;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 .search-results-title {
-    font-size: 3rem;
+  font-size: 3rem;
 }
