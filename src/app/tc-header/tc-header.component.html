@@ -37,7 +37,7 @@
             </a>
           </li>
 
-          <li class="header-navbar--nav-item nav-item">
+          <li class="header-navbar--nav-item nav-item" *ngIf="authService.isLoggedIn">
             <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/discover']">
               {{t._?.header?.discover_title}}
             </a>
@@ -75,9 +75,14 @@
           </li>
 
           <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn" >
-            <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
-              {{t._?.header?.signin_title}}
-            </a>
+            <div class="header-navbar--nav-item-content">
+              <span class="header-navbar--nav-link-text">
+                {{t._?.auth?.already_member_title}}
+              </span>
+              <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
+                {{t._?.header?.signin_title}}
+              </a>
+            </div>
           </li>
 
         </ul>
@@ -108,15 +113,6 @@
     </div>
   </div>
 
-  <div class="header-headings" *ngIf="title">
-    <div class="container">
-      <span class="header-headings--page-pre-title">Featured</span>
-      <h2 class="header-headings--page-title">{{title}}</h2>
-    </div>
-  </div>
-
   <div class="header-cover" *ngIf="image" [ngStyle]="{ 'background-image': 'url(' + image + ')'}"></div>
-
-  <!--<div *ngIf="!image" class="header-radial"></div>-->
 
 </div>

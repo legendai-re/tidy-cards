@@ -5,6 +5,122 @@
 @import '../../../style/settings/_variables.scss';
 @import '../../../style/settings/_mixins.scss';
 
+
+.collection-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  border-radius: $border-radius-base;
+  box-shadow: 0 .125rem .25rem $box-shadow-color;
+}
+
+
+// COLLECTION HEADER
+
+.collection-container--header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 0 .5rem;
+
+}
+
+.collection-container--publication {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 2 1 auto;
+  width: 100%;
+}
+
+.collection-container--publication-infos {
+  line-height: 31px;
+  color: $gray-900;
+  margin: 1px .5rem 0;
+
+  a {
+    font-weight: 600;
+  }
+}
+
+.collection-container--stats {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+  line-height: 31px;
+  margin: 1px 0 0 1.5rem;
+}
+
+.collection-container--stats-list {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.collection-container--stats-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0 auto;
+}
+
+.collection-container--stats-item + .collection-container--stats-item {
+  margin-left: .5rem;
+}
+
+.collection-container--stats-icon {
+  position: relative;
+  display: flex;
+  font-family: $font-mi;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin: 0 .25rem 0 0;
+  color: $gray-600;
+
+  &.is-highlighted {
+    color: $yellow;
+  }
+}
+
+.collection-container--stats-actions {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-left: 1.5rem;
+}
+
+.collection-container--stats-action .btn-icon-narrow {
+  padding: .375rem 0;
+}
+
+.collection-container--stats-action + .collection-container--stats-action {
+  margin-left: .25rem;
+}
+
+// COLLECTION LIST
+
+.collection-container--list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+
+//
+//
+//
+//
+
+
 .collection-page {
     // margin-top: -35px;
 }

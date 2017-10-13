@@ -1,95 +1,128 @@
-<section *ngIf="!isLoadingCollection && collection && collection._id" class="section collection-page">
-    <div class="container">
-        <div class="page-wrapper">
-            <div class="collection-page-header">
-                <!--<h2 class="collection-page-title">{{collection.title}}</h2>-->
-                <div class="collection-page-details">
-                    <a href="javascript:void(0)" [routerLink]="['/', collection._author.username]" title="{{collection._author?.name}}">
-                        <div class="collection-page-avatar avatar avatar--60">
-                            <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
-                            <span class="avatar-char">{{collection._author.name.charAt(0)}}</span>
-                        </div>
-                    </a>
-                    <div class="collection-page-details-infos">
-                        <div class="collection-page-metas">
-                            <p class="collection-page-author">
-                                {{t._.collection?.by_title}} <strong>{{collection._author?.name}}</strong>
-                            </p>
-                            <p class="collection-page-dates">
-                                <span>{{collection.createdAt | date }}</span> <span *ngIf="collection.modifiedAt">• last modifications: {{collection.modifiedAt | date }}</span>
-                                <span *ngIf="isAuthor">
-                                    <a href="javascript:void(0)" (click)="deleteCollection()">Delete collection</a>|
-                                    <a href="javascript:void(0)" (click)="startUpdateCollection()">Update collection</a>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="collection-page-stats">
-                            <ul class="stats-list">
-                                <li class="stat-item-list">
-                                    {{collection.itemsCount}}
-                                    <span *ngIf="collection.itemsCount < 2">{{t._.collection?.item_sing}}</span>
-                                    <span *ngIf="collection.itemsCount > 1">{{t._.collection?.item_plur}}</span>
-                                </li>
-                                <li *ngIf="collection.visibility.id != 'PRIVATE'" class="stat-item-list">
-                                    <i class="material-icons stat-icon">mode_comment</i> 0
-                                </li>
-                                <li *ngIf="collection.visibility.id != 'PRIVATE'" (click)="onStarCliked()" class="stat-item-list">
-                                    <i class="material-icons stat-icon">star</i> {{collection.starsCount}}
-                                </li>
-                                <li *ngIf="collection.visibility.id == 'PRIVATE'" class="stat-item-list">
-                                    <i class="material-icons stat-icon">visibility_off</i> {{t._.collection?.visibility?.title}}: {{ t._.collection?.visibility[collection.visibility.id].title}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="page" *ngIf="!isLoadingCollection && collection && collection._id">
+  <div class="container">
 
-            <div *ngIf="collection.depth > 0">
-                <span *ngFor="let collection of collection._parents"><a [routerLink]="['/c', collection._id]" href="javascript:void(0)">{{collection.title}}</a> -> </span>
-                <span>{{collection.title}}</span>
-            </div>
+    <div class="page-headings">
 
-            <tc-collection-create
-                *ngIf="updateCollectionIntent"
-                [inputCollection]="collection"
-                (newCollection)="onCollectionUpdated($event)"
-                (updateCanceled)="onUpdateCollectionCanceled()">
-            </tc-collection-create>
-            <tc-item-create
-                *ngIf="isAuthor"
-                [collection]="collection"
-                (newItem)="onNewItem($event)">
-            </tc-item-create>
-            <tc-collection-create
-                *ngIf="isAuthor"
-                [parentCollection]="collection"
-                (newCollection)="onSubCollectionCreated($event)">
-            </tc-collection-create>
+      <span class="page-headings--page-pre-title">Featured</span>
+      <h2 class="page-headings--page-title">{{collection.title}}</h2>
 
-            <div tc-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" class="items-list" *ngIf="itemLoaded">
-                <article *ngIf="collection._items.length == 0">
-                    <p>There is no items in the colletion yet...</p>
-                </article>
-                <article class="item ui-state-default" *ngFor="let item of collection._items">
-                    <tc-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event)"></tc-item>
-                </article>
-            </div>
-
-            <div>
-                <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">{{t._.action?.load_more}}...</a>
-                <p class="loading-more" *ngIf="loadingItems">Loading...</p>
-                <p class="no-more" *ngIf="!haveMoreItems">You’ve reached the end of the list</p>
-            </div>
-        </div>
     </div>
-</section>
-<section *ngIf="!isLoadingCollection && (!collection || !collection._id)">
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title dark-bg">Sorry cannot find collection with id: "{{searchParams}}"</h2>
+
+    <div class="collection-container">
+      <div class="collection-container--header">
+
+        <div class="collection-container--publication">
+
+          <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">
+            <div class="collection-container--thumbnail avatar avatar--32">
+              <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
+              <span class="avatar-char">{{collection._author.name.charAt(0)}}</span>
+            </div>
+          </a>
+
+          <p class="collection-container--publication-infos">
+            {{t._.collection?.by_title}} <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">{{collection._author?.name}}</a> <span class="muted">on {{collection.createdAt | date }} <span class="small" title="{{collection.modifiedAt | date }}" *ngIf="collection.modifiedAt">(edited)</span></span>
+          </p>
+
         </div>
-    </section>
-</section>
+
+        <div class="collection-container--stats">
+          <ul class="collection-container--stats-list">
+
+            <li class="collection-container--stats-item muted" *ngIf="collection.itemsCount == 1">
+              {{collection.itemsCount}} {{t._.collection?.item_sing}}
+            </li>
+            <li class="collection-container--stats-item muted" *ngIf="collection.itemsCount > 1 || collection.itemsCount == 0">
+              {{collection.itemsCount}} {{t._.collection?.item_plur}}
+            </li>
+            <li class="collection-container--stats-item" *ngIf="collection.visibility.id != 'PRIVATE'" (click)="onStarCliked()">
+              <span class="collection-container--stats-icon">star</span>
+              <span>{{collection.starsCount}}</span>
+            </li>
+
+          </ul>
+
+          <div class="collection-container--stats-actions" *ngIf="isAuthor">
+            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" data-toggle="modal" data-target="#collectionModal">
+              New item
+            </button>
+
+            <div class="collection-container--stats-action dropdown show">
+              <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="icon">more_vert</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a href="javascript:void(0)" class="dropdown-item" (click)="startUpdateCollection()">Edit</a>
+                <a href="javascript:void(0)" class="dropdown-item" (click)="deleteCollection()">Delete</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="collection-container--list"></div>
+      <div class="collection-container--footer"></div>
+
+    </div>
 
 
+    <ul>
+      <li *ngIf="collection.visibility.id == 'PRIVATE'">
+        <i class="material-icons">visibility_off</i>
+        <span>{{t._.collection?.visibility?.title}}: {{ t._.collection?.visibility[collection.visibility.id].title}}</span>
+      </li>
+    </ul>
+
+    <!-- <div *ngIf="collection.depth > 0">
+      <span *ngFor="let collection of collection._parents">
+        <a [routerLink]="['/c', collection._id]" href="javascript:void(0)">{{collection.title}}</a>
+      </span>
+      <span>{{collection.title}}</span>
+    </div> -->
+
+    <div class="items-list" tc-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" *ngIf="itemLoaded">
+      <article *ngIf="collection._items.length == 0">
+        <p>There is no items in the colletion yet...</p>
+      </article>
+      <article class="item ui-state-default" *ngFor="let item of collection._items">
+        <tc-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event)"></tc-item>
+      </article>
+    </div>
+
+    <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">{{t._.action?.load_more}}...</a>
+    <p class="loading-more" *ngIf="loadingItems">Loading...</p>
+    <p class="no-more" *ngIf="!haveMoreItems">You’ve reached the end of the list</p>
+
+  </div>
+</div>
+
+<div class="modal fade"
+     id="collectionModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="appModalLabel"
+     aria-hidden="true"
+     *ngIf="!isLoadingCollection && collection && collection._id">
+  <div class="modal-dialog" role="document">
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <tc-item-create class="" *ngIf="isAuthor" [collection]="collection" (newItem)="onNewItem($event)"></tc-item-create>
+
+  </div>
+</div>
+<!-- <tc-collection-create *ngIf="isAuthor" [parentCollection]="collection" (newCollection)="onSubCollectionCreated($event)"></tc-collection-create> -->
+
+
+<div class="page" *ngIf="!isLoadingCollection && (!collection || !collection._id)">
+  <div class="container">
+
+    <div class="page-headings">
+
+      <h2 class="page-headings--page-title">Sorry cannot find collection with id: "{{searchParams}}"</h2>
+
+    </div>
+  </div>
+</div>

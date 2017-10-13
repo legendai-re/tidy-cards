@@ -21,7 +21,9 @@
 
   &.is-hidden {}
 
-  &.has-thumbnail {}
+  &.has-thumbnail {
+    min-height: 35rem;
+  }
 
   &.has-jumbotron {
     min-height: 48rem;
@@ -180,6 +182,22 @@
 
 
 // HEADER NAVBAR
+.navbar-dark .header-navbar .nav-link {
+  background-color: transparent;
+  color: $white;
+  border-radius: $border-radius-base;
+  transition: background-color .3s ease-in-out;
+
+  &:hover {
+    background-color: rgba($white, .1);
+  }
+
+  &:active {
+    background-color: rgba($white, .25);
+  }
+}
+
+
 .header-navbar--nav-item {
   &:not(:first-of-type) {
     margin-left: .5rem;
@@ -191,6 +209,17 @@
   display: flex;
   flex-direction: row;
   font-weight: 500;
+}
+
+.header-navbar--nav-item-content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.header-navbar--nav-link-text {
+  padding: .5rem .125rem .5rem .25rem;
+  color: rgba($white, .75);
 }
 
 .header-navbar--avatar {
@@ -243,46 +272,6 @@
 }
 
 
-// HEADER HEADINGS
-
-.header-headings {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 8rem 0 16rem;
-  z-index: 10;
-}
-
-.header-headings--page-pre-title {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba($white, .5);
-  margin: .5rem 0 1.5rem;
-}
-
-
-.header-headings--page-title {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 3.5rem;
-  color: $white;
-  margin: 3.5rem 0 0;
-}
-
-.header-headings--page-pre-title + .header-headings--page-title {
-  margin: .5rem 0 0;
-}
-
-
 // HEADER COVER
 .header-cover {
   position: absolute;
@@ -292,12 +281,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-size: cover;
+  background-size: 150%;
   background-repeat: no-repeat;
   background-position: center;
   z-index: 0;
 
-  &:before, &:after {
+  &:before {
     position: absolute;
     display: flex;
     content: "";
@@ -305,15 +294,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-  }
-
-  &:before {
     background-color: rgba($black, .6);
     z-index: 0;
-  }
-
-  &:after {
-    // background: linear-gradient(to bottom, rgba($whitesmoke, 0) 25%, rgba($whitesmoke, 1) 90%);
-    z-index: 1;
   }
 }
