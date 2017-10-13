@@ -1,87 +1,39 @@
-$white:    #ffffff;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #868e96;
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529;
-$black:  #000;
+$white:                     #ffffff;
+$gray-100:                  #f8f9fa;
+$gray-200:                  #e9ecef;
+$gray-300:                  #dee2e6;
+$gray-400:                  #ced4da;
+$gray-500:                  #adb5bd;
+$gray-600:                  #868e96;
+$gray-700:                  #495057;
+$gray-800:                  #343a40;
+$gray-900:                  #212529;
+$black:                     #000000;
 
 $grays: (
-  100: $gray-100,
-  200: $gray-200,
-  300: $gray-300,
-  400: $gray-400,
-  500: $gray-500,
-  600: $gray-600,
-  700: $gray-700,
-  800: $gray-800,
-  900: $gray-900
+  100:                      $gray-100,
+  200:                      $gray-200,
+  300:                      $gray-300,
+  400:                      $gray-400,
+  500:                      $gray-500,
+  600:                      $gray-600,
+  700:                      $gray-700,
+  800:                      $gray-800,
+  900:                      $gray-900
 );
 
-$blue:    #007bff;
-$indigo:  #6610f2;
-$purple:  #6B5DFF;
-$pink:    #e83e8c;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #28a745;
-$teal:    #20c997;
-$cyan:    #17a2b8;
+$blue:                      #007bff;
+$indigo:                    #6610f2;
+$purple:                    #6B5DFF;
+$pink:                      #e83e8c;
+$red:                       #dc3545;
+$orange:                    #fd7e14;
+$yellow:                    #ffc107;
+$green:                     #4FE88D;
+$teal:                      #20c997;
+$cyan:                      #17a2b8;
 
-$colors: (
-  blue: $blue,
-  indigo: $indigo,
-  purple: $purple,
-  pink: $pink,
-  red: $red,
-  orange: $orange,
-  yellow: $yellow,
-  green: $green,
-  teal: $teal,
-  cyan: $cyan,
-  white: $white,
-  gray: $gray-600,
-  gray-dark: $gray-800
-);
-
-$theme-colors: (
-  primary: $purple,
-  secondary: $gray-100,
-  success: $green,
-  info: $cyan,
-  warning: $yellow,
-  danger: $red,
-  light: $gray-100,
-  dark: $gray-800
-);
-
-
-// OLD WIP
-
-// VARS
-
-// fonts
-
-$font-primary:              Fira Sans, Helvetica, sans-serif;
-
-//colors
-
-// $purple:                    #6B5DFF;
-
-$black:                     #282828;
-$black-light:               #777777;
-$grey:                      #DDDDDD;
-$grey-light:                #BBBBBB;
-
-$whitesmoke:                #F5F5F5;
-$white:                     #FFFFFF;
-
-// collection colors
+$brand-primary:             $purple;
 
 $collection-grey:           #CFD8DC;
 $collection-red:            #FF887A;
@@ -91,6 +43,47 @@ $collection-purple:         #A4ABFF;
 $collection-blue:           #78D6FF;
 $collection-cyan:           #A4FFEB;
 $collection-green:          #CBFF8A;
+
+$theme-colors: (
+  primary:                  $brand-primary,
+  secondary:                $gray-100,
+  success:                  $green,
+  info:                     $cyan,
+  warning:                  $yellow,
+  danger:                   $red,
+  light:                    $gray-100,
+  dark:                     $gray-800
+);
+
+$font-brand:                Fira Sans, Helvetica, sans-serif;
+$font-primary:              $font-brand;
+$font-icons:                "TidyCards Icons";
+$font-mi:                   "Material Icons";
+
+
+$border-radius-small:      .125rem;
+$border-radius-base:       .1875rem;
+$border-radius-large:      .325rem;
+
+
+// $btn-font-weight:          bold;
+// OLD WIP
+
+// VARS
+
+// fonts
+
+//colors
+
+$black-light:               #777777;
+$grey:                      #DDDDDD;
+$grey-light:                #BBBBBB;
+
+$whitesmoke:                #F5F5F5;
+
+// collection colors
+
+
 
 $collection-default-color:  $collection-grey;
 

@@ -44,25 +44,26 @@
 /* ==========================================================================
    5. MODULES
    ========================================================================== */
-    @import "modules/avatar";
-    @import "modules/btn";
-    @import "modules/card";
+    @import "modules/avatars";
+    @import "modules/buttons";
+    @import "modules/cards";
     @import "modules/dropdowns";
     @import "modules/forms";
-    @import "modules/item";
+    @import "modules/items";
     @import "modules/loading";
-    @import "modules/logo";
-    @import "modules/nav";
-    @import "modules/page";
-    @import "modules/section";
+    @import "modules/logos";
+    @import "modules/navs";
+    @import "modules/selects";
     @import "modules/stats";
-    @import "modules/select";
-    @import "modules/thumbnail";
+    @import "modules/thumbnails";
 
 /* ==========================================================================
    6. LAYOUTS
    ========================================================================== */
     @import "layouts/footer";
+    @import "layouts/page";
+    @import "layouts/section";
+    @import "layouts/view";
 
 /* ==========================================================================
    7. HELPERS

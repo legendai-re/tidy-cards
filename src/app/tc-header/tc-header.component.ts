@@ -184,5 +184,3 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
         this.headerSub.unsubscribe();
     }
 }
-
-
