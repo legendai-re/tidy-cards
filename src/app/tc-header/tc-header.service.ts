@@ -4,6 +4,7 @@ import { Injectable, EventEmitter} from '@angular/core';
 export class TcHeaderService {
 
     public noHeader: boolean;
+    public noFooter: boolean;
     updateHeader: any;
 
     constructor() {

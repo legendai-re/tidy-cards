@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, OnDestroy }   from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy  }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
@@ -191,6 +191,8 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
                 this.collection._items[i].position = parseInt(i);
             }
             this.collection.itemsCount++;
+            //$('#myModal').modal('hide');
+
         }
     }
 

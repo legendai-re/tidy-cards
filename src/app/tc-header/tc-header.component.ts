@@ -92,6 +92,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
             this.color = event.value.color;
             this.image = event.value.image;
             this.title = event.value.title;
+            this.headerService.noFooter = false;
         }else{
             this.setDefault();
         }
@@ -101,6 +102,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
         this.headerState = 'default';
         this.noHeader = false;
         this.headerService.noHeader = false;
+        this.headerService.noFooter = false;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
@@ -123,6 +125,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
         this.headerState = 'discover';
         this.noHeader = false;
         this.headerService.noHeader = false;
+        this.headerService.noFooter = false;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
@@ -132,6 +135,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
         this.headerState = 'search';
         this.noHeader = false;
         this.headerService.noHeader = false;
+        this.headerService.noFooter = true;
         this.color = this.defaultColor;
         this.image = null;
         this.title = '';
@@ -148,7 +152,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
     }
 
     public cancelSearch(){
-        this.headerState = 'default';
+        //this.headerState = 'default';
         var toGo = typeof this.previousRoute == 'string' ? this.previousRoute :'/';
         this.router.navigate([toGo]);
     }
