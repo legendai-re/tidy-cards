@@ -66,11 +66,14 @@ module.exports = function (req, res) {
         collection.title = faker.lorem.words().capitalizeFirstLetter();
         collection.bio = faker.lorem.sentence().capitalizeFirstLetter();
         collection.itemsCount = itemNb;
+        collection.depth = 0;
         collection.color = colors[Math.floor(Math.random() * colors.length)];
         collection.visibility = visibility[Math.floor(Math.random() * visibility.length)];
         var userId = userList[Math.floor(Math.random() * userList.length)]._id;
         collection._author = userId;
         collection.save(function(err){
+            if(err)
+                console.log(err);
             models.CustomSort.findOneAndUpdate(
                 {type: sortTypes.MY_COLLECTIONS.id, _user: userId},
                 { $push: {
