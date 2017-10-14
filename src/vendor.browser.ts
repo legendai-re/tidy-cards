@@ -5,6 +5,10 @@
 
 // TODO(gdi2290): switch to DLLs
 
+import 'jquery';
+import 'jquery-ui';
+import 'jquery-ui-bundle';
+
 // Angular 2
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
@@ -29,8 +33,4 @@ if ('production' === ENV) {
   // Development
 
 }
-
-import 'jquery';
-import 'jquery-ui-bundle';
-
 

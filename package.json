@@ -89,6 +89,7 @@
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "2.5.45",
     "@types/jquery": "3.2.1",
+    "@types/jqueryui": "^1.11.37",
     "@types/node": "^7.0.39",
     "@types/protractor": "^1.5.20",
     "@types/selenium-webdriver": "2.44.29",
