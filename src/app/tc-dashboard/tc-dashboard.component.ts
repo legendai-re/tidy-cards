@@ -16,7 +16,7 @@ export class TcDashboardComponent implements OnInit {
     public myCollections: TcCollection[];
     public myFavoriteCollections: TcCollection[];
     public isUpdatingPosition: boolean;
-
+    public sortStart = 1;
     constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private service: TcCollectionService) {
     }
 

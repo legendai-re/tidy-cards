@@ -2,18 +2,13 @@ import { Directive, ElementRef, EventEmitter, Output, Input } from '@angular/cor
 import { TcCollectionService }   from '../tc-collection/tc-collection.service';
 import { TcCollection }   from '../tc-collection/tc-collection.class';
 
-require('jquery-ui/ui/core');
-require('jquery-ui/ui/widget');
-require('jquery-ui/ui/widgets/mouse');
-require('jquery-ui/ui/widgets/sortable');
-require('jquery-ui/ui/disable-selection');
-
 declare var $: any;
 
 @Directive({ selector: '[tc-sortable]' })
 export class TcSortableDirective {
 
-    @Input() list: any[];
+    @Input('ignoreItem') ignoreItem = 0;
+    @Input('list') list: any[];
     @Output() itemMoved = new EventEmitter();
 
     private el: HTMLElement;
@@ -24,17 +19,19 @@ export class TcSortableDirective {
         let newIndex;
         let oldIndex;
         $(this.el).sortable({
-            placeholder: "card-ghost col-xs-12 col-md-6 col-lg-4 col-xl-3",
+            placeholder: "card-ghost col-12 col-md-6 col-lg-4 col-xl-3",
             helper: function(x, y){ y.addClass('card-moving'); return y },
             handle: '.move-item-button',
             cancel: '.cancel-sort',
             tolerance: "pointer",
+            items: "> :not(.not-sortable-item)",
+            scroll: false,
             start: (event, ui) => {
                 $(this).attr('data-previndex', ui.item.index());
             },
             update: (event, ui) => {
-                newIndex = ui.item.index();
-                oldIndex = $(this).attr('data-previndex');
+                newIndex = ui.item.index()-this.ignoreItem;
+                oldIndex = $(this).attr('data-previndex')-this.ignoreItem;
                 $(this).removeAttr('data-previndex');
             },
             stop: (event, ui) => {

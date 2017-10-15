@@ -4,6 +4,12 @@ import { TcAuthService }        from './tc-auth/tc-auth.service';
 import { TcLanguageService }    from './tc-language/tc-language.service';
 import { TcHeaderService }      from './tc-header/tc-header.service';
 
+require('jquery-ui/ui/core');
+require('jquery-ui/ui/widget');
+require('jquery-ui/ui/widgets/mouse');
+require('jquery-ui/ui/widgets/sortable');
+require('jquery-ui/ui/disable-selection');
+
 @Component({
     selector: 'tc-app',
     templateUrl: './tc-app.component.html',
