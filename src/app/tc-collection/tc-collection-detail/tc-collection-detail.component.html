@@ -52,7 +52,7 @@
           </ul>
 
           <div class="collection-container--stats-actions" *ngIf="isAuthor">
-            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)">
+            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)" *ngIf="collection._items.length > 0">
               New item
             </button>
 
@@ -70,7 +70,28 @@
         </div>
 
       </div>
-      <div class="collection-container--list"></div>
+
+      <div class="collection-container--list">
+
+        <div class="collection-item is-content is-empty" *ngIf="collection._items.length == 0">
+          <div class="collection-item--content collection-item--empty-phase">
+            <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
+            <h3 class="collection-item--empty-title">Create an item in your collection</h3>
+            <p class="collection-item--empty-caption">
+              Use the button bellow to add an item to your collection. It can be a link or a caption without link.
+            </p>
+            <ul class="collection-item--actions">
+              <li class="collection-itel--action">
+                <button type="button" class="btn btn-primary" (click)="openModal(newItemModal)">
+                  Add my first item
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
       <div class="collection-container--footer"></div>
 
     </div>

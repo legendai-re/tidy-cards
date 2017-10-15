@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: row;
   padding: 0 .5rem;
-
+  margin: 0 0 1rem;
 }
 
 .collection-container--publication {
@@ -132,51 +132,88 @@
 }
 
 
-//
-//
-//
-//
+// COLLECTION ITEMS
 
+.collection-item {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  background-color: $gray-100;
+  margin: 0 0 .5rem;
+  border-radius: $border-radius-base;
 
-.collection-page {
-    // margin-top: -35px;
+  &.is-content {
+    background-color: $gray-050;
+  }
+
+  &.is-empty {
+    align-items: center;
+    margin: 0;
+  }
 }
 
-.item {
-    margin: 10px 0;
+.collection-item--header {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  padding: .75rem .5rem .75rem 1rem;
 }
 
-.collection-page-header {
-    &:before,
-    &:after {
-        content: "";
-        clear: both;
-        display: table;
-    }
+.collection-item--content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    max-width: 100%;
+  }
 }
 
-.collection-page-avatar {
-    float: left;
+.collection-item--empty-phase {
+  width: 100%;
+  max-width: 24rem;
+  padding: 2rem 0 3.5rem;
+  text-align: center;
 }
 
-.collection-page-metas {
-    float: left;
-    padding-left: 15px;
+.collection-item--image {
+  &.empty-phase {
+    margin-bottom: -1.5rem;
+  }
 }
 
-.collection-page-author {
-    font-size: 1.25rem;
-    color: $white;
-    margin-bottom: 8px;
+.collection-item--empty-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: $gray-900;
+  margin: 0 0 .5rem;
 }
 
-.collection-page-dates {
-    font-size: .875rem;
-    color: $black-light;
+.collection-item--empty-caption {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: $gray-900;
+  margin: 0;
+
+  &:not(:last-child) {
+    margin: 0 0 1.5rem;
+  }
 }
 
-.collection-page-stats {
-    float: right;
-    padding-top: 6px;
-    color: $white;
+.collection-item--actions {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  line-height: 2rem;
+  justify-content: center;
+}
+
+.collection-item--action + .collection-item--action {
+  margin-right: .5rem;
 }
