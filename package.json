@@ -160,6 +160,7 @@
     "nodemailer": "^2.5.0",
     "npm": "^3.10.5",
     "null-loader": "0.1.1",
+    "optimize-js-plugin": "0.0.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",

@@ -202,10 +202,10 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/list-of-plugins.html#normalmodulereplacementplugin
        */
-      new NormalModuleReplacementPlugin(
+      /*new NormalModuleReplacementPlugin(
         /(angular2|@angularclass)((\\|\/)|-)hmr/,
         helpers.root('config/empty.js')
-      ),
+      ),*/
 
       new NormalModuleReplacementPlugin(
         /zone\.js(\\|\/)dist(\\|\/)long-stack-trace-zone/,
