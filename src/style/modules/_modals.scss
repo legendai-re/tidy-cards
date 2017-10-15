@@ -1,0 +1,23 @@
+.modal {
+  background-color: rgba(255,255,255,.1);
+  background: radial-gradient(circle at center, rgba($white, 1) 25%, rgba($white, .95) 50%, rgba($white, .75) 100%);
+}
+
+.modal-dialog {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // width: 0;
+  height: 100vh;
+}
+
+.modal-content {
+  flex: 0 0 auto;
+  border: none;
+  box-shadow: 0 .125rem 16rem rgba($black, .25);
+
+  .card {
+    margin: 0;
+  }
+}

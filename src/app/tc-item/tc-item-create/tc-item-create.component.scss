@@ -6,26 +6,38 @@
 @import '../../../style/settings/_mixins.scss';
 
 .item-new {
-    background: $white;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 1px 4px $box-shadow-color;
-    border-radius: 3px;
-    margin: 20px 0;
+  background: $white;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 4px $box-shadow-color;
+  border-radius: 3px;
+  // margin: 20px 0;
 
-    &:before {
-        content: "";
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-        border: 1px solid $border-color;
-        z-index: 0;
-        border-radius: 3px;
-    }
+  &:before {
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    border: 1px solid $border-color;
+    z-index: 0;
+    border-radius: 3px;
+  }
+
+  @include rwd-sm {
+    width: 24rem;
+  }
+
+  @include rwd-md {
+    width: 32rem;
+  }
+
+  @include rwd-lg {
+    width: 40rem;
+  }
 }
 
 .item-new-embeded-content,

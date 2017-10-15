@@ -26,7 +26,7 @@
         </button>
         <textarea *ngIf="addDescription" (keydown)="onDescriptionKeyDown($event)" [(ngModel)]="item.description" name="description" class="item-new-description" placeholder="Add a description here..." rows="1"></textarea>
 
-        <div [class.collapse]="!actionIntent" class="item-create">
+        <div [class.collapse]="!actionIntent" class="item-create d-flex">
             <div class="btn-group form-action active" [class.active]="addDescription" (click)="addDescription = !addDescription">
                 <button class="btn-icon" type="button">
                     <i class="material-icons icon">comment</i>
@@ -41,12 +41,12 @@
             <input
                 *ngIf="mode == 'CREATE'"
                 [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-                class="btn btn-create float-xs-right" type="submit" value="Add"/>
+                class="btn btn-create ml-auto" type="submit" value="Add"/>
 
             <input
                 *ngIf="mode == 'UPDATE'"
                 [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-                class="btn btn-create float-xs-right" type="submit" value="Update"/>
+                class="btn btn-create ml-auto" type="submit" value="Update"/>
 
             <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create float-xs-right">Cancel</a>
         </div>
