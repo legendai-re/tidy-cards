@@ -9,6 +9,13 @@
 
     </div>
 
+    <!-- <div *ngIf="collection.depth > 0">
+      <span *ngFor="let collection of collection._parents">
+        <a [routerLink]="['/c', collection._id]" href="javascript:void(0)">{{collection.title}}</a>
+      </span>
+      <span>{{collection.title}}</span>
+    </div> -->
+
     <div class="collection-container">
       <div class="collection-container--header">
 
@@ -90,31 +97,21 @@
           </div>
         </div>
 
+        <div class="items-list" tc-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" *ngIf="itemLoaded">
+          <article class="item ui-state-default" *ngFor="let item of collection._items">
+            <tc-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event)"></tc-item>
+          </article>
+        </div>
+
+        <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">{{t._.action?.load_more}}...</a>
+        <p class="loading-more" *ngIf="loadingItems">Loading...</p>
+        <p class="no-more" *ngIf="!haveMoreItems && collection._items.length > 0">You’ve reached the end of the list</p>
+
       </div>
 
       <div class="collection-container--footer"></div>
 
     </div>
-
-    <!-- <div *ngIf="collection.depth > 0">
-      <span *ngFor="let collection of collection._parents">
-        <a [routerLink]="['/c', collection._id]" href="javascript:void(0)">{{collection.title}}</a>
-      </span>
-      <span>{{collection.title}}</span>
-    </div> -->
-
-    <div class="items-list" tc-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" *ngIf="itemLoaded">
-      <article *ngIf="collection._items.length == 0">
-        <p>There is no items in the colletion yet...</p>
-      </article>
-      <article class="item ui-state-default" *ngFor="let item of collection._items">
-        <tc-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event)"></tc-item>
-      </article>
-    </div>
-
-    <a href="javascript:void(0)" class="load-more" *ngIf="haveMoreItems && !loadingItems"(click)="loadNextPage()">{{t._.action?.load_more}}...</a>
-    <p class="loading-more" *ngIf="loadingItems">Loading...</p>
-    <p class="no-more" *ngIf="!haveMoreItems">You’ve reached the end of the list</p>
 
   </div>
 </div>
