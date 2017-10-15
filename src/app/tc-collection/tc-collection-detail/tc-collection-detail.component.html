@@ -5,6 +5,7 @@
 
       <span class="page-headings--page-pre-title" *ngIf="collection.isFeatured">Featured</span>
       <h2 class="page-headings--page-title">{{collection.title}}</h2>
+      <p class="page-headings--page-description" *ngIf="collection.bio">{{collection.bio}}</p>
 
     </div>
 
@@ -39,6 +40,14 @@
               <span class="collection-container--stats-icon" [class.is-highlighted]="collection._star">star</span>
               <span>{{collection.starsCount}}</span>
             </li>
+            <li class="collection-container--stats-item visibility" *ngIf="collection.visibility.id == 'UNINDEXED'">
+              <span class="collection-container--stats-icon">visibility_off</span>
+              <span class="muted">{{ t._.collection?.visibility[collection.visibility.id].title}}</span>
+            </li>
+            <li class="collection-container--stats-item visibility" *ngIf="collection.visibility.id == 'PRIVATE'">
+              <span class="collection-container--stats-icon">lock</span>
+              <span class="muted">{{ t._.collection?.visibility[collection.visibility.id].title}}</span>
+            </li>
 
           </ul>
 
@@ -46,7 +55,7 @@
             <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)">
               New item
             </button>
-            
+
             <div class="collection-container--stats-action dropdown show">
               <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="icon">more_vert</span>
@@ -65,13 +74,6 @@
       <div class="collection-container--footer"></div>
 
     </div>
-
-    <ul>
-      <li *ngIf="collection.visibility.id == 'PRIVATE'">
-        <i class="material-icons">visibility_off</i>
-        <span>{{t._.collection?.visibility?.title}}: {{ t._.collection?.visibility[collection.visibility.id].title}}</span>
-      </li>
-    </ul>
 
     <!-- <div *ngIf="collection.depth > 0">
       <span *ngFor="let collection of collection._parents">

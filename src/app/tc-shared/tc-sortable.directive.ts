@@ -21,7 +21,7 @@ export class TcSortableDirective {
         $(this.el).sortable({
             placeholder: "card-ghost col-12 col-md-6 col-lg-4 col-xl-3",
             helper: function(x, y){ y.addClass('card-moving'); return y },
-            handle: '.move-item-button',
+            handle: '.card-collection--drag-handle',
             cancel: '.cancel-sort',
             tolerance: "pointer",
             items: "> :not(.not-sortable-item)",

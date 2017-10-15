@@ -70,10 +70,28 @@
   display: flex;
   flex-direction: row;
   flex: 1 0 auto;
+
+  &.visibility {
+    padding: 0 0 0 .5rem;
+
+    &:before {
+      position: absolute;
+      content: "";
+      background: linear-gradient(to bottom, rgba($black, 0) 0rem, rgba($black, .15) .5rem, rgba($black, .15) 1.5rem, rgba($black, 0) 2rem);
+      width: 1px;
+      height: 2rem;
+      top: 0;
+      left: 0;
+    }
+  }
 }
 
 .collection-container--stats-item + .collection-container--stats-item {
   margin-left: .5rem;
+
+  &.visibility {
+    margin-left: .7rem;
+  }
 }
 
 .collection-container--stats-icon {
