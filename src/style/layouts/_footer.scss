@@ -1,7 +1,19 @@
+.footer-container {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  margin-top: auto;
+}
+
 .footer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
   background: rgba(0,0,0,.04);
   padding: 2rem 0 3rem;
   color: $black-light;
+  margin-top: 4rem;
 
   &.is-hidden {
     display: none;

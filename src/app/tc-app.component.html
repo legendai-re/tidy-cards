@@ -6,14 +6,14 @@
       <router-outlet></router-outlet>
     </div>
 
-    <footer class="footer" *ngIf="!headerService.noHeader && !headerService.noFooter">
-      <div class="container">
-        <div class="col-12">
-          <div class="float-xs-left">
-            <h1 class="icon-invow logo footer-logo">Invow</h1>
-            <span class="footer-copy">TidyCards© 2017</span>
-          </div>
-          <nav class="nav nav-pills navbar-toggleable-md">
+    <div class="footer-container" *ngIf="!headerService.noHeader && !headerService.noFooter">
+      <div class="footer">
+        <div class="container">
+
+          <h1 class="icon-invow logo footer-logo">Invow</h1>
+          <span class="footer-copy">TidyCards© 2017</span>
+
+          <nav class="nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/about']" >About</a>
             </li>
@@ -27,8 +27,9 @@
               <a class="nav-link" [routerLink]="['/terms']">Terms</a>
             </li>
           </nav>
+
         </div>
       </div>
-    </footer>
+    </div>
 
 </main>
