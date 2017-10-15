@@ -2,6 +2,7 @@ import { NgModule }           from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { RouterModule }       from '@angular/router';
+import { NgbModule }          from '@ng-bootstrap/ng-bootstrap';
 import { TcSharedModule }     from '../tc-shared/tc-shared.module';
 import { TcItemModule }       from '../tc-item/tc-item.module';
 import { TcCollectionCardModule } from './tc-collection-card/tc-collection-card.module';
@@ -15,7 +16,7 @@ import { TcCollectionLastComponent }     from './tc-collection-last/tc-collectio
 import { TcCollectionPopularComponent }  from './tc-collection-popular/tc-collection-popular.component';
 
 @NgModule({
-  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcItemModule, TcCollectionCardModule, TcCollectionCreateModule ],
+  imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcItemModule, TcCollectionCardModule, TcCollectionCreateModule, NgbModule ],
   declarations: [
     TcCollectionMeComponent,
     TcCollectionStarredComponent,

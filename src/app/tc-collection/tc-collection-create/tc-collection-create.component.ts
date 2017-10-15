@@ -52,6 +52,7 @@ export class TcCollectionCreateComponent implements OnInit {
     private initUpdateMode(){
         this.mode = 'UPDATE';
         this.collection = TcCollection.createFormJson(this.inputCollection);
+        console.log(this.collection);
         this.actionIntent = true;
     }
 

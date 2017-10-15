@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
 
@@ -48,6 +49,7 @@ import { TcBase64 }            from './tc-shared/tc-base64.service';
         BrowserModule,
         FormsModule,
         HttpModule,
+        NgbModule.forRoot(),
         TcAuthModule,
         TcCollectionModule,
         TcCollectionCardModule,
