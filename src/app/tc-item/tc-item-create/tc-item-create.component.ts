@@ -41,7 +41,8 @@ export class TcItemCreateComponent implements OnInit {
     private init(){
         this.itemCreated = false;
         this.loadingContent = false;
-        this.addDescription = false;
+        this.addDescription = true;
+        this.actionIntent = true;
         if(this.item!=null){
             this.initUpdateMode();
         }else{
@@ -55,7 +56,7 @@ export class TcItemCreateComponent implements OnInit {
         this.item._collection = this.collection._id;
         this.urlEntry = '';
         this.validUrl = false;
-        this.addDescription = false;
+        this.addDescription = true;
     }
 
     private initUpdateMode(){

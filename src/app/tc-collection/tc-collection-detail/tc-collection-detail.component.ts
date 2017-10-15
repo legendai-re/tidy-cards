@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
 import { Observable }                     from 'rxjs/Observable';
+import { NgbModal, NgbModalRef, ModalDismissReasons}    from '@ng-bootstrap/ng-bootstrap';
 import { TcLanguageService }              from '../../tc-language/tc-language.service';
 import { TcAuthService }                  from '../../tc-auth/tc-auth.service';
 import { TcStarService }                  from '../../tc-star/tc-star.service';
@@ -30,9 +31,9 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
     public itemLoaded: boolean;
     public isAuthor: boolean;
     public isUpdatingStar: boolean;
-    public updateCollectionIntent: boolean;
     public isUpdatingPosition: boolean;
     public subCollectionTemplate: TcCollection;
+    public currentModal: NgbModalRef;
     private sub: any;
 
     constructor(
@@ -41,6 +42,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         private headerService: TcHeaderService,
         private route: ActivatedRoute,
         private router: Router,
+        private modalService: NgbModal,
         private collectionService: TcCollectionService,
         private itemService: TcItemService,
         private starService: TcStarService) {
@@ -56,6 +58,10 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             this.initCollection(params);
         });
+    }
+
+    private openModal(content) {
+        this.currentModal = this.modalService.open(content);
     }
 
     private initCollection(params){
@@ -135,12 +141,8 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         }
     }
 
-    public startUpdateCollection(){
-        this.updateCollectionIntent = true;
-    }
-
     public onUpdateCollectionCanceled(){
-        this.updateCollectionIntent = false;
+        this.currentModal.close();
     }
 
     public onCollectionUpdated(event){
@@ -152,7 +154,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
             this.collection._thumbnail = event.value._thumbnail;
             this.emitUpdateHeaderEvent();
         }
-        this.updateCollectionIntent = false;
+        this.currentModal.close();
     }
 
     private addStarredCollection(){
@@ -191,8 +193,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
                 this.collection._items[i].position = parseInt(i);
             }
             this.collection.itemsCount++;
-            //$('#myModal').modal('hide');
-
+            this.currentModal.close();
         }
     }
 

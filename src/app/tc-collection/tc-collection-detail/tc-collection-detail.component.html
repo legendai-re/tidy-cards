@@ -43,16 +43,16 @@
           </ul>
 
           <div class="collection-container--stats-actions" *ngIf="isAuthor">
-            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" data-toggle="modal" data-target="#collectionModal">
+            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)">
               New item
             </button>
-
+            
             <div class="collection-container--stats-action dropdown show">
               <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="icon">more_vert</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a href="javascript:void(0)" class="dropdown-item" (click)="startUpdateCollection()">Edit</a>
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openModal(updateCollectionModal)">Edit</a>
                 <a href="javascript:void(0)" class="dropdown-item" (click)="deleteCollection()">Delete</a>
               </div>
             </div>
@@ -65,7 +65,6 @@
       <div class="collection-container--footer"></div>
 
     </div>
-
 
     <ul>
       <li *ngIf="collection.visibility.id == 'PRIVATE'">
@@ -97,24 +96,24 @@
   </div>
 </div>
 
-<div class="modal fade"
-     id="collectionModal"
-     tabindex="-1"
-     role="dialog"
-     aria-labelledby="appModalLabel"
-     aria-hidden="true"
-     *ngIf="!isLoadingCollection && collection && collection._id">
-  <div class="modal-dialog" role="document">
+<ng-template #newItemModal let-c="close" let-d="dismiss">
+  <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>-->
+  <tc-item-create class="" *ngIf="isAuthor" [collection]="collection" (newItem)="onNewItem($event)"></tc-item-create>
+  <!--<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>-->
+</ng-template>
 
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <tc-item-create class="" *ngIf="isAuthor" [collection]="collection" (newItem)="onNewItem($event)"></tc-item-create>
 
-  </div>
-</div>
-<!-- <tc-collection-create *ngIf="isAuthor" [parentCollection]="collection" (newCollection)="onSubCollectionCreated($event)"></tc-collection-create> -->
+<ng-template #updateCollectionModal let-c="close" let-d="dismiss">
+  <tc-collection-create
+    [inputCollection]="collection"
+    (newCollection)="onCollectionUpdated($event)"
+    (updateCanceled)="onUpdateCollectionCanceled()">
+  </tc-collection-create>
+</ng-template>
 
+<!--<tc-collection-create *ngIf="isAuthor" [parentCollection]="collection" (newCollection)="onSubCollectionCreated($event)"></tc-collection-create>-->
 
 <div class="page" *ngIf="!isLoadingCollection && (!collection || !collection._id)">
   <div class="container">
