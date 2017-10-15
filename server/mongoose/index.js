@@ -1,2 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.Promise = require('bluebird');
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useMongoClient: true
+});
