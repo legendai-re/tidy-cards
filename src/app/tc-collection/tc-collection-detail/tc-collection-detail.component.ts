@@ -15,6 +15,8 @@ import { TcItemComponent }                from '../../tc-item/tc-item.component'
 import { TcItem }                         from '../../tc-item/tc-item.class';
 import { TcDataLimit }                    from '../../tc-shared/tc-data-limit';
 
+declare var $: any;
+
 @Component({
     templateUrl: './tc-collection-detail.component.html',
     styleUrls: ['tc-collection-detail.component.scss']
@@ -56,7 +58,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.subCollectionTemplate = new TcCollection();
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
-            this.initCollection(params);
+            this.initCollection(params);            
         });
     }
 
@@ -75,6 +77,9 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
             if(this.authService.isLoggedIn && collection._author._id === this.authService.currentUser._id)
                 this.isAuthor = true;
             this.isLoadingCollection = false;
+            setTimeout( () => {
+                $("#collectionDetailHeader").removeClass('is-hidden');
+            }, 10);
             this.emitUpdateHeaderEvent();
             this.loadItems();
         }, () => {this.isLoadingCollection = false;});
@@ -114,6 +119,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.haveMoreItems = (items.length===TcDataLimit.ITEM);
         this.loadingItems = false;
         this.itemLoaded = true;
+
     }
 
     public loadNextPage(){

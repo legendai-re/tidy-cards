@@ -1,7 +1,7 @@
 <div class="page" *ngIf="!isLoadingCollection && collection && collection._id">
   <div class="container">
 
-    <div class="page-headings">
+    <div class="page-headings is-hidden" id="collectionDetailHeader">
 
       <span class="page-headings--page-pre-title" *ngIf="collection.isFeatured">Featured</span>
       <h2 class="page-headings--page-title">{{collection.title}}</h2>
@@ -80,7 +80,7 @@
 
       <div class="collection-container--list">
 
-        <div class="collection-item is-content is-empty" *ngIf="collection._items.length == 0">
+        <div class="collection-item is-content is-empty" *ngIf="itemLoaded && collection._items.length == 0">
           <div class="collection-item--content collection-item--empty-phase">
             <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
             <h3 class="collection-item--empty-title">Create an item in your collection</h3>
@@ -98,7 +98,7 @@
         </div>
 
         <div class="items-list" tc-sortable [list]=collection._items (itemMoved)="onItemMoved($event)" *ngIf="itemLoaded">
-          <article class="item ui-state-default" *ngFor="let item of collection._items">
+          <article class="ui-state-default item" *ngFor="let item of collection._items">
             <tc-item [item]=item [isAuthor]=isAuthor (deletedItem)="onDeletedItem($event)"></tc-item>
           </article>
         </div>

@@ -35,6 +35,8 @@ MAILER_PASSWORD=mailer_password
 MAILER_PORT=1025
 ```
 
+In order to upload images you will need to install [graphicsmagick](http://www.graphicsmagick.org/)
+
 Install dependencies `npm install`
 
 Install typings `npm install typings -g`

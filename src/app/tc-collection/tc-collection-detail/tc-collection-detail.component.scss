@@ -21,6 +21,10 @@
 
 // COLLECTION HEADER
 
+.is-hidden {
+  display: none;
+}
+
 .collection-container--header {
   position: relative;
   display: flex;
