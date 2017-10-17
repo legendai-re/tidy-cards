@@ -74,7 +74,7 @@ module.exports = function getMultiple (req, res) {
             filterObj.isOnDiscover = true;
 
         if(rq.search){
-            algoliaGetCollectionIds(rq.search, function(ids){                
+            algoliaGetCollectionIds(decodeURIComponent(rq.search), function(ids){                
                 filterObj._id = { '$in': ids }; 
                 callback(filterObj);  
             })

@@ -35,7 +35,7 @@ module.exports = function getMultiple (req, res) {
         var filterObj = {};
 
         if(rq.search){
-            algoliaGetUserIds(rq.search, function(ids){                
+            algoliaGetUserIds(decodeURIComponent(rq.search), function(ids){                
                 filterObj._id = { '$in': ids }; 
                 callback(filterObj);  
             })
