@@ -1,5 +1,7 @@
 .btn + .btn {
-  margin-left: .5rem;
+  &:not(.btn-block) {
+    margin-left: .5rem;
+  }
 }
 
 .btn-icon {
