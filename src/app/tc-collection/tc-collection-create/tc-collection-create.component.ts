@@ -69,7 +69,8 @@ export class TcCollectionCreateComponent implements OnInit {
     }
 
     public onCollectionFocus(){
-        this.collection.color = 'CFD8DC';
+        if(this.collection.color == 'FFFFFF')
+            this.collection.color = 'CFD8DC';
         this.actionIntent = true;
     }
 

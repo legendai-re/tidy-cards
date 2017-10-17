@@ -68,7 +68,7 @@ export class TcSearchHeaderComponent implements OnInit, OnDestroy {
         params.set('skip', (TcDataLimit.COLLECTION * this.collectionsPageNb).toString());
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
-        params.set('search', encodeURIComponent(this.searchQuery));
+        params.set('search', encodeURIComponent(this.searchQuery.trim()));
         this.collectionService.getCollections(params).subscribe(collections => {
             if(this.collectionsPageNb == 0)
                 this.collections = collections;
@@ -88,7 +88,7 @@ export class TcSearchHeaderComponent implements OnInit, OnDestroy {
         params.set('populate', '_avatar');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
-        params.set('search', encodeURIComponent(this.searchQuery));
+        params.set('search', encodeURIComponent(this.searchQuery.trim()));
         this.userService.getUsers(params).subscribe(users => {
             if(this.usersPageNb == 0)
                 this.users = users;

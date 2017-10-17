@@ -1,6 +1,8 @@
 module.exports = function getMultiple (req, res) {
 
     var models      = require('../../models');
+    var algoliaClient = require('../../algolia/algolia')
+    var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
 
     var rq = req.query;
 
@@ -33,10 +35,34 @@ module.exports = function getMultiple (req, res) {
         var filterObj = {};
 
         if(rq.search){
-            filterObj.$or = [{username: { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'}}, {name: { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'}}]
+            algoliaGetUserIds(rq.search, function(ids){                
+                filterObj._id = { '$in': ids }; 
+                callback(filterObj);  
+            })
+        }else{
+            callback(filterObj);    
         }
 
-        callback(filterObj);
     }
 
+
+    function algoliaGetUserIds(searchQuery, callback){
+        algoliaUserIndex.search(
+        {
+            query: searchQuery,
+            attributesToRetrieve: ['objectID'],
+            hitsPerPage: 20,
+        },
+        function searchDone(err, content) {
+            if (err) {
+              console.error(err);
+              callback([]);
+            }
+            var usersIds = [];
+            for (var h in content.hits) {
+                usersIds.push(content.hits[h].objectID)
+            }
+            callback(usersIds);
+        });
+    }
 }

@@ -18,4 +18,9 @@ router.route('/delete-all-but-users')
         require('./deleteAllButUsers')(req, res);
     });
 
+router.route('/add-algolia-indexes')
+    .get(isGranted('ROLE_ADMIN'), function(req, res) {
+        require('./addAlgoliaIndexes')(req, res);
+    });
+
 module.exports = router;

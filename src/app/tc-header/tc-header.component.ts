@@ -182,7 +182,7 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
 
     private updateUrl(){
         if(this.searchQuery && this.searchQuery != '')
-            this._location.go('/search;q='+ encodeURIComponent(this.searchQuery));
+            this._location.go('/search;q='+ encodeURIComponent(this.searchQuery.trim()));
         else
             this._location.go('/search');
     }

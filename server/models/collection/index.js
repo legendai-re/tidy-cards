@@ -1,11 +1,9 @@
-/**
- * @module Item
- * @author Olivier Coué
- */
-
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 var lifeStates  = require('../lifeStates.json');
+var visibility  = require('./visibility.json');
+var algoliaClient = require('../../algolia/algolia')
+var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_collection');
 
 var CollectionSchema = require('./schema')(Schema);
 
@@ -14,6 +12,24 @@ CollectionSchema.pre('save', function(next) {
         this.createdAt = new Date();
     this.updatedAt = Date();
     next();
+});
+
+CollectionSchema.post('save', function(collection) {
+    if(collection.lifeState === lifeStates.ACTIVE.id && collection.visibility === visibility.PUBLIC.id) {
+        algoliaIndex.addObject({
+            objectID: collection._id,
+            title: collection.title,
+            bio: collection.bio
+        }, function(err, content) {
+            if(err)
+                console.log(err)
+        });
+    }else{
+        algoliaIndex.deleteObject(collection._id.toString(), function(err) {
+            if(err)
+                console.log(err);
+        });
+    }
 });
 
 /**

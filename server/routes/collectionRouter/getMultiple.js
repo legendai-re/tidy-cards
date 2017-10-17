@@ -5,7 +5,9 @@ module.exports = function getMultiple (req, res) {
     var sortTypes   = require('../../models/customSort/sortTypes.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
-
+    var algoliaClient = require('../../algolia/algolia')
+    var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_collection');
+    
 	var rq = req.query;
 
     if(rq._author && rq.custom_sort){
@@ -66,14 +68,17 @@ module.exports = function getMultiple (req, res) {
 
         if(!rq.search)
             filterObj.depth = 0;
-		if(rq.search)
-			filterObj.title = { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'};
         if(rq.isFeatured)
             filterObj.isFeatured = true;
         if(rq.isOnDiscover)
             filterObj.isOnDiscover = true;
 
-		if(rq._author){
+        if(rq.search){
+            algoliaGetCollectionIds(rq.search, function(ids){                
+                filterObj._id = { '$in': ids }; 
+                callback(filterObj);  
+            })
+        } else if(rq._author){
 			filterObj._author = rq._author;
 			if(req.user && req.user.isGranted('ROLE_USER'))
 				filterObj.$or = [{visibility: visibility.PUBLIC.id}, {_author: req.user._id}]
@@ -89,6 +94,26 @@ module.exports = function getMultiple (req, res) {
 			callback(filterObj);
 		}
 	}
+
+    function algoliaGetCollectionIds(searchQuery, callback){
+        algoliaCollectionIndex.search(
+        {
+            query: searchQuery,
+            attributesToRetrieve: ['objectID'],
+            hitsPerPage: 20,
+        },
+        function searchDone(err, content) {
+            if (err) {
+              console.error(err);
+              callback([]);
+            }
+            var collectionsIds = [];
+            for (var h in content.hits) {
+                collectionsIds.push(content.hits[h].objectID)
+            }
+            callback(collectionsIds);
+        });
+    }
 
 	function getStarredByQuery(rq, req, callback){
 		var filterObj = {};

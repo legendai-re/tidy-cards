@@ -1,8 +1,11 @@
 var mongoose    = require('mongoose');
 var roles       = require('../../security/roles.json');
 var visibility  = require('../collection/visibility.json');
+var lifeStates  = require('../lifeStates.json');
 var URLSlugs    = require('../../helpers/user/mongooseSlug');
 var Schema      = mongoose.Schema;
+var algoliaClient = require('../../algolia/algolia')
+var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
 
 var UserSchema  = require('./schema')(Schema);
 
@@ -11,6 +14,24 @@ UserSchema.pre('save', function(next) {
         this.createdAt = new Date();
     this.updatedAt = Date();
     next();
+});
+
+UserSchema.post('save', function(user) {
+    /*if(user.lifeState === lifeStates.ACTIVE.id) {
+        algoliaUserIndex.addObject({
+            objectID: user._id,
+            username: user.username,
+            name: user.name
+        }, function(err, content) {
+            if(err)
+                console.log(err)
+        });
+    }else{
+        algoliaUserIndex.deleteObject(user._id.toString(), function(err) {
+            if(err)
+                console.log(err);
+        });
+    }*/
 });
 
 UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username', update: true}));
