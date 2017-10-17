@@ -1,45 +1,39 @@
 <main class="application-ui" [class.is-hidden]="!authService.authInitialized || !t.langInitialized">
 
-  <div class="application-flash"></div>
+  <tc-header class="application-header" [class.is-public]="!authService.isLoggedIn"></tc-header>
 
-  <div class="application-container">
+  <div class="application-content">
 
-    <tc-header class="application-header" [class.is-public]="!authService.isLoggedIn"></tc-header>
+    <router-outlet></router-outlet>
 
-    <div class="application-content">
+  </div>
 
-      <router-outlet></router-outlet>
+  <div class="application-footer"> <!-- TODO: tc-footer -->
 
-    </div>
+    <div class="footer-container" *ngIf="!headerService.noHeader && !headerService.noFooter">
+      <div class="footer">
+        <div class="container">
 
-    <div class="application-footer"> <!-- TODO: tc-footer -->
+          <h1 class="icon-invow logo footer-logo">Invow</h1>
+          <span class="footer-copy">TidyCards© 2017</span>
 
-      <div class="footer-container" *ngIf="!headerService.noHeader && !headerService.noFooter">
-        <div class="footer">
-          <div class="container">
+          <nav class="nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/about']" >About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/contact']" >Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/team']" >Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/terms']">Terms</a>
+            </li>
+          </nav>
 
-            <h1 class="icon-invow logo footer-logo">Invow</h1>
-            <span class="footer-copy">TidyCards© 2017</span>
-
-            <nav class="nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/about']" >About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/contact']" >Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/team']" >Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/terms']">Terms</a>
-              </li>
-            </nav>
-
-          </div>
         </div>
       </div>
-
     </div>
 
   </div>
