@@ -17,7 +17,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.post('save', function(user) {
-    /*if(user.lifeState === lifeStates.ACTIVE.id) {
+    if(user.lifeState === lifeStates.ACTIVE.id) {
         algoliaUserIndex.addObject({
             objectID: user._id,
             username: user.username,
@@ -31,7 +31,7 @@ UserSchema.post('save', function(user) {
             if(err)
                 console.log(err);
         });
-    }*/
+    }
 });
 
 UserSchema.plugin(URLSlugs('unsafeUsername', {field: 'username', update: true}));

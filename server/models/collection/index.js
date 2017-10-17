@@ -16,7 +16,7 @@ CollectionSchema.pre('save', function(next) {
 
 CollectionSchema.post('save', function(collection) {
     if(collection.lifeState === lifeStates.ACTIVE.id && collection.visibility === visibility.PUBLIC.id) {
-        algoliaIndex.addObject({
+        algoliaCollectionIndex.addObject({
             objectID: collection._id,
             title: collection.title,
             bio: collection.bio
@@ -25,7 +25,7 @@ CollectionSchema.post('save', function(collection) {
                 console.log(err)
         });
     }else{
-        algoliaIndex.deleteObject(collection._id.toString(), function(err) {
+        algoliaCollectionIndex.deleteObject(collection._id.toString(), function(err) {
             if(err)
                 console.log(err);
         });
