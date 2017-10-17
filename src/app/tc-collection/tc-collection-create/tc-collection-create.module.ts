@@ -5,14 +5,17 @@ import { RouterModule }       from '@angular/router';
 import { TcSharedModule }     from '../../tc-shared/tc-shared.module';
 
 import { TcCollectionCreateComponent } from './tc-collection-create.component';
+import { TcCollectionUpdateComponent } from './tc-collection-update.component';
 
 @NgModule({
   imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule ],
   declarations: [
-    TcCollectionCreateComponent
+    TcCollectionCreateComponent,
+    TcCollectionUpdateComponent
   ],
   exports: [
-    TcCollectionCreateComponent
+    TcCollectionCreateComponent,
+    TcCollectionUpdateComponent
   ],
   providers: []
 })

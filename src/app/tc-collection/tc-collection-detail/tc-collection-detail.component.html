@@ -126,11 +126,11 @@
 
 
 <ng-template #updateCollectionModal let-c="close" let-d="dismiss">
-  <tc-collection-create
+  <tc-collection-update
     [inputCollection]="collection"
     (newCollection)="onCollectionUpdated($event)"
     (updateCanceled)="onUpdateCollectionCanceled()">
-  </tc-collection-create>
+  </tc-collection-update>
 </ng-template>
 
 <!--<tc-collection-create *ngIf="isAuthor" [parentCollection]="collection" (newCollection)="onSubCollectionCreated($event)"></tc-collection-create>-->
