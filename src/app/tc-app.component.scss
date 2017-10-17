@@ -1,5 +1,63 @@
 :host {
     display: block;
+    background-color: red;
 }
 
 @import '../style/app.scss';
+
+.application-ui {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity .6s ease;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.application-flash {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  width: 100vw;
+  height: auto;
+}
+
+.application-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.application-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: -8rem;
+}
+
+.application-header.is-public + .application-content {
+  z-index: 200;
+}
+
+.application-footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
