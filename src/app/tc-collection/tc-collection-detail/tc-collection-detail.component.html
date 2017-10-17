@@ -80,7 +80,7 @@
 
       <div class="collection-container--list">
 
-        <div class="collection-item is-content is-empty" *ngIf="itemLoaded && collection._items.length == 0">
+        <div class="collection-item is-content is-empty" *ngIf="itemLoaded && collection._items.length == 0 && isAuthor">
           <div class="collection-item--content collection-item--empty-phase">
             <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
             <h3 class="collection-item--empty-title">Create an item in your collection</h3>
@@ -94,6 +94,16 @@
                 </button>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div class="collection-item is-content is-empty" *ngIf="itemLoaded && collection._items.length == 0 && !isAuthor">
+          <div class="collection-item--content collection-item--empty-phase">
+            <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
+            <h3 class="collection-item--empty-title">Whoops, this collection is empty</h3>
+            <p class="collection-item--empty-caption">
+              Unfortunately there is nothing in this collection yet, please make a try later.
+            </p>
           </div>
         </div>
 
