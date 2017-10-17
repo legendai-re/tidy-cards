@@ -11,7 +11,7 @@
   flex-direction: column;
   z-index: 0;
   width: 100vw;
-  height: 100vh;
+  height: auto;
   transition: opacity .6s ease;
 
   &.is-hidden {
@@ -20,23 +20,6 @@
   }
 }
 
-.application-flash {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  width: 100vw;
-  height: auto;
-}
-
-.application-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  z-index: 100;
-  overflow: hidden;
-}
 
 .application-header {
   position: relative;
