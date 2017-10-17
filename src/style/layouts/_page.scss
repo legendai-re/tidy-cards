@@ -10,9 +10,17 @@
   flex-direction: column;
   padding: 8rem 0 0;
   min-height: 24.5rem;
+  transition: opacity .6s ease;
+  transition-delay: .4s;
 
   @include rwd-lg() {
     padding: 8rem 8rem 0;
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s ease;
   }
 }
 

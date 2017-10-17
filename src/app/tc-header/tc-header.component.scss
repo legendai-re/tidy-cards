@@ -11,7 +11,7 @@
   flex-direction: column;
   background-color: $brand-primary;
   min-height: 16rem;
-  transition: min-height .5s ease-in-out;
+  transition: min-height .4s ease;
 
   &.is-searching {
     min-height: 100vh!important;
