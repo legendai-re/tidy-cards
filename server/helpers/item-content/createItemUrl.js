@@ -6,7 +6,10 @@ module.exports = function createItemUrl (url, user, callback) {
     const cheerio       = require('cheerio')
     
     var host = getHost(url);
-    request(url, function (error, response, html) {
+    var options = {
+        headers: {'user-agent': 'node.js'}
+    }
+    request(url,options, function (error, response, html) {
         if (error)
             return callback(error);
 
