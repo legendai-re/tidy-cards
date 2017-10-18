@@ -111,6 +111,7 @@
     "bootstrap": "^4.0.0-beta",
     "bootstrap-loader": "2.2.0",
     "bootstrap-sass": "^3.3.7",
+    "cheerio": "^1.0.0-rc.2",
     "codelyzer": "0.0.19",
     "cookie-parser": "^1.4.3",
     "copy-webpack-plugin": "^4.0.1",
