@@ -6,6 +6,7 @@ var express 			= require('express');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 var session 			= require('express-session');
+var sslRedirect         = require('heroku-ssl-redirect');
 var db 					= require('./mongoose');
 var controllers         = require('./controllers');
 
@@ -22,13 +23,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
-app.use(function(req, res, next) {
-    if(!req.secure && process.env.NODE_ENV == 'production') {
-    	return res.redirect(['https://', req.get('Host'), req.url].join(''));
-  	}
-  	next();
-})
+app.use(sslRedirect(['production']));
 
 require('./security')(app);
 require('./routes')(app);
