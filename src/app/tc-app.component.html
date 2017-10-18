@@ -4,13 +4,9 @@
 
   <div class="application-container">
 
-    <tc-header class="application-header" [class.is-public]="!authService.isLoggedIn"></tc-header>
+    <tc-header class="application-header"></tc-header>
 
-    <div class="application-content">
-
-      <router-outlet></router-outlet>
-
-    </div>
+    <router-outlet></router-outlet>
 
     <div class="application-footer"> <!-- TODO: tc-footer -->
 
