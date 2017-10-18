@@ -1,6 +1,6 @@
 <!-- website item -->
 <div class="item-embeded-container item-website" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'website'">
-    <a [href]="'//'+itemUrl.noHttpUrl" target="_blank">
+    <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="itemUrl.image" />
         </div>
@@ -19,7 +19,7 @@
 
 <!-- article item -->
 <div class="item-embeded-container item-article" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'article'">
-    <a [href]="'//'+itemUrl.noHttpUrl" target="_blank">
+    <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="itemUrl.image" />
         </div>
@@ -38,7 +38,7 @@
 
 <!-- no type item -->
 <div class="item-embeded-container no-type" [class.item-no-image]="!itemUrl.image" *ngIf="!itemUrl.type || !(itemUrl.type == 'article' || itemUrl.type == 'website')">
-    <a [href]="'//'+itemUrl.noHttpUrl" target="_blank">
+    <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="itemUrl.image" />
         </div>
