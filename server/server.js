@@ -22,6 +22,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
+
+app.use(function(req, res, next) {
+    if(!req.secure && process.env.NODE_ENV == 'production') {
+    	return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  	}
+  	next();
+})
+
 require('./security')(app);
 require('./routes')(app);
 
