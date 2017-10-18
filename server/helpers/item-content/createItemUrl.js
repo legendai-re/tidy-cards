@@ -7,7 +7,7 @@ module.exports = function createItemUrl (url, user, callback) {
     
     var host = getHost(url);
     request(url, function (error, response, html) {
-        if (error || response.statusCode != 200)
+        if (error)
             return callback(error);
 
         var $ = cheerio.load(html);
