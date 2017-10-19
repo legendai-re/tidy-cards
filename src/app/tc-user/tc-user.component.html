@@ -1,13 +1,6 @@
-<section class="section" *ngIf="displayPublic">
-    <div class="container profile-wrapper">
-        <tc-public-profile></tc-public-profile>
-    </div>
-</section>
+<div class="application-content is-profile">
 
-<section class="section" *ngIf="!displayPublic">
-    <div class="container">
-        <div class="page-wrapper profile-wrapper">
-            <tc-private-profile></tc-private-profile>
-        </div>
-    </div>
-</section>
+  <tc-public-profile *ngIf="displayPublic"></tc-public-profile>
+  <tc-private-profile *ngIf="!displayPublic"></tc-private-profile>
+  
+</div>

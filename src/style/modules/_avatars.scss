@@ -1,10 +1,12 @@
 .avatar {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
     background: $collection-purple;
     overflow: hidden;
     border-radius: 50%;
     text-align: center;
     color: $white-op-3-4;
-    position: relative;
     font-weight: 500;
 
     img {
