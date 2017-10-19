@@ -59,7 +59,7 @@
           </ul>
 
           <div class="collection-container--stats-actions" *ngIf="isAuthor">
-            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)" *ngIf="collection._items.length > 0">
+            <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal)">
               New item
             </button>
 
@@ -69,7 +69,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a href="javascript:void(0)" class="dropdown-item" (click)="openModal(updateCollectionModal)">Edit</a>
-                <a href="javascript:void(0)" class="dropdown-item" (click)="deleteCollection()">Delete</a>
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteCollectionModal(collectionDeleteModal)">Delete</a>
               </div>
             </div>
 
@@ -126,14 +126,25 @@
   </div>
 </div>
 
-<ng-template #newItemModal let-c="close" let-d="dismiss">
-  <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>-->
-  <tc-item-create class="" *ngIf="isAuthor" [collection]="collection" (newItem)="onNewItem($event)"></tc-item-create>
-  <!--<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>-->
+
+<ng-template class="default-modal" #collectionDeleteModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="c('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <b>Do you really want to delete this collection?</b>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this collection</button>
+  </div>
 </ng-template>
 
+<ng-template #newItemModal let-c="close" let-d="dismiss">
+  <tc-item-create class="" *ngIf="isAuthor" [collection]="collection" (newItem)="onNewItem($event)"></tc-item-create>
+</ng-template>
 
 <ng-template #updateCollectionModal let-c="close" let-d="dismiss">
   <tc-collection-update

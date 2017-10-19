@@ -66,6 +66,14 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.currentModal = this.modalService.open(content);
     }
 
+    private openDeleteCollectionModal(content) {
+        this.modalService.open(content).result.then((result) => {
+            if(result == 'confirm')
+                this.deleteCollection();
+        }, (reason) => {
+        });
+    }
+
     private initCollection(params){
         this.searchParams = params['collection_id'];
         let getParams = new URLSearchParams();

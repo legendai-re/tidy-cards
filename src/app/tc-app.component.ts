@@ -34,8 +34,12 @@ export class TcAppComponent {
                         params[keyValue[0]] = decodeURIComponent(keyValue[1]);
                 }
                 authService.initCurrentUser().then(success => {
+                    router.initialNavigation();
                     url = url.replace("#_=_", "");
-                    this.router.navigate([url, params]);
+                    if(url=='/')
+                        this.router.navigate([url]);
+                    else
+                        this.router.navigate([url, params]);
                 });
             }
         })
