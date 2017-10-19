@@ -11,17 +11,11 @@
 
 .profile-header {
     display: flex;
-    margin: 30px 0;
-}
-
-.profile-header:before, .profile-header:after {
-    content: "";
-    display: table;
-    clear: both;
+    flex-direction: row;
+    margin: 2rem 0;
 }
 
 .profile-avatar {
-    float: left;
     margin: 0 30px 0 0;
 }
 
@@ -92,43 +86,61 @@
 }
 
 .profile-header-infos {
-    flex: 1;
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
 }
 
 .profile-header-top {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .profile-infos-name {
-    color: $white;
-    padding: 13px 0 15px;
-    flex: 1;
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  color: $white;
+  padding: 1rem .5rem 1rem 0;
 }
 
 .profile-name, .profile-username {
-    margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .profile-name {
     font-size: 2rem;
 
     input {
-        background: transparent;
-        border: none;
+      position: relative;
+      display: flex;
+      flex: 0 1 auto;
+      background: transparent;
+      border: none;
+      width: 100%;
     }
 }
 
 .profile-username {
+  position: relative;
+  display: flex;
     font-size: 1rem;
     font-weight: normal;
 }
 
 .profile-infos-edit {
-    padding: 15px 0;
-    align-self: flex-end;
-    color: $white;
+  position: relative;
+  display: flex;
+  align-self: flex-end;
+  padding: 1rem 0;
+  color: $white;
 }
 
 .profile-infos-stats {
@@ -175,15 +187,22 @@
 .list-item {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+
+    &:not(:last-child) {
+      margin: 0 0 1rem;
+    }
 }
 
 .list-item-title, .list-item-description {
-    max-width: 80%;
+  position: relative;
 }
 
 .list-item-infos {
-    flex: 1;
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 0 2rem 0 0;
 }
 
 .list-item-title {
@@ -200,13 +219,21 @@
     margin: 0;
 }
 
+.list-item-form {
+  border-color: $gray-200;
+  background-color: $gray-200;
+}
+
 .list-item-description-darker {
     color: $black;
 }
 
 input.list-item-description-darker {
-    max-width: 350px;
     width: 100%;
     border: none;
     background: transparent;
+}
+
+.list-item-status {
+  // line-height: 1rem;
 }

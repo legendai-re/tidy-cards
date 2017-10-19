@@ -1,22 +1,24 @@
 .section {
-    margin: 0 0 30px;
+    margin: 0 0 2.5rem;
 }
 
 .section-title {
     font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: $black;
+    margin-bottom: 1.5rem;
+    color: $gray-900;
 
     &.withDescription {
-        margin-bottom: 10px;
+        margin-bottom: .25rem;
     }
 }
 
 .section-description {
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color: $black-light;
-    border-bottom: 1px solid $border-color;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  color: $gray-700;
 }
 
 .section:first-child {

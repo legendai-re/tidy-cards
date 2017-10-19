@@ -1,5 +1,9 @@
+.form-control + .form-control {
+  margin-left: .5rem;
+}
+
 .form-group {
-    margin-bottom: 5px;
+    margin-bottom: .5rem;
 }
 
 .form-actions {}
@@ -28,11 +32,6 @@
 
 .icon + span {
     padding: 2px 5px 0;
-}
-
-.form-control,
-.input-group-addon {
-    border-radius: 3px;
 }
 
 .custom-file {
