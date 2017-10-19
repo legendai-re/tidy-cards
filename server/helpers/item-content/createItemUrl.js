@@ -6,6 +6,7 @@ module.exports = function createItemUrl (url, user, callback) {
     const cheerio       = require('cheerio')
     
     var host = getHost(url);
+    var url = getValidUrl(url);
     var options = {
         headers: {'user-agent': 'node.js'}
     }
@@ -75,5 +76,9 @@ module.exports = function createItemUrl (url, user, callback) {
         return url;
     }
 
-
+    function getValidUrl(url){
+        if(url.substring(0, 7) === 'http://' || url.substring(0, 8) === 'https://')
+            return url;
+        return 'http://' + url;
+    }
 }

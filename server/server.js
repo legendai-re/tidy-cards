@@ -22,7 +22,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-
 app.use(sslRedirect(['production']));
 
 require('./security')(app);

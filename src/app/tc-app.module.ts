@@ -14,6 +14,7 @@ import { TcCollectionModule }     from './tc-collection/tc-collection.module';
 import { TcCollectionCardModule } from './tc-collection/tc-collection-card/tc-collection-card.module';
 import { TcCollectionCreateModule } from './tc-collection/tc-collection-create/tc-collection-create.module';
 import { TcHeaderModule }         from './tc-header/tc-header.module';
+import { TcFooterModule }         from './tc-footer/tc-footer.module';
 import { TcItemModule }           from './tc-item/tc-item.module';
 import { TcPageModule }           from './tc-page/tc-page.module';
 import { TcSearchModule }         from './tc-search/tc-search.module';
@@ -55,6 +56,7 @@ import { TcBase64 }            from './tc-shared/tc-base64.service';
         TcCollectionCardModule,
         TcCollectionCreateModule,
         TcHeaderModule,
+        TcFooterModule,
         TcItemModule,
         TcPageModule,
         TcSearchModule,
