@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TcItemImage } from './tc-item-image.class';
+import { TcApiUrl }  from '../../tc-shared/tc-api-url';
 
 @Component({
     selector: 'tc-item-image',
@@ -14,4 +15,7 @@ export class TcItemImageComponent {
     constructor() {
     }
 
+    public getImageProxyUrl(url){
+    	return TcApiUrl.IMAGES + '?url=' + encodeURIComponent(url);
+    }
 }
