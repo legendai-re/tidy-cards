@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     name: process.env.SESSION_NAME,
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 app.use(sslRedirect(['production']));

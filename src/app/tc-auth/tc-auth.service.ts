@@ -61,15 +61,11 @@ export class TcAuthService {
 
     private getLogout (): Observable<Boolean> {
         return this.http.get(TcApiUrl.LOGOUT)
-        .map(this.handleStatus)
+        .map(this.handleUser)
         .catch(this.handleError);
     }
 
-    private handleStatus(res){
-        return res.status == 200 ? true : false;
-    }
-
-    private handleUser(res: Response) {        
+    private handleUser(res: Response) {
         let body = res.json();
         return body.data ? TcUser.createFormJson(body.data) : { };
     }
