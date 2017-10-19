@@ -234,6 +234,10 @@
 // HEADER SEARCH
 
 .header-search {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
   margin-top: 4rem;
   z-index: 100;
 }
