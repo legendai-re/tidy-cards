@@ -18,6 +18,9 @@ router.route('/')
         })
     }, function(req, res){
         require('./post')(req, res);
-    });
+    })
+    .get(function(req, res){
+       require('./getOne')(req, res);
+    })
 
 module.exports = router;

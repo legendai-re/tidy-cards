@@ -1,6 +1,7 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router }       from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
+import { TcAuthService }                   from '../tc-auth/tc-auth.service';
 import { TcCollectionService }             from '../tc-collection/tc-collection.service';
 import { TcCollection }                    from '../tc-collection/tc-collection.class';
 import { TcDataLimit }                     from '../tc-shared/tc-data-limit';
@@ -16,7 +17,7 @@ export class TcDiscoverComponent implements OnInit {
     public popularCollections: TcCollection[];
     public lastCollections: TcCollection[];
 
-    constructor(public t: TcLanguageService, private router: Router, private collectionService: TcCollectionService) {
+    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {

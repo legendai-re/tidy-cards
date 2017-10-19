@@ -1,5 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { TcItem } from './tc-item.class';
 import { TcItemService } from './tc-item.service';
 
@@ -13,12 +14,16 @@ export class TcItemComponent implements OnInit{
 
     public itemTypes: any;
     public intentToUpdate: boolean;
+    public itemUpdateModal: NgbModalRef;
+    public collectionUpdateModal: NgbModalRef;
 
+    @ViewChild("updateItemModal") updateItemModal: ElementRef;
+    @ViewChild("updateColletionModal") updateColletionModal: ElementRef;
     @Input() item: TcItem;
     @Input() isAuthor: boolean;
     @Output() deletedItem = new EventEmitter();
 
-    constructor(private itemService: TcItemService) {
+    constructor(private itemService: TcItemService, private modalService: NgbModal,) {
         this.itemTypes = TcItem.ITEM_TYPES;
     }
 
@@ -26,12 +31,26 @@ export class TcItemComponent implements OnInit{
         this.intentToUpdate = false;
     }
 
-    public updateItemIntent(){
-        this.intentToUpdate = true;
+    public openUpdateModal(){
+        if (this.item.type == this.itemTypes.COLLECTION)
+            this.collectionUpdateModal = this.modalService.open(this.updateItemModal);
+        else
+            this.itemUpdateModal = this.modalService.open(this.updateItemModal);
+    }
+
+    public openDeleteItemModal(content) {
+        this.modalService.open(content).result.then((result) => {
+            if(result == 'confirm')
+                this.deleteItem();
+        }, (reason) => {
+        });
     }
 
     public onItemUpdatedCanceled(){
-        this.intentToUpdate = false;
+        if (this.item.type == this.itemTypes.COLLECTION)
+            this.collectionUpdateModal.close();
+        else
+            this.itemUpdateModal.close();
     }
 
     public deleteItem(){
@@ -46,6 +65,7 @@ export class TcItemComponent implements OnInit{
         if(event.value){
             this.item = event.value;
             this.intentToUpdate = false;
+            this.itemUpdateModal.close();
         }
     }
 
@@ -53,6 +73,7 @@ export class TcItemComponent implements OnInit{
         if(event.value){
             this.item._content = event.value;
             this.intentToUpdate = false;
+            this.collectionUpdateModal.close();
         }
     }
 }

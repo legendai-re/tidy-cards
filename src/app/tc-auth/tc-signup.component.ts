@@ -59,7 +59,7 @@ export class TcSignupComponent {
     }
 
     public checkUsername(){
-        if(!TcUser.isValidUsername(this.signupData.username)){
+        if(!this.signupData.username || !TcUser.isValidUsername(this.signupData.username)){
             this.usernameState = 'INVALID';
             return;
         }
