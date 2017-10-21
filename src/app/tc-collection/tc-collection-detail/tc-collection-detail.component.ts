@@ -19,7 +19,7 @@ declare var $: any;
 
 @Component({
     templateUrl: './tc-collection-detail.component.html',
-    styleUrls: ['tc-collection-detail.component.scss']
+    styleUrls: ['tc-collection-detail.component.scss', '../../tc-item/tc-item.component.scss']
 })
 
 export class TcCollectionDetailComponent implements OnInit, OnDestroy {
@@ -58,7 +58,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.subCollectionTemplate = new TcCollection();
         this.itemLoaded = false;
         this.sub = this.route.params.subscribe(params => {
-            this.initCollection(params);            
+            this.initCollection(params);
         });
     }
 
@@ -95,7 +95,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
 
     private emitUpdateHeaderEvent(){
         this.headerService.emitUpdateHeaderEvent({
-            value:{                
+            value:{
                 type: 'collection',
                 color: this.collection.color,
                 image:  this.collection._thumbnail ? this.collection._thumbnail.getPath('1000x400') : '',

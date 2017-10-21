@@ -1,22 +1,105 @@
+<div class="collection-item" [class.is-content]="item.type == itemTypes.IMAGE || item.type == itemTypes.YOUTUBE || item.description && (item.type != itemTypes.URL && item.description)" [class.is-media]="item.type == itemTypes.IMAGE || item.type == itemTypes.YOUTUBE">
 
-<div *ngIf="!intentToUpdate">
-    <div class="item-container-metas">
-        <span class="date">{{item.createdAt | date}}</span>
-        <div class="item-settings" *ngIf="isAuthor">
-            <a class="card-collection--drag-handle edit-item move-item-button">Drag me</a>
-            <a class="edit-item" (click)="openUpdateModal()"><i class="material-icons">edit</i>Edit</a>
-            <a class="delete-item" (click)="openDeleteItemModal(itemDeleteModal)"><i class="material-icons">delete</i>Delete</a>
+  <div class="collection-item--header" [class.is-top]="item.type == itemTypes.IMAGE || item.type == itemTypes.YOUTUBE">
+
+    <a [href]="item._content.url" target="_blank" class="collection-item--header-details" *ngIf="item.type == itemTypes.URL">
+      <div class="collection-item--header-detail collection-item--favicon">
+        <img src="http://www.google.com/s2/favicons?domain={{item._content.host}}" />
+      </div>
+      <div class="collection-item--header-detail">
+        <div class="collection-item--title">
+          <span class="collection-item--title-wrapper">{{item._content.title}}</span>
+          <span class="collection-item--host">{{item._content.host}}</span>
         </div>
+      </div>
+    </a>
+
+    <div class="collection-item--header-details" *ngIf="item.description && !(item.type == itemTypes.URL || item.type == itemTypes.TWEET || item.type == itemTypes.YOUTUBE || item.type == itemTypes.IMAGE)">
+      <div class="collection-item--header-detail collection-item--icon">
+        comment
+      </div>
+      <div class="collection-item--header-detail collection-item--caption-title">
+        Text caption
+      </div>
     </div>
-    <tc-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]="item._content"></tc-item-url>
-    <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></tc-item-tweet>
-    <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></tc-item-youtube>
-    <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></tc-item-image>
-    <tc-collection-card *ngIf="item.type == itemTypes.COLLECTION" [collection]="item._content"></tc-collection-card>
-    <div class="item-content" *ngIf="item.description">
-        <p>{{item.description}}</p>
+
+    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.TWEET">
+      <div class="collection-item--header-detail collection-item--favicon">
+        <img src="http://www.google.com/s2/favicons?domain=twitter.com" />
+      </div>
+      <div class="collection-item--header-detail collection-item--caption-title">
+        Tweeted by {{item._content.author_name}}
+      </div>
     </div>
+
+    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.YOUTUBE">
+      <div class="collection-item--header-detail collection-item--favicon">
+        <img src="http://www.google.com/s2/favicons?domain=youtube.com" />
+      </div>
+      <div class="collection-item--header-detail collection-item--caption-title">
+        YouTube video from {{item._content.snippet?.channelTitle}}
+      </div>
+    </div>
+
+    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.IMAGE">
+      <div class="collection-item--header-detail collection-item--favicon">
+        <img src="http://www.google.com/s2/favicons?domain=host" />
+      </div>
+      <div class="collection-item--header-detail collection-item--caption-title">
+        Photo from host
+      </div>
+    </div>
+
+    <ul class="collection-item--header-actions">
+
+      <li class="collection-item--header-action">
+        <span class="collection-item--header-action-icon">star</span>
+        <span class="collection-item--header-star-value">0</span>
+      </li>
+
+      <li class="collection-item--header-action">
+        <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm card-collection--drag-handle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="icon">more_vert</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal()">Edit</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">Delete</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type == itemTypes.URL && item.type == itemTypes.YOUTUBE">
+
+    <span class="collection-item--description-icon">comment</span>
+    <span>{{item.description}}</span>
+
+  </div>
+
+  <div class="collection-item--content" *ngIf="item.description && !(item.type == itemTypes.URL || item.type == itemTypes.TWEET || item.type == itemTypes.YOUTUBE || item.type == itemTypes.IMAGE)">
+    <div class="collection-item--content-wrapper">
+      <h1>Le titre dont on parlait</h1>
+      <span>{{item.description}}</span>
+    </div>
+  </div>
+
+  <tc-item-image class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></tc-item-image>
+
+  <tc-item-youtube class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></tc-item-youtube>
+
+  <!-- <div class="collection-item--content">
+  <tc-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]="item._content"></tc-item-url>
+  <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></tc-item-tweet>
+  <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></tc-item-youtube>
+  <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></tc-item-image>
+
+  <tc-collection-card *ngIf="item.type == itemTypes.COLLECTION" [collection]="item._content"></tc-collection-card>
+
+  <span class="date">{{item.createdAt | date}}</span>-->
+
 </div>
+
 
 <ng-template #updateItemModal let-c="close" let-d="dismiss">
     <tc-item-create [item]=item (newItem)="onItemUpdated($event);" (updateCanceled)="onItemUpdatedCanceled($event)"></tc-item-create>

@@ -1,5 +1,5 @@
 <!-- website item -->
-<div class="item-embeded-container item-website" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'website'">
+<!-- <div class="item-embeded-container item-website" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'website'">
     <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="getImageProxyUrl(itemUrl.image)" />
@@ -15,10 +15,10 @@
             </div>
         </div>
     </a>
-</div>
+</div> -->
 
 <!-- article item -->
-<div class="item-embeded-container item-article" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'article'">
+<!-- <div class="item-embeded-container item-article" [class.item-no-image]="!itemUrl.image" *ngIf="itemUrl.type == 'article'">
     <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="getImageProxyUrl(itemUrl.image)" />
@@ -34,10 +34,10 @@
             </div>
         </div>
     </a>
-</div>
+</div> -->
 
 <!-- no type item -->
-<div class="item-embeded-container no-type" [class.item-no-image]="!itemUrl.image" *ngIf="!itemUrl.type || !(itemUrl.type == 'article' || itemUrl.type == 'website')">
+<!-- <div class="item-embeded-container no-type" [class.item-no-image]="!itemUrl.image" *ngIf="!itemUrl.type || !(itemUrl.type == 'article' || itemUrl.type == 'website')">
     <a [href]="itemUrl.url" target="_blank">
         <div class="item-embeded-image" *ngIf="itemUrl.image">
             <img [src]="getImageProxyUrl(itemUrl.image)" />
@@ -53,4 +53,4 @@
             </div>
         </div>
     </a>
-</div>
+</div> -->
