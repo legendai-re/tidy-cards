@@ -1,15 +1,11 @@
-<div class="embed-responsive embed-responsive-16by9 item-embeded-container item-video">
-    <div *ngIf="!displayVideo" class="item-embeded-image">
-        <img src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" />
-    </div>
-    <div *ngIf="!displayVideo" (click)="displayVideo = true" class="item-embeded-content">
-        <div class="item-embeded-content-wrapper">
-            <h3 class="item-title" *ngIf="itemYoutube.snippet?.title">{{itemYoutube.snippet?.title}}</h3>
-            <p class="item-metas" *ngIf="itemYoutube.snippet?.channelTitle">
-                <span class="item-host">youtube.com</span>
-                <span class="item-author" *ngIf="itemYoutube.snippet?.channelTitle">| by {{itemYoutube.snippet?.channelTitle}}</span>
-            </p>
-        </div>
-    </div>
-    <iframe *ngIf="displayVideo && itemYoutube.trustedEmbedUrl" class="embed-responsive-item" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen></iframe>
+<div class="collection-item--media-container" *ngIf="!displayVideo">
+  <img src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" />
+</div>
+<div class="collection-item--media-container" *ngIf="displayVideo && itemYoutube.trustedEmbedUrl">
+  <iframe class="embed-responsive-item" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen></iframe>
+</div>
+
+<div class="collection-item--content-wrapper">
+  <h1 *ngIf="itemYoutube.snippet?.title">{{itemYoutube.snippet?.title}}</h1>
+  <span>Afficher si Description, afficher Titre si titre et afficher parent si un des deux.</span>
 </div>

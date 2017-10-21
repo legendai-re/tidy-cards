@@ -1,4 +1,8 @@
-<figure class="figure item-embeded-container">
-    <img data-src="" class="figure-img img-fluid img-rounded" alt="A generic square placeholder image with rounded corners in a figure." [src]="getImageProxyUrl(itemImage.url)">
-    <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
-</figure>
+<div class="collection-item--media-container">
+  <img data-src="" class="collection-item--photo" alt="" [src]="getImageProxyUrl(itemImage.url)">
+</div>
+
+<div class="collection-item--content-wrapper">
+  <h1>Le titre dont on parlait</h1>
+  <span>Afficher si Description, afficher Titre si titre et afficher parent si un des deux.</span>
+</div>
