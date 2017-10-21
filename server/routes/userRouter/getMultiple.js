@@ -3,12 +3,14 @@ module.exports = function getMultiple (req, res) {
     var models      = require('../../models');
     var algoliaClient = require('../../algolia/algolia')
     var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
+    var lifeStates  = require('../../models/lifeStates.json');
 
     var rq = req.query;
 
     getQueryFiler(rq, req, function(filterObj){
         var q = models.User.find(filterObj).sort({'createdAt': 1}).limit(20);
-
+         q.where('lifeState').equals(lifeStates.ACTIVE.id);
+         
         if(rq.populate){
             q.populate(rq.populate);
         }

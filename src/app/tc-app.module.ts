@@ -24,6 +24,7 @@ import { TcUserModule }           from './tc-user/tc-user.module';
 //Components
 import { TcAdminFeaturedComponent } from './tc-admin/tc-admin-featured.component';
 import { TcAdminHomeComponent }     from './tc-admin/tc-admin-home.component';
+import { TcAdminUsersComponent }     from './tc-admin/tc-admin-users.component';
 
 import { TcDashboardComponent }      from './tc-dashboard/tc-dashboard.component';
 
@@ -68,6 +69,7 @@ import { TcBase64 }            from './tc-shared/tc-base64.service';
         TcAppComponent,
         TcAdminFeaturedComponent,
         TcAdminHomeComponent,
+        TcAdminUsersComponent,
         TcDashboardComponent,
         TcDiscoverComponent,
         TcResetCompleteComponent,
