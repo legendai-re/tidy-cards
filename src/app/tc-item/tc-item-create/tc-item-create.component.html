@@ -24,6 +24,7 @@
         <button *ngIf="!actionIntent" (click)="onUrlFocus(); addDescription = true" class="btn-icon" type="button">
             <i class="material-icons icon">comment</i>
         </button>
+        <textarea class="item-new-description" type="input" placeholder="Title..." name="title" rows="1" [(ngModel)]="item.title" ></textarea>
         <textarea *ngIf="addDescription" (keydown)="onDescriptionKeyDown($event)" [(ngModel)]="item.description" name="description" class="item-new-description" placeholder="Add a description here..." rows="1"></textarea>
 
         <div [class.collapse]="!actionIntent" class="item-create d-flex">
