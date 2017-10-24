@@ -21,6 +21,16 @@ module.exports = function getItemSchema(Schema) {
                 message: '{VALUE} is not a title'
             }
         },
+        host: {
+            type: String,
+            required: false,
+            validate: {
+                validator: function(v) {
+                    return (v.length < 500);
+                },
+                message: '{VALUE} is not a host'
+            }
+        },
         description: {
             type: String,
             required: false,
