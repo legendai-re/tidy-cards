@@ -8,10 +8,10 @@
         </div>
         <div class="item-new-embeded-content" *ngIf="!loadingContent && item._content && validUrl">
             <span class="item-new-preview">How it's gonna looks like</span>
-            <tc-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]=item._content ></tc-item-url>
-            <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]=item._content ></tc-item-image>
-            <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]=item._content ></tc-item-tweet>
-            <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]=item._content ></tc-item-youtube>
+            <tc-item-url *ngIf="item.type == itemTypes.URL" [item]=item ></tc-item-url>
+            <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [item]=item ></tc-item-image>
+            <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [item]=item ></tc-item-tweet>
+            <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [item]=item ></tc-item-youtube>
         </div>
         <input
             (keyup)="onUrlKeyUp()"

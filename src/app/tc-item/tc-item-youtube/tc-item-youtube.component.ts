@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer   } from '@angular/platform-browser';
 import { TcItemYoutube } from './tc-item-youtube.class';
+import { TcItem } from '../tc-item.class';
 
 @Component({
     selector: 'tc-item-youtube',
@@ -10,7 +11,9 @@ import { TcItemYoutube } from './tc-item-youtube.class';
 
 export class TcItemYoutubeComponent implements OnInit {
 
-    @Input() itemYoutube: TcItemYoutube;
+    @Input() item: TcItem;
+
+    public itemYoutube: TcItemYoutube;
 
     public displayVideo: boolean;
 
@@ -18,6 +21,7 @@ export class TcItemYoutubeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.itemYoutube = this.item._content;
         this.itemYoutube.trustedEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.itemYoutube.embedUrl);
     }
 }

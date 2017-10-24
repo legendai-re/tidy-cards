@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { TcItemTweet } from './tc-item-tweet.class';
+import { TcItem } from '../tc-item.class';
 
 @Component({
     selector: 'tc-item-tweet',
@@ -7,11 +8,17 @@ import { TcItemTweet } from './tc-item-tweet.class';
     styleUrls: ['../tc-item.component.scss', 'tc-item-tweet.component.scss']
 })
 
-export class TcItemTweetComponent implements AfterViewInit {
+export class TcItemTweetComponent implements OnInit, AfterViewInit {
 
-    @Input() itemTweet: TcItemTweet;
+	@Input() item: TcItem;
+
+    public itemTweet: TcItemTweet;
 
     constructor() {
+    }
+
+    ngOnInit() {
+        this.itemTweet = this.item._content;
     }
 
     ngAfterViewInit(){
