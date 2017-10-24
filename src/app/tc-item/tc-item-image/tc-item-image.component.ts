@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TcItemImage } from './tc-item-image.class';
+import { TcItem } from '../tc-item.class';
 import { TcApiUrl }  from '../../tc-shared/tc-api-url';
 
 @Component({
@@ -8,11 +9,17 @@ import { TcApiUrl }  from '../../tc-shared/tc-api-url';
     styleUrls: ['../tc-item.component.scss', 'tc-item-image.component.scss']
 })
 
-export class TcItemImageComponent {
+export class TcItemImageComponent implements OnInit {
 
-    @Input() itemImage: TcItemImage;
+	@Input() item: TcItem;
+
+    public itemImage: TcItemImage;
 
     constructor() {
+    }
+
+    ngOnInit() {
+        this.itemImage = this.item._content;
     }
 
     public getImageProxyUrl(url){

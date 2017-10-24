@@ -8,7 +8,7 @@
       </div>
       <div class="collection-item--header-detail">
         <div class="collection-item--title">
-          <span class="collection-item--title-wrapper">{{item._content.title}}</span>
+          <span class="collection-item--title-wrapper">{{item.title}}</span>
           <span class="collection-item--host">{{item._content.host}}</span>
         </div>
       </div>
@@ -85,15 +85,15 @@
     </div>
   </div>
 
-  <tc-item-image class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></tc-item-image>
+  <tc-item-image class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 
-  <tc-item-youtube class="collection-item--content collection-item--video-container" *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></tc-item-youtube>
+  <tc-item-youtube class="collection-item--content collection-item--video-container" *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
 
   <!-- <div class="collection-item--content">
-  <tc-item-url *ngIf="item.type == itemTypes.URL" [itemUrl]="item._content"></tc-item-url>
-  <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [itemTweet]="item._content"></tc-item-tweet>
-  <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [itemYoutube]="item._content"></tc-item-youtube>
-  <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [itemImage]="item._content"></tc-item-image>
+  <tc-item-url *ngIf="item.type == itemTypes.URL" [item]="item"></tc-item-url>
+  <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [item]="item._content"></tc-item-tweet>
+  <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
+  <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 
   <tc-collection-card *ngIf="item.type == itemTypes.COLLECTION" [collection]="item._content"></tc-collection-card>
 

@@ -111,6 +111,7 @@ export class TcItemCreateComponent implements OnInit {
            if(result){
                this.item.type = result.type;
                this.item._content = result._content;
+               this.item.title = this.getItemTitle();
                this.validUrl = true;
            }else{
                this.item._content = null;
@@ -118,6 +119,23 @@ export class TcItemCreateComponent implements OnInit {
            }
            this.loadingContent = false;
        })
+    }
+
+    private getItemTitle(){
+        switch(this.item.type.id){
+            case TcItem.ITEM_TYPES.URL.id:
+                return this.item._content.title;
+            case TcItem.ITEM_TYPES.IMAGE.id:
+                return 'image';
+            case TcItem.ITEM_TYPES.YOUTUBE.id:
+                return this.item._content.snippet.title;
+            case TcItem.ITEM_TYPES.TWEET.id:
+                return 'tweet';
+            case TcItem.ITEM_TYPES.COLLECTION.id:
+                return this.item._content.title;
+            default:
+                return '';
+        }
     }
 
     public resetItemContent(){
@@ -137,7 +155,7 @@ export class TcItemCreateComponent implements OnInit {
 
     private isValidToSave(){
         if(!this.item._content)this.item.type = TcItem.ITEM_TYPES.TEXT;
-        return !this.loadingContent && (this.item._content || !this.item._content && this.item.description);
+        return !this.loadingContent && (this.item.title && (this.item._content || !this.item._content && this.item.description));
     }
 
     private createItem() {

@@ -15,6 +15,8 @@ export class TcItem {
     public _collection: string;
     public position: number;
     public updatePosition: boolean;
+    public title: string;
+    public host: string;
 
     constructor(
         _id?: string,
@@ -24,7 +26,9 @@ export class TcItem {
         type?: any,
         _content?: TcItemUrl | TcItemYoutube | TcItemImage | TcItemTweet | TcCollection,
         _collection?: string,
-        position?: number) {
+        position?: number,
+        title?: string,
+        host?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -33,6 +37,8 @@ export class TcItem {
         this._content = _content;
         this._collection = _collection;
         this.position = position;
+        this.title = title;
+        this.host = host;
     }
 
     public static get ITEM_TYPES() { return require('../../../server/models/item/itemTypes.json');}
@@ -48,7 +54,9 @@ export class TcItem {
             obj.type,
             TcItem.getContent(obj),
             obj._collection,
-            obj.position
+            obj.position,
+            obj.title,
+            obj.host
             );
     }
 
