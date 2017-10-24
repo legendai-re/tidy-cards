@@ -1,11 +1,9 @@
-<div class="collection-item--media-container" *ngIf="!displayVideo">
-  <img src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" />
-</div>
-<div class="collection-item--media-container" *ngIf="displayVideo && itemYoutube.trustedEmbedUrl">
-  <iframe class="embed-responsive-item" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen></iframe>
+<div class="collection-item--video">
+  <img class="video" src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" (click)="displayVideo = true" *ngIf="!displayVideo"/>
+  <iframe class="video" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen *ngIf="displayVideo && itemYoutube.trustedEmbedUrl"></iframe>
 </div>
 
-<div class="collection-item--content-wrapper">
-  <h1 *ngIf="itemYoutube.snippet?.title">{{itemYoutube.snippet?.title}}</h1>
+<div class="collection-item--video-content">
+  <h3 *ngIf="itemYoutube.snippet?.title">{{itemYoutube.snippet?.title}}</h3>
   <span>Afficher si Description, afficher Titre si titre et afficher parent si un des deux.</span>
 </div>
