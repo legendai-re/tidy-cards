@@ -13,6 +13,7 @@ import { TcCollection }                   from '../tc-collection.class';
 import { TcHeaderService }                from '../../tc-header/tc-header.service';
 import { TcItemComponent }                from '../../tc-item/tc-item.component';
 import { TcItem }                         from '../../tc-item/tc-item.class';
+import { TcStar }                         from '../../tc-star/tc-star.class';
 import { TcDataLimit }                    from '../../tc-shared/tc-data-limit';
 
 declare var $: any;
@@ -36,6 +37,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
     public isUpdatingPosition: boolean;
     public subCollectionTemplate: TcCollection;
     public currentModal: NgbModalRef;
+    public cantFoundButwasStarred: boolean;
     private sub: any;
 
     constructor(
@@ -57,6 +59,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.isAuthor = false;
         this.subCollectionTemplate = new TcCollection();
         this.itemLoaded = false;
+        this.cantFoundButwasStarred = false;
         this.sub = this.route.params.subscribe(params => {
             this.initCollection(params);
         });
@@ -90,7 +93,18 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
             }, 10);
             this.emitUpdateHeaderEvent();
             this.loadItems();
-        }, () => {this.isLoadingCollection = false;});
+        }, (error) => {
+            var errorBody = JSON.parse(error._body);
+            var star = null
+            if(errorBody.data)
+                star = errorBody.data._star;
+            if(star){
+                this.collection = new TcCollection();
+                this.collection._star = TcStar.createFormJson(star);
+                this.cantFoundButwasStarred = true;
+            }
+            this.isLoadingCollection = false;
+        });
     }
 
     private emitUpdateHeaderEvent(){
@@ -180,11 +194,13 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    private removeStarredCollection(){
+    private removeStarredCollection(redirectAfter = false){
         this.starService.deleteStare(this.collection._star).subscribe((response) => {
             this.collection._star = null;
             this.collection.starsCount--;
             this.isUpdatingStar = false;
+            if(redirectAfter)
+                this.router.navigate(['/dashboard']);
         })
     }
 

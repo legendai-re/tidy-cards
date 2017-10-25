@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TcItemUrl } from './tc-item-url.class';
 import { TcItem } from '../tc-item.class';
-import { TcApiUrl }  from '../../tc-shared/tc-api-url';
+import { TcApiUrl } from '../../tc-shared/tc-api-url';
 
 @Component({
     selector: 'tc-item-url',
@@ -12,7 +12,7 @@ import { TcApiUrl }  from '../../tc-shared/tc-api-url';
 export class TcItemUrlComponent implements OnInit{
 
 	@Input() item: TcItem;
-	
+  
     public itemUrl: TcItemUrl;
 
     constructor() {

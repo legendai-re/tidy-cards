@@ -4,6 +4,7 @@ module.exports = function getMultiple (req, res) {
     var lifeStates      = require('../../models/lifeStates.json');
     var models          = require('../../models');
     var sortTypes       = require('../../models/customSort/sortTypes.json');
+    var visibility      = require('../../models/collection/visibility.json');
 
     var rq = req.query;
 
@@ -13,10 +14,21 @@ module.exports = function getMultiple (req, res) {
     }
 
     if(rq.custom_sort){
-        manageCustomSort();
+        checkCollectionStateAndVisibility(manageCustomSort);
     }else{
-        manageNormalSort();
+        checkCollectionStateAndVisibility(manageNormalSort);
     };
+
+    function checkCollectionStateAndVisibility(callback){
+        models.Collection.findOne({_id: rq._collection}, function(err, collection){
+            if(err) {console.log(err); res.sendStatus(500); return;}
+            if(!collection || collection.lifeState == lifeStates.ARCHIVED.id)
+                return res.sendStatus(404);
+            if(collection.visibility == visibility.PRIVATE.id && (!req.user || collection._author != req.user._id))
+                return res.sendStatus(401);
+            callback();
+        })
+    }
 
     function manageCustomSort(){
         var skip = rq.skip ? parseInt(rq.skip) : 0;

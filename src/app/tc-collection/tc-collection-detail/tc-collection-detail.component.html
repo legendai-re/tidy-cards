@@ -158,12 +158,25 @@
 
 <!--<tc-collection-create *ngIf="isAuthor" [parentCollection]="collection" (newCollection)="onSubCollectionCreated($event)"></tc-collection-create>-->
 
-<div class="page" *ngIf="!isLoadingCollection && (!collection || !collection._id)">
+<div class="page" *ngIf="!isLoadingCollection && (!collection || !collection._id) && !cantFoundButwasStarred">
   <div class="container">
 
     <div class="page-headings">
 
       <h2 class="page-headings--page-title">Sorry cannot find collection with id: "{{searchParams}}"</h2>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="page" *ngIf="!isLoadingCollection && cantFoundButwasStarred">
+  <div class="container">
+
+    <div class="page-headings">
+
+      <h2 class="">Sorry this collection do not exist anymore or is now private. You can delete it from you starred collection if you want.</h2>
+      <input href="javascript:void(0)" (click)="removeStarredCollection(true)" value="Remove from my starred collection" class="btn btn-sm btn-outline-primary" type="submit"/>
 
     </div>
 

@@ -24,13 +24,20 @@ module.exports = function getMultiple (req, res) {
                 for(var i in collections){
                     collections[i].position = customSort.ids.indexOf(collections[i]._id) + skip;
                 }
-                res.json({data: collections});
+                if(req.user){
+                    addIsStarred(req.user, collections, function(collectionsResult){
+                        res.json({data: collections});
+                    })
+                }else{
+                    res.json({data: collections});
+                }
             });
         })
     }else{
     	getQueryFiler(rq, req, function(filterObj){
     		var q = models.Collection.find(filterObj).limit(20);
-            q.where('lifeState').equals(lifeStates.ACTIVE.id);
+            if(!rq._starredBy)
+                q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
     		q.populate('_thumbnail');
     		q.populate({
@@ -117,7 +124,9 @@ module.exports = function getMultiple (req, res) {
 
 	function getStarredByQuery(rq, req, callback){
 		var filterObj = {};
-		models.Star.find({_user: rq._starredBy}).exec(function (err, stars){
+        var skip = rq.skip ? parseInt(rq.skip) : 0;
+        var limit = rq.limit ? parseInt(rq.limit) : 8;
+		models.Star.find({_user: rq._starredBy}).limit(limit).skip(skip).exec(function (err, stars){
 			if (err) {console.log(err); res.sendStatus(500); return;}
 			if(!req.user || req.user._id != rq._starredBy)
 				filterObj.visibility = visibility.PUBLIC.id
