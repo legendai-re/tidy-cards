@@ -33,11 +33,46 @@ module.exports = function getMultiple (req, res) {
                 }
             });
         })
+    }else if (rq._starredBy){
+        var filterObj = {};
+        var skip = rq.skip ? parseInt(rq.skip) : 0;
+        var limit = rq.limit ? parseInt(rq.limit) : 8;
+
+        var q = models.Star.find({_user: rq._starredBy}).limit(limit).skip(skip).sort({createdAt: -1});
+
+        q.populate({
+            path: '_collection',
+            populate: {
+                path: '_author',
+                populate: { path: '_avatar' }
+            }
+        });
+        q.populate({
+            path: '_collection',
+            populate: {
+                path: '_thumbnail'
+            }
+        });
+
+        q.exec(function(err, stars){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            var collections = [];
+            stars.forEach(function(star) {
+                collections.push(star._collection)
+            });
+            if(req.user){
+                addIsStarred(req.user, collections, function(collectionsResult){
+                    res.json({data: collections});
+                })
+            }else{
+                res.json({data: collections});
+            }            
+        });
+
     }else{
     	getQueryFiler(rq, req, function(filterObj){
     		var q = models.Collection.find(filterObj).limit(20);
-            if(!rq._starredBy)
-                q.where('lifeState').equals(lifeStates.ACTIVE.id);
+            q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
     		q.populate('_thumbnail');
     		q.populate({
@@ -92,10 +127,6 @@ module.exports = function getMultiple (req, res) {
 			else
 				filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
-		}else if(rq._starredBy){
-			getStarredByQuery(rq, req, function(starredByQuery){
-				callback(starredByQuery);
-			})
 		}else{
 			filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
@@ -121,22 +152,6 @@ module.exports = function getMultiple (req, res) {
             callback(collectionsIds);
         });
     }
-
-	function getStarredByQuery(rq, req, callback){
-		var filterObj = {};
-        var skip = rq.skip ? parseInt(rq.skip) : 0;
-        var limit = rq.limit ? parseInt(rq.limit) : 8;
-		models.Star.find({_user: rq._starredBy}).limit(limit).skip(skip).exec(function (err, stars){
-			if (err) {console.log(err); res.sendStatus(500); return;}
-			if(!req.user || req.user._id != rq._starredBy)
-				filterObj.visibility = visibility.PUBLIC.id
-            var ids = [];
-            for(var i in stars)
-                ids.push(stars[i]._collection)
-			filterObj._id = {$in: ids};
-			callback(filterObj);
-		});
-	}
 
     function addIsStarred(user, collections, callback){
         async.times(collections.length, function(n, next) {
