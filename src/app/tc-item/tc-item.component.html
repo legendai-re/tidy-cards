@@ -1,4 +1,4 @@
-<div class="collection-item" [class.is-content]="item.type == itemTypes.IMAGE || item.description && (item.type != itemTypes.URL && item.description)" [class.is-media]="item.type == itemTypes.IMAGE">
+<div class="collection-item" [class.is-content]="!item._content">
 
   <div class="collection-item--header" [class.is-top]="item.type == itemTypes.IMAGE">
 
@@ -9,7 +9,7 @@
       <div class="collection-item--header-detail">
         <div class="collection-item--title">
           <span class="collection-item--title-wrapper">{{item.title}}</span>
-          <span class="collection-item--host">{{item._content.host}}</span>
+          <span class="collection-item--host">{{item.host}}</span>
         </div>
       </div>
     </a>
@@ -19,7 +19,7 @@
         comment
       </div>
       <div class="collection-item--header-detail collection-item--caption-title">
-        Text caption
+        Caption
       </div>
     </div>
 
@@ -27,8 +27,10 @@
       <div class="collection-item--header-detail collection-item--favicon">
         <img src="http://www.google.com/s2/favicons?domain=twitter.com" />
       </div>
-      <div class="collection-item--header-detail collection-item--caption-title">
-        Tweeted by {{item._content.author_name}}
+      <div class="collection-item--header-detail collection-item--title">
+        <span class="collection-item--title-wrapper" *ngIf="item.title">{{item.title}}</span>
+        <span class="collection-item--caption-title">Tweeted by {{item._content.author_name}}</span>
+        <a [href]="item._content.url" target="_blank" class="collection-item--open-icon">open_in_browser</a>
       </div>
     </div>
 
@@ -37,8 +39,9 @@
         <img src="http://www.google.com/s2/favicons?domain=youtube.com" />
       </div>
       <div class="collection-item--header-detail collection-item--title">
-        <span class="collection-item--title-wrapper">{{item._content.snippet?.title}}</span>
+        <span class="collection-item--title-wrapper">{{item.title}}</span>
         <span class="collection-item--host">youtube.com</span>
+        <a [href]="item._content.url" target="_blank" class="collection-item--open-icon">open_in_browser</a>
       </div>
     </div>
 
@@ -46,8 +49,11 @@
       <div class="collection-item--header-detail collection-item--favicon">
         <img src="http://www.google.com/s2/favicons?domain=host" />
       </div>
-      <div class="collection-item--header-detail collection-item--caption-title">
-        Photo from host
+      <div class="collection-item--header-detail collection-item--title">
+        <span class="collection-item--title-wrapper" *ngIf="item.title">{{item.title}}</span>
+        <span class="collection-item--host" *ngIf="item.title">{{item.host}}</span>
+        <span class="collection-item--caption-title" *ngIf="!item.title">Image hosted on {{item.host}}</span>
+        <a [href]="item._content.url" target="_blank" class="collection-item--open-icon">open_in_browser</a>
       </div>
     </div>
 
@@ -71,27 +77,29 @@
     </ul>
   </div>
 
-  <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type == itemTypes.URL && item.type == itemTypes.YOUTUBE">
+  <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type != itemTypes.TEXT">
 
     <span class="collection-item--description-icon">comment</span>
     <span>{{item.description}}</span>
 
   </div>
 
-  <div class="collection-item--content" *ngIf="item.description && !(item.type == itemTypes.URL || item.type == itemTypes.TWEET || item.type == itemTypes.YOUTUBE || item.type == itemTypes.IMAGE)">
+  <!-- tc-item-caption -->
+  <div class="collection-item--content" *ngIf="item.type == itemTypes.TEXT">
     <div class="collection-item--content-wrapper">
-      <h1>Le titre dont on parlait</h1>
+      <h1>{{item.title}}</h1>
       <span>{{item.description}}</span>
     </div>
   </div>
 
   <tc-item-image class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 
-  <tc-item-youtube class="collection-item--content collection-item--video-container" *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
+  <tc-item-youtube class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
 
-  <!-- <div class="collection-item--content">
+  <tc-item-tweet class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.TWEET" [item]="item"></tc-item-tweet>
+
+  <!--
   <tc-item-url *ngIf="item.type == itemTypes.URL" [item]="item"></tc-item-url>
-  <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [item]="item._content"></tc-item-tweet>
   <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
   <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 

@@ -19,6 +19,7 @@
 // // Components
 @import "~bootstrap/scss/mixins/alert";
 @import "~bootstrap/scss/mixins/buttons";
+@import "~bootstrap/scss/mixins/caret";
 @import "~bootstrap/scss/mixins/pagination";
 @import "~bootstrap/scss/mixins/lists";
 @import "~bootstrap/scss/mixins/list-group";
@@ -36,8 +37,6 @@
 // // Layout
 @import "~bootstrap/scss/mixins/clearfix";
 // @import "~bootstrap/scss/mixins/navbar-align";
-
-@import "../modules/grid-framework";
-@import "../modules/grid";
-
+@import "~bootstrap/scss/mixins/grid-framework";
+@import "~bootstrap/scss/mixins/grid";
 @import "~bootstrap/scss/mixins/float";

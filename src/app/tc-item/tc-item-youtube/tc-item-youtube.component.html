@@ -1,9 +1,6 @@
-<div class="collection-item--video">
-  <img class="video" src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" (click)="displayVideo = true" *ngIf="!displayVideo"/>
-  <iframe class="video" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen *ngIf="displayVideo && itemYoutube.trustedEmbedUrl"></iframe>
-</div>
-
-<div class="collection-item--video-content">
-  <h3 *ngIf="itemYoutube.snippet?.title">{{itemYoutube.snippet?.title}}</h3>
-  <span>Afficher si Description, afficher Titre si titre et afficher parent si un des deux.</span>
+<div class="collection-item--media-container">
+  <div class="collection-item--media-video">
+    <img class="collection-item--media-video-image" src="{{itemYoutube.snippet?.thumbnails?.standard?.url}}" (click)="displayVideo = true" *ngIf="!displayVideo"/>
+    <iframe class="collection-item--media-video-player" [src]="itemYoutube.trustedEmbedUrl" allowfullscreen *ngIf="displayVideo && itemYoutube.trustedEmbedUrl"></iframe>
+  </div>
 </div>
