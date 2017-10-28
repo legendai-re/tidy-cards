@@ -14,7 +14,8 @@ export class TcItemUrlComponent implements OnInit{
 	@Input() item: TcItem;
   
     public itemUrl: TcItemUrl;
-
+    public getImageProxyUrl = TcApiUrl.getImageProxyUrl;
+    
     constructor() {
     }
 
@@ -22,7 +23,4 @@ export class TcItemUrlComponent implements OnInit{
         this.itemUrl = this.item._content;
     }
 
-    public getImageProxyUrl(url){
-    	return TcApiUrl.IMAGES + '?url=' + encodeURIComponent(url);
-    }
 }

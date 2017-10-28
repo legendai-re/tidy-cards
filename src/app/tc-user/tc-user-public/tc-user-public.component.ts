@@ -4,6 +4,7 @@ import { URLSearchParams  }             from '@angular/http';
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcCollection }                 from '../../tc-collection/tc-collection.class';
 import { TcCollectionService }          from '../../tc-collection/tc-collection.service';
+import { TcLanguageService }            from '../../tc-language/tc-language.service';
 import { TcUserService }                from '../tc-user.service';
 import { TcUser }                       from '../tc-user.class';
 
@@ -22,7 +23,7 @@ export class TcUserPublicComponent implements OnInit, OnDestroy  {
     public user: TcUser;
     private sub: any;
 
-    constructor(private collectionService: TcCollectionService, private userService: TcUserService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
+    constructor(public t: TcLanguageService, private collectionService: TcCollectionService, private userService: TcUserService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
     }
 
     ngOnInit() {

@@ -21,4 +21,8 @@ export class TcApiUrl {
     public static get RESET_INITIATE(): string { return 'api/reset/initiate'; }
     public static get RESET_COMPLETE(): string { return 'api/reset/complete'; }
 
+    public static getImageProxyUrl(url){
+        return TcApiUrl.IMAGES + '?url=' + encodeURIComponent(url);
+    }
+
 }
