@@ -67,6 +67,12 @@ export class TcUserPublicComponent implements OnInit, OnDestroy  {
         }, () => {});
     }
 
+    private impersonate(){
+        this.authService.login(this.user.username, '').then(result => {
+            console.log(result);
+        });
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }

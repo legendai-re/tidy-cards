@@ -2,6 +2,7 @@ var express    		= require('express');
 var passport		= require('passport');
 var ExpressBrute    = require('express-brute');
 var isGranted       = require('../../security/isGranted');
+var impersonate     = require('../../security/impersonate');
 var router          = express.Router();
 var store           = new ExpressBrute.MemoryStore();
 var bruteforce      = new ExpressBrute(store);
@@ -111,7 +112,7 @@ router.route('/login')
      * @apiSuccess {User} data The user connected.
      * @apiError (Error 401) Unauthorized Bad password or username
      */
-    .post(bruteforce.prevent, passport.authenticate('local'), function(req, res){
+    .post(bruteforce.prevent, impersonate(), passport.authenticate('local'), function(req, res){
         require('./postLogin')(req, res);
     })
 

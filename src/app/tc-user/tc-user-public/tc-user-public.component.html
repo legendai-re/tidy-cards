@@ -10,6 +10,11 @@
           <h2 class="profile-name">{{user?.name}}</h2>
           <h3 class="profile-username">@{{user?.username}}</h3>
         </div>
+        <div class="profile-infos-stats" >
+          <div class="profile-stats-item" *ngIf="authService?.currentUser?.isGranted('ROLE_ADMIN')" (click)="impersonate()">
+            Impersonate
+          </div>
+        </div>
         <!--<div class="profile-infos-stats">
           <div class="profile-stats-item">
             <span class="profile-stat-value">0</span>
