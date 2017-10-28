@@ -14,7 +14,7 @@
       </div>
     </a>
 
-    <div class="collection-item--header-details" *ngIf="item.description && !(item.type == itemTypes.URL || item.type == itemTypes.TWEET || item.type == itemTypes.YOUTUBE || item.type == itemTypes.IMAGE)">
+    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.TEXT">
       <div class="collection-item--header-detail collection-item--icon">
         comment
       </div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.TWEET">
+    <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.TWEET">
       <div class="collection-item--header-detail collection-item--favicon">
         <img src="http://www.google.com/s2/favicons?domain=twitter.com" />
       </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.YOUTUBE">
+    <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.YOUTUBE">
       <div class="collection-item--header-detail collection-item--favicon">
         <img src="http://www.google.com/s2/favicons?domain=youtube.com" />
       </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="collection-item--header-details" *ngIf="item.type == itemTypes.IMAGE">
+    <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.IMAGE">
       <div class="collection-item--header-detail collection-item--favicon">
         <img src="http://www.google.com/s2/favicons?domain=host" />
       </div>
@@ -92,11 +92,11 @@
     </div>
   </div>
 
-  <tc-item-image class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
+  <tc-item-image [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 
-  <tc-item-youtube class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
+  <tc-item-youtube [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media " *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
 
-  <tc-item-tweet class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.TWEET" [item]="item"></tc-item-tweet>
+  <tc-item-tweet [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.TWEET" [item]="item"></tc-item-tweet>
 
   <!--
   <tc-item-url *ngIf="item.type == itemTypes.URL" [item]="item"></tc-item-url>

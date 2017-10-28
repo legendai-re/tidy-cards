@@ -17,6 +17,7 @@ export class TcItem {
     public updatePosition: boolean;
     public title: string;
     public host: string;
+    public isCollapsed: boolean;
 
     constructor(
         _id?: string,
@@ -39,6 +40,7 @@ export class TcItem {
         this.position = position;
         this.title = title;
         this.host = host;
+        this.isCollapsed = false;
     }
 
     public static get ITEM_TYPES() { return require('../../../server/models/item/itemTypes.json');}

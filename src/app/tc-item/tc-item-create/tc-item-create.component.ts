@@ -162,6 +162,7 @@ export class TcItemCreateComponent implements OnInit {
         this.itemService.postItem(this.item).subscribe(itemResponse => {
             this.item._id = itemResponse._id;
             this.item.createdAt = itemResponse.createdAt;
+            this.item.host = itemResponse.host;
             if(itemResponse._content)
                 this.item._content._id = itemResponse._content._id;
             this.itemCreated = true;
