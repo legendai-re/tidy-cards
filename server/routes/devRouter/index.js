@@ -23,4 +23,9 @@ router.route('/add-algolia-indexes')
         require('./addAlgoliaIndexes')(req, res);
     });
 
+router.route('/set-titles-and-host-to-items')
+    .get(isGranted('ROLE_ADMIN'), function(req, res) {
+        require('./setTitlesAndHostToItems')(req, res);
+    });
+
 module.exports = router;

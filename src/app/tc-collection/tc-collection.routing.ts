@@ -1,5 +1,5 @@
 import { GrantedUser }                     from '../tc-auth/tc-auth.guard';
-import { TcCollectionUserStarredComponent }    from './tc-collection-user-starred/tc-collection-user-starred.component';
+import { TcCollectionUserStarredComponent } from './tc-collection-user-starred/tc-collection-user-starred.component';
 import { TcCollectionLastComponent }       from './tc-collection-last/tc-collection-last.component';
 import { TcCollectionPopularComponent }    from './tc-collection-popular/tc-collection-popular.component';
 import { TcCollectionFeaturedComponent }   from './tc-collection-featured/tc-collection-featured.component';
