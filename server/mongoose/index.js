@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = require('bluebird');
 
-mongoose.connect(process.env.MONGODB_URI, {
+var mongodbUrl = process.env.NODE_ENV == 'test' ? process.env.MONGODB_TEST_URI : process.env.MONGODB_URI;
+
+mongoose.connect(mongodbUrl, {
   useMongoClient: true
 });

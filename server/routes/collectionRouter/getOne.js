@@ -3,8 +3,12 @@ module.exports = function getOne (req, res) {
 	var visibility  = require('../../models/collection/visibility.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
+    var mongodbid   = require('../../helpers/mongodbid');
 
 	var rq = req.query;
+
+    if(!mongodbid.isMongoId(req.params.collection_id))
+        return res.status(404).send({ error: req.params.collection_id + ' is not a mongodb id'});
 
 	var q = models.Collection.findById(req.params.collection_id);
 

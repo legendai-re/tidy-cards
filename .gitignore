@@ -22,6 +22,7 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 .env
+/server/.env
 
 # OS generated files #
 .DS_Store

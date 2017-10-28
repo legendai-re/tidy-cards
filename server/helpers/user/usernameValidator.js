@@ -1,16 +1,13 @@
 var mongoose = require('mongoose');
 var forbiddenUsernames = require('./forbiddenUsernames');
+var mongodbid   = require('../mongodbid');
 
 var isValid = function(username){
-    return (isValidFormat(username) && !isForbidden(username) && !isMongoId(username))
+    return (isValidFormat(username) && !isForbidden(username) && !mongodbid.isMongoId(username))
 }
 
 function isForbidden(username){
     return forbiddenUsernames.indexOf(username.toLowerCase()) > -1;
-}
-
-function isMongoId(username){
-    return new RegExp("^[0-9a-fA-F]{24}$").test(username);
 }
 
 function isValidFormat(username){

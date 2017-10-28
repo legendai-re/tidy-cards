@@ -36,7 +36,9 @@ export class TcUserPublicComponent implements OnInit, OnDestroy  {
                 this.isLoadingUser = false;
                 this.initUserCollections();
                 this.initUserStarredCollections();
-            }, () => {});
+            }, () => {
+                this.isLoadingUser = false;
+            });
         });
     }
 

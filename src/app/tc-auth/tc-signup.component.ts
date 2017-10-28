@@ -118,7 +118,6 @@ export class TcSignupComponent {
             this.signupData.password
             );
         this.authService.signup(user).then(success => {
-            console.log(success);
             this.router.navigate(['/']);
             this.signupInProgress = false;
         }, (err) => {
