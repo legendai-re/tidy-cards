@@ -1,32 +1,74 @@
 import { Component, OnInit }               from '@angular/core';
-import { Router }       from '@angular/router';
+import { Router, ActivatedRoute }          from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
 import { TcCollectionService }             from '../tc-collection.service';
 import { TcCollection }                    from '../tc-collection.class';
 import { TcDataLimit }                     from '../../tc-shared/tc-data-limit';
 import { TcAuthService }                   from '../../tc-auth/tc-auth.service';
+import { TcUserService }                   from '../../tc-user/tc-user.service';
+import { TcUser }                          from '../../tc-user/tc-user.class';
 
 @Component({
-    templateUrl: './tc-collection-starred.component.html'
+    templateUrl: './tc-collection-user-starred.component.html'
 })
 
-export class TcCollectionStarredComponent implements OnInit {
+export class TcCollectionUserStarredComponent implements OnInit {
 
     public pageNb: number;
     public haveMoreCollections: boolean;
     public loadingCollections: boolean;
     public isUpdatingPosition: boolean;
+    public isLoadingUser: boolean;
+    public username: string;
+    public user: TcUser;
     public collections: TcCollection[];
+    public isCurrentUser: boolean;
+    public sub: any;
+    public authSub: any;
 
-    constructor(public authService: TcAuthService, private router: Router, private collectionService: TcCollectionService) {
+    constructor(public authService: TcAuthService, private router: Router, private route: ActivatedRoute, private userService: TcUserService, private collectionService: TcCollectionService) {
+        this.authSub = this.authService.getAuthInitializedEmitter().subscribe((value) => {
+            if(this.authService.isLoggedIn && this.username === this.authService.currentUser.username){
+                this.isCurrentUser = true;
+                this.user = this.authService.currentUser;
+                this.loadCollections();
+            }else{
+                this.initUser(this.username)
+            }
+        })
     }
 
     ngOnInit() {
         this.pageNb = 0;
         this.loadingCollections = false;
         this.haveMoreCollections = true;
+        this.isCurrentUser = false;
         this.collections = [];
-        this.loadCollections();
+        this.sub = this.route.params.subscribe(params => {
+            this.username = params['username'];
+            if(this.authService.authInitialized){
+                if(this.authService.isLoggedIn && this.username === this.authService.currentUser.username){
+                    this.isCurrentUser = true;
+                    this.user = this.authService.currentUser;
+                    this.loadCollections();
+                }else{
+                    this.initUser(this.username)
+                }
+            };
+        });
+    }
+
+    public initUser(username){
+        let getParams = new URLSearchParams();
+        getParams.set('populate', '_avatar');
+        this.isLoadingUser = true;
+        this.userService.getUser(username, getParams).subscribe((user) => {
+            this.user = user;
+            this.isLoadingUser = false;
+            this.loadCollections();
+        }, () => {
+            this.isLoadingUser = false;
+        });
     }
 
     public loadNextPage(){
@@ -46,7 +88,7 @@ export class TcCollectionStarredComponent implements OnInit {
         params.set('sort_dir', '-1');
         params.set('limit', TcDataLimit.COLLECTION.toString());
         params.set('skip', (TcDataLimit.COLLECTION * this.pageNb).toString());
-        params.set('_starredBy', this.authService.currentUser._id);
+        params.set('_starredBy', this.user._id);
         this.collectionService.getCollections(params).subscribe(collections => {
             this.onCollectionsReceived(collections);
         }, () => {});

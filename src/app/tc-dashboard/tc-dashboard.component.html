@@ -24,7 +24,7 @@
     <div class="section">
       <h2 class="section-title">
         {{t._.dashboard?.favorite_collections_title}}
-        <a class="section-title-more" href="javascript:void(0)" [routerLink]="['/c/starred']">
+        <a class="section-title-more" href="javascript:void(0)" [routerLink]="['/', authService.currentUser.username, 'collections', 'starred']">
           {{t._.action?.see_all}}
         </a>
       </h2>

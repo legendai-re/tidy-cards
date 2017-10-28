@@ -9,7 +9,7 @@ import { TcCollectionCardModule } from './tc-collection-card/tc-collection-card.
 import { TcCollectionCreateModule } from './tc-collection-create/tc-collection-create.module';
 
 import { TcCollectionUserAllComponent }  from './tc-collection-user-all/tc-collection-user-all.component';
-import { TcCollectionStarredComponent }  from './tc-collection-starred/tc-collection-starred.component';
+import { TcCollectionUserStarredComponent }  from './tc-collection-user-starred/tc-collection-user-starred.component';
 import { TcCollectionDetailComponent }   from './tc-collection-detail/tc-collection-detail.component';
 import { TcCollectionFeaturedComponent } from './tc-collection-featured/tc-collection-featured.component';
 import { TcCollectionLastComponent }     from './tc-collection-last/tc-collection-last.component';
@@ -19,7 +19,7 @@ import { TcCollectionPopularComponent }  from './tc-collection-popular/tc-collec
   imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule, TcItemModule, TcCollectionCardModule, TcCollectionCreateModule, NgbModule ],
   declarations: [
     TcCollectionUserAllComponent,
-    TcCollectionStarredComponent,
+    TcCollectionUserStarredComponent,
     TcCollectionDetailComponent,
     TcCollectionFeaturedComponent,
     TcCollectionLastComponent,
@@ -27,7 +27,7 @@ import { TcCollectionPopularComponent }  from './tc-collection-popular/tc-collec
   ],
   exports: [
     TcCollectionUserAllComponent,
-    TcCollectionStarredComponent,
+    TcCollectionUserStarredComponent,
     TcCollectionDetailComponent,
     TcCollectionFeaturedComponent,
     TcCollectionLastComponent,
