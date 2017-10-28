@@ -4,7 +4,7 @@
 
     <a [href]="item._content.url" target="_blank" class="collection-item--header-details" *ngIf="item.type == itemTypes.URL">
       <div class="collection-item--header-detail collection-item--favicon">
-        <img src="http://www.google.com/s2/favicons?domain={{item._content.host}}" />
+        <img src="https://www.google.com/s2/favicons?domain={{item._content.host}}" />
       </div>
       <div class="collection-item--header-detail">
         <div class="collection-item--title">
@@ -25,7 +25,7 @@
 
     <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.TWEET">
       <div class="collection-item--header-detail collection-item--favicon">
-        <img src="http://www.google.com/s2/favicons?domain=twitter.com" />
+        <img src="https://www.google.com/s2/favicons?domain=twitter.com" />
       </div>
       <div class="collection-item--header-detail collection-item--title">
         <span class="collection-item--title-wrapper" *ngIf="item.title">{{item.title}}</span>
@@ -36,7 +36,7 @@
 
     <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.YOUTUBE">
       <div class="collection-item--header-detail collection-item--favicon">
-        <img src="http://www.google.com/s2/favicons?domain=youtube.com" />
+        <img src="https://www.google.com/s2/favicons?domain=youtube.com" />
       </div>
       <div class="collection-item--header-detail collection-item--title">
         <span class="collection-item--title-wrapper">{{item.title}}</span>
@@ -47,7 +47,7 @@
 
     <div class="collection-item--header-details" (click)="collapse()" *ngIf="item.type == itemTypes.IMAGE">
       <div class="collection-item--header-detail collection-item--favicon">
-        <img src="http://www.google.com/s2/favicons?domain=host" />
+        <img src="https://www.google.com/s2/favicons?domain=host" />
       </div>
       <div class="collection-item--header-detail collection-item--title">
         <span class="collection-item--title-wrapper" *ngIf="item.title">{{item.title}}</span>
