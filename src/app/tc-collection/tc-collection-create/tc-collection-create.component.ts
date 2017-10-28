@@ -20,6 +20,7 @@ export class TcCollectionCreateComponent implements OnInit {
     public uploader;
     public collectionCreated: boolean;
     public visibilityList: any;
+    public isUploadingImage: boolean;
 
     @Input() parentCollection: TcCollection;
     @Input() inputCollection: TcCollection;
@@ -33,6 +34,7 @@ export class TcCollectionCreateComponent implements OnInit {
 
     ngOnInit() {
         this.collectionCreated = false;
+        this.isUploadingImage = false;
         if(this.inputCollection!=null){
             this.initUpdateMode();
         }else if(this.parentCollection!=null){
@@ -63,8 +65,12 @@ export class TcCollectionCreateComponent implements OnInit {
     }
 
     public onThumbnailFileChange(event) {
+        if(this.isUploadingImage)
+            return;
+        this.isUploadingImage = true;
         this.imgUploadService.tryUploadAndGetImage(event, TcImage.getTypes().COLLECTION_THUMBNAIL).subscribe(image => {
             this.collection._thumbnail = image;
+            this.isUploadingImage = false;
         });
     }
 
@@ -87,6 +93,8 @@ export class TcCollectionCreateComponent implements OnInit {
     }
 
     public onCollectionSubmit(){
+        if(this.isUploadingImage)
+            return;
         if(this.mode == 'CREATE' || this.mode == 'CREATE_SUB_COLLECTION')
             this.createCollection();
         else

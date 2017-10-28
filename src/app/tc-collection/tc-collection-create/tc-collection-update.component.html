@@ -1,7 +1,7 @@
 <article class="card card-collection create-collection"
         [class.has-thumbnail]="collection._thumbnail != empty"
         [style.background-color]="'#'+collection.color">
-  <form (ngSubmit)="onCollectionSubmit()">
+  <form (ngSubmit)="onCollectionSubmit()" ngNativeValidate>
 
     <div class="card-collection--container">
 

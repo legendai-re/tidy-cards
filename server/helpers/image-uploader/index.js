@@ -70,23 +70,25 @@ var tmpPath = 'server/helpers/image-uploader/tmp-uploads/';
 function afterUpload(image, callback){
     var r = request(image.baseUrl + '/' + imagesTypes[image.type].path + '/s' + 'original' + '/' + image._id + '.' + image.mime)
                 .pipe(fs.createWriteStream(tmpPath +'original/'+ image._id + '.' + image.mime ))
-                .on('error', (e) => {console.log("pipe error");console.log(e);})
+                .on('error', (e) => {console.log("pipe error");console.log(e); return callback(err);})
 
     r.on('finish', () => {
         gm(tmpPath +'original/'+ image._id + '.' +image.mime)
             .identify(function (err, data) {
-                if (err) console.log(err)
+                if (err) {console.log(err); return callback(err);}
                 var sizes = imagesTypes[image.type].sizes;
                 async.times(sizes.length, function(n, next) {
                     gm(tmpPath +'original/'+ image._id + '.' + image.mime)
                     .thumb(sizes[n].x,sizes[n].y, tmpPath +sizes[n].x+'x'+sizes[n].y+ '/'+ image._id + '.' +image.mime, 70, function(err, stdout, stderr, command){
                         awsUpload(image, sizes[n].x+'x'+sizes[n].y, function(err){
-                            next(null);
+                            next(err);
                         });
                     })
                 }, function(err, results) {
-                    if(err)
+                    if(err){
                         console.log(err);
+                        return callback(err);
+                    }
                     fs.unlink(tmpPath + 'original/'+ image._id + '.' + image.mime);
                     callback(null);
                 });
@@ -100,11 +102,14 @@ function afterUpload(image, callback){
 function awsUpload(image, size, callback){
     var imageLocalPath = tmpPath+size+'/'+ image._id + '.' +image.mime;
     fs.readFile(imageLocalPath, function(err, data) {
+        if(err) return callback(err);
         s3.createBucket({Bucket: process.env.S3_BUCKET}, function() {
             var params = {Bucket: process.env.S3_BUCKET, Key: process.env.IMAGES_FOLDER+'/'+imagesTypes[image.type].path+'/s'+size+'/'+ image._id + '.' +image.mime, Body: data};
             s3.putObject(params, function(err, data) {
-                if (err)
+                if (err){
                     console.log(err);
+                    return callback(err);
+                }
                 else{
                     fs.unlink(imageLocalPath);
                     if(callback)callback();
@@ -120,11 +125,11 @@ function awsUpload(image, size, callback){
 function getSocialNetworkAvatar(image, url, callback){
     var r = request(url)
                 .pipe(fs.createWriteStream(tmpPath + 'original/'+ image._id + '.' + image.mime ))
-                .on('error', (e) => {console.log("pipe error");console.log(e);})
+                .on('error', (e) => {console.log("pipe error");console.log(e); return callback(err);})
     r.on('finish', () => {
         awsUpload(image, 'original', function(){
             afterUpload(image,function(err){
-                callback(err);
+                return callback(err);
             });
         })
     })
