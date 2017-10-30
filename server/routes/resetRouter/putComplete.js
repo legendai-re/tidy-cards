@@ -9,7 +9,7 @@ module.exports = function putComplete(req, res) {
     }else{
         models.User.findOne({"local.resetToken": req.body.reset_token}).select('+local.resetToken +local.password').exec(function (err, user) {
             if(err) {console.log(err); res.sendStatus(500); return;}
-            if(!user) return sendResponse("this token is do not match to any account", false);
+            if(!user) return sendResponse("this token do not match to any account", false);
             if(!isAbleToCompleteReset(user))
                 return sendResponse("this reset token is no longer valid", false);
 

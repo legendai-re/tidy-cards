@@ -24,11 +24,10 @@ app.use(session({
 }));
 app.use(sslRedirect(['production']));
 
+require('./morgan')(app);
 require('./security')(app);
 require('./routes')(app);
 
 app.listen(app.get('port'), function() {
   console.log('TidyCards is running on port', app.get('port'));
 })
-
-module.exports = app;

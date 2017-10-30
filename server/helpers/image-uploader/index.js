@@ -89,7 +89,7 @@ function afterUpload(image, callback){
                         console.log(err);
                         return callback(err);
                     }
-                    fs.unlink(tmpPath + 'original/'+ image._id + '.' + image.mime);
+                    fs.unlink(tmpPath + 'original/'+ image._id + '.' + image.mime, function(err){if(err)console.log(err)});
                     callback(null);
                 });
             });
@@ -111,7 +111,7 @@ function awsUpload(image, size, callback){
                     return callback(err);
                 }
                 else{
-                    fs.unlink(imageLocalPath);
+                    fs.unlink(imageLocalPath, function(err){if(err)console.log(err)});
                     if(callback)callback();
                 }
             });
