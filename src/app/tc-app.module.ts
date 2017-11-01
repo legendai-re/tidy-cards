@@ -2,11 +2,11 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { HttpModule } from '@angular/http';
 
 import { TcAppComponent }               from './tc-app.component';
 import { routing, appRoutingProviders } from './tc-app.routing';
+
 
 //Modules
 import { TcAuthModule }           from './tc-auth/tc-auth.module';

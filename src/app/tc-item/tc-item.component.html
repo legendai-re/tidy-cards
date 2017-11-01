@@ -80,7 +80,7 @@
   <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type != itemTypes.TEXT">
 
     <span class="collection-item--description-icon">comment</span>
-    <span>{{item.description}}</span>
+    <span><markdown [data]="item.description"></markdown></span>
 
   </div>
 
@@ -88,7 +88,7 @@
   <div class="collection-item--content" *ngIf="item.type == itemTypes.TEXT">
     <div class="collection-item--content-wrapper">
       <h1>{{item.title}}</h1>
-      <span>{{item.description}}</span>
+      <span><markdown [data]="item.description"></markdown></span>
     </div>
   </div>
 

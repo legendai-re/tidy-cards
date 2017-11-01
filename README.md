@@ -1,4 +1,4 @@
-#TidyCards
+# TidyCards
 
 Visit the website: [tidy.cards](http://www.tidy.cards)
 

@@ -100,6 +100,7 @@
     "@types/webpack": "^2.2.16",
     "add-asset-html-webpack-plugin": "^1.0.2",
     "algoliasearch": "^3.24.5",
+    "angular2-markdown": "^1.6.0",
     "angular2-template-loader": "^0.4.0",
     "assets-webpack-plugin": "^3.5.1",
     "async": "^2.0.0",

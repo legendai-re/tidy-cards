@@ -6,16 +6,16 @@
 
     <nav class="nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/about']" >About</a>
+        <a class="nav-link" [routerLink]="['/about']" >{{t._.page?.about?.title}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contact']" >Contact</a>
+        <a class="nav-link" [routerLink]="['/contact']" >{{t._.page?.contact?.title}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/team']" >Team</a>
+        <a class="nav-link" [routerLink]="['/team']" >{{t._.page?.team?.title}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/terms']">Terms</a>
+        <a class="nav-link" [routerLink]="['/terms']">{{t._.page?.terms?.title}}</a>
       </li>
     </nav>
 
