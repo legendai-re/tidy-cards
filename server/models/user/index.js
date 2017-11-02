@@ -17,6 +17,8 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.post('save', function(user) {
+    if(process.env.NODE_ENV == 'test')
+        return;
     if(user.lifeState === lifeStates.ACTIVE.id) {
         algoliaUserIndex.addObject({
             objectID: user._id,

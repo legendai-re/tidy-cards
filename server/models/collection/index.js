@@ -15,6 +15,8 @@ CollectionSchema.pre('save', function(next) {
 });
 
 CollectionSchema.post('save', function(collection) {
+    if(process.env.NODE_ENV == 'test')
+        return;
     if(collection.lifeState === lifeStates.ACTIVE.id && collection.visibility === visibility.PUBLIC.id) {
         algoliaCollectionIndex.addObject({
             objectID: collection._id,
