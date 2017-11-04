@@ -65,8 +65,8 @@
 }
 
 .card-moving {
-    transform: rotate(3deg);
+    transform: scale(1.03);
     transform-origin: center center;
-    @include vendor-property(transition, "transform .2s ease");
+    @include vendor-property(transition, "transform .2s ease-in-out");
     -webkit-backface-visibility: hidden;
 }
