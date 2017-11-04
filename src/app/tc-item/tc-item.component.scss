@@ -35,6 +35,16 @@
   }
 }
 
+.collection-item-ghost {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  background-color: $brand-primary;
+  height: 2px;
+  margin: .5rem 0 1rem;
+  border-radius: $border-radius-small;
+}
+
 .collection-item--header {
   position: relative;
   display: flex;
