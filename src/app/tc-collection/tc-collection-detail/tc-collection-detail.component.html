@@ -119,7 +119,7 @@
 
         <a href="javascript:void(0)" class="btn btn-secondary btn-block" *ngIf="itemLoaded && haveMoreItems && !loadingItems" (click)="loadNextPage()">{{t._.action?.load_more}}...</a>
         <p class="loading-more" *ngIf="loadingItems">Loading...</p>
-        <p class="no-more" *ngIf="!haveMoreItems && collection._items.length > 0">You’ve reached the end of the list</p>
+        <p class="no-more" *ngIf="!haveMoreItems && collection._items.length > 0">You reached the end of the collection...</p>
 
       </div>
 
