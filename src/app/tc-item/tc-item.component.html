@@ -1,7 +1,7 @@
 <!-- Pour le sortable ghost -->
 <!-- <div class="collection-item-ghost"></div> -->
 
-<div class="collection-item" [class.is-content]="!item._content">
+<div class="collection-item card-collection--drag-handle" [class.is-content]="!item._content">
 
   <div class="collection-item--header" [class.is-top]="item.type == itemTypes.IMAGE">
 
@@ -70,7 +70,7 @@
       </li> -->
 
       <li class="collection-item--header-action">
-        <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm card-collection--drag-handle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="icon">more_vert</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
