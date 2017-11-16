@@ -1,7 +1,7 @@
 <!-- Pour le sortable ghost -->
 <!-- <div class="collection-item-ghost"></div> -->
 
-<div class="collection-item card-collection--drag-handle" [class.is-content]="!item._content">
+<div class="collection-item" [class.card-collection--drag-handle]="isAuthor" [class.is-content]="!item._content">
 
   <div class="collection-item--header" [class.is-top]="item.type == itemTypes.IMAGE">
 
