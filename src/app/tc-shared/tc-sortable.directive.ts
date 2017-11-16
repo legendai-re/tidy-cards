@@ -18,7 +18,6 @@ export class TcSortableDirective {
     }
 
     ngOnInit() {
-        console.log(this.ghostClass);
         this.element = this.el.nativeElement;
         var elCopy = this.element;
         let newIndex;

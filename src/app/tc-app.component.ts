@@ -21,7 +21,6 @@ export class TcAppComponent {
 
     constructor(public headerService: TcHeaderService, public t: TcLanguageService, public authService: TcAuthService, public router: Router) {
         var url = null;
-        
         this.router.events.subscribe((route) => {
             if(!url){
                 var routeAny:any;
@@ -36,10 +35,10 @@ export class TcAppComponent {
                 authService.initCurrentUser().then(success => {
                     router.initialNavigation();
                     url = url.replace("#_=_", "");
-                    if(url=='/')
-                        this.router.navigate([url]);
-                    else
+                    if(url != '/' && url != '/discover')
                         this.router.navigate([url, params]);
+                    if(this.authService.isLoggedIn && url == '/')
+                        this.router.navigate([url]);
                 });
             }
         })

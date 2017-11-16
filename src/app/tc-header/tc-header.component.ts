@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title }                from '@angular/platform-browser';
 import { URLSearchParams  }     from '@angular/http';
 import { SafeResourceUrl }      from '@angular/platform-browser';
@@ -53,13 +53,15 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
         this.defaultColor = '6B5DFF';
         this.headerState = 'default';
         this.router.events.subscribe((route) => {
-            this.setPreviousRoute(route);
-            if(this.isDiscoverPage(route))
-                this.setDiscoverPage();
-            else if(this.isSearchPage(route))
-                this.setSearchPage();
-            else
-                this.setDefault();
+            if(route instanceof NavigationEnd){
+                this.setPreviousRoute(route);
+                if(this.isDiscoverPage(route))
+                    this.setDiscoverPage();
+                else if(this.isSearchPage(route))
+                    this.setSearchPage();
+                else
+                    this.setDefault();
+            }
         })
     }
 
@@ -118,7 +120,10 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
     }
 
     private isDiscoverPage(routeEvent){
-        return routeEvent.url.split(';')[0] == '/discover';
+        var url = routeEvent.url.split(';')[0];
+        if(url == '/discover' || (!this.authService.isLoggedIn && url == '/'))
+            return true;
+        return false;
     }
 
     private setDiscoverPage(){

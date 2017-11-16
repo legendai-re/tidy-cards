@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     ...TcAuthRoutes,
     ...TcResetRoutes,
     ...TcUserRoutes,
-    { path: '', component: TcAppComponent, canActivate: [HomeGuard] },
+    //{ path: '', component: TcAppComponent, canActivate: [HomeGuard] },
     { path: '**', component: TcAppComponent, canActivate: [HomeGuard] }
 ];
 
