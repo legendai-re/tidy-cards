@@ -157,7 +157,7 @@ export class TcItemCreateComponent implements OnInit {
 
     private isValidToSave(){
         if(!this.item._content)this.item.type = TcItem.ITEM_TYPES.TEXT;
-        if(this.item.description.trim() == this.urlEntry.trim())
+        if(this.item.description && this.urlEntry && this.item.description.trim() == this.urlEntry.trim())
            this.item.description = null;
         return !this.loadingContent && (this.item.title && (this.item._content || !this.item._content && this.item.description));
     }
