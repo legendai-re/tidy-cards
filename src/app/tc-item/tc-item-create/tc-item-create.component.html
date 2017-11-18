@@ -38,7 +38,11 @@
           autofocus="autofocus"
           name="description"
           rows="11"
-          [(ngModel)]="item.description"></textarea>
+          (keyup)="onUrlKeyUp()"
+          (keydown)="onUrlKeyDown($event)"
+          [(ngModel)]="item.description"
+          (ngModelChange)="parseDescriptionForUrl()"
+          ></textarea>
       </div>
     </div>
 
@@ -64,18 +68,7 @@
       </div>
 
     </div>
-
-    <input
-      (keyup)="onUrlKeyUp()"
-      (keydown)="onUrlKeyDown($event)"
-      (focus)="onUrlFocus()"
-      [(ngModel)]="urlEntry"
-      [class.active]="!actionIntent"
-      name="urlEntry"
-      class=""
-      style="width:100%;background:red;"
-      type="text"
-      placeholder="Input a supprimer et gérer les liens dans la description"/>
+    
   </form>
 </div>
 
