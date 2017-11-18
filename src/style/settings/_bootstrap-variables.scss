@@ -1,10 +1,24 @@
 
+// Grid
 
-$grid-gutter-width:            20px;
+$grid-gutter-width:                 20px;
 
-$border-radius-sm:             2px;
-$border-radius:                3px;
-$border-radius-lg:             4px;
+
+// Border radius
+
+$border-radius-sm:                  2px;
+$border-radius:                     3px;
+$border-radius-lg:                  4px;
+
+
+// Modals
+
+$modal-content-border-color:        transparent;
+$modal-content-border-width:        none;
+
+$modal-lg:                          700px;
+$modal-md:                          500px;
+$modal-sm:                          300px;
 
 $custom-file-text: (
   placeholder: (
@@ -15,4 +29,4 @@ $custom-file-text: (
     en: "Browse",
     fr: "Explorer"
   )
-) !default;
+);

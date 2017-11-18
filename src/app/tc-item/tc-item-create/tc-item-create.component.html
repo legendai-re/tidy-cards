@@ -1,43 +1,93 @@
-<div class="item-new extended"><!-- collapsed/extended -->
-    <form (ngSubmit)="onItemSubmit()">
-        <div class="item-new-embeded-content loading-content" *ngIf="urlEntry && loadingContent">
-            Loading...
+<div class="collection-item-new--container">
+  <form (ngSubmit)="onItemSubmit()">
+
+    <div class="collection-item-new--content">
+      <div class="collection-item-new--content-wrapper">
+        <h2 class="collection-item-new--content-title">Add an item to your collection</h2>
+
+        <div class="collection-item-new--embeded-container" *ngIf="urlEntry && loadingContent">
+          <div class="collection-item-new--embeded-centered-content">Fetching preview…</div>
         </div>
-        <div class="item-new-embeded-content loading-content" *ngIf="urlEntry && !loadingContent && !validUrl">
-            Invalid Url
+
+        <div class="collection-item-new--embeded-container" *ngIf="urlEntry && !loadingContent && !validUrl">
+          <div class="collection-item-new--embeded-centered-content">Invalid URL</div>
         </div>
-        <div class="item-new-embeded-content" *ngIf="!loadingContent && item._content && validUrl">
-            <span class="item-new-preview">How it's gonna looks like</span>
-            <tc-item-url *ngIf="item.type == itemTypes.URL" [item]=item ></tc-item-url>
-            <tc-item-image *ngIf="item.type == itemTypes.IMAGE" [item]=item ></tc-item-image>
-            <tc-item-tweet *ngIf="item.type == itemTypes.TWEET" [item]=item ></tc-item-tweet>
-            <tc-item-youtube *ngIf="item.type == itemTypes.YOUTUBE" [item]=item ></tc-item-youtube>
+
+        <div class="collection-item-new--embeded-container" *ngIf="!loadingContent && item._content && validUrl">
+          <a class="collection-item-new--embeded-reset" href="javascript:void(0)" (click)="resetItemContent()">close</a>
+
+          <tc-item-url class="collection-item-new--embeded-wrapper" *ngIf="item.type == itemTypes.URL" [item]=item ></tc-item-url>
+          <tc-item-image class="collection-item-new--embeded-wrapper" *ngIf="item.type == itemTypes.IMAGE" [item]=item ></tc-item-image>
+          <tc-item-tweet class="collection-item-new--embeded-wrapper" *ngIf="item.type == itemTypes.TWEET" [item]=item ></tc-item-tweet>
+          <tc-item-youtube class="collection-item-new--embeded-wrapper" *ngIf="item.type == itemTypes.YOUTUBE" [item]=item ></tc-item-youtube>
         </div>
+
+
+        <textarea
+          class="collection-item-new--input-title"
+          type="input"
+          placeholder="Title"
+          name="title"
+          rows="1"
+          [(ngModel)]="item.title"></textarea>
+
+        <textarea
+          class="collection-item-new--input-caption"
+          (keydown)="onDescriptionKeyDown($event)"
+          placeholder="Paste your link or start writing in Markdown…"
+          autofocus="autofocus"
+          name="description"
+          rows="11"
+          [(ngModel)]="item.description"></textarea>
+      </div>
+    </div>
+
+    <div class="collection-new-item--footer">
+
+      <ul class="collection-new-item--footer-infos">
+        <li class="collection-new-item--footer-info">
+          <span class="icon">help</span>
+          <span>What's Markdown?</span>
+        </li>
+      </ul>
+
+      <div class="collection-new-item--footer-actions ml-auto">
+        <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-secondary">Cancel</a>
         <input
-            (keyup)="onUrlKeyUp()"
-            (keydown)="onUrlKeyDown($event)"
-            (focus)="onUrlFocus()"
-            [(ngModel)]="urlEntry"
-            [class.active]="!actionIntent"
-            name="urlEntry"
-            class="item-new-url" type="text" placeholder="Enter your url..."/>
+            *ngIf="mode == 'CREATE'"
+            [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
+            class="btn btn-primary" type="submit" value="Add"/>
+        <input
+            *ngIf="mode == 'UPDATE'"
+            [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
+            class="btn btn-primary" type="submit" value="Update"/>
+      </div>
+
+    </div>
+
+    <input
+      (keyup)="onUrlKeyUp()"
+      (keydown)="onUrlKeyDown($event)"
+      (focus)="onUrlFocus()"
+      [(ngModel)]="urlEntry"
+      [class.active]="!actionIntent"
+      name="urlEntry"
+      class=""
+      style="width:100%;background:red;"
+      type="text"
+      placeholder="Input a supprimer et gérer les liens dans la description"/>
+  </form>
+</div>
+
+<!-- <div class="item-new extended">
+    <form (ngSubmit)="onItemSubmit()">
+
         <button *ngIf="!actionIntent" (click)="onUrlFocus(); addDescription = true" class="btn-icon" type="button">
             <i class="material-icons icon">comment</i>
         </button>
-        <textarea class="item-new-description" type="input" placeholder="Title..." name="title" rows="1" [(ngModel)]="item.title" ></textarea>
-        <textarea *ngIf="addDescription" (keydown)="onDescriptionKeyDown($event)" [(ngModel)]="item.description" name="description" class="item-new-description" placeholder="Add a description here..." rows="1"></textarea>
+
 
         <div [class.collapse]="!actionIntent" class="item-create d-flex">
-            <div class="btn-group form-action active" [class.active]="addDescription" (click)="addDescription = !addDescription">
-                <button class="btn-icon" type="button">
-                    <i class="material-icons icon">comment</i>
-                </button>
-            </div>
-            <div *ngIf="validUrl" class="btn-group form-action">
-                <button (click)="resetItemContent()" class="btn-icon text-danger" type="button">
-                    <i class="material-icons icon">link</i><span>Reset url</span>
-                </button>
-            </div>
 
             <input
                 *ngIf="mode == 'CREATE'"
@@ -52,4 +102,4 @@
             <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-create float-xs-right">Cancel</a>
         </div>
     </form>
-</div>
+</div> -->

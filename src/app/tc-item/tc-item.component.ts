@@ -35,11 +35,13 @@ export class TcItemComponent implements OnInit{
         this.item.isCollapsed = !this.item.isCollapsed;
     }
 
-    public openUpdateModal(){
+    public openUpdateModal(sizeParam = null){
         if (this.item.type == this.itemTypes.COLLECTION)
             this.collectionUpdateModal = this.modalService.open(this.updateItemModal);
         else
-            this.itemUpdateModal = this.modalService.open(this.updateItemModal);
+            this.itemUpdateModal = this.modalService.open(this.updateItemModal, {
+              size: sizeParam
+            });
     }
 
     public openDeleteItemModal(content) {

@@ -74,7 +74,7 @@
           <span class="icon">more_vert</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal()">Edit</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal('lg')">Edit</a>
           <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">Delete</a>
         </div>
       </li>
@@ -84,18 +84,18 @@
   </div>
 
   <!-- Type: Description (only) -->
-  <div class="collection-item--content" *ngIf="item.type == itemTypes.TEXT">
+  <div class="collection-item--content collection-item--caption" *ngIf="item.type == itemTypes.TEXT">
     <markdown class="collection-item--content-wrapper" [data]="item.description"></markdown>
   </div>
 
   <!-- Type: URL -->
-  <tc-item-url [class.collapse]="!item.isCollapsed" class="collection-item--content" *ngIf="item.type == itemTypes.URL" [item]="item"></tc-item-url>
+  <tc-item-url [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--website" *ngIf="item.type == itemTypes.URL" [item]="item"></tc-item-url>
 
   <!-- Type: Image -->
   <tc-item-image [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.IMAGE" [item]="item"></tc-item-image>
 
   <!-- Type: YouTube -->
-  <tc-item-youtube [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media " *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
+  <tc-item-youtube [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.YOUTUBE" [item]="item"></tc-item-youtube>
 
   <!-- Type: Tweet -->
   <tc-item-tweet [class.collapse]="!item.isCollapsed" class="collection-item--content collection-item--media" *ngIf="item.type == itemTypes.TWEET" [item]="item"></tc-item-tweet>

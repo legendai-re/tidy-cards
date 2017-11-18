@@ -10,11 +10,13 @@
   justify-content: center;
   // width: 0;
   height: 100vh;
+  margin: 0 auto;
   pointer-events: none;
+  padding: 0 1rem;
 }
 
 .modal-content {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   border: none;
   box-shadow: 0 .125rem 16rem rgba($black, .25);
   pointer-events: all;
