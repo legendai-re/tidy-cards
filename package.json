@@ -119,6 +119,7 @@
     "core-js": "^2.4.1",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
+    "ejs": "^2.5.7",
     "es6-shim": "^0.35.0",
     "exports-loader": "^0.6.4",
     "express": "^4.16.2",
