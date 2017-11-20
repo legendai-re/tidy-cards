@@ -7,7 +7,7 @@ module.exports = function getOne(req, res) {
 	var rq = req.query;
 
     if(!mongodbid.isMongoId(req.params.collection_id))
-        return res.status(404).send({ error: req.params.collection_id + ' is not a mongodb id'});
+        return res.render('404');
 
 	var q = models.Collection.findById(req.params.collection_id);
 
@@ -18,15 +18,14 @@ module.exports = function getOne(req, res) {
     });
 
 	q.exec(function(err, collection){
-        if(err) {console.log(err); res.sendStatus(500); return;}
-        if(!collection) return res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id});
+        if(err) {console.log(err); return res.render('500');}
+        if(!collection) return res.render('404');
 
         var _authorId = collection._author._id ? collection._author._id : collection._author;
 
         // if collection deleted or private and current user is not the author
         if((collection.lifeState == lifeStates.ARCHIVED.id) ||  (collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId))){        
-            res.status(401);
-            res.end();
+            res.render('401');
         }else{
             res.render('collection/getOne', {
 		        collection: collection,
