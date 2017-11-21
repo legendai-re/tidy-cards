@@ -7,10 +7,12 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "noEmit": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
     "baseUrl": "./src",
     "paths": {
+      "./node_modules/@types/*"
     },
     "lib": [
       "dom",
@@ -21,7 +23,6 @@
       "jasmine",
       "node",
       "protractor",
-      "selenium-webdriver",
       "source-map",
       "uglify-js",
       "webpack"

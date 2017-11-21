@@ -31,7 +31,8 @@ textarea {
 }
 
 a {
-    cursor: pointer;
+    cursor: pointer!important;
+    transition: color .3s ease, background-color .3s ease, border-color .3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,4 +49,12 @@ button, input, optgroup, select, textarea {
     color: inherit;
     font: inherit;
     margin: 0;
+}
+
+b, strong {
+  font-weight: 500;
+}
+
+iframe {
+  border: none;
 }

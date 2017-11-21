@@ -14,7 +14,7 @@ var sendConfirmationEmail = transporter.templateSender({
     text: require('./template.txt'),
     html: require('./template.html')
 }, {
-    from: '"Invow" <'+process.env.MAILER_USER+'>',
+    from: '"TidyCards" <'+process.env.MAILER_USER+'>',
 });
 
 function send(user, callback){

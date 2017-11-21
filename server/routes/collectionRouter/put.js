@@ -2,6 +2,7 @@ module.exports = function put (req, res) {
 
     var visibility  = require('../../models/collection/visibility.json');
     var sortTypes   = require('../../models/customSort/sortTypes.json');
+    var displayMode = require('../../models/collection/displayMode.json');
     var models      = require('../../models');
 
     q = models.Collection.findById(req.params.collection_id);
@@ -21,9 +22,12 @@ module.exports = function put (req, res) {
                 updateChildsVisibility(collection, req.body.visibility.id);
             }
 
+            if(req.body.displayMode && displayModeOk(req.body.displayMode))
+                collection.displayMode = req.body.displayMode;
+
             collection.title = (req.body.title || collection.title);
             collection.color = (req.body.color || collection.color);
-            collection.bio = typeof req.body.bio != 'undefined' ? req.body.bio : collection.bio;
+            collection.bio = typeof req.body.bio != 'undefined' ? req.body.bio : collection.bio;            
 
             if(req.body.updatePosition && typeof req.body.position != 'undefined')
                 updatePosition(collection, req.body.position)
@@ -38,6 +42,12 @@ module.exports = function put (req, res) {
 
     function visibilityOk(reqVisibility){
         if(visibility[reqVisibility.id] != null)
+            return true;
+        return false;
+    }
+
+    function displayModeOk(reqDisplayMode){
+        if(displayMode[reqDisplayMode] != null)
             return true;
         return false;
     }

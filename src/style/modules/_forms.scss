@@ -1,11 +1,14 @@
+.form-control + .form-control {
+  margin-left: .5rem;
+}
+
 .form-group {
-    margin-bottom: 5px;
+    margin-bottom: .5rem;
 }
 
 .form-actions {}
 
 .form-action {
-    height: 38px;
     outline: none;
     color: $text-blacker;
     vertical-align: middle;
@@ -27,42 +30,10 @@
     }
 }
 
-.btn-icon {
-    display: inline-flex;
-    position: relative;
-    background: transparent;
-    width: auto;
-    height: 38px;
-    padding: 7px;
-    border: none;
-    border-radius: 3px;
-    overflow: hidden;
-    font-size: .875rem;
-
-    &:hover {
-        background: $hover-dark-color;
-    }
-
-    &:before {
-        position: relative;
-        border-radius: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: none;
-        padding: 0;
-    }
-
-    &:after {
-        display: none;
-    }
-}
-
 .icon + span {
     padding: 2px 5px 0;
 }
 
-.form-control,
-.input-group-addon {
-    border-radius: 3px;
+.custom-file {
+    height: 34px;
 }

@@ -1,6 +1,7 @@
 module.exports = function getCollectionSchema(Schema) {
 
 	var visibility = require('./visibility.json');
+    var displayMode = require('./displayMode.json');
     var lifeStates = require('../lifeStates.json');
 
 	return new Schema({
@@ -41,6 +42,10 @@ module.exports = function getCollectionSchema(Schema) {
 	            message: '{VALUE} is not a valid color'
 	        }
 	    },
+        displayMode: {
+            type: String,
+            default: displayMode.LIST.id
+        },
         depth:{
             type: Number,
             required: true

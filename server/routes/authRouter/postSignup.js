@@ -13,7 +13,7 @@ module.exports = function postSignup(req, res) {
     }else{
         models.User.findOne({ $or: [{username: req.body.username.toLowerCase()}, {email: req.body.email.toLowerCase()}] }, function(err, user){
             if (err) {res.sendStatus(500); return;}
-            if(!user || !usernameValidator.isValid(req.body.username)){
+            if(!user && usernameValidator.isValid(req.body.username)){
                 var sess = req.session;
                 var user =  new models.User();
                 user.email = req.body.email;

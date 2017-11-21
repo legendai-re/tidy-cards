@@ -5,6 +5,10 @@
 
 // TODO(gdi2290): switch to DLLs
 
+import 'jquery';
+import 'jquery-ui';
+import 'jquery-ui-bundle';
+
 // Angular 2
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
@@ -30,6 +34,3 @@ if ('production' === ENV) {
 
 }
 
-import 'jquery';
-import 'jquery-ui-bundle';
-import 'bootstrap/dist/js/bootstrap.js';

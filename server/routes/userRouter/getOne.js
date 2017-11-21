@@ -1,13 +1,14 @@
 module.exports = function getOne (req, res) {
 
     var models      = require('../../models');
+    var mongodbid   = require('../../helpers/mongodbid');
 
     var rq = req.query;
     var q = null;
 
     var noCaseUsernameRegex = new RegExp(["^", req.params.user_id, "$"].join(""), "i");
 
-    if(isMongoId(req.params.user_id))
+    if(mongodbid.isMongoId(req.params.user_id))
         q = models.User.findById(req.params.user_id);
     else if(isEmail(req.params.user_id))
         q = models.User.findOne({email: noCaseUsernameRegex});
@@ -26,12 +27,9 @@ module.exports = function getOne (req, res) {
 
 	q.exec(function(err, user){
         if(err) {console.log(err); res.sendStatus(500); return;}
+        if(!user) { res.sendStatus(404); return;} 
         res.json({data: user});
     })
-
-    function isMongoId(username){
-        return new RegExp("^[0-9a-fA-F]{24}$").test(username);
-    }
 
     function isEmail(username){
         return new RegExp('.+@.+').test(username);;

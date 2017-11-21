@@ -10,7 +10,7 @@ module.exports = function post (req, res, next) {
 
         var url = req.body.url;
         var callback = function(err, itemType, itemContent){
-            if(err) {console.log(err); return res.json({error: true, data: null})}
+            if(err) { return res.json({error: true, data: null})}
             res.json({error: false, data: itemContent, itemType: itemType});
         }
 
@@ -24,7 +24,7 @@ module.exports = function post (req, res, next) {
             case 'URL':
                 return itemContentHelper.createItemUrl(url, req.user, callback);
             default:
-                return callback('unlnow type');
+                return res.json({error: true, data: null, message: 'unknow type'});
         }
     }
 

@@ -1,2 +1,2 @@
 // App
-export * from './iv-app.module';
+export * from './tc-app.module';

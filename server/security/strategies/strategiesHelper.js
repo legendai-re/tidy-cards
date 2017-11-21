@@ -21,20 +21,23 @@ var createUser = function(req, profile, accessToken, strategy, callback){
     newUser.name = (profile.displayName || 'anonyme');
     newUser.roles = ['ROLE_USER'];
     newUser.language = (sess.language || 'en');
-    var avatar = createAvatar(newUser, profile);
-    newUser._avatar = avatar._id;
 
-    newUser.save(function(err){
-        if (err) { return callback(err); }
-        avatar.save(function(err){
+    createAvatar(newUser, profile, function(image){
+        var avatar = image;
+        newUser._avatar = avatar._id;
+
+        newUser.save(function(err){
             if (err) { return callback(err); }
-            newUser._avatar = avatar;
-            createMyCollectionSort(newUser, function(err){
+            avatar.save(function(err){
                 if (err) { return callback(err); }
-                callback(null, newUser);
-            })
-        });
-    })
+                newUser._avatar = avatar;
+                createMyCollectionSort(newUser, function(err){
+                    if (err) { return callback(err); }
+                    callback(null, newUser);
+                })
+            });
+        })
+    });
 }
 
 function createMyCollectionSort(newUser, callback){
@@ -46,14 +49,18 @@ function createMyCollectionSort(newUser, callback){
     });
 }
 
-function createAvatar(newUser, profile){
+function createAvatar(newUser, profile, callback){
     var image = new models.Image();
     image.type = imagesTypes.AVATAR.name;
     image.mime = 'jpg';
     image._user = newUser._id;
-    if(profile.photos[0])
-        imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value);
-    return image;
+    if(profile.photos[0]){
+        imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value,function(err){
+            callback(image);
+        });
+    }else{
+        callback(image);
+    }
 }
 
 module.exports = {

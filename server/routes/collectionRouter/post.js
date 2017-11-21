@@ -8,23 +8,27 @@ module.exports = function post (req, res) {
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        var collection = createCollection();
-
-        if(req.body._parent){
-            getParent(function(err, parent){
-                if (err) {console.log(err); return res.sendStatus(500);}
-                collection._parent = parent._id;
-                collection.depth = parent.depth+1;
-                //if parent.deph == 0, the parent is the rootCollection
-                collection._rootCollection = (parent.depth == 0) ? parent._id : parent._rootCollection;
-                collection.visibility = parent.visibility;
-                collection.lifeState = 'PENDING_FOR_ITEM_RELATION';
-                saveSubCollection(collection);
-            })
-        }else{
-            collection.depth = 0;
-            saveRootCollection(collection);
-        }
+        createCollection(function(err, collection){
+            if(err){
+                return res.status(500).json(err);
+            }else if(req.body._parent){
+                if(process.env.NODE_ENV == 'production')
+                    return res.status(403).send({error: 'sub collections are not ready for production yet'});
+                getParent(function(err, parent){
+                    if (err) {console.log(err); return res.sendStatus(500);}
+                    collection._parent = parent._id;
+                    collection.depth = parent.depth+1;
+                    //if parent.deph == 0, the parent is the rootCollection
+                    collection._rootCollection = (parent.depth == 0) ? parent._id : parent._rootCollection;
+                    collection.visibility = parent.visibility;
+                    collection.lifeState = 'PENDING_FOR_ITEM_RELATION';
+                    saveSubCollection(collection);
+                })
+            }else{
+                collection.depth = 0;
+                saveRootCollection(collection);
+            }
+        });
     }
 
     function getParent(callback){
@@ -42,18 +46,24 @@ module.exports = function post (req, res) {
         return false;
     }
 
-    function createCollection(){
+    function createCollection(callback){
         var collection =  new models.Collection();
         collection.title = req.body.title;
         collection.color = req.body.color;
         collection.visibility = req.body.visibility.id;
-        if(req.body._thumbnail && req.body._thumbnail._id){
-            collection._thumbnail = req.body._thumbnail._id;
-        }
         if(req.body.bio){
             collection.bio = req.body.bio;
         }
-        return collection;
+        if(req.body._thumbnail && req.body._thumbnail._id){
+            models.Image.checkIfOwner(req.body._thumbnail._id, req.user, function(err, isOwner){
+                if(err) {console.log(err); return callback(err)}
+                if(!isOwner) return callback({ error: 'cannot set image, you are not the owner of this image'});
+                collection._thumbnail = req.body._thumbnail._id;
+                callback(null,collection);
+            })
+        }else{
+            callback(null,collection);
+        }
     }
 
     function saveRootCollection(collection){

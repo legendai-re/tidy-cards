@@ -22,6 +22,7 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 .env
+/server/.env
 
 # OS generated files #
 .DS_Store
@@ -32,6 +33,8 @@ Thumbs.db
 # Node Files #
 /node_modules
 /bower_components
+npm-debug.log
+/npm-debug.log.*
 
 # Coverage #
 /coverage/
@@ -55,3 +58,9 @@ __build__/**
 # IDE #
 .idea/
 *.swp
+
+.awcache
+package-lock.json
+
+# Server logs #
+/server/log

@@ -3,11 +3,14 @@ module.exports = function getOne (req, res) {
 	var visibility  = require('../../models/collection/visibility.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
+    var mongodbid   = require('../../helpers/mongodbid');
 
 	var rq = req.query;
 
+    if(!mongodbid.isMongoId(req.params.collection_id))
+        return res.status(404).send({ error: req.params.collection_id + ' is not a mongodb id'});
+
 	var q = models.Collection.findById(req.params.collection_id);
-    q.where('lifeState').equals(lifeStates.ACTIVE.id);
 
 	q.populate('_thumbnail');
     q.populate({
@@ -20,8 +23,19 @@ module.exports = function getOne (req, res) {
         if(!collection) return res.status(404).send({ error: 'cannot find collection with id: '+req.params.collection_id});
 
         var _authorId = collection._author._id ? collection._author._id : collection._author;
-        if(collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId)){
-        	res.sendStatus(401);
+
+        // if collection deleted or private and current user is not the author
+        if((collection.lifeState == lifeStates.ARCHIVED.id) ||  (collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId))){
+        	if(req.user){
+                getStar(req.user, collection, function(err, star){
+                    if(err) {console.log(err); res.sendStatus(500); return;}
+                    res.status(401);
+                    res.json({data: {_star: star}});
+                })
+            }else{
+                res.status(401);
+                res.json({data: {_star: null}});
+            }
         }else{
             getParents(collection, [], function(err, parentCollections){
                 if(err) {console.log(err); res.sendStatus(500); return;}

@@ -5,14 +5,17 @@ module.exports = function getMultiple (req, res) {
     var sortTypes   = require('../../models/customSort/sortTypes.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
-
+    var algoliaClient = require('../../algolia/algolia')
+    var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_collection');
+    
 	var rq = req.query;
-    var customSort = false;
 
     if(rq._author && rq.custom_sort){
         var skip = rq.skip ? parseInt(rq.skip) : 0;
         var limit = rq.limit ? parseInt(rq.limit) : 8;
         models.CustomSort.findOne({ _user: rq._author, type: sortTypes.MY_COLLECTIONS.id},{ ids : { $slice : [skip , limit] } }, function(err, customSort){
+            if(err || !customSort)
+                return res.status(500).json({error: "cannot find customSort related to user: "+rq._author})
             var q = models.Collection.find({_id: {$in: customSort.ids} });
             q.populate('_thumbnail');
             q.populate({
@@ -23,9 +26,51 @@ module.exports = function getMultiple (req, res) {
                 for(var i in collections){
                     collections[i].position = customSort.ids.indexOf(collections[i]._id) + skip;
                 }
-                res.json({data: collections});
+                if(req.user){
+                    addIsStarred(req.user, collections, function(collectionsResult){
+                        res.json({data: collections});
+                    })
+                }else{
+                    res.json({data: collections});
+                }
             });
         })
+    }else if (rq._starredBy){
+        var filterObj = {};
+        var skip = rq.skip ? parseInt(rq.skip) : 0;
+        var limit = rq.limit ? parseInt(rq.limit) : 8;
+
+        var q = models.Star.find({_user: rq._starredBy}).limit(limit).skip(skip).sort({createdAt: -1});
+
+        q.populate({
+            path: '_collection',
+            populate: {
+                path: '_author',
+                populate: { path: '_avatar' }
+            }
+        });
+        q.populate({
+            path: '_collection',
+            populate: {
+                path: '_thumbnail'
+            }
+        });
+
+        q.exec(function(err, stars){
+            if (err) {console.log(err); res.sendStatus(500); return;}
+            var collections = [];
+            stars.forEach(function(star) {
+                collections.push(star._collection)
+            });
+            if(req.user){
+                addIsStarred(req.user, collections, function(collectionsResult){
+                    res.json({data: collections});
+                })
+            }else{
+                res.json({data: collections});
+            }            
+        });
+
     }else{
     	getQueryFiler(rq, req, function(filterObj){
     		var q = models.Collection.find(filterObj).limit(20);
@@ -67,43 +112,48 @@ module.exports = function getMultiple (req, res) {
 
         if(!rq.search)
             filterObj.depth = 0;
-		if(rq.search)
-			filterObj.title = { $regex:  '.*'+decodeURIComponent(rq.search)+'.*', $options: 'i'};
         if(rq.isFeatured)
             filterObj.isFeatured = true;
         if(rq.isOnDiscover)
             filterObj.isOnDiscover = true;
 
-		if(rq._author){
+        if(rq.search){
+            algoliaGetCollectionIds(decodeURIComponent(rq.search), function(ids){                
+                filterObj._id = { '$in': ids }; 
+                callback(filterObj);  
+            })
+        } else if(rq._author){
 			filterObj._author = rq._author;
 			if(req.user && req.user.isGranted('ROLE_USER'))
 				filterObj.$or = [{visibility: visibility.PUBLIC.id}, {_author: req.user._id}]
 			else
 				filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
-		}else if(rq._starredBy){
-			getStarredByQuery(rq, req, function(starredByQuery){
-				callback(starredByQuery);
-			})
 		}else{
 			filterObj.visibility = visibility.PUBLIC.id;
 			callback(filterObj);
 		}
 	}
 
-	function getStarredByQuery(rq, req, callback){
-		var filterObj = {};
-		models.Star.find({_user: rq._starredBy}).exec(function (err, stars){
-			if (err) {console.log(err); res.sendStatus(500); return;}
-			if(!req.user || req.user._id != rq._starredBy)
-				filterObj.visibility = visibility.PUBLIC.id
-            var ids = [];
-            for(var i in stars)
-                ids.push(stars[i]._collection)
-			filterObj._id = {$in: ids};
-			callback(filterObj);
-		});
-	}
+    function algoliaGetCollectionIds(searchQuery, callback){
+        algoliaCollectionIndex.search(
+        {
+            query: searchQuery,
+            attributesToRetrieve: ['objectID'],
+            hitsPerPage: 20,
+        },
+        function searchDone(err, content) {
+            if (err) {
+              console.error(err);
+              callback([]);
+            }
+            var collectionsIds = [];
+            for (var h in content.hits) {
+                collectionsIds.push(content.hits[h].objectID)
+            }
+            callback(collectionsIds);
+        });
+    }
 
     function addIsStarred(user, collections, callback){
         async.times(collections.length, function(n, next) {

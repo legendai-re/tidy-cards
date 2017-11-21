@@ -11,6 +11,26 @@ module.exports = function getItemSchema(Schema) {
             required: true,
             default: lifeStates.ACTIVE.id
         },
+        title: {
+            type: String,
+            required: true,
+            validate: {
+                validator: function(v) {
+                    return (v.length < 500);
+                },
+                message: '{VALUE} is not a title'
+            }
+        },
+        host: {
+            type: String,
+            required: false,
+            validate: {
+                validator: function(v) {
+                    return (v.length < 500);
+                },
+                message: '{VALUE} is not a host'
+            }
+        },
         description: {
             type: String,
             required: false,
@@ -18,7 +38,17 @@ module.exports = function getItemSchema(Schema) {
                 validator: function(v) {
                     return (v.length < 10000);
                 },
-                message: '{VALUE} is not a title'
+                message: '{VALUE} is not a description'
+            }
+        },
+        false: {
+            type: String,
+            required: false,
+            validate: {
+                validator: function(v) {
+                    return (v.length < 500);
+                },
+                message: '{VALUE} is not an host'
             }
         },
         type: {

@@ -17,6 +17,10 @@ module.exports = function put (req, res) {
                 item.description = req.body.description;
             else
                 item.description = '';
+            if(req.body.title)
+                item.title = req.body.title;
+            if(!typeOk(req.body.type))
+                return res.status(400).send({ error: 'bad item type'});
             item.type = req.body.type.id;
             itemContentHelper.checkItemContent(item, req, function(err, content){
                 if (err){res.status(400).send({ error: "error while creating item content"}); return;}
@@ -29,7 +33,6 @@ module.exports = function put (req, res) {
                 });
             });
         }
-
     });
 
     function typeOk(reqType){
