@@ -50,6 +50,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   &.is-list-collection {
     margin-top: -8rem;
