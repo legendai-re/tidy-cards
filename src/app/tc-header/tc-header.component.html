@@ -10,26 +10,28 @@
       <a class="header-nav--brand navbar-brand" href="javascript:void(0)" [routerLink]="['/']">
         <h1 class="icon">Invow</h1>
       </a>
+
+      <form class="header-search-bar">
+        <span id="header-search" class="header-search-bar--icon">search</span>
+        <input class="header-search-bar--input"
+               name="searchQuery"
+               placeholder="{{t._?.header?.search_placeholder}}"
+               aria-describedby="header-search"
+               [(ngModel)]="searchQuery"
+               (focus)="searchIntent()"
+               (click)="searchIntent()"
+               (keyup)="onQueryKeyUp()"
+               (keydown)="onQueryKeyDown()">
+        <a href="javascript:void(0)" class="header-search-bar--cancel" [class.hidden]="headerState != 'search' "(click)="cancelSearch()">Cancel</a> <!-- TODO: Trad -->
+      </form>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appNavbar" aria-controls="appNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="appNavbar">
-        <form class="header-search-bar mr-auto">
-          <span id="header-search" class="header-search-bar--icon">search</span>
-          <input class="header-search-bar--input"
-                 name="searchQuery"
-                 placeholder="{{t._?.header?.search_placeholder}}"
-                 aria-describedby="header-search"
-                 [(ngModel)]="searchQuery"
-                 (focus)="searchIntent()"
-                 (click)="searchIntent()"
-                 (keyup)="onQueryKeyUp()"
-                 (keydown)="onQueryKeyDown()">
-          <a href="javascript:void(0)" class="header-search-bar--cancel" [class.hidden]="headerState != 'search' "(click)="cancelSearch()">Cancel</a> <!-- TODO: Trad -->
-        </form>
 
-        <ul class="header-navbar navbar-nav">
+        <ul class="header-navbar navbar-nav ml-auto">
 
           <li class="header-navbar--nav-item nav-item" *ngIf="authService.isLoggedIn">
             <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">
@@ -74,13 +76,24 @@
             </div>
           </li>
 
-          <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn" >
+          <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn && headerState == 'discover'" >
             <div class="header-navbar--nav-item-content">
               <span class="header-navbar--nav-link-text">
                 {{t._?.auth?.already_member_title}}
               </span>
-              <a class="header-navbar--nav-link nav-link" routerLinkActive="active" [routerLink]="['/signin']">
+              <a class="header-navbar--nav-link nav-link active" routerLinkActive="active" [routerLink]="['/signin']">
                 {{t._?.header?.signin_title}}
+              </a>
+            </div>
+          </li>
+
+          <li class="header-navbar--nav-item nav-item" *ngIf="!authService.isLoggedIn && headerState != 'discover'" >
+            <div class="header-navbar--nav-item-content">
+              <span class="header-navbar--nav-link-text">
+                {{t._?.auth?.not_member_title}}
+              </span>
+              <a class="header-navbar--nav-link nav-link cta" routerLinkActive="active" [routerLink]="['/signin']">
+                Sign up today
               </a>
             </div>
           </li>
@@ -102,10 +115,9 @@
             <p>Discover what's happening right now.</p>
             <p>Find collections and inspiration about the things you love.</p>
           </div>
-          <!-- TODO : refaire les boutons + créer la page About -->
           <div class="header-jumbotron--actions">
-            <a class="btn btn-success" routerLinkActive="active" [routerLink]="['/signin', {mode: 'signup'}]">Sign up today</a>
-            <a class="btn btn-secondary" [routerLink]="['/about']">Learn more</a>
+            <a class="btn btn-yellow btn-alt" routerLinkActive="active" [routerLink]="['/signin']">Sign up today</a>
+            <a class="btn btn-secondary btn-alt" [routerLink]="['/about']">Learn more</a>
           </div>
         </div>
 

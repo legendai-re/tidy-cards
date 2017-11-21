@@ -21,7 +21,7 @@
         "password_placeholder": "Mot de passe",
         "password_repeat_placeholder": "Répéter le mot de passe",
         "not_member_title": "Pas encore inscrit ?",
-        "already_member_title": "Déjà inscrit ?"
+        "already_member_title": "Vous êtes déjà inscrit ?"
     },
     "discover": {
         "featured_title": "Sélection",
