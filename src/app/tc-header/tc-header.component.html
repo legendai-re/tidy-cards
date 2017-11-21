@@ -47,7 +47,7 @@
             <a class="header-navbar--nav-link nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span>{{authService.currentUser.name}}</span>
               <div class="header-navbar--avatar avatar">
-                <img *ngIf="authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('40x40')"  alt="{{authService.currentUser?.name}} avatar">
+                <img *ngIf="authService.currentUser._avatar" [src]="authService.currentUser._avatar.getPath('40x40')"  onError="this.style.display='none';" alt="{{authService.currentUser?.name}} avatar">
                 <span class="avatar-char">{{authService.currentUser.name.charAt(0)}}</span>
               </div>
             </a>
