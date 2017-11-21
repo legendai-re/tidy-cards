@@ -108,7 +108,7 @@
   <!-- Type: Description (without collapsing) -->
   <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type != itemTypes.TEXT">
     <span class="collection-item--description-icon">comment</span>
-    <markdown [data]="item.description"></markdown>
+    <markdown class="collection-item--description-content" [data]="item.description"></markdown>
   </div>
 
 </div>
