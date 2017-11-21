@@ -63,6 +63,8 @@ export class TcItemCreateComponent implements OnInit {
         this.mode = 'UPDATE';
         this.item = TcItem.createFormJson(this.item);
         if(this.item._content!=null){
+            if(!this.item.description || this.item.description == "")
+                this.item.description = this.item._content.url;
             this.urlEntry = this.item._content.url;
             this.lastCheckedUrlEntry = this.urlEntry;
             this.validUrl = true;
