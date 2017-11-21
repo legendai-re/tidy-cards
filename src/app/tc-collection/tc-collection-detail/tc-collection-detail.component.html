@@ -23,7 +23,7 @@
 
           <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">
             <div class="collection-container--thumbnail avatar avatar--32">
-              <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
+              <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" onError="this.style.display='none';" alt="{{collection._author?.name}} avatar">
               <span class="avatar-char">{{collection._author.name.charAt(0)}}</span>
             </div>
           </a>

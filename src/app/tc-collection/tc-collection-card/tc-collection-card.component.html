@@ -6,12 +6,12 @@
 
     <div class="card-collection--content" [class.has-thumbnail]="collection._thumbnail">
 
-      <h3 class="card-collection--title">{{collection.title}}</h3>
-      <p class="card-collection--caption">{{collection.bio}}</p>
+      <h3 class="card-collection--title">{{collection.title | truncate:[40] }}</h3>
+      <p class="card-collection--caption">{{collection.bio | truncate:[200] }}</p>
 
       <div class="card-collection--details">
         <div class="card-avatar avatar avatar--32">
-          <img *ngIf="collection._author?._avatar" [src]="collection._author?._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
+          <img *ngIf="collection._author?._avatar" [src]="collection._author?._avatar.getPath('60x60')" onError="this.style.display='none';" alt="{{collection._author?.name}} avatar">
           <span class="avatar-char">{{collection._author?.name?.charAt(0)}}</span>
         </div>
         <ul class="card-collection--stats" *ngIf="collection.visibility.id != 'PRIVATE'">
@@ -28,7 +28,7 @@
 
       <div class="card-collection--background is-color" *ngIf="!collection._thumbnail" [style.background-color]="'#'+collection.color"></div>
       <div class="card-collection--background is-thumbnail" *ngIf="collection._thumbnail">
-        <img [src]="collection._thumbnail?.getPath('300x250')" />
+        <img [src]="collection._thumbnail?.getPath('300x250')" onError="this.style.display='none';" />
       </div>
 
     </div>
