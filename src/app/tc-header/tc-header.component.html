@@ -93,7 +93,7 @@
                 {{t._?.auth?.not_member_title}}
               </span>
               <a class="header-navbar--nav-link nav-link cta" routerLinkActive="active" [routerLink]="['/signin']">
-                Sign up today
+                {{t._?.auth?.signup_today_button}}
               </a>
             </div>
           </li>
@@ -116,8 +116,8 @@
             <p>Find collections and inspiration about the things you love.</p>
           </div>
           <div class="header-jumbotron--actions">
-            <a class="btn btn-yellow btn-alt" routerLinkActive="active" [routerLink]="['/signin']">Sign up today</a>
-            <a class="btn btn-secondary btn-alt" [routerLink]="['/about']">Learn more</a>
+            <a class="btn btn-yellow btn-alt" routerLinkActive="active" [routerLink]="['/signin']">{{t._?.auth?.signup_today_button}}</a>
+            <a class="btn btn-secondary btn-alt" [routerLink]="['/about']">{{t._?.header?.jumbotron?.about_button}}</a>
           </div>
         </div>
 

@@ -8,7 +8,10 @@
         "signin_title": "Accédez à votre compte",
         "profile_menu": "Profil/Paramètres",
         "admin_menu": "Admin",
-        "logout_menu": "Se déconnecter"
+        "logout_menu": "Se déconnecter",
+        "jumbotron": {
+            "about_button": "À propos de TidyCards"
+        }
     },
     "auth": {
         "signin_title": "Se connecter",
@@ -21,7 +24,8 @@
         "password_placeholder": "Mot de passe",
         "password_repeat_placeholder": "Répéter le mot de passe",
         "not_member_title": "Pas encore inscrit ?",
-        "already_member_title": "Vous êtes déjà inscrit ?"
+        "already_member_title": "Vous êtes déjà inscrit ?",
+        "signup_today_button": "S'inscrire"
     },
     "discover": {
         "featured_title": "Sélection",

@@ -8,8 +8,11 @@
         "signin_title": "Sign in",
         "profile_menu": "Profile/Settings",
         "admin_menu": "Admin",
-        "logout_menu": "Logout"
-    },
+        "logout_menu": "Logout",
+        "jumbotron": {
+            "about_button": "About TidyCards"
+        }
+    },    
     "auth": {
         "signin_title": "Sign in",
         "signup_title": "Sign up",
@@ -21,7 +24,8 @@
         "password_placeholder": "Password",
         "password_repeat_placeholder": "Repeat password",
         "not_member_title": "Not member yet?",
-        "already_member_title": "Already have an account?"
+        "already_member_title": "Already have an account?",
+        "signup_today_button": "Sign up today"
     },
     "discover": {
         "featured_title": "Featured",
