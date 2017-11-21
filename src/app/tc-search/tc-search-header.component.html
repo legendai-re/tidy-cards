@@ -1,0 +1,82 @@
+<div class="search-results" *ngIf="!searchQuery">
+  <div class="container">
+
+    <div class="search-results--summary search-results--ideas">
+      <h2 class="search-title">
+        No idea?
+      </h2>
+      <h3 class="section-title dark-bg">
+        You can visit the <a [routerLink]="['/discover']">discover page</a>...
+      </h3>
+    </div>
+
+  </div>
+</div>
+
+<div class="search-results" *ngIf="searchQuery && (isLoadingUsers || isLoadingCollections)">
+  <div class="container">
+
+    <div class="search-results--summary search-results--loading">
+      <h2 class="section-title dark-bg">Loading...</h2>
+    </div>
+
+  </div>
+</div>
+
+<div class="search-results" *ngIf="searchQuery && (!isLoadingUsers || !isLoadingCollections)">
+  <div class="container">
+
+    <div class="search-results--summary search-results--nothing" *ngIf="users.length < 1 && collections.length < 1">
+      <h3 class="search-results-before-title">Sorry. There is no results for</h3>
+      <h2 class="search-results-title">{{searchQuery}}</h2>
+    </div>
+
+    <div class="search-results--summary  search-results--show" *ngIf="users.length > 0 || collections.length > 0">
+      <h3 class="search-results-before-title">Results for</h3>
+      <h2 class="search-results-title">{{searchQuery}}</h2>
+    </div>
+
+    <div class="search-results--section search-results--users" *ngIf="users.length > 0">
+      <h2 class="section-title dark-bg">Users</h2>
+
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let user of users">
+
+          <article class="card card-user">
+            <a class="card-user-content" [routerLink]="['/', user.username]" title="{{user.name}}">
+              <div class="card-avatar avatar avatar--40">
+                <img *ngIf="user._avatar" [src]="user._avatar?.getPath('40x40')" alt="{{user.name}} avatar">
+                {{user.name.charAt(0)}}
+              </div>
+              <h3 class="card-profile-name">{{user.name}}</h3>
+              <h4 class="card-profile-username">@{{user.username}}</h4>
+            </a>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="search-results--section search-results--collections" *ngIf="collections.length > 0">
+      <h2 class="section-title dark-bg">Collections</h2>
+
+      <div class="row">
+        <tc-collection-card class="col-12 col-md-6 col-lg-4 col-xl-3" [collection]="collection" [sortable]="false" *ngFor="let collection of collections"></tc-collection-card>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="search-powered">
+  <div class="container">
+
+    <div class="search-powered--content right">
+      <a href="https://www.algolia.com" target="_blank">
+        Powered by <strong>Algolia</strong>
+      </a>
+    </div>
+
+  </div>
+</div>

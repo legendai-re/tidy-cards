@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <title>TidyCards</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="fb:app_id" content="572975739556621" />
+  <meta property="og:title" content="TidyCards" />
+  <meta property="og:url" content="http://www.tidy.cards/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="The new way to bookmark" />
+  <meta property="og:image" content="assets/img/favicon.png" />
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+
+  <% if (webpackConfig.htmlElements.headTags) { %>
+  <!-- Configured Head Tags  -->
+  <%= webpackConfig.htmlElements.headTags %>
+  <% } %>
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+
+</head>
+
+<body>
+
+  <tc-app>
+    Loading...
+  </tc-app>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script>
+    window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+  <input style="display:none" type="submit" id="render_tweet" onclick="twttr.widgets.load();" />
+</body>
+</html>
