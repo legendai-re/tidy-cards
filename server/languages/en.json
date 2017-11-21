@@ -12,7 +12,7 @@
         "jumbotron": {
             "about_button": "About TidyCards"
         }
-    },    
+    },
     "auth": {
         "signin_title": "Sign in",
         "signup_title": "Sign up",
@@ -88,7 +88,7 @@
     },
     "collection_create": {
         "title_placeholder": "Create a collection...",
-        "caption_placeholder": "Enter a caption here to describe the collection...",
+        "caption_placeholder": "Enter a caption here to describe the collection. Keep it simple and short...",
         "visibility_dropdow_title": "Who should see this?"
     },
     "action": {

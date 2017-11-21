@@ -88,7 +88,7 @@
     },
     "collection_create": {
         "title_placeholder": "Créer une collection...",
-        "caption_placeholder": "Ajouter une légende pour décrire votre collection...",
+        "caption_placeholder": "Ajouter une courte légende pour décrire votre collection...",
         "visibility_dropdow_title": "Qui peut la voir ?"
     },
     "action": {
