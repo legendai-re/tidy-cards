@@ -108,9 +108,9 @@
 }
 
 .page-headings + .page-container {
-  transition-delay: .2s;
+  transition-delay: .0s;
 
   &.is-hidden {
-    transition-delay: 0s;
+    transition-delay: .6s;
   }
 }

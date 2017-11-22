@@ -88,13 +88,17 @@ export class TcHeaderComponent implements OnInit, OnDestroy{
                 this.noHeader = true;
                 this.headerService.noHeader = true;
             }, 200)
-        }else if (event.value.type === 'collection'){
+        }else if(event.value.type === 'collection'){
             this.headerState = 'collection';
             this.type = event.value.type;
             this.color = event.value.color;
             this.image = event.value.image;
             this.title = event.value.title;
             this.headerService.noFooter = false;
+        }else if(event.value.type === 'page'){
+            this.headerState = 'page';
+            this.color = this.defaultColor;
+            this.image = null;
         }else{
             this.setDefault();
         }
