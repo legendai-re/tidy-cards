@@ -30,7 +30,7 @@
                   </div>
                   <div class="profile-infos-edit">
                       <small *ngIf="isUpdadingGeneralInfo">saving information...</small>
-                      <input *ngIf="!updateGeneralInfoIntent" (click)="startUpdateGeneralInfo()" class="btn btn-sm btn--light-op" type="submit" value="{{t._.action?.edit}}" />
+                      <input *ngIf="!updateGeneralInfoIntent" (click)="startUpdateGeneralInfo()" class="btn btn-secondary btn-sm" type="submit" value="{{t._.action?.edit}}" />
                       <input *ngIf="updateGeneralInfoIntent" (click)="updateGeneralInfo()" [disabled]="isUpdadingGeneralInfo || isUploadingAvatar || !tmpUser.name" class="btn btn-sm btn-primary" type="submit" value="{{t._.action?.save}}" />
                       <a *ngIf="updateGeneralInfoIntent" (click)="cancelUpdateGeneralInfo()" class="btn btn-sm btn-secondary">{{t._.action?.cancel}}</a>
                   </div>
