@@ -14,7 +14,8 @@ export class TcAboutComponent implements OnInit{
     ngOnInit() {
     	this.emitUpdateHeaderEvent();
     	setTimeout( () => {
-            $("#collectionDetailHeader").removeClass('is-hidden');
+            $("#pageHeadings").removeClass('is-hidden');
+            $(".page-container").removeClass('is-hidden');
         }, 10);
     }
 
