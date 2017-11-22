@@ -15,7 +15,7 @@ export class TcAboutComponent implements OnInit{
     	this.emitUpdateHeaderEvent();
     	setTimeout( () => {
             $("#pageHeadings").removeClass('is-hidden');
-            $(".page-container").removeClass('is-hidden');
+            $("#pageContent").removeClass('is-hidden');
         }, 10);
     }
 
