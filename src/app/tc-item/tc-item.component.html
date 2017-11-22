@@ -124,15 +124,13 @@
 
 <ng-template class="default-modal" #itemDeleteModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="c('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title">Delete Item?</h5>
   </div>
   <div class="modal-body">
-    <b>Do you really want to delete this item?</b>
+    Do you really want to delete this item?
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">Cancel</button>
     <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this item</button>
   </div>
 </ng-template>

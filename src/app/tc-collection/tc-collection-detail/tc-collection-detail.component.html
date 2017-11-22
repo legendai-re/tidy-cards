@@ -130,16 +130,14 @@
 
 <ng-template class="default-modal" #collectionDeleteModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="c('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title">Delete Collection?</h5>
   </div>
   <div class="modal-body">
-    <b>Do you really want to delete this collection?</b>
+    Do you really want to delete this collection?
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this collection</button>
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">No, keep collection</button>
+    <button type="button" class="btn btn-danger" (click)="c('confirm')">Yes, delete collection</button>
   </div>
 </ng-template>
 
