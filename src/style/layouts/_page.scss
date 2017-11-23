@@ -98,6 +98,10 @@
   border-radius: $border-radius-base;
   box-shadow: 0 .125rem .25rem $box-shadow-color;
   transition: min-height .4s ease;
+
+  &.wide {
+    padding: 4rem 1rem;
+  }
 }
 
 .page-content {

@@ -1,7 +1,32 @@
-<section class="section">
-    <div class="container">
-        <small *ngIf="confirmationInProgress" class="text-muted">Email confirmation in progress...</small>
-        <small *ngIf="!confirmationInProgress && emailConfirmed" class="text-success">Thanks! You have successfully confirmed your email.</small>
-        <small *ngIf="!confirmationInProgress && !emailConfirmed" class="text-danger">This confirmation link is not associated with the currently logged in account.</small>
+<div class="application-content is-page">
+  <div class="container">
+
+    <div class="page-headings is-hidden" id="pageHeadings">
+
     </div>
-</section>
+
+		<div class="page-container wide">
+			<div class="page-content row is-hidden" id="pageContent">
+        <div class="col-12 col-md-8 mx-auto" *ngIf="confirmationInProgress">
+          <p class="text-muted text-center">Email confirmation in progress...</p>
+				</div>
+
+        <div class="col-12 col-md-8 mx-auto" *ngIf="!confirmationInProgress && emailConfirmed">
+          <h3 class="text-center">Congrats {{authService.currentUser.name}}!</h3>
+          <p class="text-center">You have successfully confirmed your email.</p>
+
+					<div class="text-center">
+						<a class="btn btn-primary" [routerLink]="['/dashboard']">Go to Dashboard</a>
+					</div>
+				</div>
+
+        <div class="col-12 col-md-8 mx-auto" *ngIf="!confirmationInProgress && !emailConfirmed">
+          <h3 class="text-center">Woops, something went wrong!</h3>
+          <p *ngIf="!confirmationInProgress && !emailConfirmed" class="text-center">It looks like this confirmation link is not working.</p>
+          <!-- TODO: add btn to resend a confirmation email -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -111,6 +111,22 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
+    &:after {
+      content: "beta";
+      position: absolute;
+      display: block;
+      background: $collection-yellow;
+      font-family: $font-primary;
+      font-size: .625rem;
+      font-weight: 500;
+      line-height: 12px;
+      color: #111;
+      padding: 1px .25rem;
+      border-radius: .125rem;
+      top: 0px;
+      right: -20px;
+    }
   }
 }
 
