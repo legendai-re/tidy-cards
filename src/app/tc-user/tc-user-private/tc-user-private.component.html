@@ -88,8 +88,8 @@
                   <div class="list-item-infos">
                       <h3 class="list-item-title">
                           {{t._.profile_private?.email_row_title}}
-                          <small *ngIf="authService.currentUser.emailConfirmed"> (confirmed)</small>
-                          <small *ngIf="!authService.currentUser.emailConfirmed"> (not confirmed)</small>
+                          <small *ngIf="authService.currentUser.emailConfirmed"> ({{t._.profile_private?.email_confirmation_state_yes}})</small>
+                          <small *ngIf="!authService.currentUser.emailConfirmed"> ({{t._.profile_private?.email_confirmation_state_no}})</small>
                       </h3>
                       <input #emailInput [(ngModel)]="tmpUser.email" name="email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" [disabled]="!updateEmailIntent" class="list-item-description-darker" type="input" />
                        <div class="list-item-status small" *ngIf="authService.currentUser.email && !authService.currentUser.emailConfirmed && !updateEmailIntent">
@@ -129,7 +129,7 @@
               <div class="list-item">
                   <div class="list-item-infos">
                       <h3 class="list-item-title">
-                          Language
+                          {{t._.profile_private?.language_row_title}}
                       </h3>
                   </div>
                   <div class="list-item-actions">
@@ -202,35 +202,35 @@
 
               <div class="list-item">
                   <div class="list-item-infos" *ngIf="authService.currentUser.local.active">
-                      <h3 class="list-item-title mb-2">Change my password</h3>
+                      <h3 class="list-item-title mb-2">{{t._.profile_private?.security_change_pwd}}</h3>
                       <div class="form-group d-flex flex-row">
-                        <input class="form-control list-item-form" [(ngModel)]="password" name="password" type="password" value="" placeholder="Current password" />
+                        <input class="form-control list-item-form" [(ngModel)]="password" name="password" type="password" value="" placeholder="{{t._.profile_private?.security_current_pwd}}" />
                       </div>
                       <div class="form-group d-flex flex-row">
-                        <input class="form-control list-item-form" [(ngModel)]="newPassword" name="newPassword" type="password" value="" placeholder="New password" />
-                        <input class="form-control list-item-form" [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" type="password" value="" placeholder="Repeat new password" />
+                        <input class="form-control list-item-form" [(ngModel)]="newPassword" name="newPassword" type="password" value="" placeholder="{{t._.profile_private?.security_new_pwd}}" />
+                        <input class="form-control list-item-form" [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" type="password" value="" placeholder="{{t._.profile_private?.security_re_new_pwd}}" />
                       </div>
                       <div class="small">
                         <p *ngIf="isUpdatingPassword" class="text-muted">Update in progress..</p>
                         <p *ngIf="!isUpdatingPassword && passwordUpdateState == 'SUCCESS'" class="text-success">Password updated</p>
                         <p *ngIf="!isUpdatingPassword && passwordUpdateState == 'FAILED'" class="text-danger">The password entered do not match with the account password</p>
                         <a href="javascript:void(0)" class="d-inline-block" [routerLink]="['/reset/initiate', {user_id: authService.currentUser._id}]">
-                          Recover my password
+                          {{t._.profile_private?.security_recover_pwd}}
                         </a>
                       </div>
                   </div>
                   <div class="list-item-actions" *ngIf="authService.currentUser.local.active">
-                    <input class="btn btn-sm btn-primary" (click)="updatePassword()" [disabled]="!isUpdatingPassword && !isUpdatePasswordFormValid()" type="submit" value="Update"/>
+                    <input class="btn btn-sm btn-primary" (click)="updatePassword()" [disabled]="!isUpdatingPassword && !isUpdatePasswordFormValid()" type="submit" value="{{t._.action?.update}}"/>
                   </div>
                   <div class="list-item-infos" *ngIf="!authService.currentUser.local.active">
-                      <h3 class="list-item-title mb-2">Set a password</h3>
+                      <h3 class="list-item-title mb-2">{{t._.profile_private?.security_set_pwd}}</h3>
                       <div class="form-group d-flex flex-row">
-                        <input class="form-control list-item-form" [(ngModel)]="newPassword" name="newPassword" type="password" value="" placeholder="New password" />
-                        <input class="form-control list-item-form" [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" type="password" value="" placeholder="Repeat new password" />
+                        <input class="form-control list-item-form" [(ngModel)]="newPassword" name="newPassword" type="password" value="" placeholder="{{t._.profile_private?.security_new_pwd}}" />
+                        <input class="form-control list-item-form" [(ngModel)]="newPasswordRepeat" name="newPasswordRepeat" type="password" value="" placeholder="{{t._.profile_private?.security_re_new_pwd}}" />
                       </div>
                   </div>
                   <div class="list-item-actions" *ngIf="!authService.currentUser.local.active">
-                    <input (click)="setPassword()" [disabled]="!isUpdatingPassword && !isSetPasswordFormValid()" class="btn btn-sm btn-primary" type="submit" value="Set"/>
+                    <input (click)="setPassword()" [disabled]="!isUpdatingPassword && !isSetPasswordFormValid()" class="btn btn-sm btn-primary" type="submit" value="{{t._.action?.save}}"/>
                   </div>
               </div>
 

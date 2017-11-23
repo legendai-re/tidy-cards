@@ -17,6 +17,7 @@ export class TcLanguageService {
 
     public langInitialized: boolean = false;
     public currentLanguage: string;
+    public unsafeCurrentLanguage: string;
     public _: any;
 
     constructor (private http: Http) {
@@ -29,11 +30,12 @@ export class TcLanguageService {
             .catch(this.handleError);
     }
 
-    private updateLanguage(langId): Promise<boolean>{
+    public updateLanguage(langId): Promise<boolean>{
         return new Promise<any>((resolve, reject) => {
             this.getMyLanguage(langId).subscribe((res) => {
                 this._ = res.data;
                 this.currentLanguage = this._.lang_id;
+                this.unsafeCurrentLanguage = this._.lang_id;
                 this.langInitialized = true;
                 resolve(true);
             })
@@ -60,7 +62,7 @@ export class TcLanguageService {
         });
     }
 
-    private getBrowserLanguage(){ 
+    public getBrowserLanguage(){ 
         var userLang = navigator.language;
         return (userLang) ? userLang.split('-')[0] : 'en';
     }

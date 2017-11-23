@@ -38,7 +38,7 @@
       <ul class="card-collection--tags">
         <li class="card-collection--tag is-featured" *ngIf="collection.isFeatured">
           <span class="card-collection--tag-icon">highlight</span>
-          <span>Featured</span>
+          <span>{{t._.collection?.featured_title}}</span>
         </li>
 
         <li class="card-collection--tag has-visibility" *ngIf="collection.visibility.id == 'UNINDEXED'">

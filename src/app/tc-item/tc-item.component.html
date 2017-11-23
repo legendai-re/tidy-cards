@@ -74,8 +74,8 @@
           <span class="icon">more_vert</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal('lg')">Edit</a>
-          <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">Delete</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal('lg')">{{t._.action?.update}}</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">{{t._.action?.delete}}</a>
         </div>
       </li>
 
@@ -124,13 +124,13 @@
 
 <ng-template class="default-modal" #itemDeleteModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h5 class="modal-title">Delete Item?</h5>
+    <h5 class="modal-title">{{t._.item?.delete_title}}</h5>
   </div>
   <div class="modal-body">
-    Do you really want to delete this item?
+    {{t._.item?.delete_caption}}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('cancel')">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this item</button>
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">{{t._.action?.cancel}}</button>
+    <button type="button" class="btn btn-danger" (click)="c('confirm')">{{t._.item?.delete_button_yes}}</button>
   </div>
 </ng-template>

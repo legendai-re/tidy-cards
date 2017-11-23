@@ -22,7 +22,7 @@
                (click)="searchIntent()"
                (keyup)="onQueryKeyUp()"
                (keydown)="onQueryKeyDown()">
-        <a href="javascript:void(0)" class="header-search-bar--cancel" [class.hidden]="headerState != 'search' "(click)="cancelSearch()">Cancel</a> <!-- TODO: Trad -->
+        <a href="javascript:void(0)" class="header-search-bar--cancel" [class.hidden]="headerState != 'search' "(click)="cancelSearch()">{{t._.action?.cancel}}</a>
       </form>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appNavbar" aria-controls="appNavbar" aria-expanded="false" aria-label="Toggle navigation">

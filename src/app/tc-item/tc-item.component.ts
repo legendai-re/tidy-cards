@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { TcLanguageService } from '../tc-language/tc-language.service';
 import { TcItem } from './tc-item.class';
 import { TcItemService } from './tc-item.service';
 
@@ -23,7 +24,7 @@ export class TcItemComponent implements OnInit{
     @Input() isAuthor: boolean;
     @Output() deletedItem = new EventEmitter();
 
-    constructor(private itemService: TcItemService, private modalService: NgbModal,) {
+    constructor(private t: TcLanguageService, private itemService: TcItemService, private modalService: NgbModal,) {
         this.itemTypes = TcItem.ITEM_TYPES;
     }
 

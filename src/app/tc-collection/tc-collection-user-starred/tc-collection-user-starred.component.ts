@@ -1,6 +1,7 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router, ActivatedRoute }          from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
+import { TcLanguageService }               from '../../tc-language/tc-language.service';
 import { TcCollectionService }             from '../tc-collection.service';
 import { TcCollection }                    from '../tc-collection.class';
 import { TcDataLimit }                     from '../../tc-shared/tc-data-limit';
@@ -26,7 +27,7 @@ export class TcCollectionUserStarredComponent implements OnInit {
     public sub: any;
     public authSub: any;
 
-    constructor(public authService: TcAuthService, private router: Router, private route: ActivatedRoute, private userService: TcUserService, private collectionService: TcCollectionService) {
+    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private route: ActivatedRoute, private userService: TcUserService, private collectionService: TcCollectionService) {
         this.authSub = this.authService.getAuthInitializedEmitter().subscribe((value) => {
             if(this.authService.isLoggedIn && this.username === this.authService.currentUser.username){
                 this.isCurrentUser = true;

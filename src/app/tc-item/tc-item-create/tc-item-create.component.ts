@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
+import { TcLanguageService }      from '../../tc-language/tc-language.service';
 import { TcCollection }           from '../../tc-collection/tc-collection.class';
 import { TcItem }                 from '../tc-item.class';
 import { TcItemService }          from '../tc-item.service'
@@ -29,7 +30,7 @@ export class TcItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
-    constructor(private itemService: TcItemService) {
+    constructor(private t: TcLanguageService, private itemService: TcItemService) {
         this.doneTypingInterval = 300;
         this.itemTypes = TcItem.ITEM_TYPES;
     }
