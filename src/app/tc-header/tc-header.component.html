@@ -110,10 +110,10 @@
       <div class="row">
 
         <div class="header-jumbotron-container col-12 col-md-8 mx-md-auto">
-          <h1 class="header-jumbotron--title">TidyCards, the new way to bookmark</h1>
+          <h1 class="header-jumbotron--title">{{t._?.header?.jumbotron?.slogan}}</h1>
           <div class="header-jumbotron--lead">
-            <p>Discover what's happening right now.</p>
-            <p>Find collections and inspiration about the things you love.</p>
+            <p>{{t._?.header?.jumbotron?.description_line_1}}</p>
+            <p>{{t._?.header?.jumbotron?.description_line_2}}</p>
           </div>
           <div class="header-jumbotron--actions">
             <a class="btn btn-yellow btn-alt" routerLinkActive="active" [routerLink]="['/signin']">{{t._?.auth?.signup_today_button}}</a>
