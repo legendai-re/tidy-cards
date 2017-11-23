@@ -10,6 +10,9 @@
         "admin_menu": "Admin",
         "logout_menu": "Se déconnecter",
         "jumbotron": {
+            "slogan": "TidyCards, vos trouvailles méritent d'être partagées",
+            "description_line_1": "Découvrez ce qui se passe en ce moment.",
+            "description_line_2": "Trouvez des collections et de l'inspiration sur les choses que vous aimez.",
             "about_button": "À propos de TidyCards"
         }
     },
