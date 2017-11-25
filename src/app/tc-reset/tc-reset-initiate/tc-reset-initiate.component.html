@@ -9,9 +9,9 @@
       <div class="auth-content" *ngIf="!user">
         <p class="auth-top-content">Enter your email or username</p>
         <div class="form-group">
-            <input [(ngModel)]='searchData' type="text" id="inputSearchData" class="form-control" placeholder="" required="" autofocus="" />
-            <small *ngIf="isSearching" class="text-muted">Loading...</small>
-            <small *ngIf="notFounded" class="text-danger">Cannot find anny user with username or email: {{searchData}}</small>
+          <input [(ngModel)]='searchData' type="text" id="inputSearchData" class="form-control" placeholder="" required="" autofocus="" />
+          <small *ngIf="isSearching" class="text-muted">Loading...</small>
+          <small *ngIf="notFounded" class="text-danger">Cannot find anny user with username or email: {{searchData}}</small>
         </div>
         <input *ngIf="!user" (click)="getUser()" [disabled]="!searchData" type="submit" value="Search" class="btn btn-primary btn-block"/>
       </div>
