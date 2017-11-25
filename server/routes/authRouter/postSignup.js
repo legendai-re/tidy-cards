@@ -11,12 +11,13 @@ module.exports = function postSignup(req, res) {
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        models.User.findOne({ $or: [{username: req.body.username.toLowerCase()}, {email: req.body.email.toLowerCase()}] }, function(err, user){
+        var regex = new RegExp(["^", req.body.username, "$"].join(""), "i");
+        models.User.findOne({ $or: [{username: regex}, {email: req.body.email.toLowerCase()}] }, function(err, user){
             if (err) {res.sendStatus(500); return;}
             if(!user && usernameValidator.isValid(req.body.username)){
                 var sess = req.session;
                 var user =  new models.User();
-                user.email = req.body.email;
+                user.email = req.body.email.toLowerCase();
                 user.unsafeUsername = req.body.username;
                 user.username = req.body.username;
                 user.name = req.body.username;

@@ -2,6 +2,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
 
     var models          = require('../../models');
     var strategiesHelper = require('./strategiesHelper');
+    var lifeStates      = require('../../models/lifeStates');
 
     return new TwitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
@@ -15,7 +16,10 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
             if(user && req.user){
                 done('Twitter account already used');
             }else if(user && !req.user){
-                done(null, user);
+                if(user.lifeState === lifeStates.ACTIVE.id)
+                    done(null, user);
+                else
+                    done("account no more active", null);
             }else if(!user && !req.user){
                 strategiesHelper.createUser(req, profile, accessToken, 'twitter', function(err, newUser){
                     done(err, newUser);

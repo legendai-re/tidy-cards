@@ -6,6 +6,7 @@ module.exports = function(app) {
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var LocalStrategy   = require('passport-local').Strategy;
     var models          = require('../models');
+    var lifeStates      = require('../models/lifeStates');
 
     app.use(passport.initialize());
 
@@ -24,7 +25,7 @@ module.exports = function(app) {
     });
 
     passport.deserializeUser(function(id, done) {
-        models.User.findById(id).populate('_avatar').exec(function(err, user) {
+        models.User.findOne({_id: id, lifeState: lifeStates.ACTIVE.id}).populate('_avatar').exec(function(err, user) {
              done(err, user);
         });
     });

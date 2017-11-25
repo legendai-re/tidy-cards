@@ -3,6 +3,7 @@ module.exports = function getLocalStrategy(LocalStrategy){
     var bCrypt          = require('bcrypt-nodejs');
     var connectionTypes = require('../connectionTypes.json');
     var models          = require('../../models');
+    var lifeStates      = require('../../models/lifeStates');
 
     return new LocalStrategy(
 
@@ -11,7 +12,7 @@ module.exports = function getLocalStrategy(LocalStrategy){
                 return bCrypt.compareSync(password, user.local.password);
             }
             var regex = new RegExp(["^", username, "$"].join(""), "i");
-            models.User.findOne({ $or: [{username: regex}, {email: regex}] }).populate('_avatar').select('+local.password').exec(function (err, user) {
+            models.User.findOne({ $or: [{username: regex}, {email: regex}], lifeState: lifeStates.ACTIVE.id }).populate('_avatar').select('+local.password').exec(function (err, user) {
                 if (err) {
                     return done(err);
                 }

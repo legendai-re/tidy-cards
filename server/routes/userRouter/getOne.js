@@ -2,6 +2,7 @@ module.exports = function getOne (req, res) {
 
     var models      = require('../../models');
     var mongodbid   = require('../../helpers/mongodbid');
+    var lifeStates  = require('../../models/lifeStates.json');
 
     var rq = req.query;
     var q = null;
@@ -27,7 +28,7 @@ module.exports = function getOne (req, res) {
 
 	q.exec(function(err, user){
         if(err) {console.log(err); res.sendStatus(500); return;}
-        if(!user) { res.sendStatus(404); return;} 
+        if(!user || user.lifeState != lifeStates.ACTIVE.id) { res.sendStatus(404); return;} 
         res.json({data: user});
     })
 

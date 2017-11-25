@@ -46,6 +46,22 @@ export class TcUserService {
             .catch(this.handleError);
     }
 
+    public putDeactivate(userId: string): Observable<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(TcApiUrl.USERS + '/' + userId + '/deactivate' , {}, options)
+            .map((res) => {return res.json()})
+            .catch(this.handleError);
+    }
+
+    public putActivate(userId: string): Observable<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(TcApiUrl.USERS + '/' + userId + '/activate' , {}, options)
+            .map((res) => {return res.json()})
+            .catch(this.handleError);
+    }
+
     public getValidUsername(username: string): Observable<boolean>{
         let params = new URLSearchParams();
         params.set('username', username);

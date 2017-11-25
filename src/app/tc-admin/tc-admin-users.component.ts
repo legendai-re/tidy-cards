@@ -15,6 +15,8 @@ export class TcAdminUsersComponent implements OnInit {
     public haveMoreUsers: boolean;
     public loadingUsers: boolean;
     public users: TcUser[];
+    public userIdDeactivate: string;
+    public userIdActivate: string;
 
     constructor( private router: Router, private userService: TcUserService) {
     }
@@ -36,6 +38,24 @@ export class TcAdminUsersComponent implements OnInit {
         }
     }
 
+    public collapse(user){
+        user.isCollapsed = !user.isCollapsed;
+    }
+
+    private deactivateAccount(){
+        let params = new URLSearchParams();
+        this.userService.putDeactivate(this.userIdDeactivate).subscribe(result => {
+            console.log(result)
+        }, () => {});
+    }
+
+    private activateAccount(){
+        let params = new URLSearchParams();
+        this.userService.putActivate(this.userIdActivate).subscribe(result => {
+            console.log(result)
+        }, () => {});
+    }
+
     private loadUsers(){
         this.loadingUsers = true;
         let params = new URLSearchParams();
@@ -44,14 +64,17 @@ export class TcAdminUsersComponent implements OnInit {
         params.set('populate', '_avatar');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
-        this.userService.getUsers(params).subscribe(collections => {
-            this.onUsersReceived(collections);
+        params.set('allStates', 'true');
+        this.userService.getUsers(params).subscribe(users => {
+            this.onUsersReceived(users);
         }, () => {});
     }
 
     private onUsersReceived(users){
-        for(let i in users)
+        for(let i in users){
+            users[i].isCollapsed = false;
             this.users.push(users[i]);
+        }
         this.haveMoreUsers = (users.length==TcDataLimit.COLLECTION);
         this.loadingUsers = false;
     }
