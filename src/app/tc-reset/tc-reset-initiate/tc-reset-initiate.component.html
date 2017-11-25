@@ -1,39 +1,45 @@
 <section class="auth-section">
-    <div class="auth-container">
-        <a href="javascript:void(0)" [routerLink]="['/']">
-            <h1 class="icon-invow logo auth-logo">
-                Invow
-            </h1>
-        </a>
+  <div class="auth-container">
+    <a href="javascript:void(0)" [routerLink]="['/']">
+      <h1 class="icon-invow logo auth-logo">TidyCards</h1>
+    </a>
+    <h2 class="auth-heading">Reset password</h2>
 
-        <h2 class="auth-heading" >Reset password</h2>
-        <div class="auth-wrapper" >
-            <div class="auth-content">
+    <div class="auth-wrapper" *ngIf="!reseted">
+      <div class="auth-content" *ngIf="!user">
+        <p class="auth-top-content">Enter your email or username</p>
+        <div class="form-group">
+            <input [(ngModel)]='searchData' type="text" id="inputSearchData" class="form-control" placeholder="" required="" autofocus="" />
+            <small *ngIf="isSearching" class="text-muted">Loading...</small>
+            <small *ngIf="notFounded" class="text-danger">Cannot find anny user with username or email: {{searchData}}</small>
+        </div>
+        <input *ngIf="!user" (click)="getUser()" [disabled]="!searchData" type="submit" value="Search" class="btn btn-primary btn-block"/>
+      </div>
 
-                <div class="container">
-                    <h2>Password reset initiate</h2>
-                    <div *ngIf="!reseted">
-                        <div *ngIf="!user" style="margin-top: 100px">
-                            <small>Enter an email adress or a username</small>
-                            <input [(ngModel)]='searchData' type="text" />
-                            <input (click)="getUser()" [disabled]="!searchData" type="submit" value="Search" class="btn btn-sm btn-success"/>
-                            <small *ngIf="isSearching">Loading...</small>
-                            <small *ngIf="notFounded">Cannot find anny user with username or email: {{searchData}}</small>
-                        </div>
-                        <div *ngIf="user" style="margin-top: 100px">
-                            <h4>{{user.name}}</h4>
-                            <small>@{{user.username}}</small>
-                            <input (click)="requestReset()" value="Reset password" type="submit" class="btn btn-sm btn-success" />
-                            <a href="javascript:void(0)" (click)="reSearch()">Not you?</a>
-                            <small *ngIf="resetError" class="text-danger">Error while attempting to reset password</small>
-                        </div>
-                    </div>
-                    <div *ngIf="reseted">
-                        <small>A link to reset your password have been send to {{user.email}}. This link is only valid for 24hours. You cannot make a new password reset request before those 24hours.</small>
-                    </div>
-                </div>
-            </div>
+      <div class="auth-content" *ngIf="user">
+        <p class="auth-top-content">We found the following information associated with your account.</p>
+        <div class="auth-content-card">
+          <div *ngIf="user" class="profile-avatar avatar avatar--40">
+            <img *ngIf="user?._avatar" [src]="user?._avatar?.getPath('140x140')"  alt="{{user?.name}} avatar">
+            {{user?.name.charAt(0)}}
+          </div>
+
+          <div class="d-flex flex-column ml-2">
+            <h6 class="d-flex mb-0">{{user.name}}</h6>
+            <span class="text-muted">@{{user.username}}</span>
+          </div>
         </div>
 
+        <input (click)="requestReset()" value="Send instructions by mail" type="submit" class="btn btn-primary btn-block" />
+        <small *ngIf="resetError" class="d-flex justify-content-center text-danger mt-2">Error while attempting to reset password</small>
+        <a href="javascript:void(0)" class="d-inline-flex mt-3" (click)="reSearch()">Not you?</a>
+      </div>
     </div>
+
+    <div class="auth-wrapper" *ngIf="reseted">
+      <div class="auth-content">
+        <p class="auth-top-content">A link to reset your password have been send to your email address. This link is only valid for 24 hours. You cannot make a new password reset request before those 24 hours.</p>
+      </div>
+    </div>
+  </div>
 </section>

@@ -34,8 +34,8 @@ export class TcResetInitiateComponent implements OnInit, OnDestroy  {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('Password reset initiate' + ' | TidyCards');
-        
+        this.titleService.setTitle('Reset password' + ' | TidyCards');
+
         this.headerService.emitUpdateHeaderEvent({
             value:{
                 type: 'NO_HEADER'
@@ -54,6 +54,7 @@ export class TcResetInitiateComponent implements OnInit, OnDestroy  {
             return;
         this.isSearching = true;
         let params = new URLSearchParams();
+        params.set('populate', '_avatar');
         this.userService.getUser(this.searchData, params).subscribe((user) => {
             if(user._id){
                 this.user = user;
