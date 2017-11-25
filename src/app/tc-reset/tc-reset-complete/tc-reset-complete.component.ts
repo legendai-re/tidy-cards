@@ -6,6 +6,7 @@ import { TcHeaderService }              from '../../tc-header/tc-header.service'
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcResetService }               from '../tc-reset.service';
 import { TcUser }                       from '../../tc-user/tc-user.class';
+import { TcLanguageService }            from '../../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-reset-complete.component.html',
@@ -20,6 +21,7 @@ export class TcResetCompleteComponent implements OnInit, OnDestroy  {
     private sub: any;
 
     constructor(
+        public t: TcLanguageService,
         private resetService: TcResetService,
         private route: ActivatedRoute,
         public authService: TcAuthService,

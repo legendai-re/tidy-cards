@@ -1,24 +1,24 @@
 <section class="auth-section">
   <div class="auth-container">
     <a href="javascript:void(0)" [routerLink]="['/']">
-      <h1 class="icon-invow logo auth-logo">TidyCards</h1>
+      <h1 class="icon-invow logo auth-logo">{{t._.app_name_capitals}}</h1>
     </a>
-    <h2 class="auth-heading" *ngIf="confirmationInProgress">Email confirmation</h2>
-    <h2 class="auth-heading" *ngIf="!confirmationInProgress && emailConfirmed">Congrats {{authService.currentUser.name}}!</h2>
-    <h2 class="auth-heading" *ngIf="!confirmationInProgress && !emailConfirmed">Woops!</h2>
+    <h2 class="auth-heading" *ngIf="confirmationInProgress">{{t._.confirm_email?.title}}</h2>
+    <h2 class="auth-heading" *ngIf="!confirmationInProgress && emailConfirmed">{{t._.word?.congrats}} {{authService.currentUser.name}}!</h2>
+    <h2 class="auth-heading" *ngIf="!confirmationInProgress && !emailConfirmed">{{t._.word?.whoops_exclamation}}</h2>
 
-    <div class="auth-wrapper" >
+    <div class="auth-wrapper">
       <div class="auth-content" *ngIf="confirmationInProgress">
-        <p class="auth-top-content mb-0">Email confirmation in progress…</p>
+        <p class="auth-top-content mb-0">{{t._.confirm_email?.progress}}</p>
       </div>
 
       <div class="auth-content" *ngIf="!confirmationInProgress && emailConfirmed">
-        <p class="auth-top-content">You have successfully confirmed your email address.</p>
-        <a class="btn btn-primary btn-block" [routerLink]="['/dashboard']">Go to Dashboard</a>
+        <p class="auth-top-content">{{t._.confirm_email?.success}}</p>
+        <a class="btn btn-primary btn-block" [routerLink]="['/dashboard']">{{t._.confirm_email?.go_dashboard}}</a>
       </div>
 
       <div class="auth-content" *ngIf="!confirmationInProgress && !emailConfirmed">
-        <p class="auth-top-content mb-0" *ngIf="!confirmationInProgress && !emailConfirmed">Something went wrong… It looks like this confirmation link is not working.</p>
+        <p class="auth-top-content mb-0" *ngIf="!confirmationInProgress && !emailConfirmed">{{t._.confirm_email?.fail}}</p>
       </div>
     </div>
   </div>
