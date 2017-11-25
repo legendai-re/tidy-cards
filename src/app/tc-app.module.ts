@@ -20,6 +20,7 @@ import { TcPageModule }           from './tc-page/tc-page.module';
 import { TcSearchModule }         from './tc-search/tc-search.module';
 import { TcSharedModule }         from './tc-shared/tc-shared.module';
 import { TcUserModule }           from './tc-user/tc-user.module';
+import { TcPaymentModule }        from './tc-payment/tc-payment.module';
 
 //Components
 import { TcAdminFeaturedComponent } from './tc-admin/tc-admin-featured.component';
@@ -44,6 +45,7 @@ import { TcLanguageService }   from './tc-language/tc-language.service';
 import { TcCollectionService } from './tc-collection/tc-collection.service';
 import { TcStarService }       from './tc-star/tc-star.service';
 import { TcItemService }       from './tc-item/tc-item.service';
+import { TcPaymentService }    from './tc-payment/tc-payment.service';
 import { TcBase64 }            from './tc-shared/tc-base64.service';
 
 @NgModule({
@@ -63,6 +65,7 @@ import { TcBase64 }            from './tc-shared/tc-base64.service';
         TcSearchModule,
         TcSharedModule,
         TcUserModule,
+        TcPaymentModule,
         routing,
     ],
     declarations: [
@@ -88,6 +91,7 @@ import { TcBase64 }            from './tc-shared/tc-base64.service';
         TcSearchService,
         TcResetService,
         TcLanguageService,
+        TcPaymentService,
         TcBase64
     ],
     bootstrap: [TcAppComponent]

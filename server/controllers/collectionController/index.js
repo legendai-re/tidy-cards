@@ -35,7 +35,7 @@ function deleteCollection(user, collectionId, callback){
                 if(isRoot){
                     removeCollectionFromCustomSort(collection, function(err){
                         return callback(err);
-                    });
+                    });    
                 }else{
                     return callback(null, {message: "The collection have been successfully deleted"});
                 }

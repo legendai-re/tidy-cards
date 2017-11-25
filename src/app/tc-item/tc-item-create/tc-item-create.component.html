@@ -3,7 +3,7 @@
 
     <div class="collection-item-new--content">
       <div class="collection-item-new--content-wrapper">
-        <h2 class="collection-item-new--content-title">Add an item to your collection</h2>
+        <h2 class="collection-item-new--content-title">{{t._.item?.new_title}}</h2>
 
         <div class="collection-item-new--embeded-container" *ngIf="urlEntry && loadingContent">
           <div class="collection-item-new--embeded-centered-content">Fetching preview…</div>
@@ -26,7 +26,7 @@
         <textarea
           class="collection-item-new--input-title"
           type="input"
-          placeholder="Title"
+          placeholder="{{t._.item?.new_placeholder_title}}"
           name="title"
           rows="1"
           [(ngModel)]="item.title"></textarea>
@@ -34,7 +34,7 @@
         <textarea
           class="collection-item-new--input-caption"
           (keydown)="onDescriptionKeyDown($event)"
-          placeholder="Paste your link or start writing in Markdown…"
+          placeholder="{{t._.item?.new_placeholder_description}}"
           autofocus="autofocus"
           name="description"
           rows="11"
@@ -56,15 +56,15 @@
       </ul>
 
       <div class="collection-new-item--footer-actions ml-auto">
-        <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-secondary">Cancel</a>
+        <a href="javascript:void(0)" *ngIf="mode == 'UPDATE'" (click)="cancelUpdate()" class="btn btn-secondary">{{t._.action?.cancel}}</a>
         <input
             *ngIf="mode == 'CREATE'"
             [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-            class="btn btn-primary" type="submit" value="Add"/>
+            class="btn btn-primary" type="submit" value="{{t._.action?.add}}"/>
         <input
             *ngIf="mode == 'UPDATE'"
             [disabled]="(!item.description && !item._content) || (urlEntry && !validUrl) || (loadingContent)"
-            class="btn btn-primary" type="submit" value="Update"/>
+            class="btn btn-primary" type="submit" value="{{t._.action?.update}}"/>
       </div>
 
     </div>

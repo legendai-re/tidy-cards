@@ -3,14 +3,27 @@
     "app_name": "tidycards",
     "header": {
         "search_placeholder": "Search on TidyCards...",
+        "search_result_for": "Results for",
+        "search_no_result_for": "Sorry. There is no results for",
+        "search_no_idea_row_1": "No idea?",
+        "search_no_idea_row_2": "You can visit the",
+        "search_no_idea_row_3": "discover page",
         "dashboard_title": "Dashboard",
         "discover_title": "Discover",
         "signin_title": "Sign in",
         "profile_menu": "Profile/Settings",
         "admin_menu": "Admin",
-        "logout_menu": "Logout"
+        "logout_menu": "Logout",
+        "powered_by": "Powered by",
+        "jumbotron": {
+            "slogan": "TidyCards, your findings deserve to be shared",
+            "description_line_1": "Discover what's happening right now.",
+            "description_line_2": "Find collections and inspiration about the things you love.",
+            "about_button": "About TidyCards"
+        }
     },
     "auth": {
+        "signin_caption": "TidyCards is a community to share your passions and interests with the world.",
         "signin_title": "Sign in",
         "signup_title": "Sign up",
         "signin_facebook_title": "Sign in with Facebook",
@@ -21,7 +34,8 @@
         "password_placeholder": "Password",
         "password_repeat_placeholder": "Repeat password",
         "not_member_title": "Not member yet?",
-        "already_member_title": "Already have an account?"
+        "already_member_title": "Already have an account?",
+        "signup_today_button": "Sign up today"
     },
     "discover": {
         "featured_title": "Featured",
@@ -32,6 +46,9 @@
         "my_collections_title": "My collections",
         "favorite_collections_title": "My favorite collections"
     },
+    "profile_public":{
+        "no_bio": "This user doesn't have a description yet..."
+    },
     "profile_private": {
         "bio_placeholder": "Your description here...",
         "account_title": "Account",
@@ -40,8 +57,11 @@
         "username_edit_button": "Edit username",
         "email_row_title": "My email",
         "email_edit_button": "Edit email",
+        "email_confirmation_state_no": "not comfirmed",
+        "email_confirmation_state_yes": "comfirmed",
         "email_confirmation_info": "An email have been send to {0}. Please check your email to confirm the address.",
         "email_confirmation_resend": "Resend email.",
+        "language_row_title": "Language",
         "connections_title": "Connections",
         "connections_subtitle": "Manage the apps connections.",
         "facebook_row_title": "Connect to Facebook",
@@ -60,9 +80,24 @@
         "google_link_button": "Link Google",
         "google_unlink_button": "Unlink Google",
         "security_title": "Security",
-        "security_subtitle": "Change my security settings."
+        "security_subtitle": "Change my security settings.",
+        "security_change_pwd": "Change my password",
+        "security_current_pwd": "Current password",
+        "security_new_pwd": "New password",
+        "security_re_new_pwd": "Repeat new password",
+        "security_recover_pwd": "Recover my password",
+        "security_set_pwd": "Set a password"
     },
     "collection": {
+        "my_title": "My collections",
+        "belongs_to_title": "{0}'s collections",
+        "featured_title": "Featured",
+        "popular_title": "Popular collections",
+        "last_title": "Last collections",
+        "last_public_title": "Last public collections",
+        "favorite_title": "Favorite collections",
+        "my_favorite_title": "My favorite collections",
+        "favorite_by_title": "{0}'s favorite collections",
         "visibility":{
             "title": "Visibility",
             "PRIVATE":{
@@ -80,29 +115,62 @@
         },
         "item_sing": "item",
         "item_plur": "items",
-        "by_title": "A collection by"
+        "new_item_button": "New item",
+        "first_item_button": "Add my firt item",
+        "first_item_caption": "Use the button bellow to add an item to your collection. It can be a link or a caption without link.",
+        "by_title": "A collection by",
+        "empty_title": "Whoops, this collection is empty",
+        "empty_caption": "Unfortunately there is nothing in this collection yet, please make a try later.",
+        "list_end": "You’ve reached the end of the list...",
+        "item_list_end": "You reached the end of the collection...",
+        "delete_title": "Delete this collection?",
+        "delete_caption": "Do you really want to delete this collection?",
+        "delete_button_yes": "Delete this collection"
+    },
+    "item":{
+        "caption": "Caption",
+        "new_title": "Add an item to your collection",
+        "new_placeholder_title": "Title",
+        "new_placeholder_description": "Paste your link or start writing in Markdown...",
+        "delete_title": "Delete this item?",
+        "delete_caption": "Do you really want to delete this item?",
+        "delete_button_yes": "Delete this item"
     },
     "collection_create": {
         "title_placeholder": "Create a collection...",
-        "caption_placeholder": "Enter a caption here to describe the collection...",
+        "caption_placeholder": "Enter a caption here to describe the collection. Keep it simple and short...",
         "visibility_dropdow_title": "Who should see this?"
+    },
+    "object":{
+        "collection": "Collection",
+        "collection_plur": "Collections",
+        "user": "User",
+        "user_plur": "Users"
     },
     "action": {
         "see_all": "See all",
         "save": "Save",
+        "add": "Add",
         "cancel": "Cancel",
         "update": "Update",
         "create": "Create",
         "edit": "Edit",
-        "load_more": "Load more"
+        "delete": "Delete",
+        "loading": "Loading...",
+        "load_more": "Load more..."
+    },
+    "word": {
+        "date_on": "on"
     },
     "page":{
         "about": {
             "title": "About",
-            "content": "</br></br></br></br>[TidyCards](https://www.tidy.cards) is a web application that allows you to easily organize and share your links! Whether articles, videos, tweets or any kinds of content.\n\nYou have dozens of folders of bookmarks and it's a mess! Create a collection: set a title, a description, an image and then add your links. You can also add a comment. So you will easily find back your favorite sites.\n\nBut why go through so many steps? [TidyCards](https://www.tidy.cards) is not only about yourself. You can also share your collections with whole world.\n\nThe heart of [TidyCards](https://www.tidy.cards) is the knowledge sharing, a kind of collective intelligence: share your research, your discoveries, your hobbies even things that shock or revolt you.\n\nThis sharing works in both ways: thanks to the search feature and the [Discover](https://www.tidy.cards/discover) page, where you will find the collections created by passionate people on the other side of the world.\n\nOn [TidyCards](https://www.tidy.cards) you don't have to search for hours the most relevant websites about your favorite theme, someone has probably already dug the topic.\n\nAnd if not, [join us](https://www.tidy.cards/signin;mode=signup) now and create a collection."
+            "content": "##### [TidyCards](https://www.tidy.cards) is a web application that allows you to easily organize and share your links! Whether articles, videos, tweets or any kinds of content.\n\nYou have dozens of folders of bookmarks and it's a mess? Create a collection: set a title, a description, an image and then add your links. You can also add a comment. So you will easily find back your favorite sites.\n\nBut why go through so many steps? [TidyCards](https://www.tidy.cards) is not only about yourself. You can also share your collections with whole world.\n\nThe heart of [TidyCards](https://www.tidy.cards) is the knowledge sharing, a kind of collective intelligence: share your research, your discoveries, your hobbies even things that shock or revolt you.\n\nThis sharing works in both ways: thanks to the search feature and the [Discover](https://www.tidy.cards/discover) page, where you will find the collections created by passionate people on the other side of the world.\n\nOn [TidyCards](https://www.tidy.cards) you don't have to search for hours the most relevant websites about your favorite theme, someone has probably already dug the topic.\n\nAnd if not, [join us](https://www.tidy.cards/signin;mode=signup) now and create a collection."
         },
         "contact": {
-            "title": "Contact"
+            "title": "Contact us",
+            "content": "#### Contact us\nYou'd like to share your ideas, report a bug or just say hello?",
+            "contact_btn": "hi@tidy.cards"
         },
         "team": {
             "title": "Team"

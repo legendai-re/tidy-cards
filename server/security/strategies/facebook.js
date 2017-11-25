@@ -2,6 +2,7 @@ module.exports = function getLocalStrategy(FacebookStrategy){
 
     var models          = require('../../models');
     var strategiesHelper = require('./strategiesHelper');
+    var lifeStates      = require('../../models/lifeStates');
 
     return new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
@@ -16,7 +17,10 @@ module.exports = function getLocalStrategy(FacebookStrategy){
             if(user && req.user){
                 done('facebook account already used');
             }else if(user && !req.user){
-                done(null, user);
+                if(user.lifeState === lifeStates.ACTIVE.id)
+                    done(null, user);
+                else
+                    done("account no more active", null);
             }else if(!user && !req.user){
                 strategiesHelper.createUser(req, profile, accessToken, 'facebook', function(err, newUser){
                     done(err, newUser);

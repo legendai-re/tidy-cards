@@ -58,7 +58,7 @@ export class TcSortableDirective {
                     this.list[i].position = i;
                 }
             }
-        }).disableSelection();
+        })
     }
 
 }

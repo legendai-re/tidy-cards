@@ -12,6 +12,7 @@ module.exports = function(app) {
     var resetRouter         = require('./resetRouter');
     var rolesRouter         = require('./rolesRouter');
     var languageRouter      = require('./languageRouter');
+    var paymentRouter       = require('./paymentRouter');
     var devRouter           = require('./devRouter');
 
     app.use('/', express.static(path.resolve(__dirname, '../../dist')));
@@ -26,6 +27,7 @@ module.exports = function(app) {
     app.use('/api/reset', resetRouter);
     app.use('/api/roles', rolesRouter);
     app.use('/api/languages', languageRouter);
+    app.use('/api/payments', paymentRouter)
 
     app.use('/api/dev', devRouter);
 

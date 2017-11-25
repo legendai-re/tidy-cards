@@ -70,12 +70,12 @@
       </li> -->
 
       <li class="collection-item--header-action">
-        <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" [class.card-collection--drag-handle]="isAuthor" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-secondary btn-icon btn-icon-narrow btn-sm" *ngIf="isAuthor" [class.card-collection--drag-handle]="isAuthor" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="icon">more_vert</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal('lg')">Edit</a>
-          <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">Delete</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openUpdateModal('lg')">{{t._.action?.update}}</a>
+          <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteItemModal(itemDeleteModal)">{{t._.action?.delete}}</a>
         </div>
       </li>
 
@@ -108,7 +108,7 @@
   <!-- Type: Description (without collapsing) -->
   <div class="collection-item--content collection-item--description" *ngIf="item.description && item.type != itemTypes.TEXT">
     <span class="collection-item--description-icon">comment</span>
-    <markdown [data]="item.description"></markdown>
+    <markdown class="collection-item--description-content" [data]="item.description"></markdown>
   </div>
 
 </div>
@@ -124,15 +124,13 @@
 
 <ng-template class="default-modal" #itemDeleteModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="c('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title">{{t._.item?.delete_title}}</h5>
   </div>
   <div class="modal-body">
-    <b>Do you really want to delete this item?</b>
+    {{t._.item?.delete_caption}}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this item</button>
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">{{t._.action?.cancel}}</button>
+    <button type="button" class="btn btn-danger" (click)="c('confirm')">{{t._.item?.delete_button_yes}}</button>
   </div>
 </ng-template>

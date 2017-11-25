@@ -18,6 +18,7 @@ export class TcUser {
     public local: any;
     public emailConfirmed: boolean;
     public language: string;
+    public lifeState: string;
 
     constructor(
         _id?: string,
@@ -35,7 +36,8 @@ export class TcUser {
         google?: any,
         local?: any,
         emailConfirmed?: boolean,
-        language?: string) {
+        language?: string,
+        lifeState?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -52,6 +54,7 @@ export class TcUser {
         this.local = local;
         this.emailConfirmed = emailConfirmed;
         this.language = language;
+        this.lifeState = lifeState;
     }
 
     public static createFormJson(obj) {
@@ -73,7 +76,8 @@ export class TcUser {
             obj.google,
             obj.local,
             obj.emailConfirmed,
-            obj.language
+            obj.language,
+            obj.lifeState
             );
     }
 

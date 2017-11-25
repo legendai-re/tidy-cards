@@ -11,6 +11,7 @@ let PROVIDERS: any[] = [
 // Angular debug tools in the dev console
 // https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
 let _decorateModuleRef = function identity<T>(value: T): T { return value; };
+let _stripeKey;
 
 if ('production' === ENV) {
   // Production
@@ -21,6 +22,8 @@ if ('production' === ENV) {
     ...PROVIDERS,
     // custom providers in production
   ];
+
+  _stripeKey = "pk_test_TrxUe4Bevn99QzMfZjnG9WRy";
 
 } else {
 
@@ -41,8 +44,11 @@ if ('production' === ENV) {
     // custom providers in development
   ];
 
+  _stripeKey = "pk_test_TrxUe4Bevn99QzMfZjnG9WRy";
+
 }
 
+export const stripeKey = _stripeKey;
 export const decorateModuleRef = _decorateModuleRef;
 
 export const ENV_PROVIDERS = [

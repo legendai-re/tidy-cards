@@ -25,7 +25,7 @@ module.exports = function getOne (req, res) {
         var _authorId = collection._author._id ? collection._author._id : collection._author;
 
         // if collection deleted or private and current user is not the author
-        if((collection.lifeState == lifeStates.ARCHIVED.id) ||  (collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId))){
+        if((collection.lifeState != lifeStates.ACTIVE.id) ||  (collection.visibility == visibility.PRIVATE.id && (!req.user || String(req.user._id)!=_authorId))){
         	if(req.user){
                 getStar(req.user, collection, function(err, star){
                     if(err) {console.log(err); res.sendStatus(500); return;}

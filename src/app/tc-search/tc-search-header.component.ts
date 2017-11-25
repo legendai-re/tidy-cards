@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams  }     from '@angular/http';
+import { TcLanguageService }    from '../tc-language/tc-language.service';
 import { TcHeaderService }      from '../tc-header/tc-header.service';
 import { TcCollection }         from '../tc-collection/tc-collection.class';
 import { TcCollectionService }  from '../tc-collection/tc-collection.service';
@@ -29,6 +30,7 @@ export class TcSearchHeaderComponent implements OnInit, OnDestroy {
     private searchSub: any;
 
     constructor(
+        private t: TcLanguageService,
         private searchService: TcSearchService,
         private userService: TcUserService,
         private collectionService: TcCollectionService,

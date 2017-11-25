@@ -3,7 +3,7 @@
 
     <div class="page-headings is-hidden" id="collectionDetailHeader">
 
-      <span class="page-headings--page-pre-title" *ngIf="collection.isFeatured">Featured</span>
+      <span class="page-headings--page-pre-title" *ngIf="collection.isFeatured">{{t._.collection?.featured_title}}</span>
       <h2 class="page-headings--page-title">{{collection.title}}</h2>
       <p class="page-headings--page-description" *ngIf="collection.bio">{{collection.bio}}</p>
 
@@ -23,22 +23,22 @@
 
           <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">
             <div class="collection-container--thumbnail avatar avatar--32">
-              <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" alt="{{collection._author?.name}} avatar">
+              <img *ngIf="collection._author._avatar" [src]="collection._author._avatar.getPath('60x60')" onError="this.style.display='none';" alt="{{collection._author?.name}} avatar">
               <span class="avatar-char">{{collection._author.name.charAt(0)}}</span>
             </div>
           </a>
 
           <p class="collection-container--publication-infos">
-            {{t._.collection?.by_title}} <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">{{collection._author?.name}}</a> <span class="muted">on {{collection.createdAt | date }} <span class="small" title="{{collection.modifiedAt | date }}" *ngIf="collection.modifiedAt">(edited)</span></span>
+            {{t._.collection?.by_title}} <a href="javascript:void(0)" title="{{collection._author?.name}}" [routerLink]="['/', collection._author.username]">{{collection._author?.name}}</a> <span class="muted">{{t._.word?.date_on}} {{collection.createdAt | date }} <span class="small" title="{{collection.modifiedAt | date }}" *ngIf="collection.modifiedAt">(edited)</span></span>
           </p>
 
         </div>
 
         <div class="collection-container--stats">
           <ul class="collection-container--stats-list">
-            <li class="collection-container--stats-item muted" (click)="updateDisplayMode()">
+            <!-- <li class="collection-container--stats-item muted" (click)="updateDisplayMode()">
               {{collection.displayMode}}
-            </li>
+            </li> -->
             <li class="collection-container--stats-item muted" *ngIf="collection.itemsCount == 1">
               {{collection.itemsCount}} {{t._.collection?.item_sing}}
             </li>
@@ -62,7 +62,7 @@
 
           <div class="collection-container--stats-actions" *ngIf="isAuthor">
             <button type="button" class="collection-container--stats-action btn btn-primary btn-sm" (click)="openModal(newItemModal, 'lg')">
-              New item
+              {{t._.collection?.new_item_button}}
             </button>
 
             <div class="collection-container--stats-action dropdown">
@@ -70,11 +70,10 @@
                 <span class="icon">more_vert</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a href="javascript:void(0)" class="dropdown-item" (click)="openModal(updateCollectionModal)">Edit</a>
-                <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteCollectionModal(collectionDeleteModal)">Delete</a>
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openModal(updateCollectionModal)">{{t._.action?.edit}}</a>
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openDeleteCollectionModal(collectionDeleteModal)">{{t._.action?.delete}}</a>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -85,14 +84,14 @@
         <div class="collection-item is-content is-empty" *ngIf="isAuthor">
           <div class="collection-item--content collection-item--empty-phase">
             <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
-            <h3 class="collection-item--empty-title">Create an item in your collection</h3>
+            <h3 class="collection-item--empty-title">{{t._.item?.new_title}}</h3>
             <p class="collection-item--empty-caption">
-              Use the button bellow to add an item to your collection. It can be a link or a caption without link.
+              {{t._.collection?.first_item_caption}}
             </p>
             <ul class="collection-item--actions">
               <li class="collection-item--action">
-                <button type="button" class="btn btn-primary" (click)="openModal(newItemModal)">
-                  Add my first item
+                <button type="button" class="btn btn-primary" (click)="openModal(newItemModal, 'lg')">
+                  {{t._.collection?.first_item_button}}
                 </button>
               </li>
             </ul>
@@ -102,9 +101,9 @@
         <div class="collection-item is-content is-empty" *ngIf="!isAuthor">
           <div class="collection-item--content collection-item--empty-phase">
             <img class="collection-item--image empty-phase" src="assets/img/illustration-empty--send-new.png" />
-            <h3 class="collection-item--empty-title">Whoops, this collection is empty</h3>
+            <h3 class="collection-item--empty-title">{{t._.collection?.empty_title}}</h3>
             <p class="collection-item--empty-caption">
-              Unfortunately there is nothing in this collection yet, please make a try later.
+              {{t._.collection?.empty_caption}}
             </p>
           </div>
         </div>
@@ -117,9 +116,9 @@
 
       <div class="collection-container--footer" *ngIf="itemLoaded && collection._items.length > 0">
 
-        <a href="javascript:void(0)" class="btn btn-secondary btn-block" *ngIf="itemLoaded && haveMoreItems && !loadingItems" (click)="loadNextPage()">{{t._.action?.load_more}}...</a>
-        <p class="loading-more" *ngIf="loadingItems">Loading...</p>
-        <p class="no-more" *ngIf="!haveMoreItems && collection._items.length > 0">You reached the end of the collection...</p>
+        <a href="javascript:void(0)" class="btn btn-secondary btn-block" *ngIf="itemLoaded && haveMoreItems && !loadingItems" (click)="loadNextPage()">{{t._.action?.load_more}}</a>
+        <p class="loading-more" *ngIf="loadingItems">{{t._.action?.loading}}</p>
+        <p class="no-more" *ngIf="!haveMoreItems && pageNb > 0">{{t._.collection?.item_list_end}}</p>
 
       </div>
 
@@ -128,19 +127,16 @@
   </div>
 </div>
 
-
 <ng-template class="default-modal" #collectionDeleteModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="c('cancel')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title">{{t._.collection?.delete_title}}</h5>
   </div>
   <div class="modal-body">
-    <b>Do you really want to delete this collection?</b>
+    {{t._.collection?.delete_caption}}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="c('confirm')">Delete this collection</button>
+    <button type="button" class="btn btn-secondary" (click)="c('cancel')">{{t._.action?.cancel}}</button>
+    <button type="button" class="btn btn-danger" (click)="c('confirm')">{{t._.collection?.delete_button_yes}}</button>
   </div>
 </ng-template>
 
