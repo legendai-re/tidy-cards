@@ -13,7 +13,7 @@ module.exports = function getItemSchema(Schema) {
         },
         title: {
             type: String,
-            required: true,
+            required: false,
             validate: {
                 validator: function(v) {
                     return (v.length < 500);

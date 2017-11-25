@@ -129,6 +129,7 @@
     },
     "item":{
         "caption": "Légende",
+        "no_title": "Sans titre",
         "new_title": "Ajouter un objet à votre collection",
         "new_placeholder_title": "Titre",
         "new_placeholder_description": "Collé un lien ou commencé à écrire en Mardown.",
