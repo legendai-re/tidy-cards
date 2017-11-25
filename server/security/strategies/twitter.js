@@ -7,6 +7,7 @@ module.exports = function getTwitterStrategy(TwitterStrategy){
     return new TwitterStrategy({
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true",
         callbackURL: process.env.HOST + "/auth/twitter/callback",
         passReqToCallback : true
     },
