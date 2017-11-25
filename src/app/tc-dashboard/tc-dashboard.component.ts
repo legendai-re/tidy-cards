@@ -2,6 +2,7 @@ import { Component, OnInit }   from '@angular/core';
 import { TcAuthService }          from '../tc-auth/tc-auth.service';
 import { Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
+import { Title } from '@angular/platform-browser';
 import { TcCollectionService }   from '../tc-collection/tc-collection.service';
 import { TcCollection } from '../tc-collection/tc-collection.class';
 import { TcLanguageService } from '../tc-language/tc-language.service';
@@ -17,10 +18,16 @@ export class TcDashboardComponent implements OnInit {
     public myFavoriteCollections: TcCollection[];
     public isUpdatingPosition: boolean;
 
-    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private service: TcCollectionService) {
+    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private titleService: Title, private service: TcCollectionService) {
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle(this.t._.header.dashboard_title + ' | TidyCards');
+        })
     }
 
+
     ngOnInit() {
+        if(this.t.langInitialized)
+            this.titleService.setTitle(this.t._.header.dashboard_title + ' | TidyCards');
         this.initMyCollections();
         this.initMyFavoriteCollections();
     }

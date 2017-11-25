@@ -1,5 +1,6 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title }                  from '@angular/platform-browser';
 import { TcAuthService } from './tc-auth.service';
 import { TcHeaderService } from '../tc-header/tc-header.service';
 import { TcLanguageService } from '../tc-language/tc-language.service';
@@ -19,10 +20,18 @@ export class TcAuthComponent implements OnInit{
         private headerService: TcHeaderService,
         public authService: TcAuthService,
         public router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private titleService: Title) {
+
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle(this.t._.auth.signin_title + ' | TidyCards');
+        })
     }
 
     ngOnInit(){
+        if(this.t.langInitialized)
+            this.titleService.setTitle(this.t._.auth.signin_title + ' | TidyCards');
+
         this.inLogin = true;
         this.headerService.emitUpdateHeaderEvent({
             value:{

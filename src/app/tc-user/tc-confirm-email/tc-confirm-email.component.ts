@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
+import { Title }                        from '@angular/platform-browser';
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcCollection }                 from '../../tc-collection/tc-collection.class';
 import { TcUserService }                from '../tc-user.service';
@@ -18,10 +19,22 @@ export class TcConfirmEmailComponent implements OnInit, OnDestroy  {
     public emailConfirmed: boolean;
     private sub: any;
 
-    constructor(public t: TcLanguageService, private userService: TcUserService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
+    constructor(
+        public t: TcLanguageService,
+        private userService: TcUserService,
+        private route: ActivatedRoute,
+        public authService: TcAuthService,
+        public router: Router,
+        public titleService: Title) {
+
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle('Email confirmation' + ' | TidyCards');
+        })
     }
 
     ngOnInit() {
+        this.titleService.setTitle('Email confirmation' + ' | TidyCards');
+
         this.sub = this.route.params.subscribe(params => {
             let confirm_token = params['confirm_token'];
             this.confirmEmail(confirm_token);
