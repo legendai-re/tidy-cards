@@ -148,6 +148,7 @@
         "caption": "Caption",
         "no_title": "No title",
         "new_title": "Add an item to your collection",
+        "update_title": "Update an item",
         "new_placeholder_title": "Title",
         "new_placeholder_description": "Paste your link or start writing in Markdown...",
         "delete_title": "Delete this item?",

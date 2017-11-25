@@ -19,7 +19,7 @@ router.route('/facebook')
         var sess=req.session;
         sess.next = (req.query.next || '/dashboard');
         next();
-    },passport.authenticate('facebook'))
+    },passport.authenticate('facebook', {scope:['email']}))
 
 router.route('/facebook/callback')
     /**
@@ -73,7 +73,7 @@ router.route('/google')
         var sess=req.session;
         sess.next = (req.query.next || '/dashboard');
         next();
-    }, passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }))
+    }, passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email'] }))
 
 router.route('/google/callback')
     /**
