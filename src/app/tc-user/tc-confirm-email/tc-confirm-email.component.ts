@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
 import { Title }                        from '@angular/platform-browser';
+import { TcHeaderService }              from '../../tc-header/tc-header.service';
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcCollection }                 from '../../tc-collection/tc-collection.class';
 import { TcUserService }                from '../tc-user.service';
@@ -9,7 +10,8 @@ import { TcUser }                       from '../tc-user.class';
 import { TcLanguageService }            from '../../tc-language/tc-language.service';
 
 @Component({
-    templateUrl: './tc-confirm-email.component.html'
+    templateUrl: './tc-confirm-email.component.html',
+    styleUrls: ['../../tc-auth/tc-auth.component.scss']
 })
 
 export class TcConfirmEmailComponent implements OnInit, OnDestroy  {
@@ -25,7 +27,8 @@ export class TcConfirmEmailComponent implements OnInit, OnDestroy  {
         private route: ActivatedRoute,
         public authService: TcAuthService,
         public router: Router,
-        public titleService: Title) {
+        public titleService: Title,
+        public headerService: TcHeaderService) {
 
         this.t.getLangInitializedEmitter().subscribe((value) => {
             this.titleService.setTitle('Email confirmation' + ' | TidyCards');
@@ -34,6 +37,12 @@ export class TcConfirmEmailComponent implements OnInit, OnDestroy  {
 
     ngOnInit() {
         this.titleService.setTitle('Email confirmation' + ' | TidyCards');
+
+        this.headerService.emitUpdateHeaderEvent({
+            value:{
+                type: 'NO_HEADER'
+            }
+        });
 
         this.sub = this.route.params.subscribe(params => {
             let confirm_token = params['confirm_token'];
