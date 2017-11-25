@@ -29,7 +29,7 @@ export class TcResetCompleteComponent implements OnInit, OnDestroy  {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('Password reset complete' + ' | TidyCards');
+        this.titleService.setTitle('Complete your password reset' + ' | TidyCards');
 
         this.headerService.emitUpdateHeaderEvent({
             value:{
