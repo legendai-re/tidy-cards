@@ -12,7 +12,8 @@ function deleteItem(user, itemId, callback){
         if(err) {console.error(err); return callback({error_code: 500, error: err});}
         if(!item) {return callback({error_code: 400, error: "cannot find item with id: "+req.params.item_id });}
         if(item._collection._author!=user._id) {return callback({error_code: 401, error: "only the author of the collection can remove item" });}
-
+        if(item.lifeState == lifeStates.ARCHIVED.id) return callback(null);
+        
         checkIfCollectionType(user, item, function(err){
             if(err) {console.error(err); return callback(err);}
 
