@@ -1,4 +1,17 @@
-<div class="auth-content">
+<div class="auth-content" *ngIf="mode=='socials'">
+    <form class="form-signin" (ngSubmit)="onSignupSubmit()">
+      <p class="auth-top-content">{{t._.auth?.signup_caption}}</p>
+
+      <a href="javascript:void(0)" class="btn btn--facebook btn-block" (click)="connectWith('facebook')">{{t._.auth?.signup_facebook_title}}</a>
+      <a href="javascript:void(0)" class="btn btn--twitter btn-block" (click)="connectWith('twitter')">{{t._.auth?.signup_twitter_title}}</a>
+      <a href="javascript:void(0)" class="btn btn-secondary btn-block" (click)="connectWith('google')">{{t._.auth?.signup_google_title}}</a>
+      <a href="javascript:void(0)" class="btn btn-secondary btn-block" (click)="mode='mail'">{{t._.auth?.signup_mail_title}}</a>
+
+    </form>
+</div>
+
+<div class="auth-content" *ngIf="mode=='mail'">
+  <a href="javascript:void(0)" class="d-inline-flex mb-3 float-left" (click)="mode='socials'">←{{t._.auth?.all_signup_options}}</a>
     <form class="form-signin" (ngSubmit)="onSignupSubmit()">
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Username</label>
@@ -11,7 +24,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email address</label>
+            <label for="inputEmail" class="sr-only">{{t._.auth?.email_placeholder}}</label>
             <input [(ngModel)]="signupData.email" name="email" (keyup)="onEmailKeyUp()" (keydown)="onEmailKeyDown()" (blur)="checkEmail()" type="email" id="inputEmail" class="form-control" placeholder="{{t._.auth?.email_placeholder}}" required="" autofocus="">
             <div *ngIf="signupData.email">
                 <small class="text-muted" *ngIf="emailState == 'VALIDATING'">Validation in progress..</small>
@@ -21,16 +34,16 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="sr-only">Password</label>
+            <label for="inputPassword" class="sr-only">{{t._.auth?.password_placeholder}}</label>
             <input [(ngModel)]="signupData.password" name="password" type="password" id="inputPassword" class="form-control" placeholder="{{t._.auth?.password_placeholder}}" required="">
             <small class="text-danger" *ngIf="signupData.password && signupData.password.length < 3">Password too short</small>
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="sr-only">Repeat password</label>
+            <label for="inputPassword" class="sr-only">{{t._.auth?.password_repeat_placeholder}}</label>
             <input [(ngModel)]="signupData.passwordRepeat" name="passwordRepeat" type="password" id="inputPassword" class="form-control" placeholder="{{t._.auth?.password_repeat_placeholder}}" required="">
             <small class="text-danger" *ngIf="signupData.password && signupData.passwordRepeat && signupData.password != signupData.passwordRepeat">Passwords do not match</small>
         </div>
-        <button [disabled]='!isFormValid() || signupInProgress' class="btn btn-primary btn-block" type="submit">{{t._.auth?.signup_title}}</button>
+        <button [disabled]='!isFormValid() || signupInProgress' class="btn btn-primary btn-block" type="submit">{{t._.auth?.signup_button}}</button>
         <small *ngIf="signupInProgress">Signup in progress...</small>
     </form>
 </div>

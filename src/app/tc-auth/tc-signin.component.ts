@@ -12,6 +12,7 @@ import { TcLanguageService } from '../tc-language/tc-language.service';
 export class TcSigninComponent implements OnInit, OnDestroy{
 
     public sub: any;
+    public mode: string;
     public encodedNextUrl: string;
     public nextUrl: string;
     public username: string;
@@ -24,6 +25,7 @@ export class TcSigninComponent implements OnInit, OnDestroy{
     }
 
     ngOnInit(){
+        this.mode = "socials";
         this.sub = this.route.params.subscribe(params => {
             this.encodedNextUrl = params['next'];
             this.nextUrl = decodeURIComponent(params['next']);

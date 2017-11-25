@@ -10,7 +10,7 @@
         <div class="auth-wrapper" *ngIf="inLogin">
             <tc-signin></tc-signin>
             <div class="auth-footer">
-                {{t._.auth?.not_member_title}} <a href="javascript:void(0)" (click)="inLogin = false">{{t._.auth?.signup_title}}</a>
+                {{t._.auth?.not_member_title}} <a href="javascript:void(0)" (click)="inLogin = false">{{t._.auth?.signup_button}}</a>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
         <div class="auth-wrapper" *ngIf="!inLogin">
             <tc-signup></tc-signup>
             <div class="auth-footer">
-                {{t._.auth?.already_member_title}} <a href="javascript:void(0)" (click)="inLogin = true">{{t._.auth?.signin_title}}</a>
+                {{t._.auth?.already_member_title}} <a href="javascript:void(0)" (click)="inLogin = true">{{t._.auth?.signin_button}}</a>
             </div>
         </div>
 

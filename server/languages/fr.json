@@ -23,19 +23,36 @@
         }
     },
     "auth": {
-        "signin_caption": "TidyCards est une communauté pour partager vos passions et vos intérêts avec le monde.",
-        "signin_title": "Se connecter",
-        "signup_title": "S'inscrire",
+        "signin_title": "Heureux de vous revoir",
+        "signup_title": "Rejoindre TidyCards",
+        "signin_button": "Se connecter",
+        "signup_button": "S'inscrire",
+        "all_signin_options": "Retour",
+        "all_signup_options": "Retour",
+        "signin_caption": "Connectez vous pour partager vos passions avec le monde.",
+        "signup_caption": "Rejoignez la communauté pour partager vos passions avec le monde.",
+        "signin_mail_title": "Se connecter avec une adresse mail",
         "signin_facebook_title": "Se connecter avec Facebook",
         "signin_twitter_title": "Se connecter avec Twitter",
         "signin_google_title": "Se connecter avec Google",
+        "signup_mail_title": "S'inscrire avec une adresse mail",
+        "signup_facebook_title": "S'inscrire avec Facebook",
+        "signup_twitter_title": "S'inscrire avec Twitter",
+        "signup_google_title": "S'inscrire avec Google",
         "username_placeholder": "Nom d'utilisateur",
         "email_placeholder": "Adresse e-mail",
         "password_placeholder": "Mot de passe",
         "password_repeat_placeholder": "Répéter le mot de passe",
-        "not_member_title": "Pas encore inscrit ?",
+        "password_lost": "Mot de passe oublié ?",
+        "not_member_title": "Nouveau sur TidyCards ?",
         "already_member_title": "Vous êtes déjà inscrit ?",
-        "signup_today_button": "S'inscrire"
+        "signup_today_button": "S'inscrire",
+        "status": {
+          "signin_attempt": "Tentative de connexion...",
+          "error_wrong": "Mot de passe ou pseudo/mail incorrecte.",
+          "error_too_many_attempt": "Trop de tentatives de connexion, veuillez patienter.",
+          "error_unknown": "Erreur inconnue, réessayer plus tard."
+        }
     },
     "discover": {
         "featured_title": "Sélection",
