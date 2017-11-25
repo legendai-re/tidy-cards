@@ -6,19 +6,27 @@
             </h1>
         </a>
 
-        <h2 class="auth-heading" *ngIf="inLogin">{{t._.auth?.signin_title}}</h2>
-        <div class="auth-wrapper" *ngIf="inLogin">
-            <tc-signin></tc-signin>
+        <h2 class="auth-heading" *ngIf="mode == 'socials'">{{t._.auth?.signup_title}}</h2>
+        <div class="auth-wrapper" *ngIf="mode == 'socials'">
+            <tc-socials></tc-socials>
             <div class="auth-footer">
-                {{t._.auth?.not_member_title}} <a href="javascript:void(0)" (click)="inLogin = false">{{t._.auth?.signup_button}}</a>
+                <a href="javascript:void(0)" (click)="mode = 'signin'">{{t._.auth?.signin_button}}</a> or <a href="javascript:void(0)" (click)="mode = 'signup'">{{t._.auth?.signup_button}} with email</a>
             </div>
         </div>
 
-        <h2 class="auth-heading" *ngIf="!inLogin">{{t._.auth?.signup_title}}</h2>
-        <div class="auth-wrapper" *ngIf="!inLogin">
+        <h2 class="auth-heading" *ngIf="mode == 'signin'">{{t._.auth?.signin_title}}</h2>
+        <div class="auth-wrapper" *ngIf="mode == 'signin'">
+            <tc-signin></tc-signin>
+            <div class="auth-footer">
+                <a href="javascript:void(0)" (click)="mode = 'socials'">back</a>
+            </div>
+        </div>
+
+        <h2 class="auth-heading" *ngIf="mode == 'signup'">{{t._.auth?.signup_title}}</h2>
+        <div class="auth-wrapper" *ngIf="mode == 'signup'">
             <tc-signup></tc-signup>
             <div class="auth-footer">
-                {{t._.auth?.already_member_title}} <a href="javascript:void(0)" (click)="inLogin = true">{{t._.auth?.signin_button}}</a>
+                <a href="javascript:void(0)" (click)="mode = 'socials'">back</a>
             </div>
         </div>
 

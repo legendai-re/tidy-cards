@@ -14,7 +14,6 @@ import { TcLanguageService } from '../tc-language/tc-language.service';
 export class TcSignupComponent implements OnInit {
 
     public passWordValid: boolean;
-    public mode: string;
     public usernameState: string;
     public validatingUsername: boolean;
     private typingUsernameTimer;
@@ -42,7 +41,6 @@ export class TcSignupComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.mode = "socials";
     }
 
     public onUsernameKeyUp(){

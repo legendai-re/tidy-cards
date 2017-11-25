@@ -12,7 +12,7 @@ import { TcLanguageService } from '../tc-language/tc-language.service';
 
 export class TcAuthComponent implements OnInit{
 
-    public inLogin: boolean;
+    public mode: string;
     private sub: any;
 
     constructor(
@@ -32,7 +32,7 @@ export class TcAuthComponent implements OnInit{
         if(this.t.langInitialized)
             this.titleService.setTitle(this.t._.auth.signin_title + ' | TidyCards');
 
-        this.inLogin = true;
+        this.mode = 'socials';
         this.headerService.emitUpdateHeaderEvent({
             value:{
                 type: 'NO_HEADER'
@@ -40,7 +40,7 @@ export class TcAuthComponent implements OnInit{
         });
         this.sub = this.route.params.subscribe(params => {
             if(params['mode'] == 'signup')
-                this.inLogin = false;
+                this.mode = 'signup';
         });
     }
 

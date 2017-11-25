@@ -7,6 +7,7 @@ import { TcSharedModule }     from '../tc-shared/tc-shared.module';
 import { TcAuthComponent }   from './tc-auth.component';
 import { TcSigninComponent } from './tc-signin.component';
 import { TcSignupComponent } from './tc-signup.component';
+import { TcSocialsComponent } from './tc-socials.component';
 import { TcLogoutComponent } from './tc-logout.component';
 
 @NgModule({
@@ -15,12 +16,14 @@ import { TcLogoutComponent } from './tc-logout.component';
         TcAuthComponent,
         TcSigninComponent,
         TcSignupComponent,
+        TcSocialsComponent,
         TcLogoutComponent
     ],
     exports: [
         TcAuthComponent,
         TcSigninComponent,
         TcSignupComponent,
+        TcSocialsComponent,
         TcLogoutComponent
     ],
     providers: []

@@ -1,17 +1,4 @@
-<div class="auth-content" *ngIf="mode=='socials'">
-    <form class="form-signin" (ngSubmit)="onSignupSubmit()">
-      <p class="auth-top-content">{{t._.auth?.signup_caption}}</p>
-
-      <a href="javascript:void(0)" class="btn btn--facebook btn-block" (click)="connectWith('facebook')">{{t._.auth?.signup_facebook_title}}</a>
-      <a href="javascript:void(0)" class="btn btn--twitter btn-block" (click)="connectWith('twitter')">{{t._.auth?.signup_twitter_title}}</a>
-      <a href="javascript:void(0)" class="btn btn-secondary btn-block" (click)="connectWith('google')">{{t._.auth?.signup_google_title}}</a>
-      <a href="javascript:void(0)" class="btn btn-secondary btn-block" (click)="mode='mail'">{{t._.auth?.signup_mail_title}}</a>
-
-    </form>
-</div>
-
-<div class="auth-content" *ngIf="mode=='mail'">
-  <a href="javascript:void(0)" class="d-inline-flex mb-3 float-left" (click)="mode='socials'">←{{t._.auth?.all_signup_options}}</a>
+<div class="auth-content">
     <form class="form-signin" (ngSubmit)="onSignupSubmit()">
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Username</label>

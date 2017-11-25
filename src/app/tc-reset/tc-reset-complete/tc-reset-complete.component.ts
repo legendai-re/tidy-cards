@@ -2,12 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
 import { Title }                        from '@angular/platform-browser';
+import { TcHeaderService }              from '../../tc-header/tc-header.service';
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcResetService }               from '../tc-reset.service';
 import { TcUser }                       from '../../tc-user/tc-user.class';
 
 @Component({
-    templateUrl: './tc-reset-complete.component.html'
+    templateUrl: './tc-reset-complete.component.html',
+    styleUrls: ['../../tc-auth/tc-auth.component.scss']
 })
 
 export class TcResetCompleteComponent implements OnInit, OnDestroy  {
@@ -22,11 +24,18 @@ export class TcResetCompleteComponent implements OnInit, OnDestroy  {
         private route: ActivatedRoute,
         public authService: TcAuthService,
         public router: Router,
-        public titleService: Title) {
+        public titleService: Title,
+        public headerService: TcHeaderService) {
     }
 
     ngOnInit() {
         this.titleService.setTitle('Password reset complete' + ' | TidyCards');
+
+        this.headerService.emitUpdateHeaderEvent({
+            value:{
+                type: 'NO_HEADER'
+            }
+        });
 
         this.sub = this.route.params.subscribe(params => {
             this.resetToken = params['reset_token'];
