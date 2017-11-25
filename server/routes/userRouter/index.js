@@ -52,6 +52,31 @@ router.route('/:user_id')
         require('./put')(req, res);
     });
 
+router.route('/:user_id/deactivate')
+    /**
+     * @api {put} /api/users/:user_id Deactivate an account
+     * @apiParam {Number} user_id User unique ID.
+     * @apiPermission ROLE_ADMIN
+     * @apiName DeactivateUser
+     * @apiGroup User
+     * @apiSuccess {Boolean} success True if account deactived.
+     */
+    .put(isGranted('ROLE_ADMIN'), function(req, res) {
+        require('./putDeactivate')(req, res);
+    });
+
+router.route('/:user_id/activate')
+    /**
+     * @api {put} /api/users/:user_id Reactivate an account
+     * @apiParam {Number} user_id User unique ID.
+     * @apiPermission ROLE_ADMIN
+     * @apiName ActivateUser
+     * @apiGroup User
+     * @apiSuccess {Boolean} success True if account deactived.
+     */
+    .put(isGranted('ROLE_ADMIN'), function(req, res) {
+        require('./putActivate')(req, res);
+    });
 
 router.route('/helpers/valid-username')
     /**

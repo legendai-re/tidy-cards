@@ -26,52 +26,80 @@
   padding: .375rem 0;
 }
 
-// TODO : clean
+.btn-alt {
+  padding: .4375rem 1rem;
+  box-shadow: 0 .125rem .75rem rgba($black, .15);
+  transition: all .3s ease;
 
-.btn-create {
-    background: transparent;
-    font-weight: 500;
-    color: rgba($black, .75);
-    outline: none;
-    text-transform: uppercase;
+  &:hover {
+    box-shadow: 0 .125rem .5rem rgba($black, .25);
+    margin-top: -1px;
+    margin-bottom: 1px;
+    border-color: transparent;
+  }
 
+  &.btn-secondary {
     &:hover {
-        background: $hover-dark-color;
+      background-color: $white;
     }
+  }
 }
 
+.btn-yellow {
+  background-color: $collection-yellow;
+  color: color-yiq($collection-yellow);
+
+  &:hover {
+    background-color: darken($collection-yellow, 15%);
+    color: color-yiq($collection-yellow);
+  }
+}
 .btn {
 }
 
 .btn-sm {
-    line-height: 1.1;
-    padding: 6px 10px 5px;
-    font-size: .875rem;
+  line-height: 1.1;
+  padding: 6px 10px 5px;
+  font-size: .875rem;
 }
 
-.btn-outline-secondary {
-    color: $black-light;
-}
+// TODO : clean
 
-.btn--light-op {
-    background: rgba(0,0,0,.1);
-    color: $white;
-    border: 1px solid transparent;
+// .btn-create {
+//     background: transparent;
+//     font-weight: 500;
+//     color: rgba($black, .75);
+//     outline: none;
+//     text-transform: uppercase;
+//
+//     &:hover {
+//         background: $hover-dark-color;
+//     }
+// }
 
-    &:hover {
-        background: rgba(0,0,0,.25);
-    }
-}
-
-.btn--dark-op {
-    background: rgba(255,255,255,.25);
-    color: $black;
-    border: 1px solid transparent;
-
-    &:hover {
-        background: rgba(255,255,255,.5);
-    }
-}
+// .btn-outline-secondary {
+//     color: $black-light;
+// }
+//
+// .btn--light-op {
+//     background: rgba(0,0,0,.1);
+//     color: $white;
+//     border: 1px solid transparent;
+//
+//     &:hover {
+//         background: rgba(0,0,0,.25);
+//     }
+// }
+//
+// .btn--dark-op {
+//     background: rgba(255,255,255,.25);
+//     color: $black;
+//     border: 1px solid transparent;
+//
+//     &:hover {
+//         background: rgba(255,255,255,.5);
+//     }
+// }
 
 .btn-icon {
     display: inline-flex;

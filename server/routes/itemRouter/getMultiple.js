@@ -36,7 +36,7 @@ module.exports = function getMultiple (req, res) {
         models.CustomSort.findOne({ _collection: rq._collection, type: sortTypes.COLLECTION_ITEMS.id},{ ids : { $slice : [skip , limit] } }, function(err, customSort){
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(!customSort) { res.sendStatus(400); return;}
-            var q = models.Item.find({_id: {$in: customSort.ids} });
+            var q = models.Item.find({_id: {$in: customSort.ids}, lifeState: lifeStates.ACTIVE.id });
 
             if(rq.populate){
                 q.populate(rq.populate);

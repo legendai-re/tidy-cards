@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
+import { TcLanguageService }      from '../../tc-language/tc-language.service';
 import { TcCollection }           from '../../tc-collection/tc-collection.class';
 import { TcItem }                 from '../tc-item.class';
 import { TcItemService }          from '../tc-item.service'
@@ -18,10 +19,10 @@ export class TcItemCreateComponent implements OnInit {
     @Output() updateCanceled = new EventEmitter();
 
     public mode: string;
-    public actionIntent: boolean;
     public itemCreated: boolean;
     public urlEntry: string;
     public lastCheckedUrlEntry: string;
+    public urlEntryModified: boolean;
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
@@ -29,8 +30,8 @@ export class TcItemCreateComponent implements OnInit {
     private typingTimer;
     private doneTypingInterval: number;
 
-    constructor(private itemService: TcItemService) {
-        this.doneTypingInterval = 1000;
+    constructor(private t: TcLanguageService, private itemService: TcItemService) {
+        this.doneTypingInterval = 300;
         this.itemTypes = TcItem.ITEM_TYPES;
     }
 
@@ -42,7 +43,7 @@ export class TcItemCreateComponent implements OnInit {
         this.itemCreated = false;
         this.loadingContent = false;
         this.addDescription = true;
-        this.actionIntent = true;
+        this.urlEntryModified = false;
         if(this.item!=null){
             this.initUpdateMode();
         }else{
@@ -63,16 +64,13 @@ export class TcItemCreateComponent implements OnInit {
         this.mode = 'UPDATE';
         this.item = TcItem.createFormJson(this.item);
         if(this.item._content!=null){
+            if(!this.item.description || this.item.description == "")
+                this.item.description = this.item._content.url;
             this.urlEntry = this.item._content.url;
             this.lastCheckedUrlEntry = this.urlEntry;
             this.validUrl = true;
         }
         if(this.item.description)this.addDescription = true;
-        this.actionIntent = true;
-    }
-
-    public onUrlFocus(){
-        this.actionIntent = true;
     }
 
     public onUrlKeyUp(){
@@ -80,8 +78,7 @@ export class TcItemCreateComponent implements OnInit {
         new Promise((resolve, reject) => {
             this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
         }).then((e)=>{
-            if((!this.item._content) || (this.urlEntry != this.lastCheckedUrlEntry))
-                this.createContentFromUrl();
+            this.createContentFromUrl();
         })
     }
 
@@ -89,8 +86,6 @@ export class TcItemCreateComponent implements OnInit {
         if (event.keyCode == 65 && event.ctrlKey) {
             event.target.select()
         }
-        if((!this.item._content) || (this.urlEntry != this.lastCheckedUrlEntry))
-            this.loadingContent = true;
         clearTimeout(this.typingTimer);
     }
 
@@ -100,18 +95,28 @@ export class TcItemCreateComponent implements OnInit {
         }
     }
 
+    public parseDescriptionForUrl(){
+        var regexRes = RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:;,.]*\)|[-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:;,.])*(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:,.]*\)|[A-ZÀ-ÿ0-9+&@#/%=~_|$])', 'igm').exec(this.item.description);
+        this.urlEntry =  regexRes ? regexRes[0] : null;
+        this.urlEntryModified = !this.urlEntry || (this.urlEntry == this.lastCheckedUrlEntry) ? false : true;
+        this.lastCheckedUrlEntry = this.urlEntry;
+    }
+
     private createContentFromUrl(){
+       if(!this.urlEntryModified && this.item._content != null)
+           return;
        if(!this.urlEntry || this.urlEntry == ''){
            this.item._content = null;
            return;
        }
-       this.lastCheckedUrlEntry = this.urlEntry;
        this.loadingContent = true;
+       this.urlEntryModified = false;
        this.itemService.postItemContent(this.urlEntry).subscribe((result) => {
            if(result){
                this.item.type = result.type;
                this.item._content = result._content;
-               this.item.title = this.getItemTitle();
+               if(!this.item.title)
+                   this.item.title = this.getItemTitle();
                this.validUrl = true;
            }else{
                this.item._content = null;
@@ -155,6 +160,8 @@ export class TcItemCreateComponent implements OnInit {
 
     private isValidToSave(){
         if(!this.item._content)this.item.type = TcItem.ITEM_TYPES.TEXT;
+        if(this.item.description && this.urlEntry && this.item.description.trim() == this.urlEntry.trim())
+           this.item.description = null;
         return !this.loadingContent && (this.item.title && (this.item._content || !this.item._content && this.item.description));
     }
 

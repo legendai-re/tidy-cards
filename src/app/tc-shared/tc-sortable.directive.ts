@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { TcCollectionService }   from '../tc-collection/tc-collection.service';
 import { TcCollection }   from '../tc-collection/tc-collection.class';
 
@@ -9,17 +9,21 @@ export class TcSortableDirective {
 
     @Input('ignoreItem') ignoreItem = 0;
     @Input('list') list: any[];
+    @Input('ghostClass') ghostClass: string;
     @Output() itemMoved = new EventEmitter();
 
-    private el: HTMLElement;
+    private element: HTMLElement;
 
-    constructor(el: ElementRef, private collectionService: TcCollectionService) {
-        this.el = el.nativeElement;
-        var elCopy = this.el;
+    constructor(public el: ElementRef, private collectionService: TcCollectionService) {
+    }
+
+    ngOnInit() {
+        this.element = this.el.nativeElement;
+        var elCopy = this.element;
         let newIndex;
         let oldIndex;
-        $(this.el).sortable({
-            placeholder: "card-ghost col-12 col-md-6 col-lg-4 col-xl-3",
+        $(this.element).sortable({
+            placeholder: this.ghostClass,
             helper: function(x, y){ y.addClass('card-moving'); return y },
             handle: '.card-collection--drag-handle',
             cancel: '.cancel-sort',
@@ -54,6 +58,7 @@ export class TcSortableDirective {
                     this.list[i].position = i;
                 }
             }
-        }).disableSelection();
+        })
     }
+
 }

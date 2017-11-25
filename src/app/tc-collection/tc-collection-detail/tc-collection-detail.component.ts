@@ -38,6 +38,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
     public subCollectionTemplate: TcCollection;
     public currentModal: NgbModalRef;
     public cantFoundButwasStarred: boolean;
+    public displayModeList: any;
     private sub: any;
 
     constructor(
@@ -50,6 +51,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         private collectionService: TcCollectionService,
         private itemService: TcItemService,
         private starService: TcStarService) {
+        this.displayModeList = TcCollection.DISPLAY_MODE;
     }
 
     ngOnInit() {
@@ -65,8 +67,10 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    private openModal(content) {
-        this.currentModal = this.modalService.open(content);
+    private openModal(content, sizeParam = null) {
+        this.currentModal = this.modalService.open(content, {
+          size: sizeParam
+        });
     }
 
     private openDeleteCollectionModal(content) {
@@ -151,6 +155,18 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         }else{
             console.log('no more items');
         }
+    }
+
+    public updateDisplayMode(){
+        if(this.collection.displayMode == this.displayModeList.LIST.id)
+            this.collection.displayMode = this.displayModeList.GRID.id
+        else
+            this.collection.displayMode = this.displayModeList.LIST.id
+        if(!this.isAuthor)
+            return;
+        this.collectionService.putCollection(this.collection).subscribe(collectionResponse => {
+            this.collection.updatedAt = collectionResponse.updatedAt;
+        });
     }
 
     public deleteCollection(){

@@ -1,6 +1,7 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
+import { TcLanguageService }  from '../../tc-language/tc-language.service';
 import { TcCollectionService }   from '../tc-collection.service';
 import { TcCollection }   from '../tc-collection.class';
 import { TcDataLimit }    from '../../tc-shared/tc-data-limit';
@@ -16,7 +17,7 @@ export class TcCollectionPopularComponent implements OnInit {
     public loadingCollections: boolean;
     public collections: TcCollection[];
 
-    constructor( private router: Router, private collectionService: TcCollectionService) {
+    constructor(private t: TcLanguageService, private router: Router, private collectionService: TcCollectionService) {
     }
 
     ngOnInit() {

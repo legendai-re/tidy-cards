@@ -22,6 +22,7 @@ export class TcCollection {
     public position: number;
     public _parent: string;
     public depth: number;
+    public displayMode: string;
     public _parents: TcCollection[];
 
     public updatePosition: boolean;
@@ -45,7 +46,8 @@ export class TcCollection {
         position?: number,
         _parent?: string,
         depth?: number,
-        _parents?: TcCollection[]) {
+        _parents?: TcCollection[],
+        displayMode?: string) {
         this._id = _id;
         this.createdAt = typeof createdAt === 'string' ? new Date(createdAt) : createdAt;
         this.updatedAt = typeof updatedAt === 'string' ? new Date(updatedAt) : updatedAt;
@@ -64,9 +66,11 @@ export class TcCollection {
         this._parent = _parent;
         this.depth = depth;
         this._parents = _parents;
+        this.displayMode = displayMode;
     }
 
     public static get VISIBILITY() { return require('../../../server/models/collection/visibility.json');}
+    public static get DISPLAY_MODE() { return require('../../../server/models/collection/displayMode.json');}
 
     public static createFormJson(obj) {
         if(!obj)
@@ -89,7 +93,8 @@ export class TcCollection {
             obj.position,
             obj._parent,
             obj.depth,
-            TcCollection.createParentsFromJson(obj)
+            TcCollection.createParentsFromJson(obj),
+            obj.displayMode
             );
     }
 

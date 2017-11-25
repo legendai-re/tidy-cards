@@ -32,6 +32,7 @@ GOOGLE_API_KEY=my_google_api_key
 ALGOLIA_API_KEY=my_algolia_api_key
 ALGOLIA_API_SECRET=my_algolia_api_secret
 ALGOLIA_INDEX_PREFIX=my_algolia_index_prefix
+STRIPE_SECRET_KEY=my_stripe_secret
 MAILER_HOST=127.0.0.1
 MAILER_USER=hello@invow.xyz
 MAILER_PASSWORD=mailer_password

@@ -16,7 +16,7 @@ export class TcDashboardComponent implements OnInit {
     public myCollections: TcCollection[];
     public myFavoriteCollections: TcCollection[];
     public isUpdatingPosition: boolean;
-    
+
     constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private service: TcCollectionService) {
     }
 
@@ -30,7 +30,7 @@ export class TcDashboardComponent implements OnInit {
         let params = new URLSearchParams();
         params.set('populate', '_author+_thumbnail');
         params.set('custom_sort', 'true');
-        params.set('limit', '7');
+        params.set('limit', '15');
         params.set('_author', this.authService.currentUser._id);
         this.service.getCollections(params).subscribe(collections => {
             collections.sort(function(a, b){

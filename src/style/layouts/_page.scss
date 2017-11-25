@@ -54,6 +54,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  text-align: center;
   font-size: 1.125rem;
   font-weight: normal;
   line-height: 1.5rem;
@@ -81,6 +82,44 @@
     margin: 0 .5rem;
     a {
       color: rgba($white, .75);
+    }
+  }
+}
+
+.page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  border-radius: $border-radius-base;
+  box-shadow: 0 .125rem .25rem $box-shadow-color;
+  transition: min-height .4s ease;
+
+  &.wide {
+    padding: 4rem 1rem;
+  }
+}
+
+.page-content {
+  transition: opacity .6s ease;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: .6s;
+  }
+}
+
+.page-headings + .page-container {
+  .page-content {
+    transition-delay: .6s;
+
+    &.is-hidden {
+      transition-delay: 0s;
     }
   }
 }

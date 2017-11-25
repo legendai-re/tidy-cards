@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>TidyCards</title>
+  <meta name="theme-color" content="#6B5DFF">
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="fb:app_id" content="572975739556621" />
-  <meta property="og:title" content="TidyCards" />
+  <meta property="og:title" content="TidyCards, your findings deserve to be shared" />
   <meta property="og:url" content="http://www.tidy.cards/" />
   <meta property="og:type" content="website" />
-  <meta property="og:description" content="The new way to bookmark" />
-  <meta property="og:image" content="assets/img/favicon.png" />
+  <meta property="og:description" content="Discover what's happening right now. Find collections and inspiration about the things you love." />
+  <meta property="og:image" content="https://www.tidy.cards/assets/img/og_img.jpg" />
   <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 
   <% if (webpackConfig.htmlElements.headTags) { %>
@@ -18,7 +19,7 @@
   <%= webpackConfig.htmlElements.headTags %>
   <% } %>
   <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
-
+  <script src="https://checkout.stripe.com/checkout.js"></script>
 </head>
 
 <body>

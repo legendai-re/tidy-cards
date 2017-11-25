@@ -1,6 +1,6 @@
 <div class="auth-content">
     <form class="form-signin" *ngIf="!authService.isLoggedIn" (ngSubmit)="onLoginSubmit()">
-        <p class="auth-top-content">TidyCards is a community to share your passions and interests with the world.</p>
+        <p class="auth-top-content">{{t._.auth?.signin_caption}}</p>
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Username</label>
             <input [(ngModel)]="username" name="username" type="text" id="inputUsername" class="form-control" placeholder="{{t._.auth?.username_placeholder}}" required="" autofocus="" />

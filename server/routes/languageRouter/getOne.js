@@ -1,4 +1,4 @@
-module.exports = function getMine (req, res) {
+module.exports = function getOne (req, res) {
 
     var fs = require('fs');
 

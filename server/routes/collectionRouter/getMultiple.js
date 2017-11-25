@@ -14,7 +14,9 @@ module.exports = function getMultiple (req, res) {
         var skip = rq.skip ? parseInt(rq.skip) : 0;
         var limit = rq.limit ? parseInt(rq.limit) : 8;
         models.CustomSort.findOne({ _user: rq._author, type: sortTypes.MY_COLLECTIONS.id},{ ids : { $slice : [skip , limit] } }, function(err, customSort){
-            var q = models.Collection.find({_id: {$in: customSort.ids} });
+            if(err || !customSort)
+                return res.status(500).json({error: "cannot find customSort related to user: "+rq._author})
+            var q = models.Collection.find({_id: {$in: customSort.ids}, lifeState: lifeStates.ACTIVE.id });
             q.populate('_thumbnail');
             q.populate({
                 path: '_author',

@@ -2,6 +2,7 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
 
     var models          = require('../../models');
     var strategiesHelper = require('./strategiesHelper');
+    var lifeStates      = require('../../models/lifeStates');
 
     return new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
@@ -15,7 +16,10 @@ module.exports = function getGoogleStrategy(GoogleStrategy){
             if(user && req.user){
                 done('google account already used');
             }else if(user && !req.user){
-                done(null, user);
+                if(user.lifeState === lifeStates.ACTIVE.id)
+                    done(null, user);
+                else
+                    done("account no more active", null);
             }else if(!user && !req.user){
                 strategiesHelper.createUser(req, profile, accessToken, 'google', function(err, newUser){
                     done(err, newUser);

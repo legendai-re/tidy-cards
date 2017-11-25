@@ -1,5 +1,6 @@
 module.exports = function getMultiple (req, res) {
 
+    var isGranted   = require('../../security/isGranted');
     var models      = require('../../models');
     var algoliaClient = require('../../algolia/algolia')
     var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
@@ -9,7 +10,9 @@ module.exports = function getMultiple (req, res) {
 
     getQueryFiler(rq, req, function(filterObj){
         var q = models.User.find(filterObj).sort({'createdAt': 1}).limit(20);
-         q.where('lifeState').equals(lifeStates.ACTIVE.id);
+
+        if(!(rq.allStates && req.user && req.user.isGranted('ROLE_ADMIN')))
+            q.where('lifeState').equals(lifeStates.ACTIVE.id);
          
         if(rq.populate){
             q.populate(rq.populate);

@@ -3,6 +3,7 @@ import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 
 import { TcSortableDirective } from './tc-sortable.directive';
+import { TcTruncatePipe }     from '../tc-shared/tc-truncate.pipe';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
@@ -10,12 +11,14 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file
   declarations: [
     TcSortableDirective,
     FileSelectDirective,
-    FileDropDirective
+    FileDropDirective,
+    TcTruncatePipe
   ],
   exports: [
     TcSortableDirective,
     FileSelectDirective,
-    FileDropDirective
+    FileDropDirective,
+    TcTruncatePipe
   ],
   providers: []
 })
