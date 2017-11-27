@@ -56,7 +56,7 @@ export class TcDiscoverComponent implements OnInit {
 
     private loadLastCollections(){
         let params = new URLSearchParams();
-        params.set('limit', '8');
+        params.set('limit', '16');
         params.set('sort_field', 'createdAt');
         params.set('sort_dir', '-1');
         this.collectionService.getCollections(params).subscribe(collections => {

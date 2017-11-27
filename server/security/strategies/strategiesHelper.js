@@ -9,7 +9,11 @@ var updateEmail        = require('../../helpers/user/updateEmail');
 var createUser = function(req, profile, accessToken, strategy, callback){
     var sess = req.session;
     var newUser = new models.User();
-    var profileEmail = profile.emails[0].value;
+    var profileEmail;
+    if(profile.emails && profile.emails.length > 0)
+        profileEmail = profile.emails[0].value;
+    else
+        profileEmail = '';
 
     //check if email alreday used
     models.User.findOne({email: profileEmail.toLowerCase()}, function(err, user){
@@ -35,8 +39,21 @@ var createUser = function(req, profile, accessToken, strategy, callback){
 
             newUser.save(function(err){
                 if (err) { return callback(err); }
-                updateEmail.update(newUser, profileEmail, function(err, newUser){
-                    if (err) { return callback(err); }
+
+                //if no email
+                if(profileEmail != ''){
+                    updateEmail.update(newUser, profileEmail, function(err, newUser){
+                        if (err) { return callback(err); }
+                        avatar.save(function(err){
+                            if (err) { return callback(err); }
+                            newUser._avatar = avatar;
+                            createMyCollectionSort(newUser, function(err){
+                                if (err) { return callback(err); }
+                                callback(null, newUser);
+                            })
+                        });
+                    });
+                }else{
                     avatar.save(function(err){
                         if (err) { return callback(err); }
                         newUser._avatar = avatar;
@@ -45,7 +62,8 @@ var createUser = function(req, profile, accessToken, strategy, callback){
                             callback(null, newUser);
                         })
                     });
-                });
+                }
+
             })
         });
 
@@ -66,7 +84,7 @@ function createAvatar(newUser, profile, callback){
     image.type = imagesTypes.AVATAR.name;
     image.mime = 'jpg';
     image._user = newUser._id;
-    if(profile.photos[0]){
+    if(profile.photos && profile.photos[0]){
         imageUpdloader.getSocialNetworkAvatar(image, profile.photos[0].value,function(err){
             callback(image);
         });
