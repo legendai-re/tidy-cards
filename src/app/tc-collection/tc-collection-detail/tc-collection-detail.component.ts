@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, OnDestroy  }   from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl }                from '@angular/platform-browser';
 import { Router, ActivatedRoute }         from '@angular/router';
+import { Title }                          from '@angular/platform-browser';
 import { Observable }                     from 'rxjs/Observable';
 import { NgbModal, NgbModalRef, ModalDismissReasons}    from '@ng-bootstrap/ng-bootstrap';
 import { TcLanguageService }              from '../../tc-language/tc-language.service';
@@ -50,7 +51,8 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private collectionService: TcCollectionService,
         private itemService: TcItemService,
-        private starService: TcStarService) {
+        private starService: TcStarService,
+        private titleService: Title) {
         this.displayModeList = TcCollection.DISPLAY_MODE;
     }
 
@@ -88,6 +90,7 @@ export class TcCollectionDetailComponent implements OnInit, OnDestroy {
         this.isLoadingCollection = true;
         this.collectionService.getCollection(this.searchParams, getParams).subscribe((collection) => {
             this.collection = collection;
+            this.titleService.setTitle(this.collection.title + ' | TidyCards');
             this.collection._items = [];
             if(this.authService.isLoggedIn && collection._author._id === this.authService.currentUser._id)
                 this.isAuthor = true;

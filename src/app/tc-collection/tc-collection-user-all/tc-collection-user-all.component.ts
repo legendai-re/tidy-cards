@@ -1,6 +1,7 @@
 import { Component, OnInit }               from '@angular/core';
 import { Router, ActivatedRoute }          from '@angular/router';
 import { URLSearchParams  }                from '@angular/http';
+import { Title }                           from '@angular/platform-browser';
 import { TcLanguageService }               from '../../tc-language/tc-language.service';
 import { TcCollectionService }             from '../tc-collection.service';
 import { TcCollection }                    from '../tc-collection.class';
@@ -27,11 +28,20 @@ export class TcCollectionUserAllComponent implements OnInit {
     public sub: any;
     public authSub: any
 
-    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private route: ActivatedRoute, private userService: TcUserService, private collectionService: TcCollectionService) {
+    constructor(
+        public t: TcLanguageService,
+        public authService: TcAuthService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private userService: TcUserService,
+        private collectionService: TcCollectionService,
+        private titleService: Title) {
+
         this.authSub = this.authService.getAuthInitializedEmitter().subscribe((value) => {
             if(this.authService.isLoggedIn && this.username === this.authService.currentUser.username){
                 this.isCurrentUser = true;
                 this.user = this.authService.currentUser;
+                this.setTitle();
                 this.loadCollections();
             }else{
                 this.initUser(this.username)
@@ -51,12 +61,22 @@ export class TcCollectionUserAllComponent implements OnInit {
                 if(this.authService.isLoggedIn && this.username === this.authService.currentUser.username){
                     this.isCurrentUser = true;
                     this.user = this.authService.currentUser;
+                    this.setTitle();
                     this.loadCollections();
                 }else{
                     this.initUser(this.username)
                 }
             };
         });
+    }
+
+    private setTitle(){
+        if(this.t.langInitialized){
+            if(this.isCurrentUser)
+                this.titleService.setTitle(this.t._.collection.my_title);
+            else
+                this.titleService.setTitle(this.t.format(this.t._.collection.belongs_to_title, [this.user.name]));
+        }
     }
 
     public initUser(username){
@@ -66,6 +86,7 @@ export class TcCollectionUserAllComponent implements OnInit {
         this.userService.getUser(username, getParams).subscribe((user) => {
             this.user = user;
             this.isLoadingUser = false;
+            this.setTitle();
             this.loadCollections();
         }, () => {
             this.isLoadingUser = false;

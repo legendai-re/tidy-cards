@@ -1,4 +1,4 @@
-import { Component }   from '@angular/core';
+import { Component, OnInit }   from '@angular/core';
 import { Router }      from '@angular/router';
 import { TcAuthService } from './tc-auth.service';
 import { TcUser }        from '../tc-user/tc-user.class';
@@ -11,10 +11,9 @@ import { TcLanguageService } from '../tc-language/tc-language.service';
     styleUrls: ['./tc-auth.component.scss']
 })
 
-export class TcSignupComponent {
+export class TcSignupComponent implements OnInit {
 
     public passWordValid: boolean;
-
     public usernameState: string;
     public validatingUsername: boolean;
     private typingUsernameTimer;
@@ -39,6 +38,9 @@ export class TcSignupComponent {
     constructor(public t: TcLanguageService, private userService: TcUserService, public authService: TcAuthService, public router: Router) {
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
+    }
+
+    ngOnInit(){
     }
 
     public onUsernameKeyUp(){
@@ -123,6 +125,10 @@ export class TcSignupComponent {
         }, (err) => {
             this.signupInProgress = false;
         });
+    }
+
+    public connectWith(strategy){
+        window.location.href = 'auth/' + strategy;
     }
 
 }

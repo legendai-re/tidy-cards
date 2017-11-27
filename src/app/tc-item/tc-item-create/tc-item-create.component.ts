@@ -103,6 +103,8 @@ export class TcItemCreateComponent implements OnInit {
     }
 
     private createContentFromUrl(){
+       if(this.item._content != null)
+           return;
        if(!this.urlEntryModified && this.item._content != null)
            return;
        if(!this.urlEntry || this.urlEntry == ''){
@@ -162,7 +164,7 @@ export class TcItemCreateComponent implements OnInit {
         if(!this.item._content)this.item.type = TcItem.ITEM_TYPES.TEXT;
         if(this.item.description && this.urlEntry && this.item.description.trim() == this.urlEntry.trim())
            this.item.description = null;
-        return !this.loadingContent && (this.item.title && (this.item._content || !this.item._content && this.item.description));
+        return !this.loadingContent && (this.item._content || !this.item._content && this.item.description);
     }
 
     private createItem() {

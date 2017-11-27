@@ -1,11 +1,12 @@
-import { Component, OnInit }               from '@angular/core';
-import { Router }       from '@angular/router';
-import { URLSearchParams  }                from '@angular/http';
-import { TcAuthService }                   from '../tc-auth/tc-auth.service';
-import { TcCollectionService }             from '../tc-collection/tc-collection.service';
-import { TcCollection }                    from '../tc-collection/tc-collection.class';
-import { TcDataLimit }                     from '../tc-shared/tc-data-limit';
-import { TcLanguageService }               from '../tc-language/tc-language.service';
+import { Component, OnInit }      from '@angular/core';
+import { Router }                 from '@angular/router';
+import { URLSearchParams  }       from '@angular/http';
+import { Title }                  from '@angular/platform-browser';
+import { TcAuthService }          from '../tc-auth/tc-auth.service';
+import { TcCollectionService }    from '../tc-collection/tc-collection.service';
+import { TcCollection }           from '../tc-collection/tc-collection.class';
+import { TcDataLimit }            from '../tc-shared/tc-data-limit';
+import { TcLanguageService }      from '../tc-language/tc-language.service';
 
 @Component({
     templateUrl: './tc-discover.component.html',
@@ -17,10 +18,15 @@ export class TcDiscoverComponent implements OnInit {
     public popularCollections: TcCollection[];
     public lastCollections: TcCollection[];
 
-    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private collectionService: TcCollectionService) {
+    constructor(public t: TcLanguageService, public authService: TcAuthService, private router: Router, private titleService: Title, private collectionService: TcCollectionService) {
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle(this.t._.header.discover_title + ' | TidyCards');
+        })
     }
 
     ngOnInit() {
+        if(this.t.langInitialized)
+            this.titleService.setTitle(this.t._.header.discover_title + ' | TidyCards');
         this.loadFeaturedCollections();
         this.loadPopularCollections();
         this.loadLastCollections();

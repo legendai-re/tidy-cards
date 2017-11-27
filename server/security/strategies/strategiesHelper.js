@@ -4,40 +4,52 @@ var imagesTypes        = require('../../models/image/imageTypes.json');
 var sortTypes          = require('../../models/customSort/sortTypes.json');
 var forbiddenUsernames = require('../../helpers/user/forbiddenUsernames.json');
 var imageUpdloader     = require('../../helpers/image-uploader');
+var updateEmail        = require('../../helpers/user/updateEmail');
 
 var createUser = function(req, profile, accessToken, strategy, callback){
     var sess = req.session;
     var newUser = new models.User();
+    var profileEmail = profile.emails[0].value;
 
-    newUser[strategy].id = profile.id;
-    newUser[strategy].token = accessToken;
+    //check if email alreday used
+    models.User.findOne({email: profileEmail.toLowerCase()}, function(err, user){
+        if(err) {console.log(err); return callback(err)}
+        if(user) return callback("email already used");
 
-    if(profile.displayName){
-        var slugDdisplayName = slug(profile.displayName, '-');
-        newUser.unsafeUsername = (forbiddenUsernames.indexOf(slugDdisplayName.toLowerCase()) > -1 ) ? 'forbidden-name' : slugDdisplayName;
-    }else{
-        newUser.unsafeUsername = 'anonyme';
-    }
-    newUser.name = (profile.displayName || 'anonyme');
-    newUser.roles = ['ROLE_USER'];
-    newUser.language = (sess.language || 'en');
+        newUser[strategy].id = profile.id;
+        newUser[strategy].token = accessToken;
 
-    createAvatar(newUser, profile, function(image){
-        var avatar = image;
-        newUser._avatar = avatar._id;
+        if(profile.displayName){
+            var slugDdisplayName = slug(profile.displayName, '-');
+            newUser.unsafeUsername = (forbiddenUsernames.indexOf(slugDdisplayName.toLowerCase()) > -1 ) ? 'forbidden-name' : slugDdisplayName;
+        }else{
+            newUser.unsafeUsername = 'anonyme';
+        }
+        newUser.name = (profile.displayName || 'anonyme');
+        newUser.roles = ['ROLE_USER'];
+        newUser.language = (sess.language || 'en');
 
-        newUser.save(function(err){
-            if (err) { return callback(err); }
-            avatar.save(function(err){
+        createAvatar(newUser, profile, function(image){
+            var avatar = image;
+            newUser._avatar = avatar._id;
+
+            newUser.save(function(err){
                 if (err) { return callback(err); }
-                newUser._avatar = avatar;
-                createMyCollectionSort(newUser, function(err){
+                updateEmail.update(newUser, profileEmail, function(err, newUser){
                     if (err) { return callback(err); }
-                    callback(null, newUser);
-                })
-            });
-        })
-    });
+                    avatar.save(function(err){
+                        if (err) { return callback(err); }
+                        newUser._avatar = avatar;
+                        createMyCollectionSort(newUser, function(err){
+                            if (err) { return callback(err); }
+                            callback(null, newUser);
+                        })
+                    });
+                });
+            })
+        });
+
+    })
 }
 
 function createMyCollectionSort(newUser, callback){

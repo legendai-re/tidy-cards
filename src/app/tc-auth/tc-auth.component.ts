@@ -1,5 +1,6 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title }                  from '@angular/platform-browser';
 import { TcAuthService } from './tc-auth.service';
 import { TcHeaderService } from '../tc-header/tc-header.service';
 import { TcLanguageService } from '../tc-language/tc-language.service';
@@ -11,7 +12,7 @@ import { TcLanguageService } from '../tc-language/tc-language.service';
 
 export class TcAuthComponent implements OnInit{
 
-    public inLogin: boolean;
+    public mode: string;
     private sub: any;
 
     constructor(
@@ -19,11 +20,19 @@ export class TcAuthComponent implements OnInit{
         private headerService: TcHeaderService,
         public authService: TcAuthService,
         public router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private titleService: Title) {
+
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle(this.t._.auth.signin_title + ' | TidyCards');
+        })
     }
 
     ngOnInit(){
-        this.inLogin = true;
+        if(this.t.langInitialized)
+            this.titleService.setTitle(this.t._.auth.signin_title + ' | TidyCards');
+
+        this.mode = 'socials';
         this.headerService.emitUpdateHeaderEvent({
             value:{
                 type: 'NO_HEADER'
@@ -31,7 +40,7 @@ export class TcAuthComponent implements OnInit{
         });
         this.sub = this.route.params.subscribe(params => {
             if(params['mode'] == 'signup')
-                this.inLogin = false;
+                this.mode = 'signup';
         });
     }
 

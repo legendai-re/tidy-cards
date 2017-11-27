@@ -8,7 +8,7 @@ module.exports = function getLocalStrategy(FacebookStrategy){
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: process.env.HOST + "/auth/facebook/callback",
-        profileFields: ['id', 'displayName', 'picture.type(large)'],
+        profileFields: ['id', 'displayName', 'picture.type(large)','emails'],
         passReqToCallback : true
     },
     function(req, accessToken, refreshToken, profile, done) {

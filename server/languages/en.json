@@ -1,8 +1,9 @@
 {
     "lang_id": "en",
     "app_name": "tidycards",
+    "app_name_capitals": "TidyCards",
     "header": {
-        "search_placeholder": "Search on TidyCards...",
+        "search_placeholder": "Search on TidyCards…",
         "search_result_for": "Results for",
         "search_no_result_for": "Sorry. There is no results for",
         "search_no_idea_row_1": "No idea?",
@@ -16,26 +17,73 @@
         "logout_menu": "Logout",
         "powered_by": "Powered by",
         "jumbotron": {
-            "slogan": "TidyCards, your findings deserve to be shared",
+            "slogan": "TidyCards, your interests are worth sharing",
             "description_line_1": "Discover what's happening right now.",
             "description_line_2": "Find collections and inspiration about the things you love.",
             "about_button": "About TidyCards"
         }
     },
+    "confirm_email": {
+      "title": "Email confirmation",
+      "progress": "Email confirmation in progress…",
+      "success": "You have successfully confirmed your email address.",
+      "fail": "Something went wrong… It looks like this confirmation link is not working.",
+      "resend": "Resend a confirmation email",
+      "go_dashboard": "Go to dashboard"
+    },
+    "reset_password": {
+      "title": "Reset password",
+      "enter_email_username": "Enter your email or username",
+      "found": "We found the following information associated with your account.",
+      "not_found": "Cannot find any user with username or email:",
+      "enter_new_password": "Choose your new password",
+      "new_password": "New password",
+      "new_password_repeat": "Repeat",
+      "update_password": "Update password",
+      "send_instructions": "Send instructions by email",
+      "error": "Error while attempting to reset password",
+      "not_you": "Not you?",
+      "email_sent": "A link to reset your password have been send to your email address. This link is only valid for 24 hours. You cannot make a new password reset request before those 24 hours."
+    },
     "auth": {
-        "signin_caption": "TidyCards is a community to share your passions and interests with the world.",
-        "signin_title": "Sign in",
-        "signup_title": "Sign up",
-        "signin_facebook_title": "Sign in with Facebook",
-        "signin_twitter_title": "Sign in with Twitter",
-        "signin_google_title": "Sign in with Google",
+        "signin_title": "Join TidyCards",
+        "signin_button": "Sign in",
+        "signup_button": "Sign up",
+        "all_signin_options": "All sign in options",
+        "signin_caption": "Signin to your account to share your passions and interests with the world.",
+        "signup_caption": "Join the community to share your passions and interests with the world.",
+        "signin_mail_title": "Signin with email",
+        "signin_facebook_title": "Signin with Facebook",
+        "signin_twitter_title": "Signin with Twitter",
+        "signin_google_title": "Signin with Google",
+        "signup_mail_title": "Signup with email",
+        "signup_facebook_title": "Signup with Facebook",
+        "signup_twitter_title": "Signup with Twitter",
+        "signup_google_title": "Signup with Google",
         "username_placeholder": "Username",
         "email_placeholder": "Email address",
         "password_placeholder": "Password",
         "password_repeat_placeholder": "Repeat password",
-        "not_member_title": "Not member yet?",
+        "password_lost": "Password lost?",
+        "not_member_title": "Are you new to TidyCards?",
         "already_member_title": "Already have an account?",
-        "signup_today_button": "Sign up today"
+        "signup_today_button": "Sign up today",
+        "status": {
+          "signin_attempt": "Attempting to connect…",
+          "error_wrong": "Wrong password or username/email",
+          "error_too_many_attempt": "Too many connection attempt, please wait.",
+          "error_unknown": "Unknown error please retry later.",
+          "validation_progress": "Validation in progress…",
+          "username_avalaible": "This username is available",
+          "username_not_avalaible": "This username is not available",
+          "username_invalid": "This username is not valid",
+          "email_avalaible": "This email is available",
+          "email_not_avalaible": "This email is not available",
+          "email_invalid": "This email is not valid",
+          "password_too_short": "Password too short",
+          "password_not_match": "Passwords do not match",
+          "signup_progress": "Signup in progress…"
+        }
     },
     "discover": {
         "featured_title": "Featured",
@@ -47,10 +95,10 @@
         "favorite_collections_title": "My favorite collections"
     },
     "profile_public":{
-        "no_bio": "This user doesn't have a description yet..."
+        "no_bio": "This user doesn't have a description yet…"
     },
     "profile_private": {
-        "bio_placeholder": "Your description here...",
+        "bio_placeholder": "Your description here…",
         "account_title": "Account",
         "account_subtitle": "Change my basic account settings.",
         "username_row_title": "My username",
@@ -116,29 +164,31 @@
         "item_sing": "item",
         "item_plur": "items",
         "new_item_button": "New item",
-        "first_item_button": "Add my firt item",
+        "first_item_button": "Add my first item",
         "first_item_caption": "Use the button bellow to add an item to your collection. It can be a link or a caption without link.",
         "by_title": "A collection by",
         "empty_title": "Whoops, this collection is empty",
         "empty_caption": "Unfortunately there is nothing in this collection yet, please make a try later.",
-        "list_end": "You’ve reached the end of the list...",
-        "item_list_end": "You reached the end of the collection...",
+        "list_end": "You’ve reached the end of the list…",
+        "item_list_end": "You reached the end of the collection…",
         "delete_title": "Delete this collection?",
         "delete_caption": "Do you really want to delete this collection?",
         "delete_button_yes": "Delete this collection"
     },
     "item":{
         "caption": "Caption",
+        "no_title": "No title",
         "new_title": "Add an item to your collection",
+        "update_title": "Update an item",
         "new_placeholder_title": "Title",
-        "new_placeholder_description": "Paste your link or start writing in Markdown...",
+        "new_placeholder_description": "Paste your link or start writing in Markdown…",
         "delete_title": "Delete this item?",
         "delete_caption": "Do you really want to delete this item?",
         "delete_button_yes": "Delete this item"
     },
     "collection_create": {
-        "title_placeholder": "Create a collection...",
-        "caption_placeholder": "Enter a caption here to describe the collection. Keep it simple and short...",
+        "title_placeholder": "Create a collection…",
+        "caption_placeholder": "Enter a caption here to describe the collection. Keep it simple and short…",
         "visibility_dropdow_title": "Who should see this?"
     },
     "object":{
@@ -156,11 +206,15 @@
         "create": "Create",
         "edit": "Edit",
         "delete": "Delete",
-        "loading": "Loading...",
-        "load_more": "Load more..."
+        "loading": "Loading…",
+        "load_more": "Load more…"
     },
     "word": {
-        "date_on": "on"
+        "date_on": "on",
+        "or": "or",
+        "with_email": "with email",
+        "whoops_exclamation": "Whoops!",
+        "congrats": "Congrats"
     },
     "page":{
         "about": {
