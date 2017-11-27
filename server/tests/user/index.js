@@ -87,7 +87,7 @@ describe('POST /auth/signup', () => {
                 assert.equal(response.body.data.username, 'test1');
                 assert.equal(response.body.data.email, 'test1@test.com');
                 assert.equal(response.body.data.local.password, '');
-                common.testUsers.test1 = response.body.data;
+                common.testUsers.test1.data = response.body.data;
             })
             .end(done);
     });
@@ -104,8 +104,8 @@ describe('POST /auth/signup', () => {
                 assert.equal(response.body.data.username, 'test2');
                 assert.equal(response.body.data.email, 'test2@test.com');
                 assert.equal(response.body.data.local.password, '');
-                common.testUsers.test2 = response.body.data;
-                common.cookies = response.headers['set-cookie'].pop().split(';')[0];
+                common.testUsers.test2.data = response.body.data;
+                common.testUsers.test2.cookies = response.headers['set-cookie'].pop().split(';')[0];
             })
             .end(done);
     });
@@ -123,7 +123,7 @@ describe('POST /auth/signup', () => {
 describe('GET /auth/currentuser', () => {
     it('it should return the currentuser', (done) => {
         var req = request(server).get('/auth/currentuser');
-        req.cookies = common.cookies;
+        req.cookies = common.testUsers.test2.cookies;
         req.expect(200)
         .expect(response => {
             assert.equal(response.body.data.name, 'test2');
@@ -138,7 +138,7 @@ describe('GET /auth/currentuser', () => {
 describe('GET /auth/logout', () => {
     it('it should logout', (done) => {
         var req = request(server).get('/auth/logout');
-        req.cookies = common.cookies;
+        req.cookies = common.testUsers.test2.cookies;
         req.expect(200, done);
     });
 });
@@ -146,7 +146,7 @@ describe('GET /auth/logout', () => {
 describe('GET /auth/currentuser', () => {
     it('it should return nothing', (done) => {
         var req = request(server).get('/auth/currentuser');
-        req.cookies = common.cookies;
+        req.cookies = common.testUsers.test2.cookies;
         req.expect(200)
         .expect(response => {
             assert.notExists(response.body.data);
@@ -165,7 +165,7 @@ describe('POST /auth/login', () => {
                 assert.equal(response.body.data.username, 'test1');
                 assert.equal(response.body.data.email, 'test1@test.com');
                 assert.equal(response.body.data.local.password, '');
-                common.cookies = response.headers['set-cookie'].pop().split(';')[0];
+                common.testUsers.test1.cookies = response.headers['set-cookie'].pop().split(';')[0];
             })
             .end(done);
     });
@@ -173,8 +173,8 @@ describe('POST /auth/login', () => {
 
 describe('PUT /api/users/:id', () => {
     it('it should update user test1', (done) => {
-        var req = request(server).put('/api/users/'+common.testUsers.test1._id);
-        req.cookies = common.cookies;
+        var req = request(server).put('/api/users/'+common.testUsers.test1.data._id);
+        req.cookies = common.testUsers.test1.cookies;
         req.send({name: 'Test 1', bio: 'I\'m test1'})
         req.expect(200)
         .expect(response => {
@@ -189,7 +189,7 @@ describe('PUT /api/users/:id', () => {
 
 describe('GET /api/users/:id', () => {
     it('it should get user test1 updated', (done) => {
-        var req = request(server).get('/api/users/'+common.testUsers.test1._id);
+        var req = request(server).get('/api/users/'+common.testUsers.test1.data._id);
         req.expect(200)
         .expect(response => {
             assert.equal(response.body.data.name, 'Test 1');

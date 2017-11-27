@@ -12,8 +12,7 @@ exports.chai = chai;
 exports.request = request;
 exports.should = chai.should();
 exports.assert = chai.assert;
-exports.cookies = null;
 exports.testUsers = {
-    test1: null,
-    test2: null
+    test1: {cookies: null, data: null, collections: []},
+    test2: {cookies: null, data: null, collections: []}
 }
