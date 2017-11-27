@@ -87,7 +87,7 @@
     },
     "discover": {
         "featured_title": "Sélection",
-        "popular_title": "Collections populaires",
+        "popular_title": "Collections tendances",
         "last_title": "Dernières collections"
     },
     "dashboard": {
@@ -140,7 +140,7 @@
         "my_title": "Mes collections",
         "belongs_to_title": "Les collections de {0}",
         "featured_title": "Sélection",
-        "popular_title": "Collections populaires",
+        "popular_title": "Collections tendances",
         "last_title": "Dernières collections",
         "last_public_title": "Dernières collections publiques",
         "favorite_title": "Collections favorites",
