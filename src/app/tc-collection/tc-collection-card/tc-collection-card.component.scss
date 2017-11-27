@@ -11,13 +11,8 @@
 
   &:not(.not-hoverable) {
     &:hover {
-      // margin: -.25rem 0 1.5rem;
       transform: translate3d(0, -.25rem, 0);
       box-shadow: 0 .5rem 1rem rgba($black, .15);
-
-      .card-collection--background.is-thumbnail img {
-        transform: translate3d(0, .25rem, 0);
-      }
     }
   }
 
@@ -166,11 +161,8 @@
 
     img {
       width: 100%;
-      height: 104%;
+      height: 100%;
       object-fit: cover;
-      margin-top: -4px;
-      margin-bottom: -4px;
-      transition: transform .3s ease;
     }
   }
 }
