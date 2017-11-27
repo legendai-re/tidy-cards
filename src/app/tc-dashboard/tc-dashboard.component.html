@@ -11,9 +11,7 @@
 
       <div class="row" tc-sortable [ignoreItem]="1" [list]=myCollections [ghostClass]="'card-ghost col-12 col-md-6 col-lg-4 col-xl-3'" (itemMoved)="onCollectionMoved($event)">
 
-        <div class="ui-state-default ui-state-disabled not-sortable-item col-12 col-md-6 col-lg-4 col-xl-3">
-          <tc-collection-create (newCollection)="onbCollectionCreated($event)"></tc-collection-create>
-        </div>
+        <tc-collection-create (newCollection)="onbCollectionCreated($event)" class="ui-state-default ui-state-disabled not-sortable-item col-12 col-md-6 col-lg-4 col-xl-3"></tc-collection-create>
         <div *ngFor="let collection of myCollections" [class.cancel-sort]="isUpdatingPosition" class="ui-state-default col-12 col-md-6 col-lg-4 col-xl-3">
           <tc-collection-card [collection]="collection" [sortable]=true></tc-collection-card>
         </div>
