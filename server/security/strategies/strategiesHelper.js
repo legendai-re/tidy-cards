@@ -11,7 +11,7 @@ var createUser = function(req, profile, accessToken, strategy, callback){
     var newUser = new models.User();
     var emailArray = profile.emails;
     var profileEmail;
-    if(profile.emails.length > 0)
+    if(profile.emails && profile.emails.length > 0)
         profileEmail = profile.emails[0].value;
     else
         profileEmail = '';
