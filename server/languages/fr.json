@@ -181,10 +181,11 @@
         "new_title": "Ajouter un objet à votre collection",
         "update_title": "Mettre à jour un objet",
         "new_placeholder_title": "Titre",
-        "new_placeholder_description": "Collé un lien ou commencé à écrire en Mardown.",
+        "new_placeholder_description": "Collé un lien ou commencé à écrire...",
         "delete_title": "Supprimer cet objet ?",
         "delete_caption": "Voullez-vous vraiment supprimer cet objet ?",
-        "delete_button_yes": "Supprimer cet objet"
+        "delete_button_yes": "Supprimer cet objet",
+        "markdown_supported": "Mise en page Markdown supportée"
     },
     "collection_create": {
         "title_placeholder": "Créer une collection…",

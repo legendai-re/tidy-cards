@@ -8,4 +8,9 @@ router.route('/welcome')
         res.json({message: "Welcome !"})
     });
 
+router.route('/logs')
+    .get(isGranted('ROLE_ADMIN'), function(req, res) {
+        require('./getLogs')(req, res);
+    });
+
 module.exports = router;

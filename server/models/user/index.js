@@ -9,6 +9,14 @@ var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_P
 
 var UserSchema  = require('./schema')(Schema);
 
+UserSchema.pre('validate', function(next) {
+    if(this.name)
+        this.name = this.name.substring(0, 30);
+    if(this.bio)
+        this.bio = this.bio.substring(0, 1000);
+    next();
+});
+
 UserSchema.pre('save', function(next) {
     if(!this.createdAt)
         this.createdAt = new Date();
