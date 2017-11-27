@@ -1,16 +1,16 @@
 .card {
-    background: $white;
-    width: 100%;
-    height: auto;
-    border: none;
-    box-shadow: 0 1px 4px $box-shadow-color;
-    color: $black;
-    border-radius: 3px;
-    margin-bottom: 20px;
+  background: $white;
+  width: 100%;
+  height: auto;
+  border: none;
+  box-shadow: 0 .25rem .5rem $box-shadow-color;
+  color: $black;
+  border-radius: 3px;
+  margin-bottom: 20px;
 
-    a, a:hover, a:focus, a:active {
-        text-decoration: none;
-    }
+  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+  }
 }
 
 .card-avatar {
