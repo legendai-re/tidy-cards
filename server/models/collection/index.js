@@ -7,6 +7,14 @@ var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_I
 
 var CollectionSchema = require('./schema')(Schema);
 
+CollectionSchema.pre('validate', function(next) {
+    if(this.title)
+        this.title = this.title.substring(0, 100);
+    if(this.bio)
+        this.bio = this.bio.substring(0, 1000);
+    next();
+});
+
 CollectionSchema.pre('save', function(next) {
     if(!this.createdAt)
         this.createdAt = new Date();
@@ -39,13 +47,14 @@ CollectionSchema.post('save', function(collection) {
  * @param {requestCallback} callback - The callback that return the item.
  */
 CollectionSchema.methods.addItem = function addItem(item, callback) {
+    var tmpThis = this;
     item._collection = this._id;
     item.save(function(err){
         if (err) {callback(err, item); return;}
-        callback(false, item);
-    });
-    this.itemsCount++;
-    this.save(function(err){
+        tmpThis.itemsCount++;
+        tmpThis.save(function(err){
+            callback(err, item);
+        });
     });
 }
 

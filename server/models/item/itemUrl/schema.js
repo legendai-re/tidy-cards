@@ -8,9 +8,9 @@ module.exports = function getItemUrlSchema(Schema) {
             required: true,
             validate: {
                 validator: function(v) {
-                    return (v.length < 1000);
+                    return (v.length <= 10000);
                 },
-                message: '{VALUE} is not a title'
+                message: '{VALUE} is not an url'
             }
         },
         host: {
@@ -23,7 +23,13 @@ module.exports = function getItemUrlSchema(Schema) {
         },
         title: {
             type: String,
-            required: false
+            required: false,
+            validate: {
+                validator: function(v) {
+                    return (v.length <= 500);
+                },
+                message: '{VALUE} is not a title'
+            }
         },
         description: {
             type: String,

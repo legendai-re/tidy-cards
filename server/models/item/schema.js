@@ -16,7 +16,7 @@ module.exports = function getItemSchema(Schema) {
             required: false,
             validate: {
                 validator: function(v) {
-                    return (v.length < 500);
+                    return (v.length <= 500);
                 },
                 message: '{VALUE} is not a title'
             }
@@ -26,7 +26,7 @@ module.exports = function getItemSchema(Schema) {
             required: false,
             validate: {
                 validator: function(v) {
-                    return (v.length < 500);
+                    return (v.length <= 500);
                 },
                 message: '{VALUE} is not a host'
             }
@@ -36,19 +36,9 @@ module.exports = function getItemSchema(Schema) {
             required: false,
             validate: {
                 validator: function(v) {
-                    return (v.length < 10000);
+                    return (v.length <= 10000);
                 },
                 message: '{VALUE} is not a description'
-            }
-        },
-        false: {
-            type: String,
-            required: false,
-            validate: {
-                validator: function(v) {
-                    return (v.length < 500);
-                },
-                message: '{VALUE} is not an host'
             }
         },
         type: {
