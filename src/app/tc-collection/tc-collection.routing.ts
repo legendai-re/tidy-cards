@@ -11,7 +11,7 @@ export const TcCollectionRoutes = [
 { path: 'c/popular',  component: TcCollectionPopularComponent },
 { path: 'c/featured',  component: TcCollectionFeaturedComponent },
 { path: 'c/:collection_id', component: TcCollectionDetailComponent },
-{ path: ':username/collections/starred', component: TcCollectionUserStarredComponent },
-{ path: ':username/collections', component: TcCollectionUserAllComponent }
+{ path: ':username/c/starred', component: TcCollectionUserStarredComponent },
+{ path: ':username/c', component: TcCollectionUserAllComponent }
 ];
 
