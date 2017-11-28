@@ -34,6 +34,7 @@
     "reset_password": {
       "title": "Reset password",
       "enter_email_username": "Enter your email or username",
+      "search": "Search",
       "found": "We found the following information associated with your account.",
       "not_found": "Cannot find any user with username or email:",
       "enter_new_password": "Choose your new password",
