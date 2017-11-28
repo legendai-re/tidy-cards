@@ -1,15 +1,16 @@
 if(process.env.NODE_ENV != "production"){
-	require('dotenv').config();
+    require('dotenv').config();
 }
 
-var express 			= require('express');
-var cookieParser 		= require('cookie-parser');
-var bodyParser 			= require('body-parser');
-var session 			= require('express-session');
-var sslRedirect         = require('heroku-ssl-redirect');
-var path                = require('path');
-var db 					= require('./mongoose');
-var controllers         = require('./controllers');
+var express      = require('express');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
+var sslRedirect  = require('heroku-ssl-redirect');
+var path         = require('path');
+var db           = require('./mongoose');
+var controllers  = require('./controllers');
+var logger       = require('./winston');
 
 var app = express();
 app.set('port', (process.env.PORT || 2016));
@@ -32,5 +33,5 @@ require('./security')(app);
 require('./routes')(app);
 
 app.listen(app.get('port'), function() {
-  console.log('TidyCards is running on port', app.get('port'));
+  logger.log('info', 'TidyCards is running on port', app.get('port'));
 })

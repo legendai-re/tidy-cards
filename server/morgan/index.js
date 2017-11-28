@@ -4,13 +4,13 @@ module.exports = function(app) {
 	var morgan = require('morgan');
 	var path = require('path');
 	var rfs = require('rotating-file-stream');
-	var aws             = require('aws-sdk')
+	var aws = require('aws-sdk')
 
 	aws.config.region = 'eu-west-1';
 
 	var s3 = new aws.S3({params: {Bucket: process.env.S3_BUCKET}});
 
-	var logDirectory = path.join(__dirname, '../log');
+	var logDirectory = path.join(__dirname, '../logs');
  
 	fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
@@ -42,6 +42,8 @@ module.exports = function(app) {
             });
 	    });
 	});
+
+	var errorLogFile = fs.createWriteStream('node.error.log', { flags: 'a' });
 
 	app.use(morgan('combined', {stream: accessLogStream}));
 

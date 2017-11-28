@@ -1,7 +1,7 @@
 var express         = require('express');
 var isGranted       = require('../../security/isGranted');
 var defineItemType  = require('../../helpers/item-content/defineItemType')
-var router = express.Router();
+var router          = express.Router();
 
 
 router.route('/content/create')
