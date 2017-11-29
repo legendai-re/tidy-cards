@@ -41,7 +41,6 @@ export class TcItemCreateComponent implements OnInit {
         this.itemCreated = false;
         this.loadingContent = false;
         this.addDescription = true;
-        this.urlEntryModified = false;
         if(this.item!=null){
             this.initUpdateMode();
         }else{
