@@ -1,4 +1,4 @@
-var logger      = require('../../winston');
+var logger      = require('../../tools/winston');
 var visibility  = require('../../models/collection/visibility.json');
 var lifeStates  = require('../../models/lifeStates.json');
 var m           = require('../../models');

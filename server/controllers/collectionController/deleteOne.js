@@ -1,5 +1,5 @@
 var async           = require('async');
-var logger          = require('../../winston');
+var logger          = require('../../tools/winston');
 var lifeStates      = require('../../models/lifeStates.json');
 var sortTypes       = require('../../models/customSort/sortTypes.json');
 var itemTypes       = require('../../models/item/itemTypes.json');

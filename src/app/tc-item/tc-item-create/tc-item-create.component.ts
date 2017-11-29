@@ -73,15 +73,6 @@ export class TcItemCreateComponent implements OnInit {
         if(this.item.description)this.addDescription = true;
     }
 
-    public onUrlKeyUp(){
-        clearTimeout(this.typingTimer);
-        new Promise((resolve, reject) => {
-            this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
-        }).then((e)=>{
-            this.createContentFromUrl();
-        })
-    }
-
     public onUrlKeyDown(event){
         if (event.keyCode == 65 && event.ctrlKey) {
             event.target.select()
@@ -100,6 +91,13 @@ export class TcItemCreateComponent implements OnInit {
         this.urlEntry =  regexRes ? regexRes[0] : null;
         this.urlEntryModified = !this.urlEntry || (this.urlEntry == this.lastCheckedUrlEntry) ? false : true;
         this.lastCheckedUrlEntry = this.urlEntry;
+
+        clearTimeout(this.typingTimer);
+        new Promise((resolve, reject) => {
+            this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
+        }).then((e)=>{
+            this.createContentFromUrl();
+        })
     }
 
     private createContentFromUrl(){

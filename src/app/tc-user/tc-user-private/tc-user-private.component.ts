@@ -280,7 +280,7 @@ export class TcUserPrivateComponent implements OnInit {
         if(!this.isUpdatePasswordFormValid())
             return;
         this.isUpdatingPassword = true;
-        this.authService.putPasswordUpdate(this.authService.currentUser._id, this.password, this.newPassword).subscribe((response) => {
+        this.authService.putPasswordUpdate(this.password, this.newPassword).subscribe((response) => {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';
@@ -296,7 +296,7 @@ export class TcUserPrivateComponent implements OnInit {
         if(!this.isSetPasswordFormValid())
             return;
         this.isUpdatingPassword = true;
-        this.authService.putPasswordUpdate(this.authService.currentUser._id, 'none', this.newPassword).subscribe((response) => {
+        this.authService.putPasswordUpdate('none', this.newPassword).subscribe((response) => {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';

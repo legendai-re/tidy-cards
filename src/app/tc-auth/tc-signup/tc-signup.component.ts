@@ -1,14 +1,14 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router }      from '@angular/router';
-import { TcAuthService } from './tc-auth.service';
-import { TcUser }        from '../tc-user/tc-user.class';
-import { TcUserService } from '../tc-user/tc-user.service';
-import { TcLanguageService } from '../tc-language/tc-language.service';
+import { TcAuthService } from '../tc-auth.service';
+import { TcUser }        from '../../tc-user/tc-user.class';
+import { TcUserService } from '../../tc-user/tc-user.service';
+import { TcLanguageService } from '../../tc-language/tc-language.service';
 
 @Component({
     selector: 'tc-signup',
     templateUrl: './tc-signup.component.html',
-    styleUrls: ['./tc-auth.component.scss']
+    styleUrls: ['../tc-auth.component.scss']
 })
 
 export class TcSignupComponent implements OnInit {

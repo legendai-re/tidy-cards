@@ -1,4 +1,4 @@
-var logger          = require('../../winston');
+var logger          = require('../../tools/winston');
 var bCrypt          = require('bcrypt-nodejs');
 var connectionTypes = require('../../security/connectionTypes.json');
 var m               = require('../../models');
@@ -6,11 +6,11 @@ var sortTypes       = require('../../models/customSort/sortTypes.json');
 var usernameValidator = require('../../helpers/user/usernameValidator');
 var updateEmail     = require('../../helpers/user/updateEmail');
 
-module.exports = function postSignup(params, callback) {
+module.exports = function localSignup(params, callback) {
 
     // stop if some parameters are missing
     if(!requiredParamsOk(params))
-        return callback(new m.ApiResponse('some required parameters was not provided', 400));
+        return callback(new m.ApiResponse('some required parameters where not provided', 400));
 
     // stop if username is not valid
     if(!usernameValidator.isValid(params.username))
@@ -41,15 +41,15 @@ module.exports = function postSignup(params, callback) {
 
                 // try to send email confirmation
                 // do not stop the process even if it fail
-                updateEmail.update(user, user.email, function(err, user){
+                updateEmail.update(user, user.email, function(err, userAfterEmailUpdate){
                     if(err) {logger.warn(err);}
+
+                    // remove the password to do not send it
+                    user.local.password = '';
+
+                    // return new user
+                    callback(new m.ApiResponse(null, 200, user));
                 })
-
-                // remove the password to do not send it
-                user.local.password = "";
-
-                // return new user
-                return callback(new m.ApiResponse(null, 200, user));
             })
         })
     });

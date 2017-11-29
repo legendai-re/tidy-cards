@@ -21,7 +21,7 @@ module.exports = function postSignup(req, res) {
                 logger.error(err);
                 res.status(500).json(new m.ApiResponse(err, 500));
             }else{
-
+                
                 // send the new user connected
                 res.status(200).json(new m.ApiResponse(null, 200, req.user));
             }

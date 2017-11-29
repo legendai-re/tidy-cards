@@ -1,4 +1,4 @@
-var logger      = require('../../winston');
+var logger      = require('../../tools/winston');
 var bCrypt      = require('bcrypt-nodejs');
 var m           = require('../../models');
 

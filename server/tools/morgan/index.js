@@ -10,7 +10,7 @@ module.exports = function(app) {
 
 	var s3 = new aws.S3({params: {Bucket: process.env.S3_BUCKET}});
 
-	var logDirectory = path.join(__dirname, '../logs');
+	var logDirectory = path.join(__dirname, '../../logs');
  
 	fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 

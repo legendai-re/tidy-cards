@@ -4,7 +4,7 @@ var visibility  = require('../collection/visibility.json');
 var lifeStates  = require('../lifeStates.json');
 var URLSlugs    = require('../../helpers/user/mongooseSlug');
 var Schema      = mongoose.Schema;
-var algoliaClient = require('../../algolia/algolia')
+var algoliaClient = require('../../tools/algolia/algolia')
 var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
 
 var UserSchema  = require('./schema')(Schema);

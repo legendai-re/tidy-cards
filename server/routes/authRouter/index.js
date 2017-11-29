@@ -160,7 +160,6 @@ router.route('/signup')
 router.route('/password/update')
     /**
      * @api {put} /api/auth/password/update Update a password
-     * @apiParam {String} user_id User unique ID.
      * @apiParam {String} password User old password.
      * @apiParam {String} newPassword User new password.
      * @apiPermission ROLE_USER

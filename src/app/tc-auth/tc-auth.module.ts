@@ -5,10 +5,10 @@ import { RouterModule }       from '@angular/router';
 import { TcSharedModule }     from '../tc-shared/tc-shared.module';
 
 import { TcAuthComponent }   from './tc-auth.component';
-import { TcSigninComponent } from './tc-signin.component';
-import { TcSignupComponent } from './tc-signup.component';
-import { TcSocialsComponent } from './tc-socials.component';
-import { TcLogoutComponent } from './tc-logout.component';
+import { TcSigninComponent } from './tc-signin/tc-signin.component';
+import { TcSignupComponent } from './tc-signup/tc-signup.component';
+import { TcSocialsComponent } from './tc-socials/tc-socials.component';
+import { TcLogoutComponent } from './tc-logout/tc-logout.component';
 
 @NgModule({
     imports: [ RouterModule, CommonModule, FormsModule, TcSharedModule ],

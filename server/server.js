@@ -9,9 +9,9 @@ var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var sslRedirect  = require('heroku-ssl-redirect');
 var path         = require('path');
-var db           = require('./mongoose');
+var db           = require('./tools/mongoose');
+var logger       = require('./tools/winston');
 var controllers  = require('./controllers');
-var logger       = require('./winston');
 
 var app = express();
 app.set('port', (process.env.PORT || 2016));
@@ -39,8 +39,7 @@ if(app.get('env') === 'production'){
 
 app.use(session(sess));
 
-
-require('./morgan')(app);
+require('./tools/morgan')(app);
 require('./security')(app);
 require('./routes')(app);
 

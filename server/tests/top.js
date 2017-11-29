@@ -25,6 +25,7 @@ describe("", function () {
 		});
 	})
 
+	importTest("\n\n||||||||||| AUTH ||||||||||||", './auth');
     importTest("\n\n||||||||||| USERS |||||||||||", './user');
     importTest("\n\n|||||||| COLLECTIONS ||||||||", './collection');
 
