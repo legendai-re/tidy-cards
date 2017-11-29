@@ -284,7 +284,10 @@ export class TcUserPrivateComponent implements OnInit {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';
-            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.passwordUpdateState = 'SUCCESS';
+            this.isUpdatingPassword = false;
+        }, (err) => {
+            this.passwordUpdateState = 'FAILED';
             this.isUpdatingPassword = false;
         });
     }
@@ -297,8 +300,11 @@ export class TcUserPrivateComponent implements OnInit {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';
-            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.passwordUpdateState = 'SUCCESS';
             this.authService.currentUser.local.active = true;
+            this.isUpdatingPassword = false;
+        }, (err) => {
+            this.passwordUpdateState = 'FAILED';
             this.isUpdatingPassword = false;
         });
     }
