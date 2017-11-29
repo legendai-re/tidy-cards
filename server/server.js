@@ -45,5 +45,7 @@ require('./security')(app);
 require('./routes')(app);
 
 app.listen(app.get('port'), function() {
-  logger.log('info', 'TidyCards is running on port', app.get('port'));
+    logger.log('info', 'TidyCards is running on port', app.get('port'));
 })
+
+module.exports = app;
