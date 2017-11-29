@@ -54,8 +54,8 @@ module.exports = function createItemUrl (url, user, callback) {
         itemUrl.url = url;
         itemUrl._user = user._id;
         itemUrl.save(function(err){
-            if(err)callback(err)
-            callback(null, itemTypes.URL, itemUrl)
+            if(err) return callback(err)
+            return callback(null, itemTypes.URL, itemUrl)
         })
     });
 

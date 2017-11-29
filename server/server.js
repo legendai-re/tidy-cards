@@ -6,6 +6,7 @@ var express      = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var MongoStore   = require('connect-mongo')(session);
 var sslRedirect  = require('heroku-ssl-redirect');
 var path         = require('path');
 var db           = require('./mongoose');
@@ -20,13 +21,24 @@ app.set('views', path.join(__dirname, '../server/views'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(session({
+app.use(sslRedirect(['production']));
+
+var sess = {
+    store: new MongoStore({mongooseConnection: db.connection}),
     secret: process.env.SESSION_SECRET,
     name: process.env.SESSION_NAME,
     resave: false,
-    saveUninitialized: true
-}));
-app.use(sslRedirect(['production']));
+    saveUninitialized: true,
+    cookie: {}
+}
+
+if(app.get('env') === 'production'){
+    app.set('trust proxy', 1);
+    sess.cookie.secure = true;
+}
+
+app.use(session(sess));
+
 
 require('./morgan')(app);
 require('./security')(app);

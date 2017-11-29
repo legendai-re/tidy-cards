@@ -96,7 +96,7 @@ export class TcItemCreateComponent implements OnInit {
     }
 
     public parseDescriptionForUrl(){
-        var regexRes = RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:;,.]*\)|[-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:;,.])*(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?!:,.]*\)|[A-ZÀ-ÿ0-9+&@#/%=~_|$])', 'igm').exec(this.item.description);
+        var regexRes = RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:;,.]*\)|[-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:;,.])*(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:,.]*\)|[A-ZÀ-ÿ0-9+&@#/%()=~_|$])', 'igm').exec(this.item.description);
         this.urlEntry =  regexRes ? regexRes[0] : null;
         this.urlEntryModified = !this.urlEntry || (this.urlEntry == this.lastCheckedUrlEntry) ? false : true;
         this.lastCheckedUrlEntry = this.urlEntry;
