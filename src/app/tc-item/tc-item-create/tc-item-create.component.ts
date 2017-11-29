@@ -21,8 +21,6 @@ export class TcItemCreateComponent implements OnInit {
     public mode: string;
     public itemCreated: boolean;
     public urlEntry: string;
-    public lastCheckedUrlEntry: string;
-    public urlEntryModified: boolean;
     public loadingContent: boolean;
     public itemTypes: any;
     public validUrl: boolean;
@@ -67,19 +65,9 @@ export class TcItemCreateComponent implements OnInit {
             if(!this.item.description || this.item.description == "")
                 this.item.description = this.item._content.url;
             this.urlEntry = this.item._content.url;
-            this.lastCheckedUrlEntry = this.urlEntry;
             this.validUrl = true;
         }
         if(this.item.description)this.addDescription = true;
-    }
-
-    public onUrlKeyUp(){
-        clearTimeout(this.typingTimer);
-        new Promise((resolve, reject) => {
-            this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
-        }).then((e)=>{
-            this.createContentFromUrl();
-        })
     }
 
     public onUrlKeyDown(event){
@@ -98,21 +86,20 @@ export class TcItemCreateComponent implements OnInit {
     public parseDescriptionForUrl(){
         var regexRes = RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:;,.]*\)|[-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:;,.])*(?:\([-A-ZÀ-ÿ0-9+&@#/%=~_|$?()!:,.]*\)|[A-ZÀ-ÿ0-9+&@#/%()=~_|$])', 'igm').exec(this.item.description);
         this.urlEntry =  regexRes ? regexRes[0] : null;
-        this.urlEntryModified = !this.urlEntry || (this.urlEntry == this.lastCheckedUrlEntry) ? false : true;
-        this.lastCheckedUrlEntry = this.urlEntry;
+
+        clearTimeout(this.typingTimer);
+        new Promise((resolve, reject) => {
+            this.typingTimer = setTimeout(()=>{resolve(true);}, this.doneTypingInterval);
+        }).then((e)=>{
+            this.createContentFromUrl();
+        })
     }
 
     private createContentFromUrl(){
        if(this.item._content != null)
            return;
-       if(!this.urlEntryModified && this.item._content != null)
-           return;
-       if(!this.urlEntry || this.urlEntry == ''){
-           this.item._content = null;
-           return;
-       }
+
        this.loadingContent = true;
-       this.urlEntryModified = false;
        this.itemService.postItemContent(this.urlEntry).subscribe((result) => {
            if(result){
                this.item.type = result.type;
