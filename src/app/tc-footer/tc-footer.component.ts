@@ -33,6 +33,7 @@ export class TcFooterComponent implements OnInit {
         this.isUpdatingLanguage = true;
         var tmpThis = this;
         if(this.authService.isLoggedIn){
+        	this.tmpUser = TcUser.createFormJson(this.authService.currentUser);
 	        setTimeout(function(){
 	            let user = TcUser.createFormJson({_id: tmpThis.tmpUser._id, language: tmpThis.t.unsafeCurrentLanguage});
 	            tmpThis.userService.putUser(user).subscribe((userResponse) => {

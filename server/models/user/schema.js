@@ -83,7 +83,7 @@ module.exports = function getUserSchema(Schema) {
 	        required: true,
 	        validate: {
 	            validator: function(v) {
-	                return (v.length > 1 && v.length < 30);
+	                return (v.length > 1 && v.length <= 30);
 	            },
 	            message: '{VALUE} is not a valid name'
 	        }
@@ -93,7 +93,7 @@ module.exports = function getUserSchema(Schema) {
 	        required: false,
 	        validate: {
 	            validator: function(v) {
-	                return (v.length < 1000);
+	                return (v.length <= 1000);
 	            },
 	            message: 'Bio is to long'
 	        }

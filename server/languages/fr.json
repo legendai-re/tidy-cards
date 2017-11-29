@@ -17,9 +17,9 @@
         "logout_menu": "Se déconnecter",
         "powered_by": "Réalisé avec",
         "jumbotron": {
-            "slogan": "TidyCards, vos trouvailles méritent d'être partagées",
-            "description_line_1": "Découvrez ce qui se passe en ce moment.",
-            "description_line_2": "Trouvez des collections et de l'inspiration sur les choses que vous aimez.",
+            "slogan": "TidyCards, vos liens méritent d'être partagés",
+            "description_line_1": "TidyCards vous permet d'organiser et de partager facilement vos liens !",
+            "description_line_2": "Que ce soient des articles, des vidéos, des tweets ou toutes sortes de contenus.",
             "about_button": "À propos de TidyCards"
         }
     },
@@ -34,6 +34,7 @@
     "reset_password": {
       "title": "Réinitialiser le mot de passe",
       "enter_email_username": "Entrez votre mail ou pseudonyme",
+      "search": "Rechercher",
       "found": "Nous avons trouvé les informations suivantes associées à votre compte.",
       "not_found": "Impossible de trouver un utilisateur avec ce nom d'utilisateur ou adresse mail :",
       "enter_new_password": "Choisissez un mot de passe",
@@ -50,7 +51,7 @@
         "signin_button": "Se connecter",
         "signup_button": "S'inscrire",
         "all_signin_options": "Retour aux options",
-        "signin_caption": "Connectez vous pour partager vos passions avec le monde.",
+        "signin_caption": "Connectez-vous pour partager vos passions avec le monde.",
         "signup_caption": "Rejoignez la communauté pour partager vos passions avec le monde.",
         "signin_mail_title": "Se connecter avec une adresse mail",
         "signin_facebook_title": "Se connecter avec Facebook",
@@ -87,7 +88,7 @@
     },
     "discover": {
         "featured_title": "Sélection",
-        "popular_title": "Collections populaires",
+        "popular_title": "Collections tendances",
         "last_title": "Dernières collections"
     },
     "dashboard": {
@@ -140,7 +141,7 @@
         "my_title": "Mes collections",
         "belongs_to_title": "Les collections de {0}",
         "featured_title": "Sélection",
-        "popular_title": "Collections populaires",
+        "popular_title": "Collections tendances",
         "last_title": "Dernières collections",
         "last_public_title": "Dernières collections publiques",
         "favorite_title": "Collections favorites",
@@ -181,10 +182,11 @@
         "new_title": "Ajouter un objet à votre collection",
         "update_title": "Mettre à jour un objet",
         "new_placeholder_title": "Titre",
-        "new_placeholder_description": "Collé un lien ou commencé à écrire en Mardown.",
+        "new_placeholder_description": "Collé un lien ou commencé à écrire...",
         "delete_title": "Supprimer cet objet ?",
         "delete_caption": "Voullez-vous vraiment supprimer cet objet ?",
-        "delete_button_yes": "Supprimer cet objet"
+        "delete_button_yes": "Supprimer cet objet",
+        "markdown_supported": "Mise en page Markdown supportée"
     },
     "collection_create": {
         "title_placeholder": "Créer une collection…",
@@ -219,11 +221,11 @@
     "page":{
         "about":{
             "title": "À propos",
-            "content": "##### [TidyCards](https://www.tidy.cards) est une application web qui vous permet facilement d’organiser et de partager vos liens ! Que ce soit des articles, des vidéos, des tweets ou toutes sortes de contenus.\n\nVous avez des dizaines de dossiers de favoris et vous ne vous y retrouvez plus ? Créez une collection : ajoutez lui un titre, une description et une image puis ajoutez vos liens. Vous pouvez également leur ajouter un commentaire. Ainsi vous retrouverez facilement vos sites préférés.\n\nMais pourquoi se donner tant de mal ? [TidyCards](https://www.tidy.cards) ce n'est pas que pour soi. Vous pouvez également partager vos collections avec le reste du monde.\n\nLe cœur de [TidyCards](https://www.tidy.cards) c'est le partage du savoir, une sorte de veille collective : partagez vos recherches, vos trouvailles, vos passions et même ce qui vous fait vibrer ou vous révolte.\n\nCe partage fonctionne dans les deux sens : grâce à la recherche et à la page [Découvrir](https://www.tidy.cards/discover) où vous trouverez les collections créées par des personnes passionnées à l'autre bout du monde.\n\nSur [TidyCards](https://www.tidy.cards) plus besoin de rechercher pendant des heures les sites les plus pertinents sur votre thème préféré, quelqu’un a sans doute déjà creusé le sujet.\n\nEt si ce n’est pas le cas, [rejoignez-nous](https://www.tidy.cards/signin;mode=signup) dès maintenant et créez une collection."
+            "content": "##### [TidyCards](https://www.tidy.cards) est une application web qui vous permet d’organiser et de partager facilement vos liens ! Que ce soient des articles, des vidéos, des tweets ou toutes sortes de contenus.\n\nVous avez des dizaines de dossiers de favoris et vous ne vous y retrouvez plus ? Créez une collection : ajoutez-lui un titre, une description et une image puis ajoutez vos liens. Vous pouvez également leur ajouter un commentaire. Ainsi vous retrouverez facilement vos sites préférés.\n\nMais pourquoi se donner tant de mal ? [TidyCards](https://www.tidy.cards) ce n'est pas que pour soi. Vous pouvez également partager vos collections avec le reste du monde.\n\nLe cœur de [TidyCards](https://www.tidy.cards) c'est le partage du savoir, une sorte de veille collective : partagez vos recherches, vos trouvailles, vos passions et même ce qui vous fait vibrer ou vous révolte.\n\nCe partage fonctionne dans les deux sens grâce à la recherche et à la page [Découvrir](https://www.tidy.cards/discover) où vous trouverez les collections créées par des personnes passionnées à l'autre bout du monde.\n\nSur [TidyCards](https://www.tidy.cards) plus besoin de rechercher pendant des heures les sites les plus pertinents sur votre thème préféré, quelqu’un a sans doute déjà creusé le sujet.\n\nEt si ce n’est pas le cas, [rejoignez-nous](https://www.tidy.cards/signin;mode=signup) dès maintenant et créez une collection."
         },
         "contact": {
             "title": "Contactez-nous",
-            "content": "#### Contactez-nous\n\nVous voulez partager vos idées, reporter un disfonctionnement ou juste dire bonjour ?",
+            "content": "#### Contactez-nous\n\nVous voulez partager vos idées, raporter un dysfonctionnement ou juste dire bonjour ?",
             "contact_btn": "hi@tidy.cards"
         },
         "team": {

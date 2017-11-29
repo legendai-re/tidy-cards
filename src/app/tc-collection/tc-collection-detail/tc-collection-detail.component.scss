@@ -41,7 +41,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  padding: 0 .5rem;
+  padding: 0 0 0 .5rem;
   margin: 0 0 1rem;
 }
 
@@ -54,9 +54,9 @@
 }
 
 .collection-container--publication-infos {
-  line-height: 31px;
+  line-height: 2rem;
   color: $gray-900;
-  margin: 1px .5rem 0;
+  margin: 0 .5rem;
 
   a {
     font-weight: 600;
@@ -68,8 +68,8 @@
   display: flex;
   flex-direction: row;
   flex: 1 0 auto;
-  line-height: 31px;
-  margin: 1px 0 0 1.5rem;
+  line-height: 2rem;
+  margin: 0 0 0 1.5rem;
 }
 
 .collection-container--stats-list {
@@ -110,11 +110,29 @@
   }
 }
 
+.collection-container--stats-button {
+  position: relative;
+  display: flex;
+  background-color: $gray-050;
+  color: $gray-800;
+  text-decoration: none;
+  border-radius: $border-radius-small;
+  padding: 0 .625rem 0 .5rem;
+
+  &:hover {
+    background-color: $gray-200;
+  }
+
+  &:active {
+    background-color: $gray-400;
+  }
+}
+
 .collection-container--stats-icon {
   position: relative;
   display: flex;
   font-family: $font-mi;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 2rem;
   margin: 0 .25rem 0 0;
   color: $gray-600;
@@ -128,7 +146,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  margin-left: 1.5rem;
+  margin: 0 .5rem;
 }
 
 .collection-container--stats-action .btn-icon-narrow {
@@ -137,6 +155,7 @@
 }
 
 .collection-container--stats-action + .collection-container--stats-action {
+  height: 2rem;
   margin-left: .25rem;
 }
 

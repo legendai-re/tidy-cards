@@ -17,7 +17,7 @@ module.exports = function getCollectionSchema(Schema) {
 	        required: true,
 	        validate: {
 	            validator: function(v) {
-	                return (v.length < 100);
+	                return (v.length <= 100);
 	            },
 	            message: '{VALUE} is not a title'
 	        }
@@ -27,7 +27,7 @@ module.exports = function getCollectionSchema(Schema) {
             required: false,
             validate: {
                 validator: function(v) {
-                    return (v.length < 1000);
+                    return (v.length <= 1000);
                 },
                 message: '{VALUE} is not a bio'
             }

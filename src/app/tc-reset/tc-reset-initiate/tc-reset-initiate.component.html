@@ -13,7 +13,7 @@
           <small *ngIf="isSearching" class="text-muted">{{t._.action?.loading}}</small>
           <small *ngIf="notFounded" class="text-danger">{{t._.reset_password?.not_found}} {{searchData}}</small>
         </div>
-        <input *ngIf="!user" (click)="getUser()" [disabled]="!searchData" type="submit" value="Search" class="btn btn-primary btn-block"/>
+        <input *ngIf="!user" (click)="getUser()" [disabled]="!searchData" type="submit" value="{{t._.reset_password?.search}}" class="btn btn-primary btn-block"/>
       </div>
 
       <div class="auth-content" *ngIf="user">

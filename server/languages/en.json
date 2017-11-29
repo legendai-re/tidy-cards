@@ -17,9 +17,9 @@
         "logout_menu": "Logout",
         "powered_by": "Powered by",
         "jumbotron": {
-            "slogan": "TidyCards, your interests are worth sharing",
-            "description_line_1": "Discover what's happening right now.",
-            "description_line_2": "Find collections and inspiration about the things you love.",
+            "slogan": "TidyCards, your links are worth sharing",
+            "description_line_1": "TidyCards allows you to easily organize and share your links!",
+            "description_line_2": "Whether articles, videos, tweets or any kinds of content.",
             "about_button": "About TidyCards"
         }
     },
@@ -34,6 +34,7 @@
     "reset_password": {
       "title": "Reset password",
       "enter_email_username": "Enter your email or username",
+      "search": "Search",
       "found": "We found the following information associated with your account.",
       "not_found": "Cannot find any user with username or email:",
       "enter_new_password": "Choose your new password",
@@ -87,7 +88,7 @@
     },
     "discover": {
         "featured_title": "Featured",
-        "popular_title": "Popular collections",
+        "popular_title": "Trending collections",
         "last_title": "Last collections"
     },
     "dashboard": {
@@ -140,7 +141,7 @@
         "my_title": "My collections",
         "belongs_to_title": "{0}'s collections",
         "featured_title": "Featured",
-        "popular_title": "Popular collections",
+        "popular_title": "Trending collections",
         "last_title": "Last collections",
         "last_public_title": "Last public collections",
         "favorite_title": "Favorite collections",
@@ -181,10 +182,11 @@
         "new_title": "Add an item to your collection",
         "update_title": "Update an item",
         "new_placeholder_title": "Title",
-        "new_placeholder_description": "Paste your link or start writing in Markdown…",
+        "new_placeholder_description": "Paste your link or start writing...",
         "delete_title": "Delete this item?",
         "delete_caption": "Do you really want to delete this item?",
-        "delete_button_yes": "Delete this item"
+        "delete_button_yes": "Delete this item",
+        "markdown_supported": "Styling with Markdown is supported"
     },
     "collection_create": {
         "title_placeholder": "Create a collection…",
