@@ -95,7 +95,7 @@ export class TcItemCreateComponent implements OnInit {
     }
 
     private createContentFromUrl(){
-       if(this.item._content != null)
+       if(this.item._content != null || !this.urlEntry || this.urlEntry == '')
            return;
 
        this.loadingContent = true;
