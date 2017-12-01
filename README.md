@@ -46,7 +46,7 @@ Install dependencies `npm install`
 
 Install typings `npm install typings -g`
 
-Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder
+Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder (`npm run build:prod` to just run it once)
 
 Start mongodb server: `mongod --port=2000`
 

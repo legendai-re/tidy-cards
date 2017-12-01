@@ -3,7 +3,6 @@ var isGranted       = require('../../security/isGranted');
 var defineItemType  = require('../../helpers/item-content/defineItemType')
 var router          = express.Router();
 
-
 router.route('/content/create')
     /**
      * @api {post} /api/items/content/create Create item's content
@@ -24,6 +23,7 @@ router.route('/')
     /**
      * @api {post} /api/items Create an item
      * @apiParam {String} _collection The ID of the collection that the item will belong.
+     * @apiParam {String} [title] Title of the item.
      * @apiParam {Object} type An object that contain de id of the item type.
      * @apiParam {ItemContent} [_content] An object (ItemYoutube, ItemUrl, ItemTweet, ItemImage), must be defined if <code>description</code> isn't.
      * @apiParam {String} [description] A short description about the item, must be defined if <code>_content</code> isn't.
@@ -60,6 +60,7 @@ router.route('/:item_id')
     /**
      * @api {put} /api/items/:item_id Update an item
      * @apiParam {String} item_id Item unique ID.
+     * @apiParam {String} [title] Title of the item.
      * @apiParam {Boolean} [updatePosition] Set it to true if you plan to update the position.
      * @apiParam {Number} [position] To update the position (updatePosition must be defined).
      * @apiParam {String} [description] A short description about the item.
@@ -80,7 +81,6 @@ router.route('/:item_id')
      * @apiPermission ROLE_USER
      * @apiName DeleteItem
      * @apiGroup Item
-     * @apiSuccess {String} message A message about what happened.
      * @apiDescription You must be the author of the item or be granted admin to do this.
      */
     .delete(isGranted('ROLE_USER'), function(req, res) {

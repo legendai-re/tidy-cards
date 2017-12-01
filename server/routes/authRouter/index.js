@@ -165,7 +165,6 @@ router.route('/password/update')
      * @apiPermission ROLE_USER
      * @apiName UpdatePassword
      * @apiGroup Auth
-     * @apiSuccess {boolean} success True if the password has been successfully updated, else false.
      * @apiError (Error 400) Bad-Request Some required parameters was not provided.
      */
     .put(bruteforce.prevent, isGranted('ROLE_USER'), function(req,res){

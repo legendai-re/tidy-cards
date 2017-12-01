@@ -1,16 +1,16 @@
 {
   "name": "tidy-cards",
   "description": "TidyCards",
-  "author": "TidyCards",
+  "author": "Legendai.re",
   "version": "1.0.0-beta",
   "license": "MIT",
   "homepage": "readme.md",
   "apidoc": {
     "name": "TidyCards",
     "version": "0.1.0",
-    "description": "Find all information about the api of TidyCards.",
+    "description": "TidyCards api documentation",
     "title": "TidyCards api documentation",
-    "url": "http://www.tidy.cards"
+    "url": "https://www.tidy.cards"
   },
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",

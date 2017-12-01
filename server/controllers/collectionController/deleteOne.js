@@ -79,7 +79,6 @@ function deleteItems(currentUser, collection, callback){
  * Retrieve the MY_COLLECTION customSort and remove the id of the collection inside it.
  */
 function removeCollectionFromCustomSort(collection, callback){
-    console.log(collection);
     m.CustomSort.findOne({ _user: collection._author, type: sortTypes.MY_COLLECTIONS.id}, function(err, customSort){
         if(err) {logger.error(err); return callback(err);}
         if(!customSort) { return callback('cannot find custom sort object');}
