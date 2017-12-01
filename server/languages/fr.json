@@ -5,7 +5,7 @@
     "header": {
         "search_placeholder": "Rechercher sur TidyCards…",
         "search_result_for": "Résultats pour",
-        "search_no_result_for": "Désolé, nous avons trouvé aucun résultat pour",
+        "search_no_result_for": "Désolé, nous n'avons trouvé aucun résultat pour",
         "search_no_idea_row_1": "Pas d'idée ?",
         "search_no_idea_row_2": "Vous pouvez visiter la page",
         "search_no_idea_row_3": "Découvrir",
@@ -71,7 +71,7 @@
         "signup_today_button": "S'inscrire",
         "status": {
           "signin_attempt": "Tentative de connexion…",
-          "error_wrong": "Mot de passe ou pseudo/mail incorrecte.",
+          "error_wrong": "Mot de passe ou pseudo/mail incorrects.",
           "error_too_many_attempt": "Trop de tentatives de connexion, veuillez patienter.",
           "error_unknown": "Erreur inconnue, réessayer plus tard.",
           "validation_progress": "Validation en cours…",
@@ -99,15 +99,15 @@
         "no_bio": "Cet utilisateur n'a pas encore de description…"
     },
     "profile_private": {
-        "bio_placeholder": "Ajouter un description ici…",
+        "bio_placeholder": "Ajouter une description ici…",
         "account_title": "Compte",
         "account_subtitle": "Modifier mes paramètres de compte.",
         "username_row_title": "Mon nom d'utilisateur",
         "username_edit_button": "Modifier mon nom d'utilisateur",
         "email_row_title": "Mon email",
         "email_edit_button": "Modifier mon email",
-        "email_confirmation_state_no": "non comfirmé",
-        "email_confirmation_state_yes": "comfirmé",
+        "email_confirmation_state_no": "non comfirmée",
+        "email_confirmation_state_yes": "comfirmée",
         "email_confirmation_info": "Un email a été envoyé à {0}. Veuillez vérifier vos emails pour confirmer l'adresse.",
         "email_confirmation_resend": "Renvoyer l'email.",
         "language_row_title": "Langue",
@@ -166,10 +166,10 @@
         "item_plur": "objets",
         "new_item_button": "Nouvel objet",
         "first_item_button": "Ajouter mon premier objet",
-        "first_item_caption": "Utilisé le bouton ci-dessous pour ajouter un objet à votre collection. Cela peut être un lien ou seulement du texte.",
+        "first_item_caption": "Utilisez le bouton ci-dessous pour ajouter un objet à votre collection. Cela peut être un lien ou seulement du texte.",
         "by_title": "Une collection par",
         "empty_title": "Oups, cette collection est vide",
-        "empty_caption": "Malheureusement il n'y a rien dans cette collection pour le moment, réessayé plus tard.",
+        "empty_caption": "Malheureusement il n'y a rien dans cette collection pour le moment, réessayez plus tard.",
         "list_end": "Vous avez atteint la fin de cette liste…",
         "item_list_end": "Vous avez atteint la fin de cette collection…",
         "delete_title": "Supprimer cette collection ?",
@@ -182,7 +182,7 @@
         "new_title": "Ajouter un objet à votre collection",
         "update_title": "Mettre à jour un objet",
         "new_placeholder_title": "Titre",
-        "new_placeholder_description": "Collé un lien ou commencé à écrire...",
+        "new_placeholder_description": "Collez un lien ou commencez à écrire...",
         "delete_title": "Supprimer cet objet ?",
         "delete_caption": "Voullez-vous vraiment supprimer cet objet ?",
         "delete_button_yes": "Supprimer cet objet",
@@ -225,7 +225,7 @@
         },
         "contact": {
             "title": "Contactez-nous",
-            "content": "#### Contactez-nous\n\nVous voulez partager vos idées, raporter un dysfonctionnement ou juste dire bonjour ?",
+            "content": "#### Contactez-nous\n\nVous voulez partager vos idées, rapporter un dysfonctionnement ou juste dire bonjour ?",
             "contact_btn": "hi@tidy.cards"
         },
         "team": {
