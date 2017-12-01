@@ -6,11 +6,53 @@ let request = common.request;
 let should  = common.should;
 let assert  = common.assert;
 
+var invalidUsernames = ['a', 'test2', 'TeSt2', 'é*/dqdq', 'tidycards', "&=)éà'çéà\"'"];
+var validUsernames = ['Hello', 'test-123-test', 'CaMarche_Bien', '47856321'];
+
+var invalidEmails = ['a', 'hello.com', 'hello@hello', '@hello.com'];
+var validEmails = ['test@test.com', 'test.test@test.com', 'test.test@test.test.test'];
+
 describe('GET /api/users/test', () => {
     it('it should make 404 error', (done) => {
         request(server)
             .get('/api/users/test')
             .expect(404, done)
+    });
+});
+
+describe('GET /api/users/:id', () => {
+    it('it should make get user test1 with ID', (done) => {
+        request(server)
+            .get('/api/users/' + common.testUsers.test1.data._id)
+            .expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.username, 'test1');
+            })
+            .end(done);
+    });
+});
+
+describe('GET /api/users/:username', () => {
+    it('it should make get user test1 with username', (done) => {
+        request(server)
+            .get('/api/users/' + common.testUsers.test1.data.username)
+            .expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.username, 'test1');
+            })
+            .end(done);
+    });
+});
+
+describe('GET /api/users/:email', () => {
+    it('it should make get user test1 with email', (done) => {
+        request(server)
+            .get('/api/users/' + common.testUsers.test1.data.email)
+            .expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.username, 'test1');
+            })
+            .end(done);
     });
 });
 
@@ -39,7 +81,7 @@ describe('PUT /api/users/:id', () => {
     });
 });
 
-function tryInvalidUsername(invalidUsername){
+function tryUpdateInvalidUsername(invalidUsername){
     describe('PUT /api/users/:id', () => {
         it('it should try to update username and return error 422', (done) => {
             var req = request(server).put('/api/users/'+common.testUsers.test1.data._id);
@@ -51,10 +93,8 @@ function tryInvalidUsername(invalidUsername){
     });
 }
 
-var invalidUsernames = ['a', 'test2', 'TeSt2', 'é*/dqdq', 'tidycards', "&=)éà'çéà\"'"];
-
 for(var i in invalidUsernames)
-    tryInvalidUsername(invalidUsernames[i])
+    tryUpdateInvalidUsername(invalidUsernames[i])
 
 describe('PUT /api/users/:id', () => {
     it('it should update username', (done) => {
@@ -70,11 +110,11 @@ describe('PUT /api/users/:id', () => {
 });
 
 describe('PUT /api/users/:id', () => {
-    it('it should try to update email and return error 500', (done) => {
+    it('it should try to update email and return error 422', (done) => {
         var req = request(server).put('/api/users/'+common.testUsers.test1.data._id);
         req.cookies = common.testUsers.test1.cookies;
         req.send({email: 'hello'})
-        req.expect(500)
+        req.expect(422)
         .end(done);
     });
 });
@@ -148,3 +188,69 @@ describe('PUT /api/users/:id', () => {
         .end(done);
     });
 });
+
+function tryInvalidUsername(username){
+    describe('GET /api/users/helpers/valid-username', () => {
+        it('it should check if a username is invalid', (done) => {
+            var req = request(server).get('/api/users/helpers/valid-username?username='+encodeURIComponent(username));
+            req.expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.isValid, false);
+            })
+            .end(done);
+        });
+    })
+}
+
+for(var i in invalidUsernames)
+    tryInvalidUsername(invalidUsernames[i]);
+
+
+function tryValidUsername(username){
+    describe('GET /api/users/helpers/valid-username', () => {
+        it('it should check if a username is valid', (done) => {
+            var req = request(server).get('/api/users/helpers/valid-username?username='+encodeURIComponent(username));
+            req.expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.isValid, true);
+            })
+            .end(done);
+        });
+    })
+}
+
+for(var i in validUsernames)
+    tryValidUsername(validUsernames[i]);
+
+function tryInvalidEmail(email){
+    describe('GET /api/users/helpers/valid-email', () => {
+        it('it should check if a email is invalid', (done) => {
+            var req = request(server).get('/api/users/helpers/valid-email?email='+encodeURIComponent(email));
+            req.expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.isValid, false);
+            })
+            .end(done);
+        });
+    })
+}
+
+for(var i in invalidEmails)
+    tryInvalidEmail(invalidEmails[i]);
+
+
+function tryValidEmail(email){
+    describe('GET /api/users/helpers/valid-email', () => {
+        it('it should check if a email is valid', (done) => {
+            var req = request(server).get('/api/users/helpers/valid-email?email='+encodeURIComponent(email));
+            req.expect(200)
+            .expect(response => {
+                assert.equal(response.body.data.isValid, true);
+            })
+            .end(done);
+        });
+    })
+}
+
+for(var i in validEmails)
+    tryValidEmail(validEmails[i]);

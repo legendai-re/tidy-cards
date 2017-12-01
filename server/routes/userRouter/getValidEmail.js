@@ -8,7 +8,7 @@ module.exports = function getValidEmail (req, res) {
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
-        if(!new RegExp(".+@.+").test(rq.email.toLowerCase()))
+        if(!new RegExp(".+@.+\\..+").test(rq.email.toLowerCase()))
             return res.json({data: {isValid: false}});
 
 

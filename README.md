@@ -58,7 +58,7 @@ You can now visit the website on `localhost:8080` and open `localhost:1080` to s
 
 ### Run api tests
 
-mocha server\tests
+`mocha server/tests`
 
 ### Generate API documentation
 
