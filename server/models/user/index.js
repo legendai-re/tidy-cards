@@ -4,10 +4,18 @@ var visibility  = require('../collection/visibility.json');
 var lifeStates  = require('../lifeStates.json');
 var URLSlugs    = require('../../helpers/user/mongooseSlug');
 var Schema      = mongoose.Schema;
-var algoliaClient = require('../../algolia/algolia')
+var algoliaClient = require('../../tools/algolia/algolia')
 var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
 
 var UserSchema  = require('./schema')(Schema);
+
+UserSchema.pre('validate', function(next) {
+    if(this.name)
+        this.name = this.name.substring(0, 30);
+    if(this.bio)
+        this.bio = this.bio.substring(0, 1000);
+    next();
+});
 
 UserSchema.pre('save', function(next) {
     if(!this.createdAt)
@@ -17,6 +25,8 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.post('save', function(user) {
+    if(process.env.NODE_ENV == 'test')
+        return;
     if(user.lifeState === lifeStates.ACTIVE.id) {
         algoliaUserIndex.addObject({
             objectID: user._id,

@@ -5,7 +5,7 @@ module.exports = function post (req, res) {
     var sortTypes       = require('../../models/customSort/sortTypes.json');
     var itemContentHelper = require('../../helpers/item-content');
 
-    if(!req.body._collection || !req.body.type || !req.body.title || !typeOk(req.body.type)){
+    if(!req.body._collection || !req.body.type || !typeOk(req.body.type)){
         res.status(400).send({ error: 'some required parameters was not provided'});
         res.end();
     }else{
@@ -13,7 +13,8 @@ module.exports = function post (req, res) {
         if(req.body.description){
             item.description = req.body.description;
         }
-        item.title = req.body.title;
+        if(req.body.title)
+            item.title = req.body.title;
         item.type = req.body.type.id;
         models.Collection.findById(req.body._collection, function(err, collection){
             if(err) {console.log(err); res.sendStatus(500); return;}

@@ -1,32 +1,25 @@
-<div class="application-content is-page">
-  <div class="container">
+<section class="auth-section">
+  <div class="auth-container">
+    <a href="javascript:void(0)" [routerLink]="['/']">
+      <h1 class="icon-invow logo auth-logo">{{t._.app_name_capitals}}</h1>
+    </a>
+    <h2 class="auth-heading" *ngIf="confirmationInProgress">{{t._.confirm_email?.title}}</h2>
+    <h2 class="auth-heading" *ngIf="!confirmationInProgress && emailConfirmed">{{t._.word?.congrats}} {{authService.currentUser.name}}!</h2>
+    <h2 class="auth-heading" *ngIf="!confirmationInProgress && !emailConfirmed">{{t._.word?.whoops_exclamation}}</h2>
 
-    <div class="page-headings is-hidden" id="pageHeadings">
+    <div class="auth-wrapper">
+      <div class="auth-content" *ngIf="confirmationInProgress">
+        <p class="auth-top-content mb-0">{{t._.confirm_email?.progress}}</p>
+      </div>
 
+      <div class="auth-content" *ngIf="!confirmationInProgress && emailConfirmed">
+        <p class="auth-top-content">{{t._.confirm_email?.success}}</p>
+        <a class="btn btn-primary btn-block" [routerLink]="['/dashboard']">{{t._.confirm_email?.go_dashboard}}</a>
+      </div>
+
+      <div class="auth-content" *ngIf="!confirmationInProgress && !emailConfirmed">
+        <p class="auth-top-content mb-0" *ngIf="!confirmationInProgress && !emailConfirmed">{{t._.confirm_email?.fail}}</p>
+      </div>
     </div>
-
-		<div class="page-container wide">
-			<div class="page-content row is-hidden" id="pageContent">
-        <div class="col-12 col-md-8 mx-auto" *ngIf="confirmationInProgress">
-          <p class="text-muted text-center">Email confirmation in progress...</p>
-				</div>
-
-        <div class="col-12 col-md-8 mx-auto" *ngIf="!confirmationInProgress && emailConfirmed">
-          <h3 class="text-center">Congrats {{authService.currentUser.name}}!</h3>
-          <p class="text-center">You have successfully confirmed your email.</p>
-
-					<div class="text-center">
-						<a class="btn btn-primary" [routerLink]="['/dashboard']">Go to Dashboard</a>
-					</div>
-				</div>
-
-        <div class="col-12 col-md-8 mx-auto" *ngIf="!confirmationInProgress && !emailConfirmed">
-          <h3 class="text-center">Woops, something went wrong!</h3>
-          <p *ngIf="!confirmationInProgress && !emailConfirmed" class="text-center">It looks like this confirmation link is not working.</p>
-          <!-- TODO: add btn to resend a confirmation email -->
-				</div>
-			</div>
-		</div>
-
-	</div>
-</div>
+  </div>
+</section>

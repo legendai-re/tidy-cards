@@ -23,7 +23,7 @@ module.exports = function put (req, res) {
 
     function updateProfile(user){
         user.name = (req.body.name || user.name);
-        user.bio = req.body.bio;
+        user.bio = (req.body.bio || user.bio);
         if(req.body.language && availableLanguages.indexOf(req.body.language) > -1)
             user.language = req.body.language.toLowerCase();
         if(req.body._avatar && req.body._avatar._id){
@@ -55,7 +55,7 @@ module.exports = function put (req, res) {
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(alreadyExistUser) return res.status(422).send({ error: 'cannot update email: already takken'});
             updateEmail.update(user, req.body.email, function(err, user){
-                if (err) {console.log(err); res.sendStatus(500); return;}
+                if (err) {console.log(err); res.status(422).send({ error: 'cannot send comfirmation email'}); return;}
                 sendResponse(user);
             })
         })

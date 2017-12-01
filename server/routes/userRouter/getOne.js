@@ -32,7 +32,7 @@ module.exports = function getOne (req, res) {
         res.json({data: user});
     })
 
-    function isEmail(username){
-        return new RegExp('.+@.+').test(username);;
+    function isEmail(email){
+        return new RegExp('.+@.+\\..+').test(email);;
     }
 }

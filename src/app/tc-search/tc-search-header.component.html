@@ -45,7 +45,7 @@
           <article class="card card-user">
             <a class="card-user-content" [routerLink]="['/', user.username]" title="{{user.name}}">
               <div class="card-avatar avatar avatar--40">
-                <img *ngIf="user._avatar" [src]="user._avatar?.getPath('40x40')" alt="{{user.name}} avatar">
+                <img *ngIf="user._avatar" [src]="user._avatar?.getPath('40x40')" onError="this.style.display='none';" alt="{{user.name}} avatar">
                 {{user.name.charAt(0)}}
               </div>
               <h3 class="card-profile-name">{{user.name}}</h3>

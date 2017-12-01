@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { URLSearchParams  }             from '@angular/http';
+import { Title }                        from '@angular/platform-browser';
 import { TcAuthService }                from '../../tc-auth/tc-auth.service';
 import { TcCollection }                 from '../../tc-collection/tc-collection.class';
 import { TcCollectionService }          from '../../tc-collection/tc-collection.service';
@@ -23,7 +24,14 @@ export class TcUserPublicComponent implements OnInit, OnDestroy  {
     public user: TcUser;
     private sub: any;
 
-    constructor(public t: TcLanguageService, private collectionService: TcCollectionService, private userService: TcUserService, private route: ActivatedRoute, public authService: TcAuthService, public router: Router) {
+    constructor(
+        public t: TcLanguageService,
+        private collectionService: TcCollectionService,
+        private userService: TcUserService,
+        private route: ActivatedRoute,
+        public authService: TcAuthService,
+        public router: Router,
+        private titleService: Title) {
     }
 
     ngOnInit() {
@@ -35,6 +43,7 @@ export class TcUserPublicComponent implements OnInit, OnDestroy  {
             this.userService.getUser(this.searchParams, getParams).subscribe((user) => {
                 this.user = user;
                 this.isLoadingUser = false;
+                this.titleService.setTitle(this.user.name + ' | TidyCards');
                 this.initUserCollections();
                 this.initUserStarredCollections();
             }, () => {

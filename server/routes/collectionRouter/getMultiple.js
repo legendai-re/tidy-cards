@@ -5,7 +5,7 @@ module.exports = function getMultiple (req, res) {
     var sortTypes   = require('../../models/customSort/sortTypes.json');
     var lifeStates  = require('../../models/lifeStates.json');
     var models      = require('../../models');
-    var algoliaClient = require('../../algolia/algolia')
+    var algoliaClient = require('../../tools/algolia/algolia')
     var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_collection');
     
 	var rq = req.query;

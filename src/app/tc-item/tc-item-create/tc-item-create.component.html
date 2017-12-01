@@ -3,7 +3,8 @@
 
     <div class="collection-item-new--content">
       <div class="collection-item-new--content-wrapper">
-        <h2 class="collection-item-new--content-title">{{t._.item?.new_title}}</h2>
+        <h2 class="collection-item-new--content-title" *ngIf="mode == 'CREATE'">{{t._.item?.new_title}}</h2>
+        <h2 class="collection-item-new--content-title" *ngIf="mode == 'UPDATE'">{{t._.item?.update_title}}</h2>
 
         <div class="collection-item-new--embeded-container" *ngIf="urlEntry && loadingContent">
           <div class="collection-item-new--embeded-centered-content">Fetching preview…</div>
@@ -38,7 +39,6 @@
           autofocus="autofocus"
           name="description"
           rows="11"
-          (keyup)="onUrlKeyUp()"
           (keydown)="onUrlKeyDown($event)"
           [(ngModel)]="item.description"
           (ngModelChange)="parseDescriptionForUrl()"
@@ -50,8 +50,8 @@
 
       <ul class="collection-new-item--footer-infos">
         <li class="collection-new-item--footer-info">
-          <span class="icon">help</span>
-          <span>What's Markdown?</span>
+          <span class="icon">info</span>
+          <span><a href="http://commonmark.org/help/" target="_blank" rel="nofollow">{{t._.item?.markdown_supported}}</a></span>
         </li>
       </ul>
 

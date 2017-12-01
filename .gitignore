@@ -64,3 +64,4 @@ package-lock.json
 
 # Server logs #
 /server/log
+/server/logs

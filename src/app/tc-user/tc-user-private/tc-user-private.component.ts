@@ -51,13 +51,22 @@ export class TcUserPrivateComponent implements OnInit {
     public isUpdatingPassword: boolean;
     public passwordUpdateState: string;
 
-    constructor(public t: TcLanguageService, private _renderer: Renderer, private userService: TcUserService, private imgUploadService: TcImgUploadService, public authService: TcAuthService, public router: Router) {
+    constructor(
+        public t: TcLanguageService,
+        private _renderer: Renderer,
+        private userService: TcUserService,
+        private imgUploadService: TcImgUploadService,
+        public authService: TcAuthService,
+        public router: Router,
+        private titleService: Title) {
+
         this.uploader = imgUploadService.uploader;
         this.doneTypingUsernameInterval = 1000;
         this.doneTypingEmailInterval = 1000;
     }
 
     ngOnInit(){
+        this.titleService.setTitle(this.authService.currentUser.name + ' | TidyCards');
         this.tmpUser = TcUser.createFormJson(this.authService.currentUser);
         this.tmpUser._avatar = null;
 
@@ -271,11 +280,14 @@ export class TcUserPrivateComponent implements OnInit {
         if(!this.isUpdatePasswordFormValid())
             return;
         this.isUpdatingPassword = true;
-        this.authService.putPasswordUpdate(this.authService.currentUser._id, this.password, this.newPassword).subscribe((response) => {
+        this.authService.putPasswordUpdate(this.password, this.newPassword).subscribe((response) => {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';
-            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.passwordUpdateState = 'SUCCESS';
+            this.isUpdatingPassword = false;
+        }, (err) => {
+            this.passwordUpdateState = 'FAILED';
             this.isUpdatingPassword = false;
         });
     }
@@ -284,12 +296,15 @@ export class TcUserPrivateComponent implements OnInit {
         if(!this.isSetPasswordFormValid())
             return;
         this.isUpdatingPassword = true;
-        this.authService.putPasswordUpdate(this.authService.currentUser._id, 'none', this.newPassword).subscribe((response) => {
+        this.authService.putPasswordUpdate('none', this.newPassword).subscribe((response) => {
             this.password = '';
             this.newPassword = '';
             this.newPasswordRepeat = '';
-            this.passwordUpdateState = response.success ? 'SUCCESS' : 'FAILED'
+            this.passwordUpdateState = 'SUCCESS';
             this.authService.currentUser.local.active = true;
+            this.isUpdatingPassword = false;
+        }, (err) => {
+            this.passwordUpdateState = 'FAILED';
             this.isUpdatingPassword = false;
         });
     }

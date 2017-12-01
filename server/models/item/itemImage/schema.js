@@ -8,9 +8,9 @@ module.exports = function getItemImageSchema(Schema) {
             required: true,
             validate: {
                 validator: function(v) {
-                    return (v.length < 1000);
+                    return (v.length <= 10000);
                 },
-                message: '{VALUE} is not a title'
+                message: '{VALUE} is not an url'
             }
         },
         _user: { type: String, ref: 'User' }

@@ -1,3 +1,7 @@
+.btn, button {
+  cursor: pointer;
+}
+
 .btn + .btn {
   &:not(.btn-block) {
     margin-left: .5rem;

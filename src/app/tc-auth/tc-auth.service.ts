@@ -44,8 +44,8 @@ export class TcAuthService {
         .catch(this.handleError);
     }
 
-    public putPasswordUpdate (userId: string, password: string, newPassword: string): Observable<any> {
-        let body = JSON.stringify({user_id: userId, password: password, newPassword: newPassword});
+    public putPasswordUpdate (password: string, newPassword: string): Observable<any> {
+        let body = JSON.stringify({password: password, newPassword: newPassword});
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.put(TcApiUrl.PASSWORD_UPDATE, body, options)

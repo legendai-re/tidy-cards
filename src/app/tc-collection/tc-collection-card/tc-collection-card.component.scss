@@ -6,13 +6,20 @@
 @import '../../../style/settings/_mixins.scss';
 
 .card-collection {
-  transition: background-color .3s ease;
   height: 255px;
-}
+  transition: background-color .3s ease, margin .3s ease, box-shadow .3s ease, transform .3s ease;
 
-.card-collection:hover {
-  .card-collection--drag-handle {
-    opacity: 1;
+  &:not(.not-hoverable) {
+    &:hover {
+      transform: translate3d(0, -.25rem, 0);
+      box-shadow: 0 .5rem 1rem rgba($black, .15);
+    }
+  }
+
+  &:hover {
+    .card-collection--drag-handle {
+      opacity: 1;
+    }
   }
 }
 
@@ -196,8 +203,8 @@
   }
 
   &.is-featured {
-    font-weight: 600;
-    color: $orange;
+    font-weight: 500;
+    color: $purple;
   }
 
   &.has-visibility {}
@@ -212,7 +219,7 @@
   width: 1.125rem;
   height: 1.125rem;
   word-wrap: normal;
-  margin: auto .125rem auto 0;
+  margin: auto .25rem auto 0;
 }
 
 .card-collection--f-stats {

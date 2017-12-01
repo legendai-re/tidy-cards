@@ -1,8 +1,8 @@
 <!-- Type: OpenGraph -->
 <div class="collection-item--content-wrapper">
-  <a [href]="itemUrl.url" target="_blank" class="collection-item--embeded-container">
+  <a [href]="itemUrl.url" target="_blank" rel="nofollow" class="collection-item--embeded-container">
     <div class="collection-item--embeded-cover">
-      <img [src]="getImageProxyUrl(itemUrl.image)" class="collection-item--embeded-cover-image" *ngIf="itemUrl.image"/>
+      <img [src]="getImageProxyUrl(itemUrl.image)" class="collection-item--embeded-cover-image" onError="this.style.display='none';"  *ngIf="itemUrl.image"/>
       <span class="collection-item--embeded-cover-icon" *ngIf="!itemUrl.image">image</span>
     </div>
     <div class="collection-item--embeded-content">

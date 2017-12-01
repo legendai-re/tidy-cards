@@ -27,7 +27,7 @@ router.route('/')
      * @apiParam {Number} limit=8 Limit x element.
      * @apiParam {String} [sort_field] Field used to sort (sort_dir must be defined).
      * @apiParam {Number} [sort_dir] Sort direction (-1, 1) (sort_field must be defined).
-     * @apiParam {String} [search] Search collections with title containing the search param.
+     * @apiParam {String} [search] Search collections with title or bio containing the search param.
      * @apiParam {String} [_author] User unique ID. To get collections created by this user.
      * @apiParam {String} [_starredBy] User unique ID. To get collections starred by this user.
      * @apiParam {Boolean} [custom_sort] To sort collections by user choice (_author must be defined).
@@ -50,6 +50,7 @@ router.route('/:collection_id')
      * @apiName GetCollection
      * @apiGroup Collection
      * @apiSuccess {Collection} data A collection.
+     * @apiError (Error 401) Unauthorized Collection with this <code>collection_id</code> is archived or private.
      * @apiError (Error 404) Not-Found Cannot find collection with this <code>collection_id</code>.
      */
     .get(function(req, res){
@@ -58,7 +59,15 @@ router.route('/:collection_id')
     /**
      * @api {put} /api/collections/:collections_id Update a collection
      * @apiParam {String} collection_id Collection unique ID.
-     * @apiParam {Collection} collection A collection that contain only the attributes that you want to update.
+     * @apiParam {String} [title] Title of the collection.
+     * @apiParam {String} [color] Color of the collection.
+     * @apiParam {Object} [visibility] An object that contain the visibility id.
+     * @apiParam {String} [bio] A short description of the collection.
+     * @apiParam {String} [_thumbnail] Id of the image to use as thumbnail.
+     * @apiParam {Boolean} [updatePosition] Must be true if you plan to update position.
+     * @apiParam {Number} [position] Position of the collection.
+     * @apiParam {Boolean} [isFeatured] Featured this collections (must have ROLE_ADMIN).
+     * @apiParam {Boolean} [isOnDiscover] Add collection on discover page (must have ROLE_ADMIN).
      * @apiPermission ROLE_USER
      * @apiName PutUpdateCollection
      * @apiGroup Collection
@@ -74,7 +83,6 @@ router.route('/:collection_id')
      * @apiPermission ROLE_USER
      * @apiName DeleteCollection
      * @apiGroup Collection
-     * @apiSuccess {String} message A message about what happened.
      * @apiDescription You must be the author of the collection or be granted admin to do this.
      */
     .delete(isGranted('ROLE_USER'), function(req, res) {

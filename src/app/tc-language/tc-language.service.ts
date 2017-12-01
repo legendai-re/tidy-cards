@@ -1,5 +1,5 @@
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from '@angular/http';
-import { Injectable }             from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable }             from 'rxjs/Observable';
 import { TcApiUrl }               from '../tc-shared/tc-api-url';
 import { TcUser }                 from '../tc-user/tc-user.class';
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TcLanguageService {
 
+    public langInitializedEmitter: any;
     public langInitialized: boolean = false;
     public currentLanguage: string;
     public unsafeCurrentLanguage: string;
@@ -22,6 +23,7 @@ export class TcLanguageService {
 
     constructor (private http: Http) {
         this._ = {};
+        this.langInitializedEmitter = new EventEmitter();
     }
 
     private getMyLanguage(langId: string): Observable<any> {
@@ -37,6 +39,7 @@ export class TcLanguageService {
                 this.currentLanguage = this._.lang_id;
                 this.unsafeCurrentLanguage = this._.lang_id;
                 this.langInitialized = true;
+                this.langInitializedEmitter.emit({sucess: true});
                 resolve(true);
             })
         })
@@ -60,6 +63,10 @@ export class TcLanguageService {
             : match
             ;
         });
+    }
+
+    public getLangInitializedEmitter() {
+        return this.langInitializedEmitter;
     }
 
     public getBrowserLanguage(){ 

@@ -1,12 +1,9 @@
-module.exports = function (req, res) {
+module.exports = function deleteOne (req, res) {
 
     var collectionController = require('../../controllers/collectionController');
 
-    collectionController.deleteCollection(req.user, req.params.collection_id, function(err, message){
-        if(err)
-            res.json({success: false, error: err});
-        else
-            res.json({success: true});
+    collectionController.deleteOne(req.user, req.params.collection_id, function(apiResponse){
+        res.status(apiResponse.status).json(apiResponse);
     });
 
 }

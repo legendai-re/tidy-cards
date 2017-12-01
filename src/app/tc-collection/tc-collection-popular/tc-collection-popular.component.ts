@@ -1,6 +1,7 @@
 import { Component, OnInit }   from '@angular/core';
 import { Router } from '@angular/router';
 import { URLSearchParams  }   from '@angular/http';
+import { Title }              from '@angular/platform-browser';
 import { TcLanguageService }  from '../../tc-language/tc-language.service';
 import { TcCollectionService }   from '../tc-collection.service';
 import { TcCollection }   from '../tc-collection.class';
@@ -17,10 +18,20 @@ export class TcCollectionPopularComponent implements OnInit {
     public loadingCollections: boolean;
     public collections: TcCollection[];
 
-    constructor(private t: TcLanguageService, private router: Router, private collectionService: TcCollectionService) {
+    constructor(
+        private t: TcLanguageService,
+        private router: Router,
+        private collectionService: TcCollectionService,
+        private titleService: Title) {
+
+        this.t.getLangInitializedEmitter().subscribe((value) => {
+            this.titleService.setTitle(this.t._.collection.popular_title + ' | TidyCards');
+        })
     }
 
     ngOnInit() {
+        if(this.t.langInitialized)
+            this.titleService.setTitle(this.t._.collection.popular_title + ' | TidyCards');
         this.pageNb = 0;
         this.loadingCollections = false;
         this.haveMoreCollections = true;
