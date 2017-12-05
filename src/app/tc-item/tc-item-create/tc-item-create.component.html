@@ -39,7 +39,6 @@
           autofocus="autofocus"
           name="description"
           rows="11"
-          (keyup)="onUrlKeyUp()"
           (keydown)="onUrlKeyDown($event)"
           [(ngModel)]="item.description"
           (ngModelChange)="parseDescriptionForUrl()"

@@ -2,7 +2,7 @@ module.exports = function getMultiple (req, res) {
 
     var isGranted   = require('../../security/isGranted');
     var models      = require('../../models');
-    var algoliaClient = require('../../algolia/algolia')
+    var algoliaClient = require('../../tools/algolia/algolia')
     var algoliaUserIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_user');
     var lifeStates  = require('../../models/lifeStates.json');
 

@@ -11,7 +11,8 @@ variables:
 
 ```
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:2000/test
+MONGODB_URI=mongodb://localhost:2000/dev
+MONGODB_TEST_URI=mongodb://localhost:2000/test
 HOST=http://localhost:8080
 PORT=8080
 SESSION_SECRET=my_session_secret
@@ -45,7 +46,7 @@ Install dependencies `npm install`
 
 Install typings `npm install typings -g`
 
-Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder
+Run `npm run watch` to watch ts/sass/html.. files and and create the `dist` folder (`npm run build:prod` to just run it once)
 
 Start mongodb server: `mongod --port=2000`
 
@@ -54,6 +55,10 @@ Run `node server/server.js` to start the server
 Run `maildev` to catch emails on port 1025. If maildev is not installed on your computer run `npm install maildev -g`
 
 You can now visit the website on `localhost:8080` and open `localhost:1080` to see the emails send by the app.
+
+### Run api tests
+
+`mocha server/tests`
 
 ### Generate API documentation
 

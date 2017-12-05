@@ -3,7 +3,7 @@ module.exports = function getLogs(req, res) {
     var fs = require('fs');
     var path = require('path');
     
-	var filePath = path.join(__dirname, '../../log/access.log');
+	var filePath = path.join(__dirname, '../../logs/'+req.params.filename+'.log');
     var logs = fs.statSync(filePath);
 
     res.writeHead(200, {

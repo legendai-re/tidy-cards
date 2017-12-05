@@ -1,6 +1,6 @@
 import { Component }   from '@angular/core';
 import { Router }      from '@angular/router';
-import { TcAuthService } from './tc-auth.service';
+import { TcAuthService } from '../tc-auth.service';
 
 @Component({
     template: ''

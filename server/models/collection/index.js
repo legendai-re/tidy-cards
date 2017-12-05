@@ -2,7 +2,7 @@ var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 var lifeStates  = require('../lifeStates.json');
 var visibility  = require('./visibility.json');
-var algoliaClient = require('../../algolia/algolia')
+var algoliaClient = require('../../tools/algolia/algolia')
 var algoliaCollectionIndex = algoliaClient.initIndex('ts_'+process.env.ALGOLIA_INDEX_PREFIX+'_collection');
 
 var CollectionSchema = require('./schema')(Schema);
@@ -23,6 +23,8 @@ CollectionSchema.pre('save', function(next) {
 });
 
 CollectionSchema.post('save', function(collection) {
+    if(process.env.NODE_ENV == 'test')
+        return;
     if(collection.lifeState === lifeStates.ACTIVE.id && collection.visibility === visibility.PUBLIC.id) {
         algoliaCollectionIndex.addObject({
             objectID: collection._id,

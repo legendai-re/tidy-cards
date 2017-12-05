@@ -55,7 +55,7 @@ module.exports = function put (req, res) {
             if(err) {console.log(err); res.sendStatus(500); return;}
             if(alreadyExistUser) return res.status(422).send({ error: 'cannot update email: already takken'});
             updateEmail.update(user, req.body.email, function(err, user){
-                if (err) {console.log(err); res.sendStatus(500); return;}
+                if (err) {console.log(err); res.status(422).send({ error: 'cannot send comfirmation email'}); return;}
                 sendResponse(user);
             })
         })

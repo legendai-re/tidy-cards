@@ -54,7 +54,7 @@ router.route('/:user_id')
 
 router.route('/:user_id/deactivate')
     /**
-     * @api {put} /api/users/:user_id Deactivate an account
+     * @api {put} /api/users/:user_id/deactivate Deactivate an account
      * @apiParam {Number} user_id User unique ID.
      * @apiPermission ROLE_ADMIN
      * @apiName DeactivateUser
@@ -67,12 +67,12 @@ router.route('/:user_id/deactivate')
 
 router.route('/:user_id/activate')
     /**
-     * @api {put} /api/users/:user_id Reactivate an account
+     * @api {put} /api/users/:user_id/activate Reactivate an account
      * @apiParam {Number} user_id User unique ID.
      * @apiPermission ROLE_ADMIN
      * @apiName ActivateUser
      * @apiGroup User
-     * @apiSuccess {Boolean} success True if account deactived.
+     * @apiSuccess {Boolean} success True if account actived.
      */
     .put(isGranted('ROLE_ADMIN'), function(req, res) {
         require('./putActivate')(req, res);

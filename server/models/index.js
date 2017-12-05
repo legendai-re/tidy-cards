@@ -27,3 +27,6 @@ exports.Star = Star.starModel;
 
 CustomSort = require('./customSort');
 exports.CustomSort = CustomSort.customSortModel;
+
+ApiResponse = require('./apiResponse');
+exports.ApiResponse = ApiResponse.apiResponseModel;

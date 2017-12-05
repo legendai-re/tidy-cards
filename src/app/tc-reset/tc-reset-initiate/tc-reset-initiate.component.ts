@@ -57,7 +57,7 @@ export class TcResetInitiateComponent implements OnInit, OnDestroy  {
         this.isSearching = true;
         let params = new URLSearchParams();
         params.set('populate', '_avatar');
-        this.userService.getUser(this.searchData, params).subscribe((user) => {
+        this.userService.getUser(this.searchData.trim(), params).subscribe((user) => {
             if(user._id){
                 this.user = user;
                 this.notFounded = false;
@@ -65,6 +65,9 @@ export class TcResetInitiateComponent implements OnInit, OnDestroy  {
                 this.notFounded = true;
             }
             this.isSearching = false;
+        }, () => {
+            this.isSearching = false;
+            this.notFounded = true;
         })
     }
 

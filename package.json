@@ -1,16 +1,16 @@
 {
   "name": "tidy-cards",
   "description": "TidyCards",
-  "author": "TidyCards",
+  "author": "Legendai.re",
   "version": "1.0.0-beta",
   "license": "MIT",
   "homepage": "readme.md",
   "apidoc": {
     "name": "TidyCards",
     "version": "0.1.0",
-    "description": "Find all information about the api of TidyCards.",
+    "description": "TidyCards api documentation",
     "title": "TidyCards api documentation",
-    "url": "http://www.tidy.cards"
+    "url": "https://www.tidy.cards"
   },
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
@@ -87,7 +87,7 @@
     "@angular/router": "^4.4.6",
     "@angularclass/hmr": "~2.1.3",
     "@angularclass/hmr-loader": "^3.0.4",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.5",
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "2.5.45",
     "@types/jquery": "3.2.1",
@@ -112,8 +112,10 @@
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-loader": "^2.2.0",
     "bootstrap-sass": "^3.3.7",
+    "chai": "^4.1.2",
     "cheerio": "^1.0.0-rc.2",
     "codelyzer": "0.0.19",
+    "connect-mongo": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "copy-webpack-plugin": "^4.2.0",
     "core-js": "^2.4.1",
@@ -210,6 +212,8 @@
     "webpack-dev-server": "2.7.1",
     "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
     "webpack-merge": "~4.1.0",
+    "winston": "^2.4.0",
+    "winston-daily-rotate-file": "^1.7.2",
     "yui": "^3.18.1",
     "zone.js": "~0.8.18"
   },

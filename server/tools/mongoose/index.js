@@ -7,3 +7,5 @@ var mongodbUrl = process.env.NODE_ENV == 'test' ? process.env.MONGODB_TEST_URI :
 mongoose.connect(mongodbUrl, {
   useMongoClient: true
 });
+
+module.exports = mongoose;

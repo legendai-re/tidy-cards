@@ -8,7 +8,7 @@ router.route('/welcome')
         res.json({message: "Welcome !"})
     });
 
-router.route('/logs')
+router.route('/logs/:filename')
     .get(isGranted('ROLE_ADMIN'), function(req, res) {
         require('./getLogs')(req, res);
     });

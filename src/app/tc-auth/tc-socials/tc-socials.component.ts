@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy }   from '@angular/core';
 import { Router, ActivatedRoute }      from '@angular/router';
-import { TcAuthService } from './tc-auth.service';
-import { TcLanguageService } from '../tc-language/tc-language.service';
+import { TcAuthService } from '../tc-auth.service';
+import { TcLanguageService } from '../../tc-language/tc-language.service';
 
 @Component({
     selector: 'tc-socials',
     templateUrl: './tc-socials.component.html',
-    styleUrls: ['./tc-auth.component.scss']
+    styleUrls: ['../tc-auth.component.scss']
 })
 
 export class TcSocialsComponent implements OnInit, OnDestroy{
