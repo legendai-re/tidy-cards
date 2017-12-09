@@ -15,6 +15,7 @@
   transition: opacity .6s ease;
   overflow-x: hidden;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &.is-hidden {
     opacity: 0;
