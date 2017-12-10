@@ -344,7 +344,7 @@
     }
 
     @include media-breakpoint-only(md) {
-      width: 720px;
+      width: 570px;
     }
   }
 
@@ -369,7 +369,7 @@
     .bottom-navbar--account,
     .bottom-navbar--signin,
     .bottom-navbar--signup {
-      width: 25%;
+      flex: 1 1 auto;
       margin: 0;
 
       .header-navbar--nav-link {
